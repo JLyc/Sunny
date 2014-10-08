@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" filepath="$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SunnySoundInteraction/SunnySoundInteraction.iml" filepath="$PROJECT_DIR$/SunnySoundInteraction/SunnySoundInteraction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sunny_v.2.iml" filepath="$PROJECT_DIR$/Sunny_v.2.iml" />
+    </modules>
+  </component>
+</project>
+

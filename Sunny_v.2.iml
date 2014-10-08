@@ -143,8 +143,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="org.sphinx:sphinxapi:2.0.3" level="application" />
-    <orderEntry type="library" name="net.sf.sociaal:freetts:1.2.2" level="application" />
+    <orderEntry type="library" name="Sphinx4" level="project" />
+    <orderEntry type="library" name="freetts" level="project" />
   </component>
 </module>
 
