@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/jsapi-1.0-base.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmudict04.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmulex.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmu_time_awb.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmutimelex.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmu_us_kal.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/en_us.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/freetts.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/freetts-jsapi10.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/mbrola.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/rxtx-2.1-7-bins-r2/RXTXcomm.jar" />
+    <libelement value="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/sphinx4.jar" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library name="jsapi-1.0-base.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/jsapi-1.0-base.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="cmudict04.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmudict04.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="cmulex.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmulex.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="cmu_time_awb.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmu_time_awb.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="cmutimelex.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmutimelex.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="cmu_us_kal.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/cmu_us_kal.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="en_us.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/en_us.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="freetts.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/freetts.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="freetts-jsapi10.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/freetts-jsapi10.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="mbrola.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/freetts-1.2.2-bin/freetts-1.2/lib/mbrola.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="RXTXcomm.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/rxtx-2.1-7-bins-r2/RXTXcomm.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="sphinx4.jar">
+        <CLASSES>
+          <root url="file:///home/lyc/JLyc/Java/sphinx4-1.0beta6-bin/sphinx4-1.0beta6/lib/sphinx4.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="org.sphinx:sphinxapi:2.0.3" level="application" />
+    <orderEntry type="library" name="net.sf.sociaal:freetts:1.2.2" level="application" />
+  </component>
+</module>
+
