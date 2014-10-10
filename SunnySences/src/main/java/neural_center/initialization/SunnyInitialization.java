@@ -2,18 +2,18 @@ package neural_center.initialization;
 
 import neural_center.listening.SunnyListen;
 import neural_center.memory.SunnyMemory;
-import neural_center.speeking.SunnyVoice;
+import neural_center.speeking.SpeakingAdapter;
 
 public class SunnyInitialization
 {
-	private static SunnyVoice voice;
+	private static SpeakingAdapter voice;
 	private static SunnyListen listen;
 	private static SunnyMemory memory;
 	private static BasicKnowledge bknowledge;
 	
 	public static void main(String arg[]) throws NullPointerException
 	{
-		voice = new SunnyVoice();
+		voice = SpeakingAdapter.getInstance();
 		listen = new SunnyListen();
 		memory = new SunnyMemory();
 		bknowledge = new BasicKnowledge();
@@ -29,7 +29,7 @@ public class SunnyInitialization
 		return listen;
 	}
 	
-	public static SunnyVoice getVoice()
+	public static SpeakingAdapter getVoice()
 	{
 		return voice;
 	}
