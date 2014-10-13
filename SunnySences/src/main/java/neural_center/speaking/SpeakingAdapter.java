@@ -10,6 +10,29 @@ import org.slf4j.LoggerFactory;
 public class SpeakingAdapter extends SunnySencesAdapter<SpeakingInterface> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpeakingAdapter.class);
 
+    private static final SpeakingAdapter INSTANCE = new SpeakingAdapter();
+    private int testAttempts = 3;
+
+    private SpeakingAdapter() {}
+
+    public static SpeakingAdapter getInstance() {
+        return INSTANCE;
+    }
+
+    @Override
+    protected boolean workingTest(SpeakingInterface sourceForAdaper) {
+        LOGGER.debug("Silence test with empty string to say {} attempts", testAttempts);
+        for(int attempts=0;attempts<testAttempts; attempts++) {
+            try {
+                sourceForAdaper.say("");
+            } catch (Exception e) {
+                System.err.println("silenceTestFailed");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void say(String text) {
         try {
             sourceForAdapter.say(text);
@@ -17,17 +40,5 @@ public class SpeakingAdapter extends SunnySencesAdapter<SpeakingInterface> {
             LOGGER.error("{}", e.getMessage());
             // TODO validate output of error msgs
         }
-    }
-
-    @Override
-    protected boolean workingTest(SpeakingInterface sourceForAdaper) {
-        LOGGER.debug("Silence test with empty string to say");
-        try {
-            sourceForAdaper.say("");
-        } catch (Exception e) {
-            System.err.println("silenceTestFailed");
-            return false;
-        }
-        return true;
     }
 }
