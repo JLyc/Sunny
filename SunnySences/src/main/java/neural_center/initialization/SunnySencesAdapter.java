@@ -8,7 +8,7 @@ public abstract class SunnySencesAdapter<T extends SunnySencesInterface> {
     protected T sourceForAdapter;
     protected float currentVersion = 0;
 
-    public void setSourceForAdaper(T sourceForAdapter) {
+    public void setSourceForAdapter(T sourceForAdapter) {
         if ((sourceForAdapter.getVersion() > currentVersion) &&
                 workingTest(sourceForAdapter)) {
             this.sourceForAdapter = sourceForAdapter;

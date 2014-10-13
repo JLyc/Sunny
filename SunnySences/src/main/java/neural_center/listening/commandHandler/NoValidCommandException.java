@@ -1,4 +1,4 @@
-package neural_center.listening;
+package neural_center.listening.commandHandler;
 
 public class NoValidCommandException extends Exception
 {

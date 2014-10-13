@@ -1,7 +1,9 @@
-package neural_center.speaking;
+package neural_center.speaking.speakingAPI;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
+import neural_center.initialization.SunnyInitialization;
+import neural_center.speaking.SpeakingInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +19,7 @@ public class FTTKevinVoice implements SpeakingInterface {
 
     static {
         LOGGER.debug("Initializing {}", FTTKevinVoice.class);
-        SpeakingAdapter.setSpeakingSource(INSTANCE);
+        SunnyInitialization.getSpeaking().setSourceForAdapter(INSTANCE);
     }
 
 
