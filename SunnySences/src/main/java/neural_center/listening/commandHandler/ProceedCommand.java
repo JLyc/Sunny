@@ -1,5 +1,7 @@
 package neural_center.listening.commandHandler;
 
+import neural_center.listening.commandHandler.run_application.SunnyCommandProcess;
+
 /**
  * Created by socha on 13.10.2014.
  */
@@ -15,15 +17,9 @@ public class ProceedCommand implements Runnable{
 
     @Override
     public void run() {
-        if(validateCommand(command))
+        if(command.contains("sunny"))
         {
-            CommandCrate transporter = new CommandCrate(command);
-
-
+            new SunnyCommandProcess(new CommandCrate(command));
         }
-    }
-
-    private boolean validateCommand(String command) {
-        return command.contains("sunny");
     }
 }

@@ -5,9 +5,7 @@ import neural_center.memory.SunnyMemory;
 import neural_center.speaking.SpeakingAdapter;
 
 public class SunnyInitialization extends Thread {
-    private static ListeningAdapter listening;
     private static SpeakingAdapter speaking;
-    private static SunnyMemory memory;
     private static BasicKnowledge bknowledge;
 
     static
@@ -23,47 +21,12 @@ public class SunnyInitialization extends Thread {
         mainSunnyThread.start();
 	}
 
-    public static ListeningAdapter getListening() {
-        return listening;
-    }
-
-    public static void setListening(ListeningAdapter listening) {
-        SunnyInitialization.listening = listening;
-    }
-
     public static SpeakingAdapter getSpeaking() {
         return speaking;
     }
 
-    public static void setSpeaking(SpeakingAdapter speaking) {
-        SunnyInitialization.speaking = speaking;
-    }
-
     public static BasicKnowledge getBknowledge() {
         return bknowledge;
-    }
-
-    private static boolean testSunnyFunction() {
-        boolean okCheck = true;
-
-        if (listening == null) {
-            System.err.println("no listen initialized");
-            okCheck = false;
-        }
-        if (speaking == null) {
-            System.err.println("no voice initialized");
-            okCheck = false;
-        }
-        if (memory == null) {
-            System.err.println("no memory initialized");
-            okCheck = false;
-        }
-        if (bknowledge == null) {
-            System.err.println("no basic knowledge initialized");
-            okCheck = false;
-        }
-
-        return okCheck;
     }
 
     @Override
@@ -72,11 +35,37 @@ public class SunnyInitialization extends Thread {
 
         bknowledge = new BasicKnowledge();
 
-        if (testSunnyFunction()) {
-            speaking.say("Initializatin succesfull. Sunny is here");
-        } else {
-            System.err.println("Ending application to prevent not funcional run");
-            System.exit(1);
+        speaking.say("Initializatin succesfull. Sunny is here");
+    }
+
+    public static void turnOffSunny(int state)
+    {
+        turnOffSunny(state,"Not specified");
+    }
+
+    public static void turnOffSunny(int state, String msg)
+    {
+        switch(state)
+        {
+            case 1:
+            {
+                System.err.println(msg);
+                System.err.println("Turning off with no saved changes");
+                System.exit(1);
+            }
+            case 2:
+            {
+                System.err.println(msg);
+                System.err.println("Turning off with after saved changes");
+                //TODO cleanup method saveWork()
+                System.exit(0);
+            }
+            default:
+            {
+                System.err.println(msg);
+                System.err.println("Unknown state turning off with no saved changes");
+                System.exit(1);
+            }
         }
     }
 }

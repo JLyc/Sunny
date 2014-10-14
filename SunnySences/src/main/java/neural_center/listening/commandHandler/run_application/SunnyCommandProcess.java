@@ -1,5 +1,6 @@
 package neural_center.listening.commandHandler.run_application;
 
+import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.SunnyInitialization;
 import neural_center.listening.commandHandler.CommandCrate;
 
@@ -9,8 +10,7 @@ import java.util.ArrayList;
 public class SunnyCommandProcess
 {
 	private ArrayList<ArrayList<String>> loadedCommands = SunnyInitialization.getBknowledge().getCommands();
-	private static EnvironmentCommandProperties envProp = new EnvironmentCommandProperties();
-	private boolean isSudo = false;
+	private boolean isAdmin = false;
 	
 	public SunnyCommandProcess(CommandCrate commandCreate)
 	{
@@ -39,15 +39,15 @@ public class SunnyCommandProcess
     private String fillCommandsVariables(String command) {
         if(command.matches(".*%user%.*"))
         {
-            command.replace("%user%", envProp.getCommandUser());
+            command.replace("%user%", EnvironmentOfOS.getProperties("user"));
         }
         if(command.matches(".*things to do with it.*"))
         {
-            command.replace("%things to do with it%", envProp.getCommandExecutor());
+            command.replace("%things to do with it%", EnvironmentOfOS.getProperties("something"));
         }
         if(command.contains("sudo"))
         {
-            isSudo = true;
+            isAdmin = true;
         }
         return command;
     }
@@ -56,10 +56,10 @@ public class SunnyCommandProcess
 	{
 		try
 		{
-			Process p = new ProcessBuilder(envProp.getCommandExecutor(), envProp.getCommandModifier(), command).start();
-			if(isSudo)
+			Process p = new ProcessBuilder(EnvironmentOfOS.getProperties("commandsSource"), EnvironmentOfOS.getProperties("commandExecutor"), command).start();
+			if(isAdmin)
 			{
-				p.getOutputStream().write((envProp.getSudo()+"\n").getBytes());
+				p.getOutputStream().write(("171189"+"\n").getBytes());
 				p.getOutputStream().flush();
 			}
 			return true;
@@ -72,17 +72,4 @@ public class SunnyCommandProcess
 		
 	}
 	
-	@Deprecated
-	private void cmdCommand(String whatToDo, String application)
-	{
-		Process p;
-		try
-		{
-			p = Runtime.getRuntime().exec("cmd /c " + whatToDo + " " + application);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
 }

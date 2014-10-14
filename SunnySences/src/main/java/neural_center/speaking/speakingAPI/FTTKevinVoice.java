@@ -44,7 +44,7 @@ public class FTTKevinVoice implements SpeakingInterface {
         return VERSION;
     }
 
-    public void deallocate() {
+    private void deallocate() {
         voice.deallocate();
     }
 }

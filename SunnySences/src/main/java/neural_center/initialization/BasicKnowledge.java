@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class BasicKnowledge
 {
-		private String recoghnizedEnviroment;
+	private String recoghnizedEnviroment;
 	private String currentWorkingDir;
 	private String[] filesToLoad =
 		{ "src/neural_center/WordPower.txt", "src/neural_center/CommandsLinuxNoXML.txt", "src/neural_center/listening/sunny_linux.gram" };
