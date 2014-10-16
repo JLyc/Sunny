@@ -11,7 +11,6 @@ public class SunnyInitialization extends Thread {
     static
     {
         speaking = SpeakingAdapter.getInstance();
-        listening = ListeningAdapter.getInstance();
     }
 
 	public static void main(String arg[]) throws NullPointerException
