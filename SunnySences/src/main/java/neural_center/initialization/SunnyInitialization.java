@@ -1,7 +1,5 @@
 package neural_center.initialization;
 
-import neural_center.listening.ListeningAdapter;
-import neural_center.memory.SunnyMemory;
 import neural_center.speaking.SpeakingAdapter;
 
 public class SunnyInitialization extends Thread {
