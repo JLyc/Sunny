@@ -24,17 +24,12 @@ public class MainGuiCreator extends JFrame
 		this.setVisible(true);
 	}
 
-	public static void createGUI()
-	{
-		if (creatorInstance == null)
-		{
-			creatorInstance = new MainGuiCreator();
-		}
-	}
-
 	public static MainGuiCreator getGUIInstance()
 	{
-		createGUI();
-		return creatorInstance;
+        if (creatorInstance == null)
+        {
+            creatorInstance = new MainGuiCreator();
+        }
+        return creatorInstance;
 	}
 }
