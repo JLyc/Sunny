@@ -22,6 +22,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="MiniApps" />
+        <module name="MiniGames" />
         <module name="Prototype" />
         <module name="Prototypes" />
         <module name="SunnyGUI" />
