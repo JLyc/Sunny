@@ -45,6 +45,8 @@
         <module>SunnyGUI</module>
         <module>SunnySences</module>
         <module>Prototype</module>
+        <module>MiniApps</module>
+        <module>MiniGames</module>
     </modules>
 
 </project>
