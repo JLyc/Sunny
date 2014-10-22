@@ -1,12 +1,14 @@
 package neural_center.speaking;
 
+import neural_center.initialization.SunnyInitialization;
+import neural_center.speaking.speakingAPI.SpeakingInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by socha on 10.10.2014.
  */
-public class SpeakingAdapter {
+public final class SpeakingAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpeakingAdapter.class);
 
     private static final SpeakingAdapter INSTANCE = new SpeakingAdapter();
@@ -22,22 +24,19 @@ public class SpeakingAdapter {
                 workingTest(speakingSource)) {
             this.speakingSource = speakingSource;
             this.currentVersion = speakingSource.getVersion();
+            SunnyInitialization.setStateOkFor(INSTANCE);
             return true;
         }
         return false;
     }
 
-    public static SpeakingAdapter getInstance() {
-        return INSTANCE;
-    }
-
-    protected boolean workingTest(SpeakingInterface newSpeakingSource) {
+    private boolean workingTest(SpeakingInterface newSpeakingSource) {
         LOGGER.debug("Silence test with empty string to say {} attempts", testAttempts);
         for(int attempts=0;attempts<testAttempts; attempts++) {
             try {
                 newSpeakingSource.say("");
             } catch (Exception e) {
-                System.err.println("silenceTestFailed");
+                System.err.println("JLyc \"silenceTestFailed\"");
                 return false;
             }
         }

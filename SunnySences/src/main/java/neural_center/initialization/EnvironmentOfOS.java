@@ -6,7 +6,8 @@ import java.util.Map;
 /**
  * Created by socha on 14.10.2014.
  */
-public class EnvironmentOfOS {
+public class EnvironmentOfOS implements StaticBlockExecution {
+    static final String loadStaticBlock = "loading";
     private static final Map<String, String> environmentProperties = new HashMap<>();
 
     static{
@@ -19,6 +20,7 @@ public class EnvironmentOfOS {
             environmentProperties.put("commandsSource", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandExecutor", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("executorParameter", getPropertyBasedOnEnvironment()[i++]);
+            environmentProperties.put("RecognizedWords", "recognizedWords.txt");
 
         } catch (Exception e) {
             System.err.println("Internal error in environment. Cant work without environment");
@@ -28,20 +30,20 @@ public class EnvironmentOfOS {
 
     private static String[] getPropertyBasedOnEnvironment() throws Exception
     {
-        String[] output = new String[3];
+        String[] output = new String[5];
         int i = 0;
         switch (environmentProperties.get("os")) {
-            case "linux":
-                output[i++] = "configs/sunny_linux.config.xml";
-                output[i++] = "gramFile/sunny_linux.gram";
-                output[i++] = "dataFile/Commands_linux.txt";
+            case "Linux":
+                output[i++] = "sunny_linux.config.xml";
+                output[i++] = "sunny_linux.gram";
+                output[i++] = "Commands_linux.txt";
                 output[i++] = "/bin/sh";
                 output[i++] = "-c";
                 return output;
-            case "windows":
-                output[i++] = "configs/sunny_windows.config.xml";
-                output[i++] = "gramFiles/sunny_windows.gram";
-                output[i++] = "dataFile/commands_windows.txt";
+            case "Windows":
+                output[i++] = "sunny_windows.config.xml";
+                output[i++] = "sunny_windows.gram";
+                output[i++] = "commands_windows.txt";
                 output[i++] = "cmd";
                 output[i++] = "/c";
                 return output;

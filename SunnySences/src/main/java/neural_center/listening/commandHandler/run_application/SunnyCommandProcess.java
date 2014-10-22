@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class SunnyCommandProcess
 {
-	private ArrayList<ArrayList<String>> loadedCommands = SunnyInitialization.getBknowledge().getCommands();
+	private ArrayList<ArrayList<String>> loadedCommands = SunnyInitialization.getBknowledge().get("commandsSource");
 	private boolean isAdmin = false;
 	
 	public SunnyCommandProcess(CommandCrate commandCreate)

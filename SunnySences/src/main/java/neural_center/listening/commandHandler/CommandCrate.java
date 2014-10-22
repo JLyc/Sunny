@@ -1,9 +1,9 @@
 package neural_center.listening.commandHandler;
 
+import neural_center.initialization.SunnyInitialization;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import neural_center.initialization.SunnyInitialization;
 
 public class CommandCrate
 {
@@ -61,8 +61,8 @@ public class CommandCrate
 	
 	private void resolveModifierNumber()
 	{
-		//		ArrayList<ArrayList<String>> wordPower = new BasicKnowledge().getWordPower();
-		Iterator<?> wordPowerIterator = SunnyInitialization.getBknowledge().getWordPower().iterator();
+        //TODO refactor code
+		Iterator<?> wordPowerIterator = SunnyInitialization.getBknowledge().get("recognizedWords.txt").iterator();
 		while (wordPowerIterator.hasNext())
 		{
 			ArrayList<String> mapedWordPower = (ArrayList<String>) wordPowerIterator.next();

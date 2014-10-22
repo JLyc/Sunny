@@ -1,21 +1,29 @@
 package neural_center.initialization;
 
+import static neural_center.initialization.BasicKnowledge.loadStaticBlock;
+
+import neural_center.listening.ListeningManager;
 import neural_center.speaking.SpeakingAdapter;
 
 public class SunnyInitialization extends Thread {
     private static SpeakingAdapter speaking;
+    private static ListeningManager listening;
     private static BasicKnowledge bknowledge;
 
-    static
-    {
-        speaking = SpeakingAdapter.getInstance();
+    static {
+        System.out.println(loadStaticBlock());
     }
 
-	public static void main(String arg[]) throws NullPointerException
+    private SunnyInitialization(String name) {
+        super(name);
+//        BasicKnowledge basicKnowledge = new BasicKnowledge();
+    }
+
+    public static void main(String arg[]) throws NullPointerException
 	{
-        Thread mainSunnyThread = new SunnyInitialization();
-        mainSunnyThread.setName("Main Sunny Thread");
-        mainSunnyThread.start();
+        BasicKnowledge basicKnowledge = new BasicKnowledge();
+        SunnyInitialization mainSunnyThread = new SunnyInitialization("Main Sunny Thread");
+//        mainSunnyThread.start();
 	}
 
     public static SpeakingAdapter getSpeaking() {
@@ -26,12 +34,31 @@ public class SunnyInitialization extends Thread {
         return bknowledge;
     }
 
+    public static void setStateOkFor(Object object) {
+        if(object instanceof ListeningManager)
+        {
+            listening = (ListeningManager) object;
+            System.out.println("JLyc \"listening initialized\"");
+        }
+        if(object instanceof SpeakingAdapter)
+        {
+            speaking = (SpeakingAdapter) object;
+            System.out.println("JLyc \"speaking initialized\"");
+        }
+        if(object instanceof BasicKnowledge)
+        {
+            bknowledge = (BasicKnowledge) object;
+            System.out.println("JLyc \"basic knowledge initialized\"");
+        }
+    }
+
     @Override
     public void run() {
         super.run();
-
-        bknowledge = new BasicKnowledge();
-
+        while(speaking == null || listening == null || bknowledge == null)
+        {
+            System.out.println("JLyc \"loading...\"");
+        }
         speaking.say("Initializatin succesfull. Sunny is here");
     }
 

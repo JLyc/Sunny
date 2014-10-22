@@ -10,14 +10,14 @@ import neural_center.listening.ListeningManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Sphinx4Listener extends Thread implements ListenerInterface {
+public class Sphinx4Listener implements ListenerInterface {
     private static final Logger LOGGER = LoggerFactory.getLogger(Sphinx4Listener.class);
 
     private static final Sphinx4Listener INSTANCE = new Sphinx4Listener();
     private ListeningManager instanceOfListeningManager;
     private final float version = 1.0f;
 
-    private ConfigurationManager cm = new ConfigurationManager(Sphinx4Listener.class.getResource(EnvironmentOfOS.getProperties("listeningConfig")));
+    private ConfigurationManager cm;
     private Recognizer recognizer;
     private Microphone microphone;
 
@@ -29,8 +29,10 @@ public class Sphinx4Listener extends Thread implements ListenerInterface {
 
     @Override
     public void initializeListener(ListeningManager instance) {
+        cm = new ConfigurationManager(this.getClass().getResource(EnvironmentOfOS.getProperties("listeningConfig")));
+
         if (cm != null) {
-            LOGGER.error("Configuration Manger failed to load");
+            LOGGER.error("JLyc \"Configuration Manger failed to load\"");
             return;
         }
 
@@ -44,8 +46,6 @@ public class Sphinx4Listener extends Thread implements ListenerInterface {
             return;
         }
         this.instanceOfListeningManager = instance;
-        this.setName("Listening Thread");
-        this.run();
     }
 
     @Override
@@ -60,7 +60,6 @@ public class Sphinx4Listener extends Thread implements ListenerInterface {
 
     @Override
     public void run() {
-        super.run();
         try {
             while (runThread) {
                 doListening();
@@ -68,7 +67,6 @@ public class Sphinx4Listener extends Thread implements ListenerInterface {
         } finally {
             SunnyInitialization.getSpeaking().say("I stop listening");
             recognizer.deallocate();
-            ListeningManager.requestRegistration(INSTANCE);
         }
     }
 
