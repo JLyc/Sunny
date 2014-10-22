@@ -7,10 +7,17 @@ import java.util.Map;
  * Created by socha on 14.10.2014.
  */
 public class EnvironmentOfOS implements StaticBlockExecution {
-    static final String loadStaticBlock = "loading";
+    public static String loadStaticBlock = "loading";
     private static final Map<String, String> environmentProperties = new HashMap<>();
 
+    public static String theName = "The Loader";
+
+//    static {
+//        System.out.println("Loader.static");
+//    }
+
     static{
+        System.out.println("in static block");
         int i = 0;
         try {
             environmentProperties.put("os", System.getProperty("os.name"));

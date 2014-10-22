@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class BasicKnowledge
 {
-    static final String loadStaticBlock() {
-        return "loading";
-    }
+    static final String loadStaticBlock = "loading";
 
     private static BasicKnowledge INSTANCE = new BasicKnowledge();
 	private static final Map<String, ArrayList<ArrayList<String>>> knowledgeProperties = Maps.newHashMap();

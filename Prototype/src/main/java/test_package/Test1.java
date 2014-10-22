@@ -1,5 +1,7 @@
 package test_package;
 
+import neural_center.initialization.EnvironmentOfOS;
+
 /**
  * Created by socha on 22.10.2014.
  */
@@ -9,13 +11,15 @@ public class Test1 {
     }
     Test1() {
         System.out.println( "Test.Test()");
-        // Define a loader and print out the static name
         Loader l;
+        EnvironmentOfOS ofOS;
         System.out.println( Loader.theName );
+//        System.out.println( EnvironmentOfOS.theName );
+        System.out.println( EnvironmentOfOS.loadStaticBlock );
     }
     public static void main( String [] args ) {
         System.out.println( "Test.main");
-        Test t = new Test();
+        Test1 t = new Test1();
         System.exit(0);
     }
 }

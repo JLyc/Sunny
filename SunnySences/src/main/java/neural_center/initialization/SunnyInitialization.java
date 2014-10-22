@@ -1,7 +1,5 @@
 package neural_center.initialization;
 
-import static neural_center.initialization.BasicKnowledge.loadStaticBlock;
-
 import neural_center.listening.ListeningManager;
 import neural_center.speaking.SpeakingAdapter;
 
@@ -11,17 +9,15 @@ public class SunnyInitialization extends Thread {
     private static BasicKnowledge bknowledge;
 
     static {
-        System.out.println(loadStaticBlock());
+        System.out.println(EnvironmentOfOS.isLoading);
     }
 
     private SunnyInitialization(String name) {
         super(name);
-//        BasicKnowledge basicKnowledge = new BasicKnowledge();
     }
 
     public static void main(String arg[]) throws NullPointerException
 	{
-        BasicKnowledge basicKnowledge = new BasicKnowledge();
         SunnyInitialization mainSunnyThread = new SunnyInitialization("Main Sunny Thread");
 //        mainSunnyThread.start();
 	}
