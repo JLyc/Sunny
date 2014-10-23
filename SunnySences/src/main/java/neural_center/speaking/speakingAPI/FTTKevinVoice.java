@@ -6,9 +6,12 @@ import neural_center.initialization.SunnyInitialization;
 
 
 public class FTTKevinVoice implements SpeakingInterface {
+
     private static final FTTKevinVoice INSTANCE = new FTTKevinVoice();
+    public static String activateStaticBlock;
     private static final String SUNNY = "kevin16";
     private static final float VERSION = 1.0f;
+
     private VoiceManager voiceManager;
     private Voice voice;
 

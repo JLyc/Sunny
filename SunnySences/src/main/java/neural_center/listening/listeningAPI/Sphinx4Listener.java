@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class Sphinx4Listener implements ListenerInterface {
     private static final Logger LOGGER = LoggerFactory.getLogger(Sphinx4Listener.class);
+    public static String activateStaticBlock;
 
     private static final Sphinx4Listener INSTANCE = new Sphinx4Listener();
     private ListeningManager instanceOfListeningManager;

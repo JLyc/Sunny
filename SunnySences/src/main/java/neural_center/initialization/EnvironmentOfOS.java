@@ -6,18 +6,11 @@ import java.util.Map;
 /**
  * Created by socha on 14.10.2014.
  */
-public class EnvironmentOfOS implements StaticBlockExecution {
-    public static String loadStaticBlock = "loading";
+public class EnvironmentOfOS {
+    public static String activateStaticBlock = "Loading" + EnvironmentOfOS.class.getName();
     private static final Map<String, String> environmentProperties = new HashMap<>();
 
-    public static String theName = "The Loader";
-
-//    static {
-//        System.out.println("Loader.static");
-//    }
-
     static{
-        System.out.println("in static block");
         int i = 0;
         try {
             environmentProperties.put("os", System.getProperty("os.name"));
@@ -33,6 +26,7 @@ public class EnvironmentOfOS implements StaticBlockExecution {
             System.err.println("Internal error in environment. Cant work without environment");
             SunnyInitialization.turnOffSunny(1);
         }
+        System.out.println("JLyc \"environments initialized\"");
     }
 
     private static String[] getPropertyBasedOnEnvironment() throws Exception

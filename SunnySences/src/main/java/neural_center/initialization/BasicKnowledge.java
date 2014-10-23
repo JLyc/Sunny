@@ -9,26 +9,28 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class BasicKnowledge
-{
-    static final String loadStaticBlock = "loading";
+public class BasicKnowledge {
+    public static String activateStaticBlock = "Loading" + BasicKnowledge.class.getName();;
 
-    private static BasicKnowledge INSTANCE = new BasicKnowledge();
+    private static final BasicKnowledge INSTANCE = new BasicKnowledge();
 	private static final Map<String, ArrayList<ArrayList<String>>> knowledgeProperties = Maps.newHashMap();
 
     static {
-        System.out.println("initializing");
         knowledgeProperties.put("grammarForListening", new ArrayList<ArrayList<String>>());
         knowledgeProperties.put("recognizedWords.txt", new ArrayList<ArrayList<String>>());
         knowledgeProperties.put("commandsSource", new ArrayList<ArrayList<String>>());
+        SunnyInitialization.setStateOkFor(INSTANCE);
     }
 
     public static BasicKnowledge getInstance() {
+//        if(INSTANCE == null) {
+//            INSTANCE = new BasicKnowledge();
+//        }
         return INSTANCE;
     }
 
-    public BasicKnowledge(){
-        for(String key : knowledgeProperties.keySet()){
+    private BasicKnowledge(){
+        /*for(String key : knowledgeProperties.keySet()){
             try {
                 loadResources(key);
             } catch (IOException e) {
@@ -36,11 +38,12 @@ public class BasicKnowledge
                 e.printStackTrace();
                 return;
             }
-        }
-        SunnyInitialization.setStateOkFor(INSTANCE);
+        }*/
+
     }
 
 	private void loadResources(String resources) throws IOException {
+
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(EnvironmentOfOS.getProperties(resources));
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder out = new StringBuilder();

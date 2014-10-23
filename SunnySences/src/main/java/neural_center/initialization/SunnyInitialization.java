@@ -8,12 +8,19 @@ public class SunnyInitialization extends Thread {
     private static ListeningManager listening;
     private static BasicKnowledge bknowledge;
 
-    static {
-        System.out.println(EnvironmentOfOS.isLoading);
+    private static String staticBlockActivation;
+
+    static
+    {
+        staticBlockActivation = EnvironmentOfOS.activateStaticBlock;
+        staticBlockActivation = BasicKnowledge.activateStaticBlock;
+//        staticBlockActivation = FTTKevinVoice.activateStaticBlock;
+//        staticBlockActivation = Sphinx4Listener.activateStaticBlock;
     }
 
     private SunnyInitialization(String name) {
         super(name);
+
     }
 
     public static void main(String arg[]) throws NullPointerException
