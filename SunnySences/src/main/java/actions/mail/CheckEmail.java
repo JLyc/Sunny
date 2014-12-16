@@ -1,5 +1,7 @@
 package actions.mail;
 
+import javax.mail.MessagingException;
+
 import javax.mail.*;
 import java.util.Properties;
 
@@ -45,8 +47,6 @@ public class CheckEmail extends Thread{
 
             System.out.println(createAnswer(msgCount));
 
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
         } catch (MessagingException e) {
             e.printStackTrace();
         }

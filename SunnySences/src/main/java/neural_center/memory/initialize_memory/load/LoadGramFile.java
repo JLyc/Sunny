@@ -19,8 +19,8 @@ public class LoadGramFile extends LoadAnyFile {
     }
 
     @Override
-    protected void proceedFile() throws IOException {
-        BufferedReader reader = loadFile();
+    protected Object proceedFile() throws IOException {
+        BufferedReader reader = loadBufferedReaderFile();
         String line;
         for (int index=0;(line = reader.readLine()) != null;) {
             if (line.matches("public <.+> =.+")) {
@@ -32,5 +32,6 @@ public class LoadGramFile extends LoadAnyFile {
                 index++;
             }
         }
+        return proccedFile;
     }
 }

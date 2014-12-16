@@ -19,8 +19,8 @@ public class LoadLycFile extends LoadAnyFile {
         super(path);
     }
 
-    protected void proceedFile() throws IOException {
-        BufferedReader reader = loadFile();
+    protected Object proceedFile() throws IOException {
+        BufferedReader reader = loadBufferedReaderFile();
         String line;
         for (int index=0;(line = reader.readLine()) != null;) {
             if(!(line.startsWith("//") || line.isEmpty())&& line.startsWith("|")) {
@@ -32,5 +32,6 @@ public class LoadLycFile extends LoadAnyFile {
                 index++;
             }
         }
+        return proccedFile;
     }
 }

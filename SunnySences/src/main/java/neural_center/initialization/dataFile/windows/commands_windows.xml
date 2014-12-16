@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<lyc:root xmlns:lyc="JLyc.Development@gmail.com">
+    <lyc:commands>
+        <lyc:command lyc:id="email">
+            <lyc:modifier>1</lyc:modifier>
+            <lyc:code>start http://mail.google.com</lyc:code>
+            <lyc:executor>cmd</lyc:executor>
+        </lyc:command>
+        <lyc:command>
+            <lyc:modifier>0</lyc:modifier>
+            <lyc:code>start http://mail.google.com</lyc:code>
+            <lyc:executor>cmd</lyc:executor>
+        </lyc:command>
+        <lyc:command lyc:id="email">
+            <lyc:modifier></lyc:modifier>
+            <lyc:code></lyc:code>
+            <lyc:executor></lyc:executor>
+        </lyc:command>
+        <lyc:command lyc:id="face book">
+            <lyc:modifier>1</lyc:modifier>
+            <lyc:code>start http://mail.google.com</lyc:code>
+            <lyc:executor>cmd</lyc:executor>
+        </lyc:command>
+        <lyc:command lyc:id="note pad">
+            <lyc:modifier>1</lyc:modifier>
+            <lyc:code>notepad.exe</lyc:code>
+            <lyc:executor>cmd</lyc:executor>
+        </lyc:command>
+        <lyc:command lyc:id="note pad">
+            <lyc:modifier>0</lyc:modifier>
+            <lyc:executor>taskkill /F /IM notepad.exe</lyc:executor>
+            <lyc:executor>cmd</lyc:executor>
+        </lyc:command>
+    </lyc:commands>
+</lyc:root>

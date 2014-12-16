@@ -28,7 +28,7 @@ public class EnvironmentOfOS {
             environmentProperties.put("commandsSource", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandExecutor", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("executorParameter", getPropertyBasedOnEnvironment()[i++]);
-            environmentProperties.put("recognizedWords", "recognizedWords.lyc");
+            environmentProperties.put("recognizedWords", "other/recognizedWords.lyc");
             SunnyInitialization.setStateOkFor(INSTANCE);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +54,7 @@ public class EnvironmentOfOS {
             case "Windows":
                 output[i++] = "/sunny_windows.config.xml";
                 output[i++] = "/sunny_windows.gram";
-                output[i++] = "/commands_windows.lyc";
+                output[i++] = "/windows/commands_windows.lyc";
                 output[i++] = "cmd";
                 output[i++] = "/c";
                 return output;

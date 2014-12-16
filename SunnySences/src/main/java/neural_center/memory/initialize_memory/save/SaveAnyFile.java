@@ -3,7 +3,7 @@ package neural_center.memory.initialize_memory.save;
 import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.SunnyInitialization;
 import neural_center.memory.SunnyMemory;
-import neural_center.memory.initialize_memory.FileOperators;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -74,18 +74,18 @@ public abstract class SaveAnyFile implements Callable<Boolean> {
 	}
 
 	protected boolean loadFileData() {
-		try {
-			SunnyMemory memory = SunnyInitialization.getMemory();
-			memory.fileControler(resourcesKey, FileOperators.LOAD);
-			while(!memory.retrieveLoadFileOutput(resourcesKey).isDone()) {
-				TimeUnit.SECONDS.sleep(1);
-			}
-			dataToMerge = memory.retrieveLoadFileOutput(resourcesKey).get();
-			return true;
-		} catch(Exception e) {
-			e.printStackTrace();
+//		try {
+//			SunnyMemory memory = SunnyInitialization.getMemory();
+//			memory.fileControler(resourcesKey, FileOperators.LOAD);
+//			while(!memory.retrieveLoadFileOutput(resourcesKey).isDone()) {
+//				TimeUnit.SECONDS.sleep(1);
+//			}
+//			dataToMerge = memory.retrieveLoadFileOutput(resourcesKey).get();
+//			return true;
+//		} catch(Exception e) {
+//			e.printStackTrace();
 			return false;
-		}
+//		}
 	}
 
 	@Override

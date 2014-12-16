@@ -1,6 +1,6 @@
 package neural_center.initialization;
 
-import neural_center.memory.initialize_memory.FileOperators;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,12 +33,12 @@ public class BasicKnowledge {
 		if(!knowledgeProperties.containsKey(key))
 		{
 			try {
-				knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
+//				knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
 			} catch(Exception e) {
 				SunnyInitialization.getMemory().fileControler(key, FileOperators.LOAD);
 				try{
 					TimeUnit.SECONDS.sleep(10);
-					knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
+//					knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
 				}catch (Exception ex)
 				{
 					SunnyInitialization.turnOffSunny(-1, "Unrecoverable error");

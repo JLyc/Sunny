@@ -3,7 +3,7 @@ package neural_center.initialization;
 import neural_center.consciousness.Consciousness;
 import neural_center.listening.ListeningManager;
 import neural_center.memory.SunnyMemory;
-import neural_center.memory.initialize_memory.FileOperators;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.speaking.SpeakingAdapter;
 import ui_fx.SunnyFace;
 

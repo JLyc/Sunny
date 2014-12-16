@@ -2,7 +2,8 @@ package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.SunnyInitialization;
-import neural_center.memory.initialize_memory.FileOperators;
+import neural_center.memory.initialize_memory.helpers.DataStoresScheme;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.memory.initialize_memory.load.LoadGramFile;
 import neural_center.memory.initialize_memory.load.LoadLycFile;
 import neural_center.memory.initialize_memory.save.SaveGramFile;
@@ -23,7 +24,7 @@ public class SunnyMemory {
 
 	private static final Path BRAIN = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
 
-	private static Map<String, Future<ArrayList<ArrayList<String>>>> loadFileOutput = new HashMap<>();
+	private static Map<String, Future<Object>> loadFileOutput = new HashMap<>();
 
 	static {
 		INSTANCE = new SunnyMemory();
@@ -67,11 +68,13 @@ public class SunnyMemory {
 		Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getProperties(fileKey));
 		switch(operation) {
 			case LOAD:
-				if(path.toString().endsWith(".lyc"))
-					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadLycFile(path.toString())));
-				if(path.toString().endsWith(".gram"))
-					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadGramFile(path.toString())));
-				break;
+//				if(path.toString().endsWith(".lyc"))
+//					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadLycFile(path.toString())));
+//				if(path.toString().endsWith(".gram"))
+//					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadGramFile(path.toString())));
+//				if(path.toString().endsWith(".xml"))
+//					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadGramFile(path.toString())));
+//				break;
 			case SAVE:
 				if(path.toString().endsWith(".lyc"))
 					SunnyInitialization.getExecutor().submit(new SaveLycFile(fileKey));
@@ -81,11 +84,11 @@ public class SunnyMemory {
 		}
 	}
 
-	public Future<ArrayList<ArrayList<String>>> retrieveLoadFileOutput(String key) throws Exception {
-		Future<ArrayList<ArrayList<String>>> output = loadFileOutput.get(key);
-		loadFileOutput.remove(key);
-		return output;
-	}
+//	public DataStoresScheme retrieveLoadFileOutput(String key) throws Exception {
+//		Future<ArrayList<ArrayList<String>>> output = loadFileOutput.get(key);
+//		loadFileOutput.remove(key);
+//		return output;
+//	}
 
 	public static void enforceInitialization() {
 	}
