@@ -7,6 +7,6 @@ import neural_center.listening.ListeningManager;
  */
 public interface ListenerInterface extends Runnable {
     public void deinitializeListener();
-    public void initializeListener(ListeningManager instance);
+    public Sphinx4Listener initializeListener(ListeningManager instance);
     public float getVersion();
 }

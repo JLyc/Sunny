@@ -1,103 +1,57 @@
 package neural_center.initialization;
 
-import com.google.common.collect.Maps;
+import neural_center.memory.initialize_memory.FileOperators;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class BasicKnowledge {
-    public static String activateStaticBlock = "Loading" + BasicKnowledge.class.getName();;
+    private static BasicKnowledge INSTANCE;
+	private static final Map<String, ArrayList<ArrayList<String>>> knowledgeProperties = new HashMap();
 
-    private static final BasicKnowledge INSTANCE = new BasicKnowledge();
-	private static final Map<String, ArrayList<ArrayList<String>>> knowledgeProperties = Maps.newHashMap();
+    private String[] loadToMemory = {
+            "grammarForListening",
+            "recognizedWords",
+            "commandsSource",
+    };
 
     static {
-        knowledgeProperties.put("grammarForListening", new ArrayList<ArrayList<String>>());
-        knowledgeProperties.put("recognizedWords.txt", new ArrayList<ArrayList<String>>());
-        knowledgeProperties.put("commandsSource", new ArrayList<ArrayList<String>>());
+        INSTANCE = new BasicKnowledge();
         SunnyInitialization.setStateOkFor(INSTANCE);
     }
 
-    public static BasicKnowledge getInstance() {
-//        if(INSTANCE == null) {
-//            INSTANCE = new BasicKnowledge();
-//        }
-        return INSTANCE;
-    }
-
-    private BasicKnowledge(){
-        /*for(String key : knowledgeProperties.keySet()){
-            try {
-                loadResources(key);
-            } catch (IOException e) {
-                System.err.println("JLyc \"exception when reading"+key+"\"");
-                e.printStackTrace();
-                return;
-            }
-        }*/
-
-    }
-
-	private void loadResources(String resources) throws IOException {
-
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(EnvironmentOfOS.getProperties(resources));
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder out = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-                out.append(line);
+    private BasicKnowledge() {
+        for (String key : loadToMemory) {
+			SunnyInitialization.getMemory().fileControler(key, FileOperators.LOAD);
         }
-        knowledgeProperties.put(resources, processLines(String.valueOf(out)));
     }
-	
-	private ArrayList<ArrayList<String>> processLines(String redLine)
-	{
-		ArrayList<ArrayList<String>> output = new ArrayList<>();
 
-        String[] lineSplit = redLine.split("\\n");
-		for (int line = 0; line < lineSplit.length; line++)
+    public ArrayList<ArrayList<String>> get(String key)
+    {
+		if(!knowledgeProperties.containsKey(key))
 		{
-			if (lineSplit[line].matches("\\|.+") || lineSplit[line].isEmpty())
-			{
-				output.add(new ArrayList<String>());
-				String[] splitWord = lineSplit[line].split("\\|");
-				for (int wordNo = 0; wordNo < splitWord.length; wordNo++)
+			try {
+				knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
+			} catch(Exception e) {
+				SunnyInitialization.getMemory().fileControler(key, FileOperators.LOAD);
+				try{
+					TimeUnit.SECONDS.sleep(10);
+					knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
+				}catch (Exception ex)
 				{
-					output.get(output.size() - 1).add(splitWord[wordNo]);
+					SunnyInitialization.turnOffSunny(-1, "Unrecoverable error");
 				}
 			}
 		}
-		return output;
-	}
-	
-	public ArrayList<ArrayList<String>> get(String key)
-	{
-		return knowledgeProperties.get(key);
-	}
-
-	/*try (SeekableByteChannel channel = Files.newByteChannel(wordPowerPath, java.nio.file.StandardOpenOption.READ))
+		ArrayList<ArrayList<String>> output = knowledgeProperties.get(key);
+		if(output==null)
 		{
-			ByteBuffer buffer = ByteBuffer.allocate(128);
-
-			String loadedDocument = "";
-
-			while (channel.read(buffer) > 0)
-			{
-				buffer.rewind();
-				loadedDocument += Charset.forName(System.getProperty("file.encoding")).decode(buffer).toString();
-				buffer.flip();
-			}
-			return loadedDocument;
+			if(SunnyInitialization.LycLog) {System.out.println("error here" + " BasicKnowledge");}
 		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			return null;
-		}*/
+		return output;
+    }
 
-    public static void loadIt(){}
+    public static void enforceInitialization(){}
 }

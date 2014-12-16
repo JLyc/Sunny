@@ -1,33 +1,74 @@
 package neural_center.initialization;
 
+import neural_center.consciousness.Consciousness;
 import neural_center.listening.ListeningManager;
+import neural_center.memory.SunnyMemory;
+import neural_center.memory.initialize_memory.FileOperators;
 import neural_center.speaking.SpeakingAdapter;
+import ui_fx.SunnyFace;
 
-public class SunnyInitialization extends Thread {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class SunnyInitialization {
+	public static final boolean LycLog = true;
     private static SpeakingAdapter speaking;
     private static ListeningManager listening;
     private static BasicKnowledge bknowledge;
+    private static EnvironmentOfOS environmentOfOS;
+    private static Consciousness consciousness;
+	private static SunnyMemory memory;
 
-    private static String staticBlockActivation;
+	private static ExecutorService defaultExecutor = Executors.newFixedThreadPool(5);
+	private static ExecutorService persistenExecutor = Executors.newFixedThreadPool(5);
 
-    static
-    {
-        staticBlockActivation = EnvironmentOfOS.activateStaticBlock;
-        staticBlockActivation = BasicKnowledge.activateStaticBlock;
-//        staticBlockActivation = FTTKevinVoice.activateStaticBlock;
-//        staticBlockActivation = Sphinx4Listener.activateStaticBlock;
-    }
-
-    private SunnyInitialization(String name) {
-        super(name);
-
-    }
-
-    public static void main(String arg[]) throws NullPointerException
+	public static void main(String arg[]) throws NullPointerException
 	{
-        SunnyInitialization mainSunnyThread = new SunnyInitialization("Main Sunny Thread");
-//        mainSunnyThread.start();
+        defaultExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                SunnyFace.show();
+            }
+        });
+		EnvironmentOfOS.enforceInitialization();
+		SunnyMemory.enforceInitialization();
+		defaultExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				BasicKnowledge.enforceInitialization();
+			}
+		});
+        defaultExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                SpeakingAdapter.enforceInitialization();
+            }
+        });
+        defaultExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				ListeningManager.enforceInitialization();
+			}
+		});
+        Consciousness.ofSunny();
+
+
+// not saving file and broken onNewCommand
+		try {
+			TimeUnit.SECONDS.sleep(5);
+			speaking.say("Initialization successful Sunny is here");
+			listening.onNewCommand("suny run fire fox");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		memory.fileControler("commandsSource", FileOperators.SAVE);
+		memory.fileControler("grammarForListening", FileOperators.SAVE);
 	}
+
+    public static ListeningManager getListener() {
+        return listening;
+    }
 
     public static SpeakingAdapter getSpeaking() {
         return speaking;
@@ -37,32 +78,67 @@ public class SunnyInitialization extends Thread {
         return bknowledge;
     }
 
+	public static SunnyMemory getMemory() {
+		return memory;
+	}
+
+	//executeInWT = executeInWorkingThread
+    public static void executeInWT(Runnable workingThread)
+    {
+        if(defaultExecutor.isShutdown())
+        {
+            System.err.println("No executor");
+        }
+        defaultExecutor.execute(workingThread);
+    }
+
+    public static ExecutorService getPersistenExecutor()
+    {
+        return persistenExecutor;
+    }
+    
+    public static ExecutorService getExecutor()
+    {
+        return defaultExecutor;
+    }
+
     public static void setStateOkFor(Object object) {
         if(object instanceof ListeningManager)
         {
             listening = (ListeningManager) object;
             System.out.println("JLyc \"listening initialized\"");
+            return;
         }
         if(object instanceof SpeakingAdapter)
         {
             speaking = (SpeakingAdapter) object;
             System.out.println("JLyc \"speaking initialized\"");
+            return;
         }
         if(object instanceof BasicKnowledge)
         {
             bknowledge = (BasicKnowledge) object;
             System.out.println("JLyc \"basic knowledge initialized\"");
+            return;
         }
-    }
-
-    @Override
-    public void run() {
-        super.run();
-        while(speaking == null || listening == null || bknowledge == null)
+        if(object instanceof EnvironmentOfOS)
         {
-            System.out.println("JLyc \"loading...\"");
+            environmentOfOS = (EnvironmentOfOS) object;
+            System.out.println("JLyc \"environment initialized\"");
+            return;
         }
-        speaking.say("Initializatin succesfull. Sunny is here");
+        if(object instanceof Consciousness)
+        {
+            consciousness = (Consciousness) object;
+            System.out.println("JLyc \"consciousness initialized\"");
+            return;
+        }
+		if(object instanceof SunnyMemory)
+		{
+			memory = (SunnyMemory) object;
+			System.out.println("JLyc \"memory initialized\"");
+			return;
+		}
     }
 
     public static void turnOffSunny(int state)
@@ -95,4 +171,6 @@ public class SunnyInitialization extends Thread {
             }
         }
     }
+
+
 }

@@ -2,70 +2,32 @@ package neural_center.listening;
 
 import neural_center.initialization.SunnyInitialization;
 import neural_center.listening.commandHandler.ProceedCommand;
-import neural_center.listening.listeningAPI.ListenerInterface;
+import neural_center.listening.listeningAPI.Sphinx4Listener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by jlyc on 12.10.2014.
  */
 public final class ListeningManager {
-    private static final ListeningManager INSTANCE = new ListeningManager();
-    private static final Map<Float, ListenerInterface> LISTENING_SOURCES = new HashMap<>();
-    private static Thread currentListeningClass;
+    private static ListeningManager INSTANCE;
 
-    private ListeningManager() {}
+    private static ExecutorService commandExecutor = Executors.newFixedThreadPool(10);
 
-    public static void requestRegistration(ListenerInterface sourceToRegister)
+    static
     {
-        if(!LISTENING_SOURCES.containsKey(sourceToRegister.getVersion())) {
-            LISTENING_SOURCES.put(sourceToRegister.getVersion(), sourceToRegister);
-        }
-        while(true){
-            try {
-               useLatestListener();
-               break;
-            }  catch (Exception e) {
-                LISTENING_SOURCES.get(getHighestVersion()).deinitializeListener();
-                LISTENING_SOURCES.remove(getHighestVersion());
-            }
-        }
+        INSTANCE = new ListeningManager();
         SunnyInitialization.setStateOkFor(INSTANCE);
     }
 
-    private static void useLatestListener() throws Exception{
-        LISTENING_SOURCES.get(getHighestVersion()).initializeListener(INSTANCE);
-        currentListeningClass = new Thread(LISTENING_SOURCES.get(getHighestVersion()));
-        currentListeningClass.start();
-        currentListeningClass.wait();
+    private ListeningManager() {
+        commandExecutor.execute(new Sphinx4Listener());
     }
 
-    public void onNewCommand(String recordedSound)
-    {
-        new ProceedCommand(recordedSound);
+    public void onNewCommand(String recordedSound) {
+        commandExecutor.execute(new ProceedCommand(recordedSound));
     }
 
-    private static Float getHighestVersion() {
-        float higherKey = 0f;
-        for(float key : LISTENING_SOURCES.keySet())
-        {
-            if(key>higherKey){higherKey = key;}
-        }
-        return higherKey;
-    }
-
-    public boolean stopListening(){
-        try {
-            currentListeningClass.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean startListening(){
-        currentListeningClass.notify();
-        return false;
-    }
+    public static void enforceInitialization(){}
 }

@@ -9,10 +9,7 @@ public class ProceedCommand implements Runnable{
     private String command;
 
     public ProceedCommand(String recordedCommand) {
-        this.command = recordedCommand;
-        Thread currentThread = new Thread(this);
-        currentThread.setName("ProceedCommand "+recordedCommand);
-        currentThread.start();
+        this.command = recordedCommand.toLowerCase();
     }
 
     @Override

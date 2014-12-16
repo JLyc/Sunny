@@ -9,13 +9,13 @@ public class CommandRUn
 	{
 		
 		//		String command = "sudo -S pm-suspend";
-		String command = "exec firefox";
+		String command = "nircmd.exe cdrom open";
 		try
 		{
 			//			byte[] pwd =  (171189)
 			System.out.println(System.getProperty("os.name"));
 			System.out.println(System.getProperty("user.name"));
-			Process p = new ProcessBuilder("/bin/sh", "-c", command).start();
+			Process p = new ProcessBuilder("S:\\JLyc\\Sunny\\nircmd", "/c", command).start();
 			//					p.getOutputStream().write(("171189"+"\n").getBytes());
 			//					p.getOutputStream().flush();
 		}

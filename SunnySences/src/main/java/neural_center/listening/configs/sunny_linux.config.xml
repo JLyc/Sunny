@@ -96,7 +96,7 @@
         <property name="dictionary" value="dictionary"/>
         <property name="grammarLocation"
              value="resource:/neural_center/listening/"/>
-        <property name="grammarName" value="configs/sunny_linux"/>
+        <property name="grammarName" value="gramFiles/sunny_linux"/>
 	<property name="logMath" value="logMath"/>
     </component>
 

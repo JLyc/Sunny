@@ -37,16 +37,49 @@ public class RegExTest
 		//			System.out.println(b);
 		//
 		//		}
-		
-		String redLine = "sudo pkill -u %user% chrome";
-		System.out.println(redLine.contains("sudo"));
-		if(redLine.matches(".+%user%.+"))
-		{
-			String[] lineSplit = redLine.split("%user%");
-			String user = "lyc";
-			System.out.println(lineSplit[0]+user+lineSplit[1]);
-		}
-		System.out.println(redLine.replace("%user%", "lyc"));
-		
-	}
+//
+//		String redLine = "sudo pkill -u %user% chrome";
+//		System.out.println(redLine.contains("sudo"));
+//		if(redLine.matches(".+%user%.+"))
+//		{
+//			String[] lineSplit = redLine.split("%user%");
+//			String user = "lyc";
+//			System.out.println(lineSplit[0]+user+lineSplit[1]);
+//		}
+//		System.out.println(redLine.replace("%user%", "lyc"));
+////
+//		String redLine = "Windows 7";
+////		System.out.println(redLine.contains("sudo"));
+//		if(redLine.matches(".*Windows.*"))
+//		{
+////			String[] lineSplit = redLine.split("%user%");
+////			String user = "lyc";
+//			System.out.println(redLine.matches(".+Windows.+"));
+//		}
+//		System.out.println(redLine.replace("%user%", "lyc"));
+
+//        String[] splitWord = "|1|Run|Show|Start|Turn on|Mute|".split("\\|");
+//        				for (int wordNo = 0; wordNo < splitWord.length; wordNo++) {
+//
+//                            System.out.println(splitWord[wordNo] + " " + Integer.parseInt(splitWord[1]));
+//                        }
+
+//        String line = "|1|Run|Show|Start|Turn on|Mute|";
+//        for (String split : line.split("\\|")) {
+//            System.out.println(split);;
+//        }
+
+        String line = "Fire Fox";
+        String[] p = {"Fire", "Fox"};
+        System.out.println(line.matches(p[0]+".+"));
+        System.out.println(line.matches(".+"+p[1]));
+
+//        String preced = line.substring(line.indexOf("(")+1, line.lastIndexOf(")"));
+//        String[] out = preced.split("\\)\\s\\(");
+//        for (String o:out) {
+//            for (String a :o.split("\\s\\|\\s")) {
+//                System.out.println(a);
+//            }
+//        }
+    }
 }

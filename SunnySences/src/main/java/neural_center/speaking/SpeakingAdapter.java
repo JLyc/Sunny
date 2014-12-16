@@ -1,21 +1,25 @@
 package neural_center.speaking;
 
 import neural_center.initialization.SunnyInitialization;
+import neural_center.speaking.speakingAPI.FTTKevinVoice;
 import neural_center.speaking.speakingAPI.SpeakingInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by socha on 10.10.2014.
  */
 public final class SpeakingAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpeakingAdapter.class);
-
-    private static final SpeakingAdapter INSTANCE = new SpeakingAdapter();
+    private static final SpeakingAdapter INSTANCE;
     private static SpeakingInterface speakingSource;
     private static float currentVersion = 0f;
 
     private int testAttempts = 3;
+
+    static
+    {
+        INSTANCE = new SpeakingAdapter();
+        SunnyInitialization.setStateOkFor(INSTANCE);
+        new FTTKevinVoice();
+    }
 
     private SpeakingAdapter() {}
 
@@ -24,14 +28,12 @@ public final class SpeakingAdapter {
                 workingTest(speakingSource)) {
             this.speakingSource = speakingSource;
             this.currentVersion = speakingSource.getVersion();
-            SunnyInitialization.setStateOkFor(INSTANCE);
             return true;
         }
         return false;
     }
 
     private boolean workingTest(SpeakingInterface newSpeakingSource) {
-        LOGGER.debug("Silence test with empty string to say {} attempts", testAttempts);
         for(int attempts=0;attempts<testAttempts; attempts++) {
             try {
                 newSpeakingSource.say("");
@@ -45,10 +47,18 @@ public final class SpeakingAdapter {
 
     public void say(String text) {
         try {
+//            long startTime = System.currentTimeMillis();
+            //TODO run equalizer
             speakingSource.say(text);
+            //TODO stop equalizer;
+//            long finishTime = System.currentTimeMillis();
+//            System.out.println("That took: " + (finishTime - startTime) + " ms");
+
         } catch (Exception e) {
-            LOGGER.error("{}", e.getMessage());
+            e.printStackTrace();
             // TODO validate output of error msgs
         }
     }
+
+    public static void enforceInitialization(){}
 }

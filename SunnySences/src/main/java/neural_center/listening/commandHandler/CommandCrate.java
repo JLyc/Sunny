@@ -3,146 +3,117 @@ package neural_center.listening.commandHandler;
 import neural_center.initialization.SunnyInitialization;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CommandCrate
 {
-	private String name;
-	private String modifier;
-	private int modifierNumber;
-	private String commandDescription;
-	private String[] splitedCommand;
-	
-	ArrayList<String[]> parts = new ArrayList<>();
-	
-	public CommandCrate(String command)
-	{
-		try
-		{
-			splitedCommand = command.split("\\s");
-			Iterator<String[]> partIter = makeParts().iterator();
-			
-			verifyCommand(partIter.next());
-			resolveModifier(partIter.next());
-			resolveName(partIter.next());
-			if(partIter.hasNext())
-			{
-				resolveCommandDescripton(partIter.next());
-			}
-			
-		}
-		catch (NoValidCommandException e)
-		{
-			return;
-		}
-	}
-	
-	private void resolveCommandDescripton(String[] list)
-	{
-		for (int index = 3; index < splitedCommand.length; index++)
-		{
-			commandDescription += splitedCommand[index];
-		}
-	}
-	
-	private void resolveModifier(String[] list)
-	{
-		for (int index = 0; index < list.length; index++)
-		{
-			if (splitedCommand[1].equalsIgnoreCase(list[index]))
-			{
-				modifier = list[index];
-				resolveModifierNumber();
-				return;
-			}
-		}
-		
-	}
-	
-	private void resolveModifierNumber()
-	{
-        //TODO refactor code
-		Iterator<?> wordPowerIterator = SunnyInitialization.getBknowledge().get("recognizedWords.txt").iterator();
-		while (wordPowerIterator.hasNext())
-		{
-			ArrayList<String> mapedWordPower = (ArrayList<String>) wordPowerIterator.next();
-			if(mapedWordPower.contains(modifier))
-			{
-				modifierNumber = Integer.parseInt(mapedWordPower.get(1));
-				return;
-			}
-		}
-	}
-	
-	private void resolveName(String[] list)
-	{
-		int possileNameIndex = 2;
-		String possibleName = splitedCommand[possileNameIndex];
-		while (true)
-		{
-			for (int index = 0; index < list.length; index++)
-			{
-				if (possibleName.equalsIgnoreCase(list[index]))
-				{
-					name = list[index];
-					return;
-				}
-			}
-			possibleName+=" "+splitedCommand[++possileNameIndex];
-		}
-	}
-	
-	private void verifyCommand(String[] list) throws NoValidCommandException
-	{
-		if ((list.length == 1) && splitedCommand[0].equalsIgnoreCase(list[0]))
-		{
-			return;
-		}
-		else
-		{
-			throw new NoValidCommandException();
-		}
-	}
-	
-	public String getName()
-	{
-		return name;
-	}
-	
-	public String getModifier()
-	{
-		return modifier;
-	}
-	
-	public int getModifierNumber()
-	{
-		return modifierNumber;
-	}
-	
-	public String getCommandDescription()
-	{
-		return commandDescription;
-	}
-	
-	private ArrayList<String[]> makeParts()
-	{
-		String command = "(Sunny) (Run | Run | Show | Start | Close | End | Turn off | Sleep | Volume | Mute | Un mute) (Fire Fox | Goggle Chrome | Email | Face Book | Team Speak | Computer | up | down | eclipse)";
-		String[] breakLinePart = command.substring(1, command.length() - 1).split("\\) \\(");
-		for (String part : breakLinePart)
-		{
-			parts.add(part.split("\\s\\|\\s"));
-		}
-		return parts;
-	}
-	
-	@Deprecated
-	public static void main(String[] args)
-	{
-		String command = "Sunny Run Fire Fox";
-		CommandCrate feedback = new CommandCrate(command);
-		System.out.println(feedback.getCommandDescription());
-		System.out.println(feedback.getModifier());
-		System.out.println(feedback.getModifierNumber());
-		System.out.println(feedback.getName());
-	}
+    //program name
+    private String name;
+    //modifier run close
+    private String modifier;
+    private int modifierNumber;
+    private String commandDescription;
+    private String[] splitedCommand;
+
+    public CommandCrate(String command)
+    {
+        splitedCommand = command.split("\\s");
+
+        for (ArrayList<ArrayList<String>>line : makeParts()) {
+            for(int index=0;index<line.size();index++) {
+                int match = isSame(line.get(index), index);
+                if (match==-1) {
+                    break;
+                }
+                switch (index) {
+                    case 0: break;
+                    case 1:
+                        resolveModifier(splitedCommand[index]);
+                        break;
+                    case 2:
+                        name = line.get(index).get(match);
+                        break;
+                    default:
+                        commandDescription += splitedCommand[index];
+                }
+            }
+        }
+    }
+
+    private int isSame(ArrayList<String> list, int position) {
+        if (list.contains(splitedCommand[position])) {
+            return position;
+        } else {
+            for (int index = 0; index < list.size(); index++) {
+                if (list.get(index).matches(splitedCommand[position] + ".+") && list.get(index).matches(".+" + splitedCommand[position + 1])) {
+                    return index;
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    private void resolveModifier(String modifierCandidate) {
+        ArrayList<ArrayList<String>> modifiers = SunnyInitialization.getBknowledge().get("recognizedWords");
+        for(ArrayList<String> list : modifiers)
+        {
+            if(list.contains(modifierCandidate)) {
+                modifier = list.get(list.indexOf(modifierCandidate));
+                modifierNumber = Integer.parseInt(list.get(modifiers.indexOf(list)));
+                break;
+            }
+        }
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getModifier()
+    {
+        return modifier;
+    }
+
+    public int getModifierNumber()
+    {
+        return modifierNumber;
+    }
+
+    public String getCommandDescription()
+    {
+        return commandDescription;
+    }
+
+    private ArrayList<ArrayList<ArrayList<String>>> makeParts() {
+        ArrayList<ArrayList<ArrayList<String>>> cube3D = new ArrayList<>();
+        int line =0;
+        for (ArrayList<String> knowCommands : SunnyInitialization.getBknowledge().get("grammarForListening")) {
+            cube3D.add(new ArrayList<ArrayList<String>>());
+            int part = 0;
+            for (String knowCommandsPart : knowCommands) {
+                String[] partsBreak = knowCommandsPart.split("\\s\\|\\s");
+                cube3D.get(line).add(new ArrayList<String>());
+                for (String items : partsBreak) {
+
+                    cube3D.get(line).get(part).add(items);
+                }
+                part++;
+            }
+            line++;
+        }
+        return cube3D;
+    }
+
+    @Deprecated
+    public static void main(String[] args)
+    {
+        SunnyInitialization.main(null);
+        String command = "Sunny Run Fire Fox";
+        CommandCrate feedback = new CommandCrate(command);
+        System.out.println(feedback.getCommandDescription());
+        System.out.println(feedback.getModifier());
+        System.out.println(feedback.getModifierNumber());
+        System.out.println(feedback.getName());
+    }
 }

@@ -18,18 +18,16 @@ public class SunnyCommandProcess
 		if(!executeCommand(command))
             SunnyInitialization.getSpeaking().say("command do not executed");
 	}
-	
-	
-	
+
 	private String buildCommand(String name, int modifierNumber)
 	{
 		String command = "";
 		
 		for (int i = 0; i < loadedCommands.size(); i++)
 		{
-			if(loadedCommands.get(i).get(1).equalsIgnoreCase(name)&&(Integer.parseInt(loadedCommands.get(i).get(2))==(modifierNumber)))
+			if(loadedCommands.get(i).get(0).equalsIgnoreCase(name)&&(Integer.parseInt(loadedCommands.get(i).get(1))==(modifierNumber)))
 			{
-				command = fillCommandsVariables(loadedCommands.get(i).get(3));
+				command = fillCommandsVariables(loadedCommands.get(i).get(2));
 				break;
 			}
 		}
@@ -56,7 +54,8 @@ public class SunnyCommandProcess
 	{
 		try
 		{
-			Process p = new ProcessBuilder(EnvironmentOfOS.getProperties("commandsSource"), EnvironmentOfOS.getProperties("commandExecutor"), command).start();
+            System.out.println(command);
+            Process p = new ProcessBuilder(EnvironmentOfOS.getProperties("commandExecutor"), EnvironmentOfOS.getProperties("executorParameter"), command).start();
 			if(isAdmin)
 			{
 				p.getOutputStream().write(("171189"+"\n").getBytes());

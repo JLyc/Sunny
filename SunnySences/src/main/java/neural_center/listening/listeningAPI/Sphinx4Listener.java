@@ -7,14 +7,11 @@ import edu.cmu.sphinx.util.props.ConfigurationManager;
 import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.SunnyInitialization;
 import neural_center.listening.ListeningManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class Sphinx4Listener implements ListenerInterface {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Sphinx4Listener.class);
-    public static String activateStaticBlock;
+import java.net.URL;
 
-    private static final Sphinx4Listener INSTANCE = new Sphinx4Listener();
+public class Sphinx4Listener implements Runnable {
+
     private ListeningManager instanceOfListeningManager;
     private final float version = 1.0f;
 
@@ -24,44 +21,40 @@ public class Sphinx4Listener implements ListenerInterface {
 
     private boolean runThread = true;
 
-    private Sphinx4Listener() {
-        ListeningManager.requestRegistration(INSTANCE);
+    public Sphinx4Listener() {
+        this(Sphinx4Listener.class.getResource(EnvironmentOfOS.getProperties("listeningConfig")));
     }
 
-    @Override
-    public void initializeListener(ListeningManager instance) {
-        cm = new ConfigurationManager(this.getClass().getResource(EnvironmentOfOS.getProperties("listeningConfig")));
+    public Sphinx4Listener(URL url) {
+        cm = new ConfigurationManager(url);
+        initializeListener();
+    }
 
-        if (cm != null) {
-            LOGGER.error("JLyc \"Configuration Manger failed to load\"");
+    private void initializeListener() {
+        if (cm == null) {
+            System.err.println("JLyc \"Configuration Manger failed to load\"");
             return;
         }
 
-        recognizer = cm.lookup("recognizer");
+        recognizer = (Recognizer) cm.lookup("recognizer");
         recognizer.allocate();
-        microphone = cm.lookup("microphone");
+        microphone = (Microphone) cm.lookup("microphone");
 
         if (!microphone.startRecording()) {
             System.err.println("Cannot start microphone.");
             recognizer.deallocate();
             return;
         }
-        this.instanceOfListeningManager = instance;
     }
 
-    @Override
     public void deinitializeListener() {
         runThread = false;
     }
 
     @Override
-    public float getVersion() {
-        return version;
-    }
-
-    @Override
     public void run() {
         try {
+            instanceOfListeningManager = SunnyInitialization.getListener();
             while (runThread) {
                 doListening();
             }
