@@ -1,0 +1,2 @@
+"imap.gmail.com", "andrej.socha", "m62tkx7j"
+"imap.gmail.com", "JLyc.Development", "044150900"
