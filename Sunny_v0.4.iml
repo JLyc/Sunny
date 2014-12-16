@@ -8,8 +8,8 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="cmu_time_awb" level="project" />
-    <orderEntry type="library" name="mail" level="project" />
-    <orderEntry type="library" name="ant-contrib-0.6" level="project" />
+    <orderEntry type="library" name="freetts" level="project" />
+    <orderEntry type="library" name="jmail" level="project" />
+    <orderEntry type="library" name="sphinx" level="project" />
   </component>
 </module>
