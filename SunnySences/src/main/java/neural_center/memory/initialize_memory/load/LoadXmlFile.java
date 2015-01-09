@@ -10,26 +10,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 /**
  * Created by sochaa on 16. 12. 2014.
  */
-public class LoadXmlFile extends LoadAnyFile {
+public class LoadXmlFile implements Callable<Document> {
+    private Path path;
 
     public LoadXmlFile(String path) {
-        super(path);
+        this.path = FileSystems.getDefault().getPath(path);
     }
 
-    public LoadXmlFile(URI path) {
-        super(path);
-    }
-
-    @Override
-    protected Object proceedFile() throws IOException {
+    private Document proceedFile() throws IOException {
         try {
-            InputStream is = loadInputStreamFile();
-
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream(path.toString());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(is);
@@ -39,6 +37,10 @@ public class LoadXmlFile extends LoadAnyFile {
             e.printStackTrace();
             return null;
         }
+    }
 
+    @Override
+    public Document call() throws Exception {
+        return proceedFile();
     }
 }

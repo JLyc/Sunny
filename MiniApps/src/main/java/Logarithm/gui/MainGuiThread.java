@@ -1,8 +1,5 @@
 package Logarithm.gui;
 
-import neural_center.initialization.AbilitiesRegistrar;
-import neural_center.initialization.SunnyAbillities;
-
 import java.applet.Applet;
 
 /**
@@ -10,7 +7,7 @@ import java.applet.Applet;
  * @version 22.04.2013
  */
 
-public class MainGuiThread extends Applet implements AbilitiesRegistrar
+public class MainGuiThread extends Applet
 {
 	private static final long serialVersionUID = 1L;
 
@@ -37,33 +34,5 @@ public class MainGuiThread extends Applet implements AbilitiesRegistrar
 				new CreateGUI();
 			}
 		});
-		;
 	}
-
-    @Override
-    public void registerAbilitie() {
-        SunnyAbillities.registerAbillities(this);
-    }
-
-    @Override
-    public void execute() {
-        javax.swing.SwingUtilities.invokeLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new CreateGUI();
-                    }
-                });
-            }
-        });;
-    }
-
-    @Override
-    public String getAbilitieName() {
-        return "Logarithm";
-    }
 }

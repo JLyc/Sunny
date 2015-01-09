@@ -1,10 +1,13 @@
 package neural_center.initialization;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by socha on 14.10.2014.
+ * Created by JLyc on 14.10.2014.
+ *
+ * Dependencies:         Independent use
  */
 public class EnvironmentOfOS {
     private static EnvironmentOfOS INSTANCE;
@@ -28,7 +31,7 @@ public class EnvironmentOfOS {
             environmentProperties.put("commandsSource", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandExecutor", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("executorParameter", getPropertyBasedOnEnvironment()[i++]);
-            environmentProperties.put("recognizedWords", "other/recognizedWords.lyc");
+            environmentProperties.put("recognizedWords", "recognizedWords.xml");
             SunnyInitialization.setStateOkFor(INSTANCE);
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,16 +48,16 @@ public class EnvironmentOfOS {
         int i = 0;
         switch (environmentProperties.get("os")) {
             case "Linux":
-                output[i++] = "sunny_linux.config.xml";
-                output[i++] = "sunny_linux.gram";
-                output[i++] = "Commands_linux.lyc";
+                output[i++] = "";
+                output[i++] = "";
+                output[i++] = "";
                 output[i++] = "/bin/sh";
                 output[i++] = "-c";
                 return output;
             case "Windows":
-                output[i++] = "/sunny_windows.config.xml";
-                output[i++] = "/sunny_windows.gram";
-                output[i++] = "/windows/commands_windows.lyc";
+                output[i++] = "sunny_windows.config.xml";
+                output[i++] = "sunny_windows_gram.xml";
+                output[i++] = "commands_windows.xml";
                 output[i++] = "cmd";
                 output[i++] = "/c";
                 return output;
@@ -76,4 +79,16 @@ public class EnvironmentOfOS {
     }
 
     public static void enforceInitialization(){}
+
+    public static void main(String[] args) {
+        INSTANCE.testPath();
+    }
+
+    private void testPath() {
+        InputStream ip = this.getClass().getClassLoader().getResourceAsStream("commands_windows.xml");
+        if(ip==null)
+        {
+            System.out.println("fail");
+        }
+    }
 }

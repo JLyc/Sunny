@@ -7,6 +7,7 @@ import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.speaking.SpeakingAdapter;
 import ui_fx.SunnyFace;
 
+import java.sql.Time;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -53,18 +54,22 @@ public class SunnyInitialization {
 		});
         Consciousness.ofSunny();
 
-
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        speaking.say("Sunny initialized");
 // not saving file and broken onNewCommand
-		try {
-			TimeUnit.SECONDS.sleep(5);
-			speaking.say("Initialization successful Sunny is here");
-			listening.onNewCommand("suny run fire fox");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		memory.fileControler("commandsSource", FileOperators.SAVE);
-		memory.fileControler("grammarForListening", FileOperators.SAVE);
-	}
+//        "grammarForListening",
+//                "recognizedWords",
+//                "commandsSource",
+
+        memory.fileControler("grammarForListening",FileOperators.SAVE);
+        memory.fileControler("recognizedWords",FileOperators.SAVE);
+        memory.fileControler("commandsSource",FileOperators.SAVE);
+        System.out.println("all good ?");
+    }
 
     public static ListeningManager getListener() {
         return listening;

@@ -5,14 +5,14 @@
             <lyc:words>run</lyc:words>
             <lyc:words>show</lyc:words>
             <lyc:words>start</lyc:words>
-            <lyc:words>turn on</lyc:words>
+            <lyc:words lyc:whiteSpace="true">turn on</lyc:words>
             <lyc:words>mute</lyc:words>
         </lyc:modifier>
         <lyc:modifier lyc:id="2">
             <lyc:words>close</lyc:words>
             <lyc:words>cancel</lyc:words>
             <lyc:words>end</lyc:words>
-            <lyc:words>turn off</lyc:words>
+            <lyc:words lyc:whiteSpace="true">turn off</lyc:words>
             <lyc:words>unmute</lyc:words>
         </lyc:modifier>
         <lyc:modifier lyc:id="0">

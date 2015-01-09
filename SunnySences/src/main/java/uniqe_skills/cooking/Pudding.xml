@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<lyc:root xmlns:lyc="JLyc.Development@gmail.com">
+    <lyc:reciepes>
+        <lyc:reciepe lyc:name="pudding">
+            <lyc:ingrediencs>
+                <lyc:ingredienc>
+                    <lyc:name>pudding</lyc:name>
+                    <lyc:amount>one package</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>sugar</lyc:name>
+                    <lyc:amount>four spoons</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>milk</lyc:name>
+                    <lyc:amount>more then 5 deciliters</lyc:amount>
+                </lyc:ingredienc>
+            </lyc:ingrediencs>
+            <lyc:workflow>
+                <lyc:steps lyc:id="1" lyc:time="1">Mix two spoons of sugar and pudding at bowl</lyc:steps>
+                <lyc:steps lyc:id="2" lyc:time="2">Add milk make water like mixture</lyc:steps>
+                <lyc:steps lyc:id="3" lyc:time="00">Boil 5 deciliters of milk</lyc:steps>
+                <lyc:steps lyc:id="4" lyc:time="1">Add mixture to boiled milk and another two spoons of sugar</lyc:steps>
+                <lyc:steps lyc:id="5" lyc:time="00">Keep mixing all the time until pudding starts boil</lyc:steps>
+                <lyc:steps lyc:id="6" lyc:time="2">After boiling keep mixing another 2 minits until you see milk skin</lyc:steps>
+                <lyc:steps lyc:id="7" lyc:time="20">Let cool down for 15-30 min</lyc:steps>
+            </lyc:workflow>
+        </lyc:reciepe>
+    </lyc:reciepes>
+</lyc:root>

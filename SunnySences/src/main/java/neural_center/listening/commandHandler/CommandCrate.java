@@ -1,8 +1,10 @@
 package neural_center.listening.commandHandler;
 
 import neural_center.initialization.SunnyInitialization;
+import uniqe_skills.smart_xpath.SmartXPath;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommandCrate
 {
@@ -16,27 +18,10 @@ public class CommandCrate
 
     public CommandCrate(String command)
     {
-        splitedCommand = command.split("\\s");
-
-        for (ArrayList<ArrayList<String>>line : makeParts()) {
-            for(int index=0;index<line.size();index++) {
-                int match = isSame(line.get(index), index);
-                if (match==-1) {
-                    break;
-                }
-                switch (index) {
-                    case 0: break;
-                    case 1:
-                        resolveModifier(splitedCommand[index]);
-                        break;
-                    case 2:
-                        name = line.get(index).get(match);
-                        break;
-                    default:
-                        commandDescription += splitedCommand[index];
-                }
-            }
-        }
+        String xpath = ;
+        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/modifieres/modifier/@whiteSpace").asList();
+        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
+        String xpath1 = ;
     }
 
     private int isSame(ArrayList<String> list, int position) {
@@ -54,10 +39,9 @@ public class CommandCrate
 
 
     private void resolveModifier(String modifierCandidate) {
-        ArrayList<ArrayList<String>> modifiers = SunnyInitialization.getBknowledge().get("recognizedWords");
-        for(ArrayList<String> list : modifiers)
-        {
-            if(list.contains(modifierCandidate)) {
+        ArrayList<ArrayList<String>> modifiers = new ArrayList<>();
+        for (ArrayList<String> list : modifiers) {
+            if (list.contains(modifierCandidate)) {
                 modifier = list.get(list.indexOf(modifierCandidate));
                 modifierNumber = Integer.parseInt(list.get(modifiers.indexOf(list)));
                 break;
@@ -83,26 +67,6 @@ public class CommandCrate
     public String getCommandDescription()
     {
         return commandDescription;
-    }
-
-    private ArrayList<ArrayList<ArrayList<String>>> makeParts() {
-        ArrayList<ArrayList<ArrayList<String>>> cube3D = new ArrayList<>();
-        int line =0;
-        for (ArrayList<String> knowCommands : SunnyInitialization.getBknowledge().get("grammarForListening")) {
-            cube3D.add(new ArrayList<ArrayList<String>>());
-            int part = 0;
-            for (String knowCommandsPart : knowCommands) {
-                String[] partsBreak = knowCommandsPart.split("\\s\\|\\s");
-                cube3D.get(line).add(new ArrayList<String>());
-                for (String items : partsBreak) {
-
-                    cube3D.get(line).get(part).add(items);
-                }
-                part++;
-            }
-            line++;
-        }
-        return cube3D;
     }
 
     @Deprecated
