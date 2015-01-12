@@ -9,7 +9,7 @@ import java.util.Date;
 public class Consciousness extends Thread
 {
     private static Consciousness consciousness;
-    private static final Date SUNNY_BIRTHS_DAY = Calendar.getInstance().getTime();
+private static final Date SUNNY_BIRTHS_DAY = Calendar.getInstance().getTime();
     private static boolean heartBeat = true;
 
     public static void ofSunny()

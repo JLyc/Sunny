@@ -15,7 +15,7 @@ public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
 	private static final Map<String, Document> knowledgeProperties = new HashMap();
 
-    private String[] loadToMemory = {
+    private static String[] loadToMemory = {
             "grammarForListening",
             "recognizedWords",
             "commandsSource",
@@ -57,5 +57,10 @@ public class BasicKnowledge {
 		return output;
     }
 
-    public static void enforceInitialization(){}
+    public static BasicKnowledge enforceInitialization(){
+		if(INSTANCE == null)
+			return new BasicKnowledge();
+		else
+			return INSTANCE;
+	}
 }

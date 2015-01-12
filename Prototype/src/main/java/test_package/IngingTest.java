@@ -12,14 +12,5 @@ public class IngingTest
 			wordup = word+"ing";
 		}
 		System.out.println(wordup);
-		String[] splits = word.split("\\s");
-		
-		for(int i=0;i<splits.length;i++)
-		{
-			System.err.println(splits[i]+"\n");
-		}
-		
-		
-		//		System.out.println(splits[0]+"ing"+splits[1]);
 	}
 }

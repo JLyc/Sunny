@@ -26,5 +26,18 @@
                 <lyc:steps lyc:id="7" lyc:time="20">Let cool down for 15-30 min</lyc:steps>
             </lyc:workflow>
         </lyc:reciepe>
+        <lyc:reciepe lyc:name="rice">
+            <lyc:ingrediencs>
+                <lyc:ingredienc>
+                    <lyc:name>rice</lyc:name>
+                    <lyc:amount>one cup</lyc:amount>
+                </lyc:ingredienc>
+            </lyc:ingrediencs>
+            <lyc:workflow>
+                <lyc:steps lyc:id="1" lyc:time="10">Boil water</lyc:steps>
+                <lyc:steps lyc:id="2" lyc:time="2">Wash rice 3 times</lyc:steps>
+                <lyc:steps lyc:id="3" lyc:time="15">Put rice into boiled water for 15 min</lyc:steps>
+            </lyc:workflow>
+        </lyc:reciepe>
     </lyc:reciepes>
 </lyc:root>

@@ -3,10 +3,18 @@ package test_package;
 
 public class RegExTest
 {
+    private static String[][] word = {
+            {"sunny run fire fox"},
+    };
+
+    private static String[][] regex = {
+            {""},
+    };
+
 	public static void main(String arg[])
 	{
-		
-		//		String slovo = "sunny run fire fox";
+        System.out.println(word[0][0].matches(regex[0][0]));
+        //		String slovo = "sunny run fire fox";
 		//		String test = "unhappy";
 		//		slovo = test.substring(2);
 		//		System.out.println(test);

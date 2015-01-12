@@ -1,6 +1,5 @@
 package neural_center.initialization;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,36 +12,36 @@ public class EnvironmentOfOS {
     private static EnvironmentOfOS INSTANCE;
     private static final Map<String, String> environmentProperties = new HashMap<>();
 
-    static{
-        INSTANCE = new EnvironmentOfOS();
+    private EnvironmentOfOS() {
+        loadProperties();
+    }
+
+    private void loadProperties() {
         int i = 0;
         try {
-            if(System.getProperty("os.name").matches(".*Windows.*"))
-            {
-                environmentProperties.put("os", "Windows");
-            }
-            else
-            {
-                environmentProperties.put("os", System.getProperty("os.name"));
-            }
+            environmentProperties.put("os", getOsPropertie());
             environmentProperties.put("user", System.getProperty("user.name"));
             environmentProperties.put("listeningConfig", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("grammarForListening", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandsSource", getPropertyBasedOnEnvironment()[i++]);
+            environmentProperties.put("recognizedWords", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandExecutor", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("executorParameter", getPropertyBasedOnEnvironment()[i++]);
-            environmentProperties.put("recognizedWords", "recognizedWords.xml");
-            SunnyInitialization.setStateOkFor(INSTANCE);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
             System.err.println("Internal error in environment. Cant work without environment");
             SunnyInitialization.turnOffSunny(1);
         }
     }
 
-    private EnvironmentOfOS(){}
+    private String getOsPropertie() {
+        String fullOSName = System.getProperty("os.name");
+        if(fullOSName.matches(".*Windows.*"))return "Windows";
+        if(fullOSName.matches(".*Linux.*"))return "Linux";
+        return null;
+    }
 
-    private static String[] getPropertyBasedOnEnvironment() throws Exception
+    private String[] getPropertyBasedOnEnvironment() throws Exception
     {
         String[] output = new String[5];
         int i = 0;
@@ -58,6 +57,7 @@ public class EnvironmentOfOS {
                 output[i++] = "sunny_windows.config.xml";
                 output[i++] = "sunny_windows_gram.xml";
                 output[i++] = "commands_windows.xml";
+                output[i++] = "recognizedWords.xml";
                 output[i++] = "cmd";
                 output[i++] = "/c";
                 return output;
@@ -74,21 +74,14 @@ public class EnvironmentOfOS {
         }
     }
 
-    public static String getProperties(String property) {
+    public String getProperties(String property) {
         return environmentProperties.get(property);
     }
 
-    public static void enforceInitialization(){}
-
-    public static void main(String[] args) {
-        INSTANCE.testPath();
-    }
-
-    private void testPath() {
-        InputStream ip = this.getClass().getClassLoader().getResourceAsStream("commands_windows.xml");
-        if(ip==null)
-        {
-            System.out.println("fail");
-        }
+    public static EnvironmentOfOS enforceInitialization(){
+        if(INSTANCE == null)
+            return new EnvironmentOfOS();
+        else
+            return INSTANCE;
     }
 }
