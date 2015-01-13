@@ -5,15 +5,17 @@ public class RegExTest
 {
     private static String[][] word = {
             {"sunny run fire fox"},
+            {"nieco.txt"}
     };
 
     private static String[][] regex = {
             {""},
+            {".*\\.txt"}
     };
 
 	public static void main(String arg[])
 	{
-        System.out.println(word[0][0].matches(regex[0][0]));
+        System.out.println(word[1][0].matches(regex[1][0]));
         //		String slovo = "sunny run fire fox";
 		//		String test = "unhappy";
 		//		slovo = test.substring(2);
@@ -77,10 +79,10 @@ public class RegExTest
 //            System.out.println(split);;
 //        }
 
-        String line = "Fire Fox";
-        String[] p = {"Fire", "Fox"};
-        System.out.println(line.matches(p[0]+".+"));
-        System.out.println(line.matches(".+"+p[1]));
+//        String line = "Fire Fox";
+//        String[] p = {"Fire", "Fox"};
+//        System.out.println(line.matches(p[0]+".+"));
+//        System.out.println(line.matches(".+"+p[1]));
 
 //        String preced = line.substring(line.indexOf("(")+1, line.lastIndexOf(")"));
 //        String[] out = preced.split("\\)\\s\\(");

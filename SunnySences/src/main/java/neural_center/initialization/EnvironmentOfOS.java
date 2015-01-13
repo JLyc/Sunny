@@ -3,6 +3,8 @@ package neural_center.initialization;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by JLyc on 14.10.2014.
  *
@@ -14,12 +16,13 @@ public class EnvironmentOfOS {
 
     private EnvironmentOfOS() {
         loadProperties();
+        System.out.println("Environment of OS load successful: " + testClass());
     }
 
     private void loadProperties() {
         int i = 0;
         try {
-            environmentProperties.put("os", getOsPropertie());
+            environmentProperties.put("os", getOsProperty());
             environmentProperties.put("user", System.getProperty("user.name"));
             environmentProperties.put("listeningConfig", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("grammarForListening", getPropertyBasedOnEnvironment()[i++]);
@@ -34,7 +37,7 @@ public class EnvironmentOfOS {
         }
     }
 
-    private String getOsPropertie() {
+    private String getOsProperty() {
         String fullOSName = System.getProperty("os.name");
         if(fullOSName.matches(".*Windows.*"))return "Windows";
         if(fullOSName.matches(".*Linux.*"))return "Linux";
@@ -43,13 +46,14 @@ public class EnvironmentOfOS {
 
     private String[] getPropertyBasedOnEnvironment() throws Exception
     {
-        String[] output = new String[5];
+        String[] output = new String[6];
         int i = 0;
         switch (environmentProperties.get("os")) {
             case "Linux":
                 output[i++] = "";
                 output[i++] = "";
                 output[i++] = "";
+                output[i++] = "recognizedWords.xml";
                 output[i++] = "/bin/sh";
                 output[i++] = "-c";
                 return output;
@@ -65,6 +69,7 @@ public class EnvironmentOfOS {
                 output[i++] = "configs/sunny_xos.config.xml";
                 output[i++] = "gramFiles/sunny_xos.gram";
                 output[i++] = "dataFile/commands_xos.txt";
+                output[i++] = "recognizedWords.xml";
                 output[i++] = "";
                 output[i++] = "";
                 throw new Exception("xos not implemented");
@@ -74,14 +79,29 @@ public class EnvironmentOfOS {
         }
     }
 
-    public String getProperties(String property) {
+    public static String getProperties(String property) {
         return environmentProperties.get(property);
     }
 
     public static EnvironmentOfOS enforceInitialization(){
         if(INSTANCE == null)
-            return new EnvironmentOfOS();
-        else
-            return INSTANCE;
+            INSTANCE = new EnvironmentOfOS();
+
+        return INSTANCE;
+    }
+
+
+    private boolean testClass(){
+        boolean isSuccessful = true;
+        for(Map.Entry<String, String> mapElement: environmentProperties.entrySet()) {
+            if(mapElement.getValue().matches(".*\\.txt")) {
+                assertNotNull(this.getClass().getClassLoader().getResourceAsStream(mapElement.getValue()));
+            }
+        }
+        return isSuccessful;
+    }
+
+    public static void main(String[] args) {
+        enforceInitialization();
     }
 }

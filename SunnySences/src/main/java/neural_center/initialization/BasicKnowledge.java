@@ -59,8 +59,8 @@ public class BasicKnowledge {
 
     public static BasicKnowledge enforceInitialization(){
 		if(INSTANCE == null)
-			return new BasicKnowledge();
-		else
-			return INSTANCE;
+			INSTANCE = new BasicKnowledge();
+
+		return INSTANCE;
 	}
 }

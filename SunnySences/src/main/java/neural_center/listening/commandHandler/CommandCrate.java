@@ -1,10 +1,8 @@
 package neural_center.listening.commandHandler;
 
 import neural_center.initialization.SunnyInitialization;
-import uniqe_skills.smart_xpath.SmartXPath;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommandCrate
 {
@@ -18,10 +16,10 @@ public class CommandCrate
 
     public CommandCrate(String command)
     {
-        String xpath = ;
-        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/modifieres/modifier/@whiteSpace").asList();
-        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
-        String xpath1 = ;
+//        String xpath = ;
+//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/modifieres/modifier/@whiteSpace").asList();
+//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
+//        String xpath1 = ;
     }
 
     private int isSame(ArrayList<String> list, int position) {
