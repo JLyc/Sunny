@@ -7,7 +7,6 @@ import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.speaking.SpeakingAdapter;
 import ui_fx.SunnyFace;
 
-import java.sql.Time;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -65,9 +64,9 @@ public class SunnyInitialization {
 //                "recognizedWords",
 //                "commandsSource",
 
-        memory.fileControler("grammarForListening",FileOperators.SAVE);
-        memory.fileControler("recognizedWords",FileOperators.SAVE);
-        memory.fileControler("commandsSource",FileOperators.SAVE);
+        memory.fileController("grammarForListening", FileOperators.SAVE);
+        memory.fileController("recognizedWords", FileOperators.SAVE);
+        memory.fileController("commandsSource", FileOperators.SAVE);
         System.out.println("all good ?");
     }
 

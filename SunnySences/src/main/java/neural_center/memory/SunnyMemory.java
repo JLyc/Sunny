@@ -2,11 +2,13 @@ package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.SunnyInitialization;
+import neural_center.memory.initialize_memory.helpers.BufferFileToSunnyMemory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.memory.initialize_memory.load.LoadXmlFile;
 import neural_center.memory.initialize_memory.save.SaveXmlFile;
 import org.w3c.dom.Document;
 
+import java.io.BufferedReader;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -15,17 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-public class SunnyMemory {
+public class SunnyMemory extends BufferFileToSunnyMemory {
     private static SunnyMemory INSTANCE;
 
     public static final Path BRAIN = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
 
     private static Map<String, Future<Document>> loadFileOutput = new HashMap<>();
-
-    static {
-        INSTANCE = new SunnyMemory();
-        SunnyInitialization.setStateOkFor(INSTANCE);
-    }
 
     public SunnyMemory() {
         // TODO Auto-generated constructor stub
@@ -48,7 +45,8 @@ public class SunnyMemory {
         return false;
     }
 
-    public void fileControler(String fileKey, FileOperators operation) {
+
+    public void fileController(String fileKey, FileOperators operation) {
         Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getProperties(fileKey));
         switch (operation) {
             case LOAD:
@@ -62,12 +60,17 @@ public class SunnyMemory {
         }
     }
 
-	public Future<Document> retrieveLoadFileOutput(String key) throws Exception {
+	public Future<Document> retrieveLoadFileOutput(String key) {
 		Future<Document> output = loadFileOutput.get(key);
 		loadFileOutput.remove(key);
 		return output;
 	}
 
-    public static void enforceInitialization() {
+
+    public static SunnyMemory enforceInitialization(){
+        if(INSTANCE == null)
+            INSTANCE = new SunnyMemory();
+
+        return INSTANCE;
     }
 }

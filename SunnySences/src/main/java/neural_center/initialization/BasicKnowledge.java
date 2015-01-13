@@ -1,5 +1,6 @@
 package neural_center.initialization;
 
+import neural_center.memory.SunnyMemory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import org.w3c.dom.Document;
 
@@ -15,47 +16,39 @@ public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
 	private static final Map<String, Document> knowledgeProperties = new HashMap();
 
-    private static String[] loadToMemory = {
+    private static final String[] loadToMemory = {
             "grammarForListening",
             "recognizedWords",
             "commandsSource",
     };
 
-    static {
-        INSTANCE = new BasicKnowledge();
-        SunnyInitialization.setStateOkFor(INSTANCE);
-    }
-
     private BasicKnowledge() {
         for (String key : loadToMemory) {
-			SunnyInitialization.getMemory().fileControler(key, FileOperators.LOAD);
+			SunnyMemory.bufferFile(key, FileOperators.LOAD);
         }
     }
 
     public Document get(String key)
     {
 		if(!knowledgeProperties.containsKey(key))
-		{
-			try {
-				knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
-			} catch(Exception e) {
-				SunnyInitialization.getMemory().fileControler(key, FileOperators.LOAD);
-				try{
-					TimeUnit.SECONDS.sleep(10);
-					knowledgeProperties.put(key, SunnyInitialization.getMemory().retrieveLoadFileOutput(key).get());
-				}catch (Exception ex)
-				{
-					SunnyInitialization.turnOffSunny(-1, "Unrecoverable error");
-				}
+			UNDECIDED(key);
+
+		return knowledgeProperties.get(key);
+    }
+
+	private void UNDECIDED(String key){
+		try {
+			knowledgeProperties.put(key, SunnyMemory.retrieveBufferedFile(key).get());
+		} catch(Exception e) {
+			SunnyMemory.bufferFile(key, FileOperators.LOAD); //reload file
+			try{
+				TimeUnit.SECONDS.sleep(10);
+				knowledgeProperties.put(key, SunnyMemory.retrieveBufferedFile(key).get());
+			}catch (Exception ex){
+				SunnyInitialization.turnOffSunny(-1, "Unrecoverable error");
 			}
 		}
-		Document output = knowledgeProperties.get(key);
-		if(output==null)
-		{
-			if(SunnyInitialization.LycLog) {System.out.println("error here" + " BasicKnowledge");}
-		}
-		return output;
-    }
+	}
 
     public static BasicKnowledge enforceInitialization(){
 		if(INSTANCE == null)
