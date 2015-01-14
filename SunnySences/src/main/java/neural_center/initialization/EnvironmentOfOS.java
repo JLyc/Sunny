@@ -14,6 +14,10 @@ public class EnvironmentOfOS {
     private static EnvironmentOfOS INSTANCE;
     private static final Map<String, String> environmentProperties = new HashMap<>();
 
+    public static void isInitialized(){
+
+    }
+
     private EnvironmentOfOS() {
         loadProperties();
         System.out.println("Environment of OS load successful: " + testClass());

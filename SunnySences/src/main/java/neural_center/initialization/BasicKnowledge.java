@@ -31,12 +31,12 @@ public class BasicKnowledge {
     public Document get(String key)
     {
 		if(!knowledgeProperties.containsKey(key))
-			UNDECIDED(key);
+			getRequiredProperties(key);
 
 		return knowledgeProperties.get(key);
     }
 
-	private void UNDECIDED(String key){
+	private void getRequiredProperties(String key){
 		try {
 			knowledgeProperties.put(key, SunnyMemory.retrieveBufferedFile(key).get());
 		} catch(Exception e) {
