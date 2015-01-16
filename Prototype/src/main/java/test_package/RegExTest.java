@@ -10,7 +10,8 @@ public class RegExTest
 
     private static String[][] regex = {
             {""},
-            {".*\\.txt"}
+            {".*\\.txt"},
+            {".*\\..{3}"}
     };
 
 	public static void main(String arg[])
