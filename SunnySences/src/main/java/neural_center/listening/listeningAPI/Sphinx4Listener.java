@@ -9,7 +9,6 @@ import neural_center.initialization.SunnyInitialization;
 import neural_center.listening.ListeningManager;
 
 import java.net.URL;
-
 public class Sphinx4Listener implements Runnable {
 
     private ListeningManager instanceOfListeningManager;

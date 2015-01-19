@@ -2,8 +2,7 @@ package neural_center.initialization;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertNotNull;
+import java.util.NoSuchElementException;
 
 /**
  * Created by JLyc on 14.10.2014.
@@ -15,8 +14,13 @@ public class EnvironmentOfOS {
 	private static final Map<String, String> environmentProperties = new HashMap<>();
 
 	private EnvironmentOfOS() {
-		loadProperties();
-		System.out.println("Environment of OS load successful: " + testClass());
+
+		try{
+			loadProperties();
+			System.out.println("Environment of OS load successful: " + testClass());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private void loadProperties() {
@@ -77,15 +81,12 @@ public class EnvironmentOfOS {
 	}
 
 
-	private boolean testClass() {
-		boolean isSuccessful = true; for(Map.Entry<String, String> mapElement : environmentProperties.entrySet()) {
-			if(mapElement.getValue().matches(".*\\.txt")) {
-				assertNotNull(this.getClass().getClassLoader().getResourceAsStream(mapElement.getValue()));
+	private boolean testClass() throws NoSuchFieldException{
+		boolean isSuccessful = true;
+		for(Map.Entry<String, String> mapElement : environmentProperties.entrySet()) {
+			if(mapElement.getValue().matches(".*\\.txt")&&this.getClass().getClassLoader().getResourceAsStream(mapElement.getValue())==null) {
+				throw new NoSuchElementException("Can't load file: " + mapElement);
 			}
 		} return isSuccessful;
-	}
-
-	public static void main(String[] args) {
-		enforceInitialization();
 	}
 }

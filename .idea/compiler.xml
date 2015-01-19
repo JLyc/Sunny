@@ -24,7 +24,6 @@
         <processorPath useClasspath="true" />
         <module name="MiniApps" />
         <module name="MiniGames" />
-        <module name="Prototype" />
         <module name="Prototypes" />
         <module name="SunnyGUI" />
         <module name="SunnySences" />
@@ -32,4 +31,3 @@
     </annotationProcessing>
   </component>
 </project>
-
