@@ -14,15 +14,26 @@ import java.util.Map;
 public class SunnyMemory extends BufferFileToSunnyMemory {
     private static SunnyMemory INSTANCE;
 
+    /**
+     * Define dependencies here
+     */
+    static {
+        EnvironmentOfOS.enforceInitialization();
+    }
+
     private static final Map<String, Path> brainStructure = new HashMap<>();
-    private Path DEFFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
+    private static final Path DEFFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
 
-    private String[] brainParts = {"Persistent","Temporary","Action"};
+    public static final HandleMemory handleMemory = new HandleMemory();
 
-    public SunnyMemory() {
+    String[] brainParts = {"Persistent","Temporary","Action"};
+
+
+
+     public SunnyMemory() {
          try {
              constructMemoryPaths();
-             System.out.println("Load of Memory successful: " + testMemoryForFaults());
+             System.out.println("Environment of OS load successful: " + testMemoryForFaults());
          } catch(Exception e) {
 
          }
@@ -59,5 +70,10 @@ public class SunnyMemory extends BufferFileToSunnyMemory {
             INSTANCE = new SunnyMemory();
 
         return INSTANCE;
+    }
+
+    public static void main(String[] args) {
+        EnvironmentOfOS.enforceInitialization();
+        SunnyMemory.enforceInitialization();
     }
 }
