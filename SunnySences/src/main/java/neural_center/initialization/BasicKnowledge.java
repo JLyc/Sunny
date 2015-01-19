@@ -14,6 +14,11 @@ import java.util.concurrent.TimeUnit;
 
 public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
+
+	static {
+		EnvironmentOfOS.enforceInitialization();
+		SunnyMemory.enforceInitialization();
+	}
 	private static final Map<String, Document> knowledgeProperties = new HashMap();
 
     private static final String[] loadToMemory = {
@@ -23,10 +28,16 @@ public class BasicKnowledge {
     };
 
     private BasicKnowledge() {
-        for (String key : loadToMemory) {
-			SunnyMemory.bufferFile(key, FileOperators.LOAD);
-        }
+		loadBasicKnowledgeToMemory();
+		System.out.println("Environment of OS load successful: " + loadBasicKnowledgeToMemory());
     }
+
+	private boolean loadBasicKnowledgeToMemory(){
+		for (String key : loadToMemory) {
+			SunnyMemory.bufferFile(key, FileOperators.LOAD);
+		}
+		return true;
+	}
 
     public Document get(String key)
     {
