@@ -3,7 +3,6 @@ package neural_center.initialization;
 import neural_center.consciousness.Consciousness;
 import neural_center.listening.ListeningManager;
 import neural_center.memory.SunnyMemory;
-import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.speaking.SpeakingAdapter;
 import ui_fx.SunnyFace;
 
@@ -64,9 +63,9 @@ public class SunnyInitialization {
 //                "recognizedWords",
 //                "commandsSource",
 
-        memory.fileController("grammarForListening", FileOperators.SAVE);
-        memory.fileController("recognizedWords", FileOperators.SAVE);
-        memory.fileController("commandsSource", FileOperators.SAVE);
+//        memory.fileController("grammarForListening", FileOperators.SAVE);
+//        memory.fileController("recognizedWords", FileOperators.SAVE);
+//        memory.fileController("commandsSource", FileOperators.SAVE);
         System.out.println("all good ?");
     }
 

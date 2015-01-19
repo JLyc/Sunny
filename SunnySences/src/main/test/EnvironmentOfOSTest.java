@@ -7,7 +7,7 @@ import org.junit.Test;
 public class EnvironmentOfOSTest {
 
 	@Test
-	public static void testAllClass(){
+	public void testAllClass(){
 		EnvironmentOfOS.enforceInitialization();
 
 	}

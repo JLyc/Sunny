@@ -1,76 +1,79 @@
 package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
-import neural_center.initialization.SunnyInitialization;
 import neural_center.memory.initialize_memory.helpers.BufferFileToSunnyMemory;
-import neural_center.memory.initialize_memory.helpers.FileOperators;
-import neural_center.memory.initialize_memory.load.LoadXmlFile;
-import neural_center.memory.initialize_memory.save.SaveXmlFile;
-import org.w3c.dom.Document;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 public class SunnyMemory extends BufferFileToSunnyMemory {
     private static SunnyMemory INSTANCE;
 
-    public static final Path BRAIN = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
-
-    private static Map<String, Future<Document>> loadFileOutput = new HashMap<>();
-
-    public SunnyMemory() {
-        // TODO Auto-generated constructor stub
-        if (localizeAndCreateMemory()) {
-            return;
-        }
-
-//        Path from = FileSystems.getDefault().getPath("nircmd.exe");
-//        URL inputStream = this.getClass().getClassLoader().getResource("/nircmd/nircmd.exe");
-//        URL inputStream1 = this.getClass().getClassLoader().getResource("/nircmd.exe");
+    /**
+     * Define dependencies here
+     */
+    static {
+        EnvironmentOfOS.enforceInitialization();
     }
 
-    public boolean localizeAndCreateMemory() {
-        try {
-            if (Files.notExists(BRAIN, LinkOption.NOFOLLOW_LINKS)) Files.createDirectories(BRAIN);
-            return true;
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-        return false;
-    }
+    private static final Map<String, Path> brainStructure = new HashMap<>();
+    private static final Path DEFFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
+
+    public static final HandleMemory handleMemory = new HandleMemory();
+
+    String[] brainParts = {"Persistent","Temporary","Action"};
 
 
-    public void fileController(String fileKey, FileOperators operation) {
-        Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getProperties(fileKey));
-        switch (operation) {
-            case LOAD:
-				if(path.toString().endsWith(".xml"))
-					loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadXmlFile(path.toString())));
-				break;
-            case SAVE:
-                if (path.toString().endsWith(".xml"))
-                    SunnyInitialization.getExecutor().submit(new SaveXmlFile(fileKey));
-                break;
+
+     public SunnyMemory() {
+         try {
+             constructMemoryPaths();
+             System.out.println("Load of Memory successful: " + testMemoryForFaults());
+         } catch(Exception e) {
+
+         }
+     }
+
+    void constructMemoryPaths() throws IOException {
+        for(String name : brainParts){
+            brainStructure.put(name, DEFFAULT_PATH.resolve(name));
+            verifyPath(brainStructure.get(name));
         }
     }
 
-	public Future<Document> retrieveLoadFileOutput(String key) {
-		Future<Document> output = loadFileOutput.get(key);
-		loadFileOutput.remove(key);
-		return output;
-	}
+    boolean verifyPath(final Path path) throws IOException {
+        if(Files.notExists(path, LinkOption.NOFOLLOW_LINKS)) {
+            Files.createDirectories(path);
+            verifyPath(path);
+        }
+        return true;
+    }
 
+    public static Path getPathInMemory(String key) {
+        return brainStructure.get(key);
+    }
+
+    public boolean testMemoryForFaults() throws IOException {
+        for(String name : brainParts){
+            verifyPath(brainStructure.get(name));
+        }
+        return true;
+    }
 
     public static SunnyMemory enforceInitialization(){
         if(INSTANCE == null)
             INSTANCE = new SunnyMemory();
 
         return INSTANCE;
+    }
+
+    public static void main(String[] args) {
+        EnvironmentOfOS.enforceInitialization();
+        SunnyMemory.enforceInitialization();
     }
 }
