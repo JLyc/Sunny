@@ -16,7 +16,7 @@ public class RegExTest
 
 	public static void main(String arg[])
 	{
-        System.out.println(word[1][0].matches(regex[1][0]));
+        System.out.println(word[1][0].matches(regex[2][0]));
         //		String slovo = "sunny run fire fox";
 		//		String test = "unhappy";
 		//		slovo = test.substring(2);

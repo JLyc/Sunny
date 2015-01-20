@@ -9,6 +9,5 @@ public class EnvironmentOfOSTest {
 	@Test
 	public void testAllClass(){
 		EnvironmentOfOS.enforceInitialization();
-
 	}
 }
