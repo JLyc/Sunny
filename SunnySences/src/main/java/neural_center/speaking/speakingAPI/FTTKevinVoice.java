@@ -2,11 +2,8 @@ package neural_center.speaking.speakingAPI;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
-import neural_center.initialization.SunnyInitialization;
 
 public class FTTKevinVoice implements SpeakingInterface {
-
-    private static FTTKevinVoice INSTANCE;
     private static final String SUNNY = "kevin16";
     private static final float VERSION = 1.0f;
 
@@ -15,12 +12,13 @@ public class FTTKevinVoice implements SpeakingInterface {
 
     public FTTKevinVoice() {
         try {
-            INSTANCE = this;
             voiceManager = VoiceManager.getInstance();
+            boolean a = voiceManager.contains("kevin16");
+            Voice[] b = voiceManager.getVoices();
             voice = voiceManager.getVoice(SUNNY);
             voice.allocate();
             say("");
-            SunnyInitialization.getSpeaking().setSourceForAdapter(INSTANCE);
+//            registerTo.setSourceForAdapter(this);
         } catch (Exception e) {
             System.err.println("JLyc \"Speaking class not loaded can't be used\"");
             e.printStackTrace();

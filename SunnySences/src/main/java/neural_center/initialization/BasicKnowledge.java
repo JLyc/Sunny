@@ -1,6 +1,5 @@
 package neural_center.initialization;
 
-import neural_center.memory.SunnyMemory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import org.w3c.dom.Document;
 
@@ -23,11 +22,30 @@ public class BasicKnowledge {
     };
 
     private BasicKnowledge() {
-        for (String key : loadToMemory) {
-			SunnyMemory.bufferFile(key, FileOperators.LOAD);
-        }
+        try{
+			loadFileToMemory();
+			System.out.println("Basic Knowledge load successful: " + loadFileToMemory());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
     }
 
+	private boolean loadFileToMemory() throws Exception
+	{
+		for (String key : loadToMemory) {
+			Sunny.getMemory().bufferFile(key, FileOperators.LOAD);
+		}
+		return true;
+	}
+
+	/**
+	 * @param key <table style="width:10%">
+	 *                 <tr><td>grammarForListening</td></tr>
+	 *                 <tr><td>recognizedWords</td></tr>
+	 *                 <tr><td>commandsSource</td></tr>
+	 *                 </table>
+	 * @return {@link org.w3c.dom.Document} of given directory
+	*/
     public Document get(String key)
     {
 		if(!knowledgeProperties.containsKey(key))
@@ -38,22 +56,20 @@ public class BasicKnowledge {
 
 	private void getRequiredProperties(String key){
 		try {
-			knowledgeProperties.put(key, SunnyMemory.retrieveBufferedFile(key).get());
+			knowledgeProperties.put(key, Sunny.getMemory().retrieveBufferedFile(key).get());
 		} catch(Exception e) {
-			SunnyMemory.bufferFile(key, FileOperators.LOAD); //reload file
+			Sunny.getMemory().bufferFile(key, FileOperators.LOAD); //reload file
 			try{
 				TimeUnit.SECONDS.sleep(10);
-				knowledgeProperties.put(key, SunnyMemory.retrieveBufferedFile(key).get());
+				knowledgeProperties.put(key,Sunny.getMemory().retrieveBufferedFile(key).get());
 			}catch (Exception ex){
-				SunnyInitialization.turnOffSunny(-1, "Unrecoverable error");
+				Sunny.turnOffSunny(-1, "Unrecoverable error");
 			}
 		}
 	}
 
-    public static BasicKnowledge enforceInitialization(){
-		if(INSTANCE == null)
-			INSTANCE = new BasicKnowledge();
-
+    public static BasicKnowledge getInstance(){
+		if(INSTANCE == null)INSTANCE = new BasicKnowledge();
 		return INSTANCE;
 	}
 }

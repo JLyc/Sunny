@@ -35,7 +35,7 @@ public class EnvironmentOfOS {
      *                 </table>
      * @return string name of property
      */
-    public static String getProperties(String property) {
+    public String getProperties(String property) {
         return environmentProperties.get(property);
     }
 
@@ -53,7 +53,7 @@ public class EnvironmentOfOS {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.err.println("Internal error in environment. Cant work without environment");
-            SunnyInitialization.turnOffSunny(1);
+            Sunny.turnOffSunny(1);
         }
     }
 
@@ -98,9 +98,8 @@ public class EnvironmentOfOS {
         }
     }
 
-    public static EnvironmentOfOS enforceInitialization() {
+    public static EnvironmentOfOS getInstance() {
         if (INSTANCE == null) INSTANCE = new EnvironmentOfOS();
-
         return INSTANCE;
     }
 

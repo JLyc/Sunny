@@ -4,15 +4,12 @@ import edu.cmu.sphinx.frontend.util.Microphone;
 import edu.cmu.sphinx.recognizer.Recognizer;
 import edu.cmu.sphinx.result.Result;
 import edu.cmu.sphinx.util.props.ConfigurationManager;
-import neural_center.initialization.EnvironmentOfOS;
-import neural_center.initialization.SunnyInitialization;
+import neural_center.initialization.Sunny;
 import neural_center.listening.ListeningManager;
 
 import java.net.URL;
 public class Sphinx4Listener implements Runnable {
-
     private ListeningManager instanceOfListeningManager;
-    private final float version = 1.0f;
 
     private ConfigurationManager cm;
     private Recognizer recognizer;
@@ -21,7 +18,8 @@ public class Sphinx4Listener implements Runnable {
     private boolean runThread = true;
 
     public Sphinx4Listener() {
-        this(Sphinx4Listener.class.getResource(EnvironmentOfOS.getProperties("listeningConfig")));
+        this(Sphinx4Listener.class.getClass().getClassLoader().getResource(Sunny.getEnvironmentOfOS().getProperties("listeningConfig")));
+
     }
 
     public Sphinx4Listener(URL url) {
@@ -35,9 +33,9 @@ public class Sphinx4Listener implements Runnable {
             return;
         }
 
-        recognizer = (Recognizer) cm.lookup("recognizer");
+        recognizer = cm.lookup("recognizer");
         recognizer.allocate();
-        microphone = (Microphone) cm.lookup("microphone");
+        microphone = cm.lookup("microphone");
 
         if (!microphone.startRecording()) {
             System.err.println("Cannot start microphone.");
@@ -53,12 +51,11 @@ public class Sphinx4Listener implements Runnable {
     @Override
     public void run() {
         try {
-            instanceOfListeningManager = SunnyInitialization.getListener();
             while (runThread) {
                 doListening();
             }
         } finally {
-            SunnyInitialization.getSpeaking().say("I stop listening");
+            Sunny.getSpeaking().say("I stop listening");
             recognizer.deallocate();
         }
     }
@@ -67,7 +64,7 @@ public class Sphinx4Listener implements Runnable {
         Result result = recognizer.recognize();
         if (result != null) {
             String recordedCommand = result.getBestFinalResultNoFiller();
-            instanceOfListeningManager.onNewCommand(recordedCommand);
+            Sunny.getListening().onNewCommand(recordedCommand);
         }
     }
 }

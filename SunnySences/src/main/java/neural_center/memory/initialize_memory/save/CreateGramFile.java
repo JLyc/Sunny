@@ -1,6 +1,6 @@
 package neural_center.memory.initialize_memory.save;
 
-import neural_center.memory.SunnyMemory;
+import neural_center.initialization.Sunny;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import uniqe_skills.smart_xpath.SmartXPath;
@@ -21,7 +21,7 @@ import static java.nio.file.StandardOpenOption.WRITE;
  */
 public class CreateGramFile
 {
-    private static Path pathInBrain = FileSystems.getDefault().getPath(String.valueOf(SunnyMemory.getPathInMemory("")), "sunny_windows.gram");
+    private static Path pathInBrain = FileSystems.getDefault().getPath(String.valueOf(Sunny.getMemory().getPathInMemory("")), "sunny_windows.gram");
     private static StringBuilder gramFileContent = new StringBuilder("#JSGF V1.0;\n\n/**\n * Sunny basic knowleadge\n */\n\ngrammar Sunny;\n\n");
     private static Document document;
     private static String[][] sets = {

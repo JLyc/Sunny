@@ -25,7 +25,7 @@ public class PerformanceTest {
     }
 
     public static void main(String[] args) {
-        BasicKnowledge.enforceInitialization();
+        BasicKnowledge.getInstance();
 
     }
 }

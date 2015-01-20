@@ -1,7 +1,6 @@
 package neural_center.memory;
 
-import neural_center.initialization.EnvironmentOfOS;
-import neural_center.memory.initialize_memory.helpers.BufferFileToSunnyMemory;
+import neural_center.initialization.Sunny;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,17 +11,14 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SunnyMemory extends BufferFileToSunnyMemory {
-    private static SunnyMemory INSTANCE;
+public class Memory extends BufferFileToMemory {
+    private static Memory INSTANCE;
 
     private static final Map<String, Path> brainStructure = new HashMap<>();
-    private static final Path DEFFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getProperties("os"));
+    private static final Path DEFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", Sunny.getEnvironmentOfOS().getProperties("os"));
+    private static final String[] brainParts = {"Persistent","Temporary","Action"};
 
-    String[] brainParts = {"Persistent","Temporary","Action"};
-
-
-
-     public SunnyMemory() {
+    private Memory() {
          try {
              constructMemoryPaths();
              System.out.println("Memory load successful: " + testMemoryForFaults());
@@ -31,14 +27,14 @@ public class SunnyMemory extends BufferFileToSunnyMemory {
          }
      }
 
-    void constructMemoryPaths() throws IOException {
+    private void constructMemoryPaths() throws IOException {
         for(String name : brainParts){
-            brainStructure.put(name, DEFFAULT_PATH.resolve(name));
+            brainStructure.put(name, DEFAULT_PATH.resolve(name));
             verifyPath(brainStructure.get(name));
         }
     }
 
-    boolean verifyPath(final Path path) throws IOException {
+    private boolean verifyPath(final Path path) throws IOException {
         if(Files.notExists(path, LinkOption.NOFOLLOW_LINKS)) {
             Files.createDirectories(path);
             verifyPath(path);
@@ -54,7 +50,7 @@ public class SunnyMemory extends BufferFileToSunnyMemory {
      *                 </table>
      * @return Path to given directory
      */
-    public static Path getPathInMemory(String directory) {
+    public Path getPathInMemory(String directory) {
         return brainStructure.get(directory);
     }
 
@@ -67,10 +63,8 @@ public class SunnyMemory extends BufferFileToSunnyMemory {
         return true;
     }
 
-    public static SunnyMemory enforceInitialization(){
-        if(INSTANCE == null)
-            INSTANCE = new SunnyMemory();
-
+    public static Memory getInstance(){
+        if(INSTANCE == null) INSTANCE = new Memory();
         return INSTANCE;
     }
 }

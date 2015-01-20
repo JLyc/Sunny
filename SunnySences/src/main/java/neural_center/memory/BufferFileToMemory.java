@@ -1,7 +1,7 @@
-package neural_center.memory.initialize_memory.helpers;
+package neural_center.memory;
 
-import neural_center.initialization.EnvironmentOfOS;
-import neural_center.initialization.SunnyInitialization;
+import neural_center.initialization.Sunny;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.memory.initialize_memory.load.LoadXmlFile;
 import neural_center.memory.initialize_memory.save.SaveXmlFile;
 import org.w3c.dom.Document;
@@ -15,25 +15,25 @@ import java.util.concurrent.Future;
 /**
  * Created by sochaa on 13. 1. 2015.
  */
-public class BufferFileToSunnyMemory {
+public abstract class BufferFileToMemory {
 
     private static final Map<String, Future<Document>> loadFileOutput = new HashMap<>();
 
-    public static void bufferFile(String fileKey, FileOperators operation) {
-        Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getProperties(fileKey));
+    public void bufferFile(String fileKey, FileOperators operation) {
+        Path path = FileSystems.getDefault().getPath(Sunny.getEnvironmentOfOS().getProperties(fileKey));
         if (path.toString().endsWith(".xml")){
             switch (operation) {
                 case LOAD:
-                    loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadXmlFile(path.toString())));
+                    loadFileOutput.put(fileKey, Sunny.getExecutor().submit(new LoadXmlFile(path.toString())));
                     break;
                 case SAVE:
-                    SunnyInitialization.getExecutor().submit(new SaveXmlFile(fileKey));
+                    Sunny.getExecutor().submit(new SaveXmlFile(fileKey));
                     break;
             }
         }
     }
 
-    public static Future<Document> retrieveBufferedFile(String key) {
+    public Future<Document> retrieveBufferedFile(String key) {
         Future<Document> output = loadFileOutput.get(key);
         loadFileOutput.remove(key);
         return output;
