@@ -8,10 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="freetts" level="project" />
-    <orderEntry type="library" exported="" name="jmail" level="project" />
-    <orderEntry type="library" exported="" name="sphinx" level="project" />
-    <orderEntry type="library" exported="" name="JUnit" level="project" />
-    <orderEntry type="library" exported="" name="jmock-2.5" level="project" />
+    <orderEntry type="library" name="freetts" level="project" />
+    <orderEntry type="library" name="jmail" level="project" />
+    <orderEntry type="library" name="sphinx" level="project" />
+    <orderEntry type="library" name="JUnit" level="project" />
+    <orderEntry type="library" name="jmock-2.5" level="project" />
   </component>
 </module>

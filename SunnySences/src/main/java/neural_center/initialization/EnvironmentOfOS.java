@@ -3,8 +3,6 @@ package neural_center.initialization;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-
 /**
  * Created by JLyc on 14.10.2014.
  * <p>
@@ -80,7 +78,7 @@ public class EnvironmentOfOS {
 	private boolean testClass() {
 		boolean isSuccessful = true; for(Map.Entry<String, String> mapElement : environmentProperties.entrySet()) {
 			if(mapElement.getValue().matches(".*\\.txt")) {
-				assertNotNull(this.getClass().getClassLoader().getResourceAsStream(mapElement.getValue()));
+				this.getClass().getClassLoader().getResourceAsStream(mapElement.getValue());
 			}
 		} return isSuccessful;
 	}

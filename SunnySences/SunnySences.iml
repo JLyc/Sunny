@@ -18,8 +18,5 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="SunnyGUI" />
-    <orderEntry type="library" name="sphinx" level="project" />
-    <orderEntry type="library" name="freetts" level="project" />
-    <orderEntry type="library" name="jmail" level="project" />
   </component>
 </module>
