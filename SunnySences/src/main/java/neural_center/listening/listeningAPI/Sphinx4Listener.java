@@ -5,15 +5,12 @@ import edu.cmu.sphinx.recognizer.Recognizer;
 import edu.cmu.sphinx.result.Result;
 import edu.cmu.sphinx.util.props.ConfigurationManager;
 import neural_center.initialization.EnvironmentOfOS;
-import neural_center.initialization.SunnyInitialization;
 import neural_center.listening.ListeningManager;
+import neural_center.speaking.SpeakingAdapter;
 
 import java.net.URL;
-
 public class Sphinx4Listener implements Runnable {
-
     private ListeningManager instanceOfListeningManager;
-    private final float version = 1.0f;
 
     private ConfigurationManager cm;
     private Recognizer recognizer;
@@ -22,7 +19,8 @@ public class Sphinx4Listener implements Runnable {
     private boolean runThread = true;
 
     public Sphinx4Listener() {
-        this(Sphinx4Listener.class.getResource(EnvironmentOfOS.getProperties("listeningConfig")));
+        this(Sphinx4Listener.class.getClassLoader().getResource(EnvironmentOfOS.getInstance().getProperties("listeningConfig")));
+
     }
 
     public Sphinx4Listener(URL url) {
@@ -54,12 +52,11 @@ public class Sphinx4Listener implements Runnable {
     @Override
     public void run() {
         try {
-            instanceOfListeningManager = SunnyInitialization.getListener();
             while (runThread) {
                 doListening();
             }
         } finally {
-            SunnyInitialization.getSpeaking().say("I stop listening");
+            SpeakingAdapter.getInstance().say("I stop listening");
             recognizer.deallocate();
         }
     }
@@ -68,7 +65,7 @@ public class Sphinx4Listener implements Runnable {
         Result result = recognizer.recognize();
         if (result != null) {
             String recordedCommand = result.getBestFinalResultNoFiller();
-            instanceOfListeningManager.onNewCommand(recordedCommand);
+            ListeningManager.getInstance().onNewCommand(recordedCommand);
         }
     }
 }

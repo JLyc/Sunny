@@ -9,7 +9,7 @@ import java.util.Date;
 public class Consciousness extends Thread
 {
     private static Consciousness consciousness;
-private static final Date SUNNY_BIRTHS_DAY = Calendar.getInstance().getTime();
+    private static final Date SUNNY_BIRTHS_DAY = Calendar.getInstance().getTime();
     private static boolean heartBeat = true;
 
     public static void ofSunny()
@@ -18,8 +18,7 @@ private static final Date SUNNY_BIRTHS_DAY = Calendar.getInstance().getTime();
         consciousness = new Consciousness("Sunny Consciousness");
     }
 
-    private Consciousness(String name)
-    {
+    private Consciousness(String name){
         super(name);
         this.setDaemon(true);
         this.setPriority(Thread.MAX_PRIORITY);

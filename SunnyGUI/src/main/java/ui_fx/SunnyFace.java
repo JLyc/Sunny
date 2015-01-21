@@ -12,9 +12,7 @@ import javafx.stage.StageStyle;
 /**
  * Created by sochaa on 5. 12. 2014.
  */
-public class SunnyFace extends Application implements Runnable{
-    private static Thread SUNNY_FACE = new Thread(new SunnyFace());
-
+public class SunnyFace extends Application{
     private ProgressBar[] pb = {new ProgressBar(),new ProgressBar(),new ProgressBar()};
 
     @Override
@@ -52,20 +50,12 @@ public class SunnyFace extends Application implements Runnable{
 
         root.getChildren().addAll(pb);
         Scene scene = new Scene(root, 90, 100);
-        scene.setFill(Color.rgb(0,0,0));
+        scene.setFill(Color.rgb(0, 0, 0));
         mainFrame.setScene(scene);
-
-    }
-
-    @Override
-    public void run() {
-        SunnyFace.launch();
     }
 
     public static void show()
     {
-        if(!SUNNY_FACE.isAlive()) {
-            SUNNY_FACE.start();
-        }
+        SunnyFace.launch();
     }
 }
