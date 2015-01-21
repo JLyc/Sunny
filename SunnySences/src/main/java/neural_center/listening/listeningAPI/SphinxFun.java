@@ -28,9 +28,9 @@ public class SphinxFun {
             return;
         }
 
-        recognizer = cm.lookup("recognizer");
+        recognizer = (Recognizer) cm.lookup("recognizer");
         recognizer.allocate();
-        microphone = cm.lookup("microphone");
+        microphone = (Microphone) cm.lookup("microphone");
 
         if (!microphone.startRecording()) {
             System.err.println("Cannot start microphone.");

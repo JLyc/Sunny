@@ -12,10 +12,7 @@ import javafx.stage.StageStyle;
 /**
  * Created by sochaa on 5. 12. 2014.
  */
-public class SunnyFace extends Application implements Runnable{
-    private static Thread SUNNY_FACE;
-
-
+public class SunnyFace extends Application{
     private ProgressBar[] pb = {new ProgressBar(),new ProgressBar(),new ProgressBar()};
 
     @Override
@@ -35,39 +32,30 @@ public class SunnyFace extends Application implements Runnable{
 
         Group root = new Group();
 
-//        pb[0].setRotate(90);
-//        pb[0].setPrefWidth(50);
-//        pb[0].setLayoutX(10);
-//        pb[0].setLayoutY(50);
-//
-//        pb[1].setRotate(90);
-//        pb[1].setPrefWidth(70);
-//        pb[1].setLayoutX(15);
-//        pb[1].setLayoutY(50);
-//
-//        pb[2].setRotate(90);
-//        pb[2].setPrefWidth(50);
-//        pb[2].setLayoutX(40);
-//        pb[2].setLayoutY(50);
-//
-//
-//        root.getChildren().addAll(pb);
+        pb[0].setRotate(90);
+        pb[0].setPrefWidth(50);
+        pb[0].setLayoutX(10);
+        pb[0].setLayoutY(50);
+
+        pb[1].setRotate(90);
+        pb[1].setPrefWidth(70);
+        pb[1].setLayoutX(15);
+        pb[1].setLayoutY(50);
+
+        pb[2].setRotate(90);
+        pb[2].setPrefWidth(50);
+        pb[2].setLayoutX(40);
+        pb[2].setLayoutY(50);
+
+
+        root.getChildren().addAll(pb);
         Scene scene = new Scene(root, 90, 100);
-        scene.setFill(Color.rgb(0,0,0));
+        scene.setFill(Color.rgb(0, 0, 0));
         mainFrame.setScene(scene);
-
-    }
-
-    @Override
-    public void run() {
-        SunnyFace.launch();
     }
 
     public static void show()
     {
-        SUNNY_FACE = new Thread(new SunnyFace());
-        if(!SUNNY_FACE.isAlive()) {
-            SUNNY_FACE.start();
-        }
+        SunnyFace.launch();
     }
 }

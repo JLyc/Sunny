@@ -1,6 +1,4 @@
-import neural_center.initialization.EnvironmentOfOS;
 import neural_center.memory.Memory;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -8,15 +6,8 @@ import org.junit.Test;
  */
 public class MemoryTest {
 
-	@Before
-	public void testDependentClass(){
-		EnvironmentOfOS.getInstance();
-	}
-
 	@Test
 	public void testAllClass() {
-		Memory memory;
-		memory = Memory.getInstance();
-		memory.getPathInMemory("Action");
+		Memory.getInstance().getPathInMemory("Action");
 	}
 }

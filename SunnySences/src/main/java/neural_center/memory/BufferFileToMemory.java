@@ -1,5 +1,6 @@
 package neural_center.memory;
 
+import neural_center.initialization.EnvironmentOfOS;
 import neural_center.initialization.Sunny;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.memory.initialize_memory.load.LoadXmlFile;
@@ -20,7 +21,7 @@ public abstract class BufferFileToMemory {
     private static final Map<String, Future<Document>> loadFileOutput = new HashMap<>();
 
     public void bufferFile(String fileKey, FileOperators operation) {
-        Path path = FileSystems.getDefault().getPath(Sunny.getEnvironmentOfOS().getProperties(fileKey));
+        Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getInstance().getProperties(fileKey));
         if (path.toString().endsWith(".xml")){
             switch (operation) {
                 case LOAD:

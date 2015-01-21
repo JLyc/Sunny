@@ -11,5 +11,6 @@
     <orderEntry type="library" name="freetts-1.2.2" level="project" />
     <orderEntry type="library" name="mail-1.4.1" level="project" />
     <orderEntry type="library" name="junit-4.7" level="project" />
+    <orderEntry type="library" name="sphinx4-1" level="project" />
   </component>
 </module>

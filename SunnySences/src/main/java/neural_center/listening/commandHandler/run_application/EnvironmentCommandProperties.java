@@ -1,6 +1,6 @@
 package neural_center.listening.commandHandler.run_application;
 
-import neural_center.initialization.Sunny;
+import neural_center.speaking.SpeakingAdapter;
 
 import javax.swing.*;
 import java.io.File;
@@ -55,7 +55,7 @@ public class EnvironmentCommandProperties
 
 
     public byte[] getSudo() {
-        Sunny.getSpeaking().say("Enter sudo password");
+        SpeakingAdapter.getInstance().say("Enter sudo password");
         String password = JOptionPane.showInputDialog(null, "Enter sudo password", "Password");
 
         return (password+"\n").getBytes();

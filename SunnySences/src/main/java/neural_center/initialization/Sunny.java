@@ -1,55 +1,17 @@
 package neural_center.initialization;
 
-import neural_center.consciousness.Consciousness;
 import neural_center.listening.ListeningManager;
-import neural_center.memory.Memory;
 import neural_center.speaking.SpeakingAdapter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Sunny {
-    private static SpeakingAdapter speaking;
-    private static ListeningManager listening;
-    private static BasicKnowledge bknowledge;
-    private static EnvironmentOfOS environmentOfOS;
-    private static Consciousness consciousness;
-	private static Memory memory;
-
 	private static ExecutorService defaultExecutor = Executors.newFixedThreadPool(5);
 
 	public static void main(String arg[]) throws NullPointerException {
-//        defaultExecutor.execute(() -> SunnyFace.show());
-//        SunnyFace.show();
-//        defaultExecutor.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                SunnyFace.show();
-//            }
-//        });
-        environmentOfOS = EnvironmentOfOS.getInstance();
-        memory = Memory.getInstance();
-        bknowledge = BasicKnowledge.getInstance();
-        defaultExecutor.execute(() -> SpeakingAdapter.initSpeaking());
-//        defaultExecutor.execute(() -> ListeningManager.initListening());
-//        Consciousness.ofSunny();
-    }
-
-
-
-    public static void setStateOkFor(Object object) {
-        if(object instanceof ListeningManager)
-        {
-            listening = (ListeningManager) object;
-            System.out.println("JLyc \"listening initialized\"");
-            return;
-        }
-        if(object instanceof SpeakingAdapter)
-        {
-            speaking = (SpeakingAdapter) object;
-            System.out.println("JLyc \"speaking initialized\"");
-            return;
-        }
+        defaultExecutor.submit(() -> SpeakingAdapter.getInstance());
+        defaultExecutor.submit(() -> ListeningManager.getInstance());
     }
 
     public static void turnOffSunny(int state)
@@ -81,26 +43,6 @@ public class Sunny {
                 System.exit(1);
             }
         }
-    }
-
-    public static SpeakingAdapter getSpeaking() {
-        return speaking;
-    }
-
-    public static ListeningManager getListening() {
-        return listening;
-    }
-
-    public static BasicKnowledge getBknowledge() {
-        return bknowledge;
-    }
-
-    public static EnvironmentOfOS getEnvironmentOfOS() {
-        return environmentOfOS;
-    }
-
-    public static Memory getMemory() {
-        return memory;
     }
 
     public static ExecutorService getExecutor()

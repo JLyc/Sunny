@@ -1,6 +1,5 @@
 package neural_center.listening;
 
-import neural_center.initialization.Sunny;
 import neural_center.listening.listeningAPI.Sphinx4Listener;
 
 import java.util.concurrent.ExecutorService;
@@ -24,8 +23,8 @@ public final class ListeningManager {
         System.out.println(recordedSound);
     }
 
-    public static void initListening(){
-        if(INSTANCE == null){INSTANCE = new ListeningManager();}
-        Sunny.setStateOkFor(INSTANCE);
+    public static ListeningManager getInstance() {
+        if (INSTANCE == null) INSTANCE = new ListeningManager();
+        return INSTANCE;
     }
 }

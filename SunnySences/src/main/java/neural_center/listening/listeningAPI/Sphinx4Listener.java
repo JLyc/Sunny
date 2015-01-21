@@ -4,8 +4,9 @@ import edu.cmu.sphinx.frontend.util.Microphone;
 import edu.cmu.sphinx.recognizer.Recognizer;
 import edu.cmu.sphinx.result.Result;
 import edu.cmu.sphinx.util.props.ConfigurationManager;
-import neural_center.initialization.Sunny;
+import neural_center.initialization.EnvironmentOfOS;
 import neural_center.listening.ListeningManager;
+import neural_center.speaking.SpeakingAdapter;
 
 import java.net.URL;
 public class Sphinx4Listener implements Runnable {
@@ -18,7 +19,7 @@ public class Sphinx4Listener implements Runnable {
     private boolean runThread = true;
 
     public Sphinx4Listener() {
-        this(Sphinx4Listener.class.getClass().getClassLoader().getResource(Sunny.getEnvironmentOfOS().getProperties("listeningConfig")));
+        this(Sphinx4Listener.class.getClassLoader().getResource(EnvironmentOfOS.getInstance().getProperties("listeningConfig")));
 
     }
 
@@ -33,9 +34,9 @@ public class Sphinx4Listener implements Runnable {
             return;
         }
 
-        recognizer = cm.lookup("recognizer");
+        recognizer = (Recognizer) cm.lookup("recognizer");
         recognizer.allocate();
-        microphone = cm.lookup("microphone");
+        microphone = (Microphone) cm.lookup("microphone");
 
         if (!microphone.startRecording()) {
             System.err.println("Cannot start microphone.");
@@ -55,7 +56,7 @@ public class Sphinx4Listener implements Runnable {
                 doListening();
             }
         } finally {
-            Sunny.getSpeaking().say("I stop listening");
+            SpeakingAdapter.getInstance().say("I stop listening");
             recognizer.deallocate();
         }
     }
@@ -64,7 +65,7 @@ public class Sphinx4Listener implements Runnable {
         Result result = recognizer.recognize();
         if (result != null) {
             String recordedCommand = result.getBestFinalResultNoFiller();
-            Sunny.getListening().onNewCommand(recordedCommand);
+            ListeningManager.getInstance().onNewCommand(recordedCommand);
         }
     }
 }

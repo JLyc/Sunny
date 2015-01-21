@@ -1,5 +1,6 @@
 package neural_center.initialization;
 
+import neural_center.memory.Memory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import org.w3c.dom.Document;
 
@@ -14,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
 	private static final Map<String, Document> knowledgeProperties = new HashMap();
+
+	private Memory memoryOfSunny = Memory.getInstance();
 
     private static final String[] loadToMemory = {
             "grammarForListening",
@@ -33,7 +36,7 @@ public class BasicKnowledge {
 	private boolean loadFileToMemory() throws Exception
 	{
 		for (String key : loadToMemory) {
-			Sunny.getMemory().bufferFile(key, FileOperators.LOAD);
+			memoryOfSunny.bufferFile(key, FileOperators.LOAD);
 		}
 		return true;
 	}
@@ -56,12 +59,12 @@ public class BasicKnowledge {
 
 	private void getRequiredProperties(String key){
 		try {
-			knowledgeProperties.put(key, Sunny.getMemory().retrieveBufferedFile(key).get());
+			knowledgeProperties.put(key, memoryOfSunny.retrieveBufferedFile(key).get());
 		} catch(Exception e) {
-			Sunny.getMemory().bufferFile(key, FileOperators.LOAD); //reload file
+			memoryOfSunny.bufferFile(key, FileOperators.LOAD); //reload file
 			try{
 				TimeUnit.SECONDS.sleep(10);
-				knowledgeProperties.put(key,Sunny.getMemory().retrieveBufferedFile(key).get());
+				knowledgeProperties.put(key,memoryOfSunny.retrieveBufferedFile(key).get());
 			}catch (Exception ex){
 				Sunny.turnOffSunny(-1, "Unrecoverable error");
 			}

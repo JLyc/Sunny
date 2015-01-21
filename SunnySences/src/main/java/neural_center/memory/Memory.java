@@ -1,6 +1,6 @@
 package neural_center.memory;
 
-import neural_center.initialization.Sunny;
+import neural_center.initialization.EnvironmentOfOS;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class Memory extends BufferFileToMemory {
     private static Memory INSTANCE;
 
     private static final Map<String, Path> brainStructure = new HashMap<>();
-    private static final Path DEFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", Sunny.getEnvironmentOfOS().getProperties("os"));
+    private static final Path DEFAULT_PATH = FileSystems.getDefault().getPath(System.getProperty("user.dir"), "Brain", EnvironmentOfOS.getInstance().getProperties("os"));
     private static final String[] brainParts = {"Persistent","Temporary","Action"};
 
     private Memory() {
