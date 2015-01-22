@@ -1,6 +1,6 @@
 package neural_center.listening.commandHandler;
 
-import neural_center.initialization.SunnyInitialization;
+import neural_center.initialization.Sunny;
 
 import java.util.ArrayList;
 
@@ -70,7 +70,7 @@ public class CommandCrate
     @Deprecated
     public static void main(String[] args)
     {
-        SunnyInitialization.main(null);
+        Sunny.main(null);
         String command = "Sunny Run Fire Fox";
         CommandCrate feedback = new CommandCrate(command);
         System.out.println(feedback.getCommandDescription());

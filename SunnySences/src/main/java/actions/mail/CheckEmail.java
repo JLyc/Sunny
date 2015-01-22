@@ -1,7 +1,5 @@
 package actions.mail;
 
-import javax.mail.MessagingException;
-
 import javax.mail.*;
 import java.util.Properties;
 
