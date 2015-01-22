@@ -2,6 +2,7 @@ package neural_center.speaking;
 
 import neural_center.speaking.speakingAPI.FTTKevinVoice;
 import neural_center.speaking.speakingAPI.SpeakingInterface;
+import uniqe_skills.PerformanceTest;
 
 /**
  * Created by socha on 10.10.2014.
@@ -17,6 +18,8 @@ public final class SpeakingAdapter {
     private SpeakingAdapter() {
         speakingSource = FTTKevinVoice.init();
         setSourceForAdapter(speakingSource);
+        System.out.println("Speaking \t\t\t load successful: " + workingTest(speakingSource));
+        PerformanceTest.result();
     }
 
     public void setSourceForAdapter(SpeakingInterface speakingSource) {
@@ -46,7 +49,7 @@ public final class SpeakingAdapter {
         return true;
     }
 
-    public static SpeakingAdapter getInstance() {
+    public synchronized static SpeakingAdapter getInstance() {
         if (INSTANCE == null) INSTANCE = new SpeakingAdapter();
         return INSTANCE;
     }

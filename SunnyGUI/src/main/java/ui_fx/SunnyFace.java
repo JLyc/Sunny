@@ -24,6 +24,7 @@ public class SunnyFace extends Application{
         stage.setX(Screen.getPrimary().getVisualBounds().getMaxX()-90);
         stage.setY(Screen.getPrimary().getVisualBounds().getMaxY()-100);
         stage.show();
+        System.out.println("Face \t\t\t\t load successful: "+ true);
     }
 
     private void init(Stage mainFrame) {

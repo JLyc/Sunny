@@ -1,6 +1,7 @@
 package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
+import uniqe_skills.PerformanceTest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,7 +22,8 @@ public class Memory extends BufferFileToMemory {
     private Memory() {
          try {
              constructMemoryPaths();
-             System.out.println("Memory load successful: " + testMemoryForFaults());
+             System.out.println("Memory \t\t\t\t load successful: " + testMemoryForFaults());
+             PerformanceTest.result();
          } catch(Exception e) {
             e.printStackTrace();
          }
@@ -63,7 +65,7 @@ public class Memory extends BufferFileToMemory {
         return true;
     }
 
-    public static Memory getInstance(){
+    public synchronized static Memory getInstance(){
         if(INSTANCE == null) INSTANCE = new Memory();
         return INSTANCE;
     }

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CGI (c) 2013 -->
+<!-- ======================================================================
+
+     Defines macros for deployment.
+
+     Peter Kalinak
+     version: 1.0.0
+     ====================================================================== -->
+<project basedir="." default="build" name="Macros definition">
+    <description>Macros definition.</description>
+
+    <property environment="env"/>
+    <!--<property file="../../tibco-macros.properties" prefix="tmprop"/>-->
+    <property file="tibco-macros.properties" prefix="tmprop"/>
+
+    <property name="buildear.cmd" value="${tmprop.tra.bin}/buildear"/>
+    <property name="buildlibrary.cmd" value="${tmprop.designer.bin}/buildlibrary"/>
+    <property name="appmanage.cmd" value="${tmprop.tra.bin}/AppManage"/>
+    <property name="credential.file" value="${env.WORKSPACE}/../../${tmprop.bw.cred.file}"/>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+    <!-- = = = = = = = = = = = = = = = = =
+            macrodef: build-ear
+            Macro which builds specified ear according to variables. This is intended to be
+            used from hudson environment.
+           = = = = = = = = = = = = = = = = = -->
+    <macrodef name="build-ear">
+        <attribute name="location"/>
+        <attribute name="archive"/>
+        <attribute name="target"/>
+        <attribute name="aliases" default="NOT SET"/>
+        <sequential>
+            <if>
+                <not><equals arg1="NOT SET" arg2="@{aliases}"/></not>
+                <then>
+                    <exec executable="${buildear.cmd}" dir="${tmprop.tra.bin}">
+                        <arg value="-s"/>
+                        <arg value="-x"/>
+                        <arg value="-a"/>
+                        <arg value="@{aliases}"/>
+                        <arg value="-ear"/>
+                        <arg value="@{archive}"/>
+                        <arg value="-o"/>
+                        <arg value="@{target}"/>
+                        <arg value="-p"/>
+                        <arg value="@{location}"/>
+                    </exec>
+                </then>
+                <else>
+                    <exec executable="${buildear.cmd}" dir="${tmprop.tra.bin}">
+                        <arg value="-s"/>
+                        <arg value="-x"/>
+                        <arg value="-ear"/>
+                        <arg value="@{archive}"/>
+                        <arg value="-o"/>
+                        <arg value="@{target}"/>
+                        <arg value="-p"/>
+                        <arg value="@{location}"/>
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+          macrodef: build-ear
+          Macro which builds specified ear according to variables. This is intended to be
+          used from hudson environment.
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="build-library">
+        <attribute name="location"/>
+        <attribute name="archive"/>
+        <attribute name="target"/>
+        <attribute name="aliases" default="NOT SET"/>
+        <sequential>
+            <if><not><equals arg1="NOT SET" arg2="@{aliases}"/></not>
+                <then>
+                    <exec executable="${buildlibrary.cmd}" dir="${tmprop.designer.bin}">
+                        <arg value="-s"/>
+                        <arg value="-x"/>
+                        <arg value="-a"/>
+                        <arg value="@{aliases}"/>
+                        <arg value="-lib"/>
+                        <arg value="@{archive}"/>
+                        <arg value="-o"/>
+                        <arg value="@{target}"/>
+                        <arg value="-p"/>
+                        <arg value="@{location}"/>
+                    </exec>
+                </then>
+                <else>
+                    <exec executable="${buildlibrary.cmd}" dir="${tmprop.designer.bin}">
+                        <arg value="-s"/>
+                        <arg value="-x"/>
+                        <arg value="-lib"/>
+                        <arg value="@{archive}"/>
+                        <arg value="-o"/>
+                        <arg value="@{target}"/>
+                        <arg value="-p"/>
+                        <arg value="@{location}"/>
+                    </exec>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+
+    <!-- = = = = = = = = = = = = = = = = =
+          macrodef: app-undeploy
+          Undeploys specified application from Tibco administrator
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-undeploy">
+        <attribute name="appname" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Undeploying application @{appname}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-undeploy"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="${tmprop.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+          macrodef: app-delete
+          Deletes specified application from Tibco administrator
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-delete">
+        <attribute name="appname" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deleting application @{appname}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-delete"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="${tmprop.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+        macrodef: app-export
+        Exports applicaiton configuration from ear.
+       = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-export">
+        <attribute name="ear" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Exporting XML from @{ear}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-export"/>
+                <arg value="-ear"/>
+                <arg value="@{ear}"/>
+                <arg value="-out"/>
+                <arg value="@{config}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+         macrodef: app-export-admin
+         Exports applicaiton configuration from Tibco Administrator.
+        = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-export-admin">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Exporting application @{appname}/</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-export"/>
+                <arg value="-out"/>
+                <arg value="@{config}"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="${tmprop.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+          macrodef: app-deploy
+          Deploys specified ear in Tibco administrator.
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-deploy">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="ear" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deploying application: @{ear}</echo>
+
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-deploy"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-ear"/>
+                <arg value="@{ear}"/>
+                <arg value="-deployconfig"/>
+                <arg value="@{config}"/>
+                <arg value="-domain"/>
+                <arg value="${tmprop.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+                <arg value="-nostart"/>
+            </exec>
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+          taskdef: app-configure
+          modifies deployment xml file
+         = = = = = = = = = = = = = = = = = -->
+    <!--taskdef name="bw-configure" classname="org.apache.tools.ant.taskdefs.optional.tibco.TibbwConfigureApp"/-->
+    <!--macrodef name="app-configure">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="machine" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+		<attribute name="globalVarsFile" default="" />
+        <attribute name="configVarsFile" default="" />
+        <sequential>
+            <bw-configure
+                    configFile="@{config}"
+                    machine="${tmprop.tibco.machine}"
+                    instance="@{appname}"
+					globalVarsFile="@{globalVarsFile}"
+					configVarsFile="@{configVarsFile}"/>
+        </sequential>
+    </macrodef-->
+
+    <!-- = = = = = = = = = = = = = = = = =
+          taskdef: app-configure
+          modifies deployment xml file
+         = = = = = = = = = = = = = = = = = -->
+
+    <!--taskdef name="bw-create-aliases" classname="org.apache.tools.ant.taskdefs.optional.tibco.TibbwCreateAliases"/>
+    <macrodef name="create-aliases">
+       <attribute name="projlibSrcDir" default="NOT SET"/>
+       <attribute name="aliasesDstFile" default="NOT SET"/>
+        <sequential>
+           <bw-create-aliases
+                 srcDir="@{projlibSrcDir}"
+                 destFile="@{aliasesDstFile}"/>
+       </sequential>
+    </macrodef-->
+
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = =
+          macrodef: daemon-invoker
+          invokes JunitDaemon with specified parameters.
+         = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+    <macrodef name="daemon-invoker">
+        <attribute name="cmd" default="NOT_SET"/>
+        <attribute name="jtest" default="NOT_SET"/>
+        <attribute name="timeout" default="5"/>
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.invoke.JUnitDaemonInvoker" fork="true" failonerror="false"
+                  resultproperty="junit.invoker.result">
+                <classpath>
+                    <fileset dir="${tmprop.tpcl.libExt}">
+                        <include name="**/*.jar"/>
+                    </fileset>
+                    <pathelement location="${tmprop.tpcl.libExt}"/>
+                    <fileset dir="${tmprop.tibrv.home}/lib">
+                        <include name="**/*.jar"/>
+                    </fileset>
+                </classpath>
+                <arg line="-command @{cmd} -jtest @{jtest} -timeout @{timeout}"/>
+            </java>
+            <condition property="daemon-invoker.@{cmd}.success">
+                <equals arg1="${junit.invoker.result}" arg2="0"/>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = =
+          macrodef: junit-bw
+          Common template for junit tests.
+         = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+    <macrodef name="junit-bw">
+        <attribute name="testname" default="NOT SET"/>
+        <attribute name="outname" default="NOT SET"/>
+        <sequential>
+            <mkdir dir="test-all"/>
+            <junit printsummary="on" fork="true" dir="${basedir}" haltonfailure="no" showoutput="yes"
+                   filtertrace="no" errorproperty="junit.test.error" failureproperty="junit.test.failure">
+                <classpath>
+                    <fileset dir="${tmprop.tpcl.libExt}">
+                        <include name="**/*.jar"/>
+                    </fileset>
+                    <pathelement location="${tmprop.tpcl.libExt}"/>
+                    <fileset dir="${tmprop.tibrv.home}/lib">
+                        <include name="**/*.jar"/>
+                    </fileset>
+                    <!--fileset dir="${tmprop.ems.home}/lib">
+                        <include name="**/*.jar"/>
+                    </fileset-->
+                    <pathelement location="${tmprop.tra.home}/lib/TIBCOjms.jar"/>
+                    <!-- log4j.xml file needs to be on classpath -->
+                    <!--pathelement location="/app/home/tibuser/junitDaemon"/-->
+                    <!-- use deployed hawk libraries -->
+                    <pathelement location="${tmprop.hawk.home}/lib/agent.jar"/>
+                    <pathelement location="${tmprop.hawk.home}/lib/ami.jar"/>
+                    <pathelement location="${tmprop.hawk.home}/lib/console.jar"/>
+                    <pathelement location="${tmprop.hawk.home}/lib/talon.jar"/>
+                    <pathelement location="${tmprop.hawk.home}/lib/util.jar"/>
+                </classpath>
+                <formatter type="xml"/>
+                <jvmarg value="-Dfile.encoding=UTF-8"/>
+                <sysproperty key="file.encoding" value="UTF-8"/>
+                <test name="@{testname}" haltonfailure="no" outfile="test-all/@{outname}"/>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <!-- Default task shows message only -->
+    <target name="build">
+        <echo>Not implemented.</echo>
+    </target>
+
+</project>

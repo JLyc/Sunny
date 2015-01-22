@@ -3,6 +3,7 @@ package neural_center.initialization;
 import neural_center.memory.Memory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import org.w3c.dom.Document;
+import uniqe_skills.PerformanceTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,8 @@ public class BasicKnowledge {
     private BasicKnowledge() {
         try{
 			loadFileToMemory();
-			System.out.println("Basic Knowledge load successful: " + loadFileToMemory());
+			System.out.println("Basic Knowledge \t load successful: " + loadFileToMemory());
+			PerformanceTest.result();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -71,7 +73,7 @@ public class BasicKnowledge {
 		}
 	}
 
-    public static BasicKnowledge getInstance(){
+    public synchronized static BasicKnowledge getInstance(){
 		if(INSTANCE == null)INSTANCE = new BasicKnowledge();
 		return INSTANCE;
 	}
