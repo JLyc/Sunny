@@ -1,7 +1,8 @@
 package ui_fx;
 
 /**
- * Created by sochaa on 21. 1. 2015.
+ * Created by JLyc on 21. 1. 2015.
+ *
  */
 public class FaceThread extends Thread {
     private static FaceThread instance;
@@ -19,8 +20,7 @@ public class FaceThread extends Thread {
         return instance;
     }
 
-    public static void buildFace(){
+    public void buildFace(){
         instance.start();
     }
-
 }

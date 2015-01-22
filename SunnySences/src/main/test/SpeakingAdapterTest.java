@@ -2,7 +2,8 @@ import neural_center.speaking.SpeakingAdapter;
 import org.junit.Test;
 
 /**
- * Created by sochaa on 21. 1. 2015.
+ * Created by JLyc on 21. 1. 2015.
+ * Working
  */
 public class SpeakingAdapterTest {
 

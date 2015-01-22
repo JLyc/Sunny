@@ -56,7 +56,6 @@ public class EnvironmentOfOS {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.err.println("Internal error in environment. Cant work without environment");
-            Sunny.turnOffSunny(1);
         }
     }
 

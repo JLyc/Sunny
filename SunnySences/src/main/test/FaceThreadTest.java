@@ -4,7 +4,8 @@ import ui_fx.FaceThread;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by sochaa on 21. 1. 2015.
+ * Created by JLyc on 21. 1. 2015.
+ * Working
  */
 public class FaceThreadTest {
 

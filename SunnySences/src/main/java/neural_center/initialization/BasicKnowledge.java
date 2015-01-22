@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
-	private static final Map<String, Document> knowledgeProperties = new HashMap();
+	private static final Map<String, Document> knowledgeProperties = new HashMap<>();
 
 	private Memory memoryOfSunny = Memory.getInstance();
 
@@ -67,8 +67,8 @@ public class BasicKnowledge {
 			try{
 				TimeUnit.SECONDS.sleep(10);
 				knowledgeProperties.put(key,memoryOfSunny.retrieveBufferedFile(key).get());
-			}catch (Exception ex){
-				Sunny.turnOffSunny(-1, "Unrecoverable error");
+			}catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 	}

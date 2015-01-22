@@ -5,7 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 
 /**
- * Created by sochaa on 20. 1. 2015.
+ * Created by JLyc on 20. 1. 2015.
+ * Working
  */
 public class BasicKnowledgeTest {
 

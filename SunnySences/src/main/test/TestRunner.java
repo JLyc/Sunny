@@ -3,7 +3,8 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 /**
- * Created by sochaa on 22. 1. 2015.
+ * Created by JLyc on 22. 1. 2015.
+ * Working
  */
 public class TestRunner {
     public static void main(String[] args) {
