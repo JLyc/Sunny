@@ -1,6 +1,8 @@
 package neural_center.memory.initialize_memory.save;
 
 import neural_center.initialization.BasicKnowledge;
+import neural_center.initialization.EnvironmentOfOS;
+import neural_center.memory.Memory;
 import org.w3c.dom.Document;
 
 import javax.xml.transform.*;
@@ -27,7 +29,7 @@ public class SaveXmlFile implements Callable<Boolean>{
     public SaveXmlFile(String resourcesKey) {
         this.doc = BasicKnowledge.getInstance().get(resourcesKey);
         this.resourcesKey = resourcesKey;
-//        this.destinationFile = SunnyMemory.BRAIN.resolve(EnvironmentOfOS.getProperties(resourcesKey));
+        this.destinationFile = Memory.getInstance().getPathInMemory("Persistent").resolve(EnvironmentOfOS.getInstance().getProperties(resourcesKey));
     }
 
     protected void saveToBrain() {

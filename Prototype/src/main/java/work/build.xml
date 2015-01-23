@@ -1,0 +1,80 @@
+<project name="IntegrationSourceCodes" default="build-ear" basedir=".">
+
+    <description>
+        Shared library builder
+    </description>
+	<property environment="env"/>
+	<property file="build-jenkins.properties"/>
+
+    <!-- set global properties for this build -->
+    <!-- Deployment properties. Folder name must end with / character -->
+	<property name="aliasesFile" location="aliases.properties"/>
+
+	<!-- import tibco-specific custom tasks and macros definitions-->
+    <import file="${ant.home}/tibco-macros.xml"/>
+
+	<!-- build initialization-->
+    <target name="init">
+        <!-- Create the time stamp -->
+        <tstamp/>
+        <!-- Create the build directory structure used by compile -->
+		<delete file="${aliasesFile}"/>
+		<touch file="${aliasesFile}"/>
+    </target>
+	
+	<!-- List of all projlibs that should be built (Order matters)-->
+	<filelist dir="${basedir}" id="projlibs">
+		<file name="Common/BWProjects/SharedLibrary/build.xml" />
+		<file name="Common/BWProjects/LOV/build.xml" />
+	</filelist> 
+	
+	<!-- List of all projects that should be built (0rder matters)-->
+	<filelist dir="${basedir}" id="projects">
+		<file name="Siebel/BWProjects/Siebel/build.xml" />
+		<file name="SMS/BWProjects/SMS/build.xml" />
+		<file name="ODB/BWProjects/ODB/build.xml" />
+		<file name="Common/BWProjects/Administration/build.xml" />
+	</filelist> 
+	
+	<target name="build-all-libraries" depends="init">
+		<subant target="build-library" inheritall="true">
+			<filelist refid="projlibs"/> 
+		</subant>
+	</target>
+	
+	<target name="export-all" depends="build-all-libraries">
+		<subant target="export" inheritall="true">
+			<filelist refid="projects"/> 
+		</subant>
+	</target>
+
+	<target name="deploy-all" depends="build-all-libraries">
+		<subant target="deploy" inheritall="true">
+			<filelist refid="projects"/> 
+		</subant>
+	</target>
+	
+	<target name="undeploy-all">
+		<subant target="undeploy" inheritall="true">
+			<filelist refid="projects"/> 
+		</subant>
+	</target>
+	
+	<target name="delete-all">
+		<subant target="delete" inheritall="true">
+			<filelist refid="projects"/> 
+		</subant>
+	</target>
+	
+	<!-- cleanup temporary files -->
+    <target name="clean"
+            description="clean up">
+        <!-- Delete the ${build} directory tree -->
+        <delete dir="${build}"/>
+		<subant target="clean" inheritall="true">
+			<filelist refid="projlibs"/> 
+			<filelist refid="projects"/> 
+		</subant>
+    </target>
+
+</project> 

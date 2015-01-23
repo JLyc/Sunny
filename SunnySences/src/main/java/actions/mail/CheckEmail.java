@@ -3,6 +3,10 @@ package actions.mail;
 import javax.mail.*;
 import java.util.Properties;
 
+/**
+ * Created by JLyc on 22. 1. 2015.
+ * Working
+ */
 public class CheckEmail extends Thread{
 
     private String arg1;
@@ -31,9 +35,9 @@ public class CheckEmail extends Thread{
         this.arg1 = arg1;
         this.arg2 = arg2;
         this.arg3 = arg3;
-        this.arg4 = arg4;
-        this.arg5 = arg5;
-        this.arg6 = arg6;
+        CheckEmail.arg4 = arg4;
+        CheckEmail.arg5 = arg5;
+        CheckEmail.arg6 = arg6;
     }
 
     public void run()
@@ -94,23 +98,4 @@ public class CheckEmail extends Thread{
                 return arg2 +" has "+count+" messeges.";
         }
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        long startTime = System.currentTimeMillis();
-
-        CheckEmail checkEmailA = new CheckEmail("imap.gmail.com", "andrej.socha", "m62tkx7j");
-        checkEmailA.start();
-//        CheckEmail checkEmailJ = new CheckEmail("imap.gmail.com", "JLyc.Development", "044150900");
-//        checkEmailJ.start();
-
-//        while (checkEmailJ.isAlive())
-//        {}
-        long finishTime = System.currentTimeMillis();
-        System.out.println("That took: " + (finishTime - startTime) + " ms");
-        while (checkEmailA.isAlive())
-        {}
-        finishTime = System.currentTimeMillis();
-        System.out.println("That took: " + (finishTime - startTime) + " ms");
-    }
-
 }

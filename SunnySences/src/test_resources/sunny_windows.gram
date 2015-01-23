@@ -1,0 +1,9 @@
+#JSGF V1.0;
+
+/**
+ * Sunny basic knowleadge
+ */
+
+grammar Sunny;
+
+public <commands> = (Sunny) (Run | Show | Start) (Email);

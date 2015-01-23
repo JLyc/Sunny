@@ -1,7 +1,5 @@
 package neural_center.listening.commandHandler;
 
-import neural_center.initialization.Sunny;
-
 import java.util.ArrayList;
 
 public class CommandCrate
@@ -17,8 +15,8 @@ public class CommandCrate
     public CommandCrate(String command)
     {
 //        String xpath = ;
-//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/modifieres/modifier/@whiteSpace").asList();
-//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
+//        List<String> shiteSpaces = new SmartXPath().from().forExpression("/root/modifieres/modifier/@whiteSpace").asList();
+//        List<String> shiteSpaces = new SmartXPath().from().forExpression("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
 //        String xpath1 = ;
     }
 
@@ -65,17 +63,5 @@ public class CommandCrate
     public String getCommandDescription()
     {
         return commandDescription;
-    }
-
-    @Deprecated
-    public static void main(String[] args)
-    {
-        Sunny.main(null);
-        String command = "Sunny Run Fire Fox";
-        CommandCrate feedback = new CommandCrate(command);
-        System.out.println(feedback.getCommandDescription());
-        System.out.println(feedback.getModifier());
-        System.out.println(feedback.getModifierNumber());
-        System.out.println(feedback.getName());
     }
 }

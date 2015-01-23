@@ -3,6 +3,7 @@ package neural_center.initialization;
 import neural_center.memory.Memory;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import org.w3c.dom.Document;
+import uniqe_skills.PerformanceTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BasicKnowledge {
     private static BasicKnowledge INSTANCE;
-	private static final Map<String, Document> knowledgeProperties = new HashMap();
+	private static final Map<String, Document> knowledgeProperties = new HashMap<>();
 
 	private Memory memoryOfSunny = Memory.getInstance();
 
@@ -27,7 +28,8 @@ public class BasicKnowledge {
     private BasicKnowledge() {
         try{
 			loadFileToMemory();
-			System.out.println("Basic Knowledge load successful: " + loadFileToMemory());
+			System.out.println("Basic Knowledge \t load successful: " + loadFileToMemory());
+			PerformanceTest.result();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -65,13 +67,13 @@ public class BasicKnowledge {
 			try{
 				TimeUnit.SECONDS.sleep(10);
 				knowledgeProperties.put(key,memoryOfSunny.retrieveBufferedFile(key).get());
-			}catch (Exception ex){
-				Sunny.turnOffSunny(-1, "Unrecoverable error");
+			}catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 	}
 
-    public static BasicKnowledge getInstance(){
+    public synchronized static BasicKnowledge getInstance(){
 		if(INSTANCE == null)INSTANCE = new BasicKnowledge();
 		return INSTANCE;
 	}

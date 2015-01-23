@@ -46,12 +46,12 @@ public class CreateGramFile
         try {
             //get number
             SmartXPath smartXPath = new SmartXPath().from(document);
-            int rows = smartXPath.forExpresion("/root/row").asNode().getChildNodes().getLength();
+            int rows = smartXPath.forExpression("/root/row").asNode().getChildNodes().getLength();
 
             int modifier;
             for(int index=0;index<=rows;index++) {
-                modifier = Integer.parseInt(smartXPath.forExpresion("/root/row[@id='" + index + "']").asNode().getAttributes().item(0).getNodeValue());
-                fillPartsWithBrackets(smartXPath.forExpresion("/root/row[@id='" + index + "']/word").asNodeList(), modifier);
+                modifier = Integer.parseInt(smartXPath.forExpression("/root/row[@id='" + index + "']").asNode().getAttributes().item(0).getNodeValue());
+                fillPartsWithBrackets(smartXPath.forExpression("/root/row[@id='" + index + "']/word").asNodeList(), modifier);
             }
             gramFileContent.append(";");
         } catch (Exception e) {

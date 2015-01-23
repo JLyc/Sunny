@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test_resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -14,8 +15,8 @@
     <orderEntry type="library" name="mail-1.4.1" level="project" />
     <orderEntry type="library" name="rxtx-2.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="junit-4.7" level="project" />
-    <orderEntry type="module" module-name="SunnyGUI" scope="TEST" />
     <orderEntry type="library" name="freetts-1.2.2" level="project" />
     <orderEntry type="library" name="sphinx4-1" level="project" />
+    <orderEntry type="module" module-name="SunnyGUI" />
   </component>
 </module>

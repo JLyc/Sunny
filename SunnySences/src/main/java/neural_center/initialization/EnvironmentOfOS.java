@@ -1,5 +1,7 @@
 package neural_center.initialization;
 
+import uniqe_skills.PerformanceTest;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -16,7 +18,8 @@ public class EnvironmentOfOS {
     private EnvironmentOfOS() {
         try {
             loadProperties();
-            System.out.println("Environment of OS load successful: " + testClass());
+            System.out.println("Environment of OS \t load successful: " + testClass());
+            PerformanceTest.result();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +56,6 @@ public class EnvironmentOfOS {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.err.println("Internal error in environment. Cant work without environment");
-            Sunny.turnOffSunny(1);
         }
     }
 
@@ -98,7 +100,7 @@ public class EnvironmentOfOS {
         }
     }
 
-    public static EnvironmentOfOS getInstance() {
+    public synchronized static EnvironmentOfOS getInstance() {
         if (INSTANCE == null) INSTANCE = new EnvironmentOfOS();
         return INSTANCE;
     }

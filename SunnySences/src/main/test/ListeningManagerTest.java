@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Created by sochaa on 21. 1. 2015.
+ * Created by JLyc on 21. 1. 2015.
+ * Working
  */
 public class ListeningManagerTest {
 
@@ -21,7 +22,7 @@ public class ListeningManagerTest {
 
     @Test
     public void testListeningManager(){
-        ListeningManager lm = ListeningManager.getInstance();
+        ListeningManager.getInstance();
         try {//keep test alive
             TimeUnit.SECONDS.sleep(30);
         } catch (InterruptedException e) {
