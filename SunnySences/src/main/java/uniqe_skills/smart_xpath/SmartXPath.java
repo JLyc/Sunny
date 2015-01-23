@@ -25,7 +25,7 @@ public class SmartXPath {
         return this;
     }
 
-    public SmartXPath forExpresion(String expression) {
+    public SmartXPath forExpression(String expression) {
         this.expression = expression;
         return this;
     }
@@ -34,11 +34,24 @@ public class SmartXPath {
         synchronized (xPath) {
             try {
                 result = xPath.compile(expression).evaluate(document, type);
+                testResult(type);
             } catch (XPathExpressionException e) {
                 e.printStackTrace();
             } finally {
                 reuseInstance();
             }
+        }
+    }
+
+    private void testResult(QName type) throws XPathExpressionException {
+        if (result == null) {
+            throw new XPathExpressionException("XPhat is null");
+        }
+        if (type.equals(XPathConstants.NODESET) && ((NodeList) result).getLength() == 0) {
+            throw new XPathExpressionException("XPhat NodeSet is empty");
+        }
+        if (type.equals(XPathConstants.NODE) && ((Node) result).getTextContent().equals("")) {
+            throw new XPathExpressionException("XPhat Node is empty");
         }
     }
 
@@ -51,9 +64,10 @@ public class SmartXPath {
         List<String> list = new ArrayList<>();
         result(XPathConstants.NODESET);
         NodeList result = (NodeList) this.result;
-
-        for (int index = 0; index < result.getLength(); index++) {
-            list.add(result.item(index).getTextContent());
+        NodeList children = result.item(0).getChildNodes();
+        for (int index = 0; index < children.getLength(); index++) {
+            if(children.item(index).getNodeType()==Node.ELEMENT_NODE)
+            list.add(children.item(index).getTextContent());
         }
         return list;
     }

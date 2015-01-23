@@ -1,6 +1,7 @@
 package neural_center.initialization;
 
 import neural_center.listening.ListeningManager;
+import neural_center.listening.commandHandler.ReceivedCommand;
 import neural_center.memory.Memory;
 import neural_center.speaking.SpeakingAdapter;
 import ui_fx.FaceThread;
@@ -23,6 +24,11 @@ public class Sunny {
         defaultExecutor.submit(ListeningManager::getInstance);
 //        defaultExecutor.submit(() -> ListeningManager.getInstance());
         SpeakingAdapter.getInstance().say("hello bitches");
+        try {
+            System.out.println(ReceivedCommand.updateKnowingWords());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static ExecutorService getExecutor()
@@ -33,5 +39,9 @@ public class Sunny {
     public static Sunny getInstance() {
         if (instance == null) instance = new Sunny();
         return instance;
+    }
+
+    public static void main(String[] args) {
+        new Sunny();
     }
 }

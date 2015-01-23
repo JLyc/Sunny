@@ -1,5 +1,6 @@
 package neural_center.listening;
 
+import neural_center.listening.commandHandler.ReceivedCommand;
 import neural_center.listening.listeningAPI.Sphinx4Listener;
 import uniqe_skills.PerformanceTest;
 
@@ -23,7 +24,9 @@ public final class ListeningManager {
     public void onNewCommand(String recordedSound) {
 //        commandExecutor.execute(new ProceedCommand(recordedSound));
         //test chatch
+        if(!recordedSound.isEmpty()){
         System.out.println(recordedSound);
+        new ReceivedCommand(recordedSound);}
     }
 
     public synchronized static ListeningManager getInstance() {

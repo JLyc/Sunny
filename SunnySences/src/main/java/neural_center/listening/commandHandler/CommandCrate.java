@@ -15,8 +15,8 @@ public class CommandCrate
     public CommandCrate(String command)
     {
 //        String xpath = ;
-//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/modifieres/modifier/@whiteSpace").asList();
-//        List<String> shiteSpaces = new SmartXPath().from().forExpresion("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
+//        List<String> shiteSpaces = new SmartXPath().from().forExpression("/root/modifieres/modifier/@whiteSpace").asList();
+//        List<String> shiteSpaces = new SmartXPath().from().forExpression("/root/commands/command[@id='"+ name +"' and @modifier='"+ modifier+"']").asList();
 //        String xpath1 = ;
     }
 
