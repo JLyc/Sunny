@@ -33,8 +33,6 @@ public class EnvironmentOfOS {
      *                 <tr><td>grammarForListening</td></tr>
      *                 <tr><td>commandsSource</td></tr>
      *                 <tr><td>recognizedWords</td></tr>
-     *                 <tr><td>commandExecutor</td></tr>
-     *                 <tr><td>executorParameter</td></tr>
      *                 </table>
      * @return string name of property
      */
@@ -51,8 +49,6 @@ public class EnvironmentOfOS {
             environmentProperties.put("grammarForListening", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("commandsSource", getPropertyBasedOnEnvironment()[i++]);
             environmentProperties.put("recognizedWords", getPropertyBasedOnEnvironment()[i++]);
-            environmentProperties.put("commandExecutor", getPropertyBasedOnEnvironment()[i++]);
-            environmentProperties.put("executorParameter", getPropertyBasedOnEnvironment()[i++]);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.err.println("Internal error in environment. Cant work without environment");
@@ -75,24 +71,18 @@ public class EnvironmentOfOS {
                 output[i++] = "";
                 output[i++] = "";
                 output[i++] = "recognizedWords.xml";
-                output[i++] = "/bin/sh";
-                output[i++] = "-c";
                 return output;
             case "Windows":
                 output[i++] = "sunny_windows.config.xml";
                 output[i++] = "sunny_windows_gram.xml";
                 output[i++] = "commands_windows.xml";
                 output[i++] = "recognizedWords.xml";
-                output[i++] = "cmd";
-                output[i++] = "/c";
                 return output;
             case "xos":
                 output[i++] = "configs/sunny_xos.config.xml";
                 output[i++] = "gramFiles/sunny_xos.gram";
                 output[i++] = "dataFile/commands_xos.txt";
                 output[i++] = "recognizedWords.xml";
-                output[i++] = "";
-                output[i++] = "";
                 throw new Exception("xos not implemented");
             default: {
                 throw new Exception("unknown os architecture");

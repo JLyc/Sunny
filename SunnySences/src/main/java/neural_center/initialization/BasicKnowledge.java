@@ -23,6 +23,7 @@ public class BasicKnowledge {
             "grammarForListening",
             "recognizedWords",
             "commandsSource",
+			"listeningConfig",
     };
 
     private BasicKnowledge() {
@@ -48,6 +49,7 @@ public class BasicKnowledge {
 	 *                 <tr><td>grammarForListening</td></tr>
 	 *                 <tr><td>recognizedWords</td></tr>
 	 *                 <tr><td>commandsSource</td></tr>
+	 *                 <tr><td>listeningConfig</td></tr>
 	 *                 </table>
 	 * @return {@link org.w3c.dom.Document} of given directory
 	*/
