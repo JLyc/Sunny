@@ -1,11 +1,16 @@
 package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
+import neural_center.memory.initialize_memory.helpers.FileOperators;
 import uniqe_skills.PerformanceTest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.*;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +31,10 @@ public class Memory extends BufferFileToMemory {
     private Memory() {
          try {
              constructMemoryPaths();
-             verifyFileExistence();
+
              System.out.println("Memory \t\t\t\t load successful: " + testMemoryForFaults());
              PerformanceTest.result();
+             verifyFileExistence();
          } catch(Exception e) {
             e.printStackTrace();
              System.err.println("Problem with memory constructor");
@@ -36,12 +42,26 @@ public class Memory extends BufferFileToMemory {
      }
 
     private void verifyFileExistence() throws IOException {
-        for(String pathString : loadToMemory){
-            Path filePath = DEFAULT_PATH.resolve("Persistent").resolve(EnvironmentOfOS.getInstance().getProperties(pathString));
-            if(Files.notExists(filePath)) {
-                Files.createFile(filePath);
+//        for(String pathString : loadToMemory){
+        for(int index=0;index < loadToMemory.length;index++){
+            Path filePath = DEFAULT_PATH.resolve("Persistent").resolve(EnvironmentOfOS.getInstance().getProperties(loadToMemory[index]));
+            if(Files.notExists(filePath) || isEmpty(filePath)) {
+                System.out.println(filePath);
+                bufferFile(loadToMemory[index], FileOperators.SAVE);
             }
         }
+    }
+
+    private boolean isEmpty(Path filePath) {
+        try(InputStream stream = filePath.toUri().toURL().openStream()) {
+            if(stream.available()>1){
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 
     private void constructMemoryPaths() throws IOException {

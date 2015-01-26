@@ -6,13 +6,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.concurrent.Callable;
 
 /**
@@ -27,10 +24,9 @@ public class LoadXmlFile implements Callable<Document> {
 
     private Document proceedFile() throws IOException {
         try {
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream(path.toString());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(is);
+            Document doc = dBuilder.parse(path.toFile());
             doc.getDocumentElement().normalize();
             return doc;
         } catch (SAXException | ParserConfigurationException e) {
