@@ -7,7 +7,6 @@ import neural_center.memory.initialize_memory.load.LoadXmlFile;
 import neural_center.memory.initialize_memory.save.SaveXmlFile;
 import org.w3c.dom.Document;
 
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +20,9 @@ public abstract class BufferFileToMemory {
     private static final Map<String, Future<Document>> loadFileOutput = new HashMap<>();
 
     public void bufferFile(String fileKey, FileOperators operation) {
-        Path path = FileSystems.getDefault().getPath(EnvironmentOfOS.getInstance().getProperties(fileKey));
-        if (path.toString().endsWith(".xml")){
+        String fileName = EnvironmentOfOS.getInstance().getProperties(fileKey);
+        Path path = Memory.getInstance().getPathInMemory("Persistent").resolve(fileName);
+        if (path.toString().endsWith(".xml")) {
             switch (operation) {
                 case LOAD:
                     loadFileOutput.put(fileKey, Sunny.getExecutor().submit(new LoadXmlFile(path.toString())));
@@ -39,4 +39,5 @@ public abstract class BufferFileToMemory {
         loadFileOutput.remove(key);
         return output;
     }
+
 }

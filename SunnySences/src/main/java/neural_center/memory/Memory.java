@@ -1,9 +1,16 @@
 package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
-import neural_center.memory.initialize_memory.helpers.FileOperators;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import uniqe_skills.PerformanceTest;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,10 +38,9 @@ public class Memory extends BufferFileToMemory {
     private Memory() {
          try {
              constructMemoryPaths();
-
+             verifyFileExistence();
              System.out.println("Memory \t\t\t\t load successful: " + testMemoryForFaults());
              PerformanceTest.result();
-             verifyFileExistence();
          } catch(Exception e) {
             e.printStackTrace();
              System.err.println("Problem with memory constructor");
@@ -42,26 +48,39 @@ public class Memory extends BufferFileToMemory {
      }
 
     private void verifyFileExistence() throws IOException {
-//        for(String pathString : loadToMemory){
-        for(int index=0;index < loadToMemory.length;index++){
-            Path filePath = DEFAULT_PATH.resolve("Persistent").resolve(EnvironmentOfOS.getInstance().getProperties(loadToMemory[index]));
+        for(String pathString : loadToMemory){
+            Path filePath = DEFAULT_PATH.resolve("Persistent").resolve(EnvironmentOfOS.getInstance().getProperties(pathString));
             if(Files.notExists(filePath) || isEmpty(filePath)) {
-                System.out.println(filePath);
-                bufferFile(loadToMemory[index], FileOperators.SAVE);
+                try {
+                    createFileFromResources(pathString,filePath);
+                } catch (ParserConfigurationException | TransformerException | SAXException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     private boolean isEmpty(Path filePath) {
         try(InputStream stream = filePath.toUri().toURL().openStream()) {
-            if(stream.available()>1){
-                return true;
+            if(stream.available()>0){
+                return false;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return true;
         }
         return false;
+    }
+
+    public void createFileFromResources(String resourcesKey, Path destinationFile) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(Memory.class.getClassLoader().getResourceAsStream(EnvironmentOfOS.getInstance().getProperties(resourcesKey)));
+        doc.getDocumentElement().normalize();
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        Result output = new StreamResult(destinationFile.toFile());
+        Source input = new DOMSource(doc);
+        transformer.transform(input, output);
     }
 
     private void constructMemoryPaths() throws IOException {

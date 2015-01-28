@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 public final class ListeningManager {
     private static ListeningManager INSTANCE;
 
-    private static ExecutorService commandExecutor = Executors.newFixedThreadPool(10);
+    private static ExecutorService commandExecutor = Executors.newFixedThreadPool(5);
 
     private ListeningManager() {
         commandExecutor.execute(new Sphinx4Listener());
@@ -26,7 +26,7 @@ public final class ListeningManager {
         //test chatch
         if(!recordedSound.isEmpty()){
         System.out.println(recordedSound);
-        new ReceivedCommand(recordedSound);}
+            commandExecutor.execute(new ReceivedCommand(recordedSound));}
     }
 
     public synchronized static ListeningManager getInstance() {
