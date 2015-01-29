@@ -1,7 +1,7 @@
 package neural_center.memory;
 
 import neural_center.initialization.EnvironmentOfOS;
-import neural_center.initialization.Sunny;
+import neural_center.initialization.SunnyInitialization;
 import neural_center.memory.initialize_memory.helpers.FileOperators;
 import neural_center.memory.initialize_memory.load.LoadXmlFile;
 import neural_center.memory.initialize_memory.save.SaveXmlFile;
@@ -25,10 +25,10 @@ public abstract class BufferFileToMemory {
         if (path.toString().endsWith(".xml")) {
             switch (operation) {
                 case LOAD:
-                    loadFileOutput.put(fileKey, Sunny.getExecutor().submit(new LoadXmlFile(path.toString())));
+                    loadFileOutput.put(fileKey, SunnyInitialization.getExecutor().submit(new LoadXmlFile(path.toString())));
                     break;
                 case SAVE:
-                    Sunny.getExecutor().submit(new SaveXmlFile(fileKey));
+                    SunnyInitialization.getExecutor().submit(new SaveXmlFile(fileKey));
                     break;
             }
         }

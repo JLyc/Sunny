@@ -10,11 +10,11 @@ import uniqe_skills.PerformanceTest;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Sunny {
-    private static Sunny instance;
+public class SunnyInitialization {
+    private static SunnyInitialization instance;
 
     private static ExecutorService defaultExecutor = Executors.newFixedThreadPool(5);
-	private Sunny() throws NullPointerException {
+	private SunnyInitialization() throws NullPointerException {
         PerformanceTest.start();
         defaultExecutor.submit(() -> FaceThread.getInstance().buildFace());
         defaultExecutor.submit(EnvironmentOfOS::getInstance);
@@ -22,7 +22,7 @@ public class Sunny {
         defaultExecutor.submit(BasicKnowledge::getInstance);
         defaultExecutor.submit(SpeakingAdapter::getInstance);
         defaultExecutor.submit(ListeningManager::getInstance);
-//        defaultExecutor.submit(() -> ListeningManager.getInstance());
+//        defaultExecutor.submit(() -> ListeningManager.initialize());
         SpeakingAdapter.getInstance().say("hello bitches");
         try {
             System.out.println(ReceivedCommand.updateKnowingWords());
@@ -36,12 +36,7 @@ public class Sunny {
         return defaultExecutor;
     }
 
-    public static Sunny getInstance() {
-        if (instance == null) instance = new Sunny();
-        return instance;
-    }
-
-    public static void main(String[] args) {
-        new Sunny();
+    public static void initialize() {
+        if (instance == null) instance = new SunnyInitialization();
     }
 }
