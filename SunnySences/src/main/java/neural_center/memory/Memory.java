@@ -58,6 +58,19 @@ public class Memory extends BufferFileToMemory {
                 }
             }
         }
+        clearTempFiles();
+    }
+
+    private void clearTempFiles() throws IOException {
+        Files.walk(DEFAULT_PATH.resolve("Temporary")).forEach(filePath -> {
+            if (Files.isRegularFile(filePath)) {
+                try {
+                    Files.delete(filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private boolean isEmpty(Path filePath) {
@@ -73,13 +86,14 @@ public class Memory extends BufferFileToMemory {
     }
 
     public void createFileFromResources(String resourcesKey, Path destinationFile) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(Memory.class.getClassLoader().getResourceAsStream(EnvironmentOfOS.getInstance().getProperties(resourcesKey)));
         doc.getDocumentElement().normalize();
+
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         Result output = new StreamResult(destinationFile.toFile());
         Source input = new DOMSource(doc);
+
         transformer.transform(input, output);
     }
 

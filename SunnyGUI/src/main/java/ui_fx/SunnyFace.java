@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
  * Created by sochaa on 5. 12. 2014.
  */
 public class SunnyFace extends Application{
-    private ProgressBar[] pb = {new ProgressBar(),new ProgressBar(),new ProgressBar()};
+    public ProgressBar[] pb = {new ProgressBar(),new ProgressBar(),new ProgressBar()};
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -42,6 +42,7 @@ public class SunnyFace extends Application{
         pb[1].setPrefWidth(70);
         pb[1].setLayoutX(15);
         pb[1].setLayoutY(50);
+        pb[1].setProgress(0.5);
 
         pb[2].setRotate(90);
         pb[2].setPrefWidth(50);
@@ -55,8 +56,17 @@ public class SunnyFace extends Application{
         mainFrame.setScene(scene);
     }
 
-    public static void show()
+
+
+    static SunnyFace instance;
+
+    public static SunnyFace show()
     {
         SunnyFace.launch();
+        return instance = new SunnyFace();
+    }
+
+    public static SunnyFace getInstance(){
+        return instance;
     }
 }

@@ -1,0 +1,961 @@
+<!-- Created and modified by R@jo in 2003 -->
+<!-- Junit test framework update by P. Stelmachovic in 2007 -->
+<!-- Junit test framework rewriten by M. Jacala & P. Stelmachovic in 2008 -->
+
+<project name="bw-test" default="build-tests" basedir=".">
+    <description>Project of the LogicaCMG - BW Test.</description>
+
+    <property environment="env" />
+
+    <!-- Properties: common. -->
+    <property name="sourceFileEncoding" value="Cp1250"/>
+    <property name="build.compiler" value="modern"/>
+    <property name="project.debug" value="on"/>
+    <property name="project.optimize" value="on"/>
+    <condition property="tibco.home" value="/opt/tibco7" else="d:/tibco"><os family="unix"/></condition>
+    <condition property="library.home" value="/opt/tibco7/tpcl/5.7/libExt/Junits" else="${basedir}/lib"><os family="unix"/></condition>
+    <!-- Properties: project. -->
+    <condition property="config" value="${library.home}" else="${basedir}/config"><os family="unix"/></condition>
+    <property name="out" value="${basedir}/classes"/>
+    <property name="test" value="${basedir}/test"/>
+    <property name="resources" value="${basedir}/resources"/>
+    <!-- Reporting properties-->
+    <property name="log" value="${basedir}/log"/>
+    <property name="log.html" value="${basedir}/log/html"/>
+    <property name="log.temp" value="${basedir}/log/temp"/>
+    <property name="etc" value="${basedir}/etc"/>
+    <property name="log.propfile" value ="${basedir}/logging.properties"/>
+    <!-- Aspect properties -->
+    <property name="aspect.temp" value="${basedir}/temp"/>
+    <property name="aspect.preprocess" value="false"/>
+
+    <!-- Properties: deploy. -->
+    <property file="deploy.properties"/>
+    <!-- JAXB compiler -->
+    <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+        <classpath>
+            <fileset dir="${library.home}" includes="*.jar" excludes="ant.jar"/>
+        </classpath>
+    </taskdef>
+    <!-- FTP -->
+    <taskdef name="ftp" classname="org.apache.tools.ant.taskdefs.optional.net.FTP">
+        <classpath>
+            <fileset dir="${library.home}" includes="*.jar"/>
+        </classpath>
+    </taskdef>
+    <!-- ASPECT -->
+    <taskdef name="ajc"
+             classname="org.aspectj.tools.ant.taskdefs.Ajc10" >
+        <classpath>
+            <pathelement location="${library.home}/ajde.jar"/>
+            <pathelement location="${library.home}/aspectjweaver.jar"/>
+            <pathelement location="${library.home}/aspectjtools.jar"/>
+            <pathelement location="${library.home}/aspectj-ant.jar"/>
+        </classpath>
+    </taskdef>
+    <!-- Classpath. -->
+    <path id="project.classpath">
+        <fileset dir="${library.home}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tibco.home}/hawk/4.9/lib">
+            <include name="activation.jar"/>
+            <include name="agent.jar"/>
+            <include name="ami.jar"/>
+            <include name="talon.jar"/>
+            <include name="util.jar"/>
+        </fileset>
+        <fileset dir="${tibco.home}/_oracleDrivers">
+            <include name="ojdbc14.jar"/>
+        </fileset>
+        <fileset dir="${tibco.home}/ems/6.1/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tibco.home}/tibrv/8.3/lib">
+            <include name="tibrvj.jar"/>
+        </fileset>
+    </path>
+
+
+    <!-- Target: init. -->
+    <target name="init">
+        <tstamp/>
+    </target>
+
+    <!-- Target: prepare. Delete build dirs and previous jar files and create build dirs again. -->
+    <target name="prepare" depends="init">
+        <delete dir="${out}"/>
+        <mkdir dir="${out}"/>
+    </target>
+
+
+    <!-- Target: manifest. Creates manifest file. -->
+    <target name="manifest" depends="build-props">
+        <mkdir dir="${out}/meta-inf"/>
+        <tstamp>
+            <format property="BLD" pattern="d.MM.yyyy HH:mm"/>
+        </tstamp>
+        <loadproperties srcFile="build.properties"/>
+        <manifest file="${out}/meta-inf/MANIFEST.MF">
+            <attribute name="Built-By" value="${user.name}"/>
+            <section name="com.logica.eai.test.bw">
+                <attribute name="Specification-Title" value="BW Test"/>
+                <attribute name="Specification-Vendor" value="LogicaCMG s.r.o."/>
+                <attribute name="Implementation-Version" value="${release}.${version}.${buildno} from ${BLD}"/>
+                <attribute name="Implementation-Vendor" value="LogicaCMG s.r.o."/>
+            </section>
+        </manifest>
+    </target>
+
+
+    <!-- Target: build-props. Creates build properties -->
+    <target name="build-props" description="create and/or update a build properties file">
+        <propertyfile file="build.properties" comment="Build file for the BW Test">
+            <entry key="release" value="1"/>
+            <entry key="version" value="0"/>
+            <entry key="buildno" type="int" default="0" operation="+" value="1"/>
+        </propertyfile>
+    </target>
+
+
+    <!-- Target: compile. Compile project. -->
+    <target name="compile" depends="prepare">
+        <javac destdir="${out}" encoding="${sourceFileEncoding}" debug="${project.debug}" optimize="${project.optimize}" source="1.5" compiler="javac1.6" target="1.6">
+            <src path="${test}"/>
+            <classpath refid="project.classpath"/>
+        </javac>
+        <!-- Run the AspectJ compiler using the special task -->
+        <ajc
+                workingdir="${temp}" srcdir="${test}"
+                preprocess="${preprocess}"
+                includes="**/*.aj,**/*.java"
+                excludes=""
+                destdir="${out}"
+                verbose="true"
+                source="1.5">
+            <classpath>
+                <pathelement location="${library.home}/aspectjrt.jar"/>
+            </classpath>
+            <classpath refid="project.classpath"/>
+        </ajc>
+        <copy todir="${out}" overwrite="true" filtering="on">
+            <fileset dir="${test}">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${out}" overwrite="true" filtering="on">
+            <fileset dir="${test}">
+                <include name="**/*.txt"/>
+            </fileset>
+        </copy>
+        <copy todir="${out}" overwrite="true" filtering="off">
+            <fileset dir="${resources}"/>
+        </copy>
+    </target>
+
+    <!-- Fetches last checked revision number from file, compares to actual revision. If differs, build of tmskbwtest.jar is triggered -->
+    <!--target name="build-tests-hudson">
+        <loadfile property="hudson.scm.revision" srcFile="${env.WORKSPACE}/revision" failonerror="false"/>
+        <echo>Last checked revision: ${hudson.scm.revision}</echo>
+
+        <condition property="hudson.scm.different">
+            <not><equals arg1="${env.SVN_REVISION}" arg2="${hudson.scm.revision}" /></not>
+        </condition>
+
+        <echo file="${env.WORKSPACE}/revision">${env.SVN_REVISION}</echo>
+        <antcall target="build-tests-helper"/>
+    </target-->
+
+    <!--target name="build-tests-helper" if="hudson.scm.different">
+        <antcall target="build-tests"/>
+    </target-->
+
+
+    <!-- Target: build-tests. Creates tmsk BW Test JAR -->
+    <target name="build-tests" depends="init, prepare, compile, manifest">
+        <jar jarfile="${basedir}/tmskbwtest.jar" basedir="${out}" manifest="${out}/meta-inf/MANIFEST.MF"
+             excludes="com/logica/eai/test/daemon/**, com/logica/eai/test/util/**,"  />
+        <delete dir="${out}"/>
+    </target>
+
+    <!-- Documentation for tests -->
+    <target name="document-tests">
+        <javadoc packagenames="com.logica.eai.test.bw.*" sourcepath="test" defaultexcludes="yes" destdir="docs/tests/api" author="true" windowtitle="Integration Tests"/>
+    </target>
+
+    <!-- Runs the rv testing tool -->
+    <target name="run-rv-tool">
+        <java classname="com.logica.eai.test.util.rv.RVPublisher" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+            <arg line="-daemon artemis1.eurotel.sk:7531 -service 7531"/>
+        </java>
+    </target>
+
+    <!-- Runs the rv testing tool -->
+    <target name="run-rv-tool-local">
+        <java classname="com.logica.eai.test.util.rv.RVPublisher" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+            <arg line="-daemon tcp:7492 -service 7492"/>
+        </java>
+    </target>
+
+
+
+    <!-- Runs the jms testing tool -->
+    <target name="run-jms-tool">
+        <java classname="com.logica.eai.test.util.jms.JMSPublisher" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+            <arg line="-server tcp://artemis2.eurotel.sk:7231 -user admin -password aaaa"/>
+        </java>
+    </target>
+
+
+    <!-- Runs the rv listener  -->
+    <target name="run-rv-listen">
+        <java classname="com.logica.eai.test.util.rv.RVListener" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+            <arg line="-daemon crmdev1:7554 -service 7554 -subject xxxx "/>
+        </java>
+    </target>
+
+
+    <!-- Runs the testing daemon -->
+    <target name="run-junit-daemon">
+        <java classname="com.logica.eai.test.daemon.JunitDaemon" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Runs the testing bwdiff ear comparator -->
+    <target name="run-bwdiff">
+        <java classname="com.logica.eai.test.bwdiff.BWDiff" fork="true">
+            <classpath>
+                <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                <path refid="project.classpath"/>
+                <pathelement location="${config}/"/>
+            </classpath>
+            <sysproperty key="java.util.logging.config.file" value="${log.propfile}"/>
+            <arg line="-v ${earC} ${earT}"/>
+        </java>
+    </target>
+
+
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = =
+          macrodef: daemon-invoker
+          invokes JunitDaemon with specified parameters.
+       = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+    <macrodef name="daemon-invoker">
+        <attribute name="cmd" default="NOT SET" />
+        <attribute name="jtest" default="NOT SET" />
+        <attribute name="timeout" default="300" />
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.invoke.JUnitDaemonInvoker" fork="true" failonerror="false" resultproperty="junit.invoker.result">
+                <classpath>
+                    <pathelement location="${library.home}/lcmgtestfw.jar"/>
+                    <path refid="project.classpath"/>
+                    <pathelement location="${config}/"/>
+                </classpath>
+                <arg line="--command @{cmd} --jtest @{jtest} --timeout @{timeout}"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = =
+          macrodef: junit-bw
+          Common template for junit tests.
+         = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+    <macrodef name="junit-bw">
+        <attribute name="testname" default="NOT SET" />
+        <attribute name="outname" default="NOT SET" />
+        <sequential>
+            <junit printsummary="on" fork="true" dir="${basedir}" haltonfailure="no" showoutput="yes" filtertrace="no" errorproperty="junit.test.error" failureproperty="junit.test.failure">
+                <classpath>
+                    <pathelement location="${basedir}/tmskbwtest.jar"/>
+                    <path refid="project.classpath"/>
+                    <pathelement location="${config}/"/>
+                </classpath>
+                <formatter type="xml"/>
+                <jvmarg value="-Dfile.encoding=UTF-8"/>
+                <sysproperty key="file.encoding" value="UTF-8"/>
+                <test name="@{testname}" haltonfailure="no" outfile="log/@{outname}"/>
+            </junit>
+        </sequential>
+    </macrodef>
+
+
+    <!-- generates report for all completed tests -->
+    <target name="report-new">
+        <mkdir dir="${log.html}"/>
+        <mkdir dir="${log.temp}"/>
+        <junitreport todir="${log.temp}">
+            <fileset dir="${log}" includes="*.xml"/>
+            <report format="frames" todir="${log.html}" styledir="${etc}"/>
+        </junitreport>
+    </target>
+
+    <!-- test-all : Runs all test suites -->
+    <target name="test-all">
+        <antcall target="test-ECF1_CDM2AM_SYNCH"/>
+        <antcall target="test-ECF1_CDM2MARION"/>
+        <antcall target="test-ECF1_CDM2BSCS"/>
+        <antcall target="test-ECF1_CDM2BSCS_SYNCH"/>
+        <antcall target="test-ECF1_CDM2HPSD"/>
+        <antcall target="test-ECF1_CDM2InstantLink"/>
+        <antcall target="test-ECF1_HPSD2CDM"/>
+        <antcall target="test-ECF1_InstantLink2CDM"/>
+        <antcall target="test-ECF1_JMSRespHandler"/>
+        <antcall target="test-ECF1_RoutingLogic"/>
+        <antcall target="test-ECF1_RoutingLogic_CUG"/>
+        <antcall target="test-ECF1_RoutingLogic_SYNCH"/>
+        <antcall target="test-ECF1_CDM2Loyalty_SYNCH"/>
+        <antcall target="test-ECF1_EURE2CDM"/>
+        <antcall target="test-ECF1_CDM2EURE"/>
+        <antcall target="test-ECF2_BSCS2CDM"/>
+        <antcall target="test-ECF3_CCR2CDM"/>
+        <antcall target="test-ECF3_CDM2CCR"/>
+        <antcall target="test-ECF3_CDM2CCR_SYNCH"/>
+        <antcall target="test-ECF4_CDM2Clarify_A"/>
+        <antcall target="test-ECF4_CDM2Clarify_B"/>
+        <antcall target="test-ECF4_CDM2Clarify_SYNCH"/>
+        <antcall target="test-ECF4_CDM2Clarify_RR"/>
+        <antcall target="test-ECF4_CDM2Clarify_SIEBEL"/>
+        <antcall target="test-ECF5_Clarify2CDM"/>
+        <antcall target="test-ECF6_CDM2EBill_SYNCH"/>
+        <antcall target="test-ECF6_RequestReplyServices"/>
+        <antcall target="test-ECF7_CDM2INPPS"/>
+        <antcall target="test-ECF7_CDM2INPPS_SYNCH"/>
+        <antcall target="test-ECF7_INPPS2CDM"/>
+        <antcall target="test-ECF8_RequestReplyServices"/>
+        <antcall target="test-ECF9_RequestReplyServices"/>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_SYNC"/>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_ASYNC"/>
+        <antcall target="test-ECF9_OFFERS_DB_to_CDMASYNCH"/>
+    </target>
+
+
+    <!-- test-ECF0984-PRD-006base : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006base">
+        <antcall target="test-ECF1_CDM2AM_SYNCH"/>
+        <antcall target="test-ECF1_CDM2MARION"/>
+        <antcall target="test-ECF1_CDM2BSCS"/>
+        <antcall target="test-ECF1_CDM2BSCS_SYNCH"/>
+        <antcall target="test-ECF1_CDM2HPSD"/>
+        <antcall target="test-ECF1_CDM2InstantLink"/>
+        <antcall target="test-ECF1_EURE2CDM"/>
+        <antcall target="test-ECF1_CDM2EURE"/>
+        <antcall target="test-ECF1_HPSD2CDM"/>
+        <antcall target="test-ECF1_InstantLink2CDM"/>
+        <antcall target="test-ECF1_JMSRespHandler"/>
+        <antcall target="test-ECF1_RoutingLogic"/>
+        <antcall target="test-ECF1_RoutingLogic_CUG"/>
+        <antcall target="test-ECF1_RoutingLogic_SYNCH"/>
+        <antcall target="test-ECF1_CDM2Loyalty_SYNCH"/>
+        <antcall target="test-ECF1_CDM2IWD"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_CCR_T : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_CCR">
+        <antcall target="test-ECF3_CCR2CDM"/>
+        <antcall target="test-ECF3_CDM2CCR"/>
+        <antcall target="test-ECF3_CDM2CCR_SYNCH"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_BSCStoCDM : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_BSCStoCDM">
+        <antcall target="test-ECF2_BSCS2CDM"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_CDMtoClarify : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_CDMtoClarify">
+        <antcall target="test-ECF4_CDM2Clarify_A"/>
+        <antcall target="test-ECF4_CDM2Clarify_B"/>
+        <antcall target="test-ECF4_CDM2Clarify_SYNCH"/>
+        <antcall target="test-ECF4_CDM2Clarify_RR"/>
+        <antcall target="test-ECF4_CDM2Clarify_SIEBEL"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_ClarifytoCDM : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_ClarifytoCDM">
+        <antcall target="test-ECF5_Clarify2CDM"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_EBill : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_EBill">
+        <antcall target="test-ECF6_CDM2EBill_SYNCH"/>
+        <antcall target="test-ECF6_RequestReplyServices"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_INPPS : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_INPPS">
+        <antcall target="test-ECF7_CDM2INPPS"/>
+        <antcall target="test-ECF7_CDM2INPPS_SYNCH"/>
+        <antcall target="test-ECF7_INPPS2CDM"/>
+    </target>
+
+    <!-- test-ECF0984-PRD-006_OFFERS_DB : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_OFFERS_DB">
+        <antcall target="test-ECF9_RequestReplyServices"/>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_SYNC"/>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_ASYNC"/>
+        <antcall target="test-ECF9_OFFERS_DB_to_CDMASYNCH"/>
+    </target>
+
+    <!--test-ECF0984-PRD-006_RequestReplyServices : Runs all test suites designed for this ear.  -->
+    <target name="test-ECF0984-PRD-006_RequestReplyServices">
+        <antcall target="test-ECF8_RequestReplyServices"/>
+    </target>
+
+
+
+    <!-- Target: test-ECF9_RequestReplyServices. Starts junit, in case of initialization success. -->
+    <target name="test-ECF9_RequestReplyServices">
+        <daemon-invoker cmd="starttest" jtest="ECF9_RequestReplyServices" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF9_RequestReplyServices-junit" />
+    </target>
+
+    <target name="test-ECF9_RequestReplyServices-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF9_RequestReplyServices" outname="ECF9_RequestReplyServices" />
+        <daemon-invoker cmd="stoptest" jtest="ECF9_RequestReplyServices" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF9_CDM_to_OFFERS_DB_SYNC. Starts junit, in case of initialization success. -->
+    <target name="test-ECF9_CDM_to_OFFERS_DB_SYNC">
+        <daemon-invoker cmd="starttest" jtest="ECF9_CDM_to_OFFERS_DB_SYNC"  timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_SYNC-junit" />
+    </target>
+
+    <target name="test-ECF9_CDM_to_OFFERS_DB_SYNC-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF9_CDM_to_OFFERS_DB_SYNC" outname="ECF9_CDM_to_OFFERS_DB_SYNC"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF9_CDM_to_OFFERS_DB_SYNC" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF9_CDM_to_OFFERS_DB_ASYNC. Starts junit, in case of initialization success. -->
+    <target name="test-ECF9_CDM_to_OFFERS_DB_ASYNC">
+        <daemon-invoker cmd="starttest" jtest="ECF9_CDM_to_OFFERS_DB_ASYNC"  timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF9_CDM_to_OFFERS_DB_ASYNC-junit" />
+    </target>
+
+    <target name="test-ECF9_CDM_to_OFFERS_DB_ASYNC-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF9_CDM_to_OFFERS_DB_ASYNC" outname="ECF9_CDM_to_OFFERS_DB_ASYNC"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF9_CDM_to_OFFERS_DB_ASYNC" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF9_OFFERS_DB_to_CDMASYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF9_OFFERS_DB_to_CDMASYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF9_OFFERS_DB_to_CDMASYNCH"  timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF9_OFFERS_DB_to_CDMASYNCH-junit" />
+    </target>
+
+    <target name="test-ECF9_OFFERS_DB_to_CDMASYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF9_OFFERS_DB_to_CDMASYNCH" outname="ECF9_OFFERS_DB_to_CDMASYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF9_OFFERS_DB_to_CDMASYNCH" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF8_RequestReplyServices. Starts junit, in case of initialization success. -->
+    <target name="test-ECF8_RequestReplyServices">
+        <daemon-invoker cmd="starttest" jtest="ECF8_RequestReplyServices" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF8_RequestReplyServices-junit" />
+    </target>
+
+    <target name="test-ECF8_RequestReplyServices-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF8_RequestReplyServices" outname="ECF8_RequestReplyServices" />
+        <daemon-invoker cmd="stoptest" jtest="ECF8_RequestReplyServices" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF7_INPPS2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF7_INPPS2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF7_INPPS2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF7_INPPS2CDM-junit" />
+    </target>
+
+    <target name="test-ECF7_INPPS2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF7_INPPS2CDM" outname="ECF7_INPPS2CDM" />
+        <daemon-invoker cmd="stoptest" jtest="ECF7_INPPS2CDM" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF7_CDM2INPPS_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF7_CDM2INPPS_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF7_CDM2INPPS_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF7_CDM2INPPS_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF7_CDM2INPPS_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF7_CDM2INPPS_SYNCH" outname="ECF7_CDM2INPPS_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF7_CDM2INPPS_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF7_CDM2INPPS. Starts junit, in case of initialization success. -->
+    <target name="test-ECF7_CDM2INPPS">
+        <daemon-invoker cmd="starttest" jtest="ECF7_CDM2INPPS" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF7_CDM2INPPS-junit" />
+    </target>
+
+    <target name="test-ECF7_CDM2INPPS-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF7_CDM2INPPS" outname="ECF7_CDM2INPPS"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF7_CDM2INPPS" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF6_RequestReplyServices. Starts junit, in case of initialization success. -->
+    <target name="test-ECF6_RequestReplyServices">
+        <daemon-invoker cmd="starttest" jtest="ECF6_RequestReplyServices" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF6_RequestReplyServices-junit" />
+    </target>
+
+    <target name="test-ECF6_RequestReplyServices-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF6_RequestReplyServices" outname="ECF6_RequestReplyServices"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF6_RequestReplyServices" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF6_CDM2EBill_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF6_CDM2EBill_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF6_CDM2EBill_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF6_CDM2EBill_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF6_CDM2EBill_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF6_CDM2EBill_SYNCH" outname="ECF6_CDM2EBill_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF6_CDM2EBill_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF5_Clarify2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF5_Clarify2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF5_Clarify2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF5_Clarify2CDM-junit" />
+    </target>
+
+    <target name="test-ECF5_Clarify2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF5_Clarify2CDM" outname="ECF5_Clarify2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF5_Clarify2CDM" timeout="300" />
+    </target>
+
+
+    <!-- Target: test-ECF4_CDM2Clarify_RR. Starts junit, in case of initialization success. -->
+    <target name="test-ECF4_CDM2Clarify_RR">
+        <daemon-invoker cmd="starttest" jtest="ECF4_CDM2Clarify_RR" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF4_CDM2Clarify_RR-junit" />
+    </target>
+
+    <target name="test-ECF4_CDM2Clarify_RR-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF4_CDM2Clarify_RR" outname="ECF4_CDM2Clarify_RR"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF4_CDM2Clarify_RR" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF4_CDM2Clarify_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF4_CDM2Clarify_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF4_CDM2Clarify_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF4_CDM2Clarify_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF4_CDM2Clarify_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF4_CDM2Clarify_SYNCH" outname="ECF4_CDM2Clarify_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF4_CDM2Clarify_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF4_CDM2Clarify_B. Starts junit, in case of initialization success. -->
+    <target name="test-ECF4_CDM2Clarify_B">
+        <daemon-invoker cmd="starttest" jtest="ECF4_CDM2Clarify_B" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF4_CDM2Clarify_B-junit" />
+    </target>
+
+    <target name="test-ECF4_CDM2Clarify_B-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF4_CDM2Clarify_B" outname="ECF4_CDM2Clarify_B"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF4_CDM2Clarify_B" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF4_CDM2Clarify_A. Starts junit, in case of initialization success. -->
+    <target name="test-ECF4_CDM2Clarify_A">
+        <daemon-invoker cmd="starttest" jtest="ECF4_CDM2Clarify_A" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF4_CDM2Clarify_A-junit" />
+    </target>
+
+    <target name="test-ECF4_CDM2Clarify_A-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF4_CDM2Clarify_A" outname="ECF4_CDM2Clarify_A" />
+        <daemon-invoker cmd="stoptest" jtest="ECF4_CDM2Clarify_A" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF4_CDM2Clarify_SIEBEL. Starts junit, in case of initialization success. -->
+    <target name="test-ECF4_CDM2Clarify_SIEBEL">
+        <daemon-invoker cmd="starttest" jtest="ECF4_CDM2Clarify_SIEBEL" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF4_CDM2Clarify_SIEBEL-junit" />
+    </target>
+
+    <target name="test-ECF4_CDM2Clarify_SIEBEL-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF4_CDM2Clarify_SIEBEL" outname="ECF4_CDM2Clarify_SIEBEL" />
+        <daemon-invoker cmd="stoptest" jtest="ECF4_CDM2Clarify_SIEBEL" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF3_CDM2CCR_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF3_CDM2CCR_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF3_CDM2CCR_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF3_CDM2CCR_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF3_CDM2CCR_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF3_CDM2CCR_SYNCH" outname="ECF3_CDM2CCR_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF3_CDM2CCR_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF3_CDM2CCR. Starts junit, in case of initialization success. -->
+    <target name="test-ECF3_CDM2CCR">
+        <daemon-invoker cmd="starttest" jtest="ECF3_CDM2CCR" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF3_CDM2CCR-junit" />
+    </target>
+
+    <target name="test-ECF3_CDM2CCR-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF3_CDM2CCR" outname="ECF3_CDM2CCR"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF3_CDM2CCR" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF3_CCR2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF3_CCR2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF3_CCR2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF3_CCR2CDM-junit" />
+    </target>
+
+    <target name="test-ECF3_CCR2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF3_CCR2CDM" outname="ECF3_CCR2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF3_CCR2CDM" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF2_BSCS2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF2_BSCS2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF2_BSCS2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF2_BSCS2CDM-junit" />
+    </target>
+
+    <target name="test-ECF2_BSCS2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF2_BSCS2CDM" outname="ECF2_BSCS2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF2_BSCS2CDM" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_RoutingLogic_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_RoutingLogic_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF1_RoutingLogic_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_RoutingLogic_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF1_RoutingLogic_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_RoutingLogic_SYNCH" outname="ECF1_RoutingLogic_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_RoutingLogic_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_RoutingLogic_CUG. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_RoutingLogic_CUG">
+        <daemon-invoker cmd="starttest" jtest="ECF1_RoutingLogic_CUG" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_RoutingLogic_CUG-junit" />
+    </target>
+
+    <target name="test-ECF1_RoutingLogic_CUG-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_RoutingLogic_CUG" outname="ECF1_RoutingLogic_CUG"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_RoutingLogic_CUG" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_RoutingLogic. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_RoutingLogic">
+        <daemon-invoker cmd="starttest" jtest="ECF1_RoutingLogic" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_RoutingLogic-junit" />
+    </target>
+
+    <target name="test-ECF1_RoutingLogic-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_RoutingLogic" outname="ECF1_RoutingLogic"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_RoutingLogic" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_JMSRespHandler. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_JMSRespHandler">
+        <daemon-invoker cmd="starttest" jtest="ECF1_JMSRespHandler" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_JMSRespHandler-junit" />
+    </target>
+
+    <target name="test-ECF1_JMSRespHandler-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_JMSRespHandler" outname="ECF1_JMSRespHandler"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_JMSRespHandler" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_InstantLink2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_InstantLink2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF1_InstantLink2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_InstantLink2CDM-junit" />
+    </target>
+
+    <target name="test-ECF1_InstantLink2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_InstantLink2CDM" outname="ECF1_InstantLink2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_InstantLink2CDM" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF1_CDM2MARION. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2MARION">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2MARION" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2MARION-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2MARION-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2MARION" outname="ECF1_CDM2MARION"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2MARION" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF1_CDM2IWD. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2IWD">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2IWD" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2IWD-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2IWD-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2IWD" outname="ECF1_CDM2IWD"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2IWD" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_HPSD2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_HPSD2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF1_HPSD2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_HPSD2CDM-junit" />
+    </target>
+
+    <target name="test-ECF1_HPSD2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_HPSD2CDM" outname="ECF1_HPSD2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_HPSD2CDM" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2InstantLink. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2InstantLink">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2InstantLink" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2InstantLink-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2InstantLink-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2InstantLink" outname="ECF1_CDM2InstantLink"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2InstantLink" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2HPSD. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2HPSD">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2HPSD" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2HPSD-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2HPSD-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2HPSD" outname="ECF1_CDM2HPSD"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2HPSD" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2BSCS_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2BSCS_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2BSCS_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2BSCS_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2BSCS_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2BSCS_SYNCH" outname="ECF1_CDM2BSCS_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2BSCS_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2BSCS. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2BSCS">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2BSCS" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2BSCS-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2BSCS-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2BSCS" outname="ECF1_CDM2BSCS"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2BSCS" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2AM_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2AM_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2AM_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2AM_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2AM_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2AM_SYNCH" outname="ECF1_CDM2AM_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2AM_SYNCH" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2Loyalty_SYNCH. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2Loyalty_SYNCH">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2Loyalty_SYNCH" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2Loyalty_SYNCH-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2Loyalty_SYNCH-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2Loyalty_SYNCH" outname="ECF1_CDM2Loyalty_SYNCH"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2Loyalty_SYNCH" timeout="10000" />
+    </target>
+
+    <!-- Target: test-ECF1_EURE2CDM. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_EURE2CDM">
+        <daemon-invoker cmd="starttest" jtest="ECF1_EURE2CDM" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_EURE2CDM-junit" />
+    </target>
+
+    <target name="test-ECF1_EURE2CDM-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_EURE2CDM" outname="ECF1_EURE2CDM"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_EURE2CDM" timeout="10000" />
+    </target>
+
+
+    <!-- Target: test-ECF1_CDM2EURE. Starts junit, in case of initialization success. -->
+    <target name="test-ECF1_CDM2EURE">
+        <daemon-invoker cmd="starttest" jtest="ECF1_CDM2EURE" timeout="10000"/>
+        <condition property="junit.daemon.successStart">
+            <equals arg1="${junit.invoker.result}" arg2="0" />
+        </condition>
+        <antcall target="test-ECF1_CDM2EURE-junit" />
+    </target>
+
+    <target name="test-ECF1_CDM2EURE-junit" if="junit.daemon.successStart">
+        <junit-bw testname="com.logica.eai.test.bw.tmsk.ECF1_CDM2EURE" outname="ECF1_CDM2EURE"/>
+        <daemon-invoker cmd="stoptest" jtest="ECF1_CDM2EURE" timeout="10000" />
+    </target>
+
+</project>
