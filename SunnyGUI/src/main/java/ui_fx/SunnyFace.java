@@ -25,6 +25,7 @@ public class SunnyFace extends Application{
         stage.setY(Screen.getPrimary().getVisualBounds().getMaxY()-100);
         stage.show();
         System.out.println("Face \t\t\t\t load successful: "+ true);
+        TestMove.returnInstance(new SunnyFace());
     }
 
     private void init(Stage mainFrame) {
@@ -49,7 +50,6 @@ public class SunnyFace extends Application{
         pb[2].setLayoutX(40);
         pb[2].setLayoutY(50);
 
-
         root.getChildren().addAll(pb);
         Scene scene = new Scene(root, 90, 100);
         scene.setFill(Color.rgb(0, 0, 0));
@@ -63,6 +63,7 @@ public class SunnyFace extends Application{
     public static SunnyFace show()
     {
         SunnyFace.launch();
+        System.out.println("never get here");
         return instance = new SunnyFace();
     }
 
