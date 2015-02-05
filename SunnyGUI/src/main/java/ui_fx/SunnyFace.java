@@ -24,32 +24,32 @@ public class SunnyFace extends Application{
         stage.setX(Screen.getPrimary().getVisualBounds().getMaxX()-90);
         stage.setY(Screen.getPrimary().getVisualBounds().getMaxY()-100);
         stage.show();
+        stage.setAlwaysOnTop(true);
         System.out.println("Face \t\t\t\t load successful: "+ true);
-        TestMove.returnInstance(new SunnyFace());
+        TestMove.returnInstance(this);
     }
 
+
     private void init(Stage mainFrame) {
-        mainFrame.setResizable(false);
+//        mainFrame.setResizable(false);
         mainFrame.setTitle("Sunny");
 
-        Group root = new Group();
-
-        pb[0].setRotate(90);
+        pb[0].setRotate(270);
         pb[0].setPrefWidth(50);
         pb[0].setLayoutX(10);
         pb[0].setLayoutY(50);
 
-        pb[1].setRotate(90);
+        pb[1].setRotate(270);
         pb[1].setPrefWidth(70);
         pb[1].setLayoutX(15);
         pb[1].setLayoutY(50);
-        pb[1].setProgress(0.5);
 
-        pb[2].setRotate(90);
+        pb[2].setRotate(270);
         pb[2].setPrefWidth(50);
         pb[2].setLayoutX(40);
         pb[2].setLayoutY(50);
 
+        Group root = new Group();
         root.getChildren().addAll(pb);
         Scene scene = new Scene(root, 90, 100);
         scene.setFill(Color.rgb(0, 0, 0));
@@ -60,14 +60,8 @@ public class SunnyFace extends Application{
 
     static SunnyFace instance;
 
-    public static SunnyFace show()
+    public static void show()
     {
         SunnyFace.launch();
-        System.out.println("never get here");
-        return instance = new SunnyFace();
-    }
-
-    public static SunnyFace getInstance(){
-        return instance;
     }
 }
