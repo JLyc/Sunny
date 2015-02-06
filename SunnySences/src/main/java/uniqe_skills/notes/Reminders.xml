@@ -1,0 +1,10 @@
+<root>
+    <note id="1">
+        <url>http://docs.oracle.com/javase/tutorial/sound/sampled-overview.html</url>
+        <description>java sound project</description>
+    </note>
+    <note id="2">
+        <url>http://code.makery.ch/blog/javafx-8-dialogs/</url>
+        <description>Java fx dialogs tutorial</description>
+    </note>
+</root>

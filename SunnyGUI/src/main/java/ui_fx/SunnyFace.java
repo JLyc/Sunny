@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,16 +23,17 @@ public class SunnyFace extends Application{
         stage.initStyle(stageStyle);
 
         stage.setX(Screen.getPrimary().getVisualBounds().getMaxX()-90);
-        stage.setY(Screen.getPrimary().getVisualBounds().getMaxY()-100);
+        stage.setY(Screen.getPrimary().getVisualBounds().getMaxY() - 100);
+        stage.getIcons().add(new Image(SunnyFace.class.getClassLoader().getResourceAsStream("sunny.png")));
         stage.show();
         stage.setAlwaysOnTop(true);
         System.out.println("Face \t\t\t\t load successful: "+ true);
-        TestMove.returnInstance(this);
+        FaceThread.getInstance().returnInstance(this);
     }
 
 
     private void init(Stage mainFrame) {
-//        mainFrame.setResizable(false);
+        mainFrame.setResizable(false);
         mainFrame.setTitle("Sunny");
 
         pb[0].setRotate(270);

@@ -39,5 +39,49 @@
                 <lyc:steps lyc:id="3" lyc:time="15">Put rice into boiled water for 15 min</lyc:steps>
             </lyc:workflow>
         </lyc:reciepe>
+        <lyc:reciepe lyc:name="pancace">
+            <lyc:ingrediencs>
+                <lyc:ingredienc>
+                    <lyc:name>milk</lyc:name>
+                    <lyc:amount>one and quoter cup</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>flour</lyc:name>
+                    <lyc:amount>one and half</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>baking pouder</lyc:name>
+                    <lyc:amount>three and half tea spoon</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>salt</lyc:name>
+                    <lyc:amount>tea spoon</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>egg</lyc:name>
+                    <lyc:amount>1</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>sugar</lyc:name>
+                    <lyc:amount>spoon</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>melted butter</lyc:name>
+                    <lyc:amount>tree table spoon</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>whip cream</lyc:name>
+                    <lyc:amount>any</lyc:amount>
+                </lyc:ingredienc>
+                <lyc:ingredienc>
+                    <lyc:name>pancake syrup</lyc:name>
+                    <lyc:amount>any</lyc:amount>
+                </lyc:ingredienc>
+            </lyc:ingrediencs>
+            <lyc:workflow>
+                <lyc:steps lyc:id="1" lyc:time="5">Mix in bowl flower, baking, powder, salt, sugar, milk and egg and melt butter mix until smooth butter</lyc:steps>
+                <lyc:steps lyc:id="2" lyc:time="15">Heat pan with oil or butter on medium heat put mixture wait until see small bubbles and nice browning at the edges</lyc:steps>
+            </lyc:workflow>
+        </lyc:reciepe>
     </lyc:reciepes>
 </lyc:root>

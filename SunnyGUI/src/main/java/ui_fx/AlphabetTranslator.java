@@ -19,7 +19,7 @@ public class AlphabetTranslator implements Runnable {
 
     public AlphabetTranslator(SunnyFace instanceOfSunny, String sentence) {
         this.instanceOfSunny = instanceOfSunny;
-        this.sentence = sentence.toLowerCase();
+        this.sentence = sentence.replace("\\s","").toLowerCase();
     }
 
     private static Map<String, Color> loadAlphabet() {
@@ -69,19 +69,21 @@ public class AlphabetTranslator implements Runnable {
             Platform.runLater(() -> instanceOfSunny.pb[1].setProgress((double)finalColorCode.getRed() / 255+0.2d));
             Platform.runLater(() -> instanceOfSunny.pb[2].setProgress((double)finalColorCode.getGreen() / 255+0.2d));
 
-                Thread.sleep(100);
+                Thread.sleep(75);
                 Platform.runLater(() -> instanceOfSunny.pb[0].setProgress(0.4d));
                 Platform.runLater(() -> instanceOfSunny.pb[1].setProgress(0.5d));
                 Platform.runLater(() -> instanceOfSunny.pb[2].setProgress(0.4d));
-                Thread.sleep(50);
+                Thread.sleep(15);
             }
 
+
+
+        } catch (InterruptedException e) {
+
+        } finally {
             Platform.runLater(() -> instanceOfSunny.pb[0].setProgress(-1.0d));
             Platform.runLater(() -> instanceOfSunny.pb[1].setProgress(-1.0d));
             Platform.runLater(() -> instanceOfSunny.pb[2].setProgress(-1.0d));
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
