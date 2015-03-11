@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><lyc:root xmlns:lyc="JLyc.Development@gmail.com">
+    <lyc:row lyc:condition="0" lyc:id="0">
+        <lyc:word>public &lt;commands&gt; = </lyc:word>
+    </lyc:row>
+    <lyc:row lyc:condition="1" lyc:id="1">
+        <lyc:word>sunny</lyc:word>
+    </lyc:row>
+    <lyc:row lyc:condition="1" lyc:id="2">
+        <lyc:word>run</lyc:word>
+        <lyc:word>show</lyc:word>
+        <lyc:word>start</lyc:word>
+        <lyc:word>close</lyc:word>
+        <lyc:word>end</lyc:word>
+        <lyc:word>turn off</lyc:word>
+        <lyc:word>sleep</lyc:word>
+        <lyc:word>volume</lyc:word>
+        <lyc:word>mute</lyc:word>
+        <lyc:word>un mute</lyc:word>
+    </lyc:row>
+    <lyc:row lyc:condition="1" lyc:id="3">
+        <lyc:word>fire fox</lyc:word>
+        <lyc:word>google chrome</lyc:word>
+        <lyc:word>email</lyc:word>
+        <lyc:word>face book</lyc:word>
+        <lyc:word>team speak</lyc:word>
+        <lyc:word>computer</lyc:word>
+        <lyc:word>up</lyc:word>
+        <lyc:word>down</lyc:word>
+        <lyc:word>eclipse</lyc:word>
+        <lyc:word>note pad</lyc:word>
+    </lyc:row>
+</lyc:root>

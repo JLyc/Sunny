@@ -1,0 +1,101 @@
+<project name="bw-test" default="default" basedir=".">
+    <property environment="env"/>
+    <!-- Properties: common. -->
+    <property file="${basedir}/lib.properties" prefix="lib"/>
+    <property name="Tibco_Home" location="${env.TIBCO_HOME}"/>
+    <property name="out" value="${basedir}/.class"/>
+    <property name="src" value="${basedir}/src"/>
+    <!--Pridat oznacenie bude sa menit -->
+    <property name="lib" value="D:/IntegrationSourceCodes/JUnit/BWCGIFramework/lib"/>
+
+    <!-- Classpath. -->
+    <path id="project.classpath">
+        <filelist dir="${lib}">
+            <file name="${lib.jar.ApacheCommonsLog}"/>
+            <file name="${lib.jar.ApacheCommonsPool}"/>
+            <file name="${lib.jar.ApacheCommonsDBCP}"/>
+            <file name="${lib.jar.Junit4}"/>
+            <file name="${lib.jar.XmlUnit}"/>
+            <file name="${lib.jar.Hamcrest}"/>
+            <file name="${lib.jar.Dom4j}"/>
+            <file name="${lib.jar.Jetty}"/>
+        </filelist>
+        <filelist dir="${Tibco_Home}" id="tibcoLibraries">
+            <file name="${lib.jar.Framework}"/>
+            <file name="${lib.jar.Jms}"/>
+            <file name="${lib.jar.TibcoHawk.agent}"/>
+            <file name="${lib.jar.TibcoHawk.ami}"/>
+            <file name="${lib.jar.TibcoHawk.console}"/>
+            <file name="${lib.jar.TibcoHawk.talon}"/>
+            <file name="${lib.jar.TibcoHawk.util}"/>
+            <file name="${lib.jar.TibcoRv}"/>
+            <file name="${lib.jar.TibcoJms.tibjms}"/>
+        </filelist>
+    </path>
+
+    <target name="start SalesManagement">
+        <parallel>
+            <daemons>
+            <antcall target="daemonRun"/>
+            </daemons>
+            <daemon-invoker cmd="starttest" jtest="SalesManagement"/>
+        </parallel>
+        <echo>Doooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo echo</echo>
+    </target>
+
+    <target name="stop SalesManagement">
+        <parallel>
+            <antcall target="daemonRun"/>
+            <daemon-invoker cmd="stoptest" jtest="SalesManagement"/>
+        </parallel>
+    </target>
+
+    <target name="daemonRun" description="run Daemon">
+        <java classname="com.logica.eai.test.daemon.JunitDaemon" fork="true">
+            <classpath>
+                <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                <pathelement location="${Tibco_Home}\tpcl\5.8\lib\lcmgTestFw.jar"/>
+                <path refid="project.classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <macrodef name="daemon-invoker">
+        <attribute name="cmd" default="NOT SET" />
+        <attribute name="jtest" default="NOT SET" />
+        <attribute name="timeout" default="300" />
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.invoke.JUnitDaemonInvoker" fork="true" failonerror="false" resultproperty="junit.invoker.result">
+                <classpath>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib\lcmgTestFw.jar"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+                <arg line="-command @{cmd} -jtest @{jtest} -timeout @{timeout}"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="run_junit">
+        <attribute name="TestName"/>
+        <attribute name="ResultName"/>
+        <sequential>
+            <junit printsummary="yes" haltonfailure="yes">
+                <classpath path="project.classpath"/>
+                <classpath>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                    <pathelement location="${basedir}\UnitTests.jar"/>
+                </classpath>
+                <test name="@{TestName}"
+                      haltonfailure="no" outfile="@{ResultName}">
+                    <formatter type="plain"/>
+                    <formatter type="xml"/>
+                </test>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <target name="default">
+        <echo>Specify target you want to run</echo>
+    </target>
+</project>

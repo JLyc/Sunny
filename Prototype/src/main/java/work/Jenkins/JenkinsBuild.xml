@@ -1,0 +1,271 @@
+<project name="Jenkins_automated_ant" default="default">
+    <!-- = = = = = = = = = = = = = = = = =
+    ant contribution maping dynamic properties
+    = = = = = = = = = = = = = = = = = -->
+
+    <!-- = = = = = = = = = = = = = = = = =
+    properties
+    = = = = = = = = = = = = = = = = = -->
+    <property environment="env"/>
+    <property environment="tra"/>
+    <property file="${basedir}/variables.properties" prefix="var"/>
+    <property file="${basedir}/lib.properties" prefix="lib"/>
+
+    <property name="buildear.cmd" value="${var.tra.bin}/buildear"/>
+    <property name="appmanage.cmd" value="${var.tra.bin}/AppManage"/>
+    <property name="credential.file" value="${var.env.WORKSPACE}/${var.bw.cred.file}"/>
+
+    <property name="out" value="${pathToJenkins}/${junit-dir}/build"/>
+    <property name="src" value="${pathToJenkins}/${junit-dir}/src"/>
+    <!--Pridat oznacenie bude sa menit-->
+    <property name="lib" value="${pathToJenkins}/${var.libraries}"/>
+
+
+
+    <!-- Classpath. -->
+    <path id="project.classpath">
+        <filelist dir="${lib}">
+            <file name="${lib.jar.ApacheCommonsLog}"/>
+            <file name="${lib.jar.ApacheCommonsPool}"/>
+            <file name="${lib.jar.ApacheCommonsDBCP}"/>
+            <file name="${lib.jar.Junit4}"/>
+            <file name="${lib.jar.XmlUnit}"/>
+            <file name="${lib.jar.Hamcrest}"/>
+            <file name="${lib.jar.Dom4j}"/>
+            <file name="${lib.jar.Jetty}"/>
+        </filelist>
+        <filelist dir="${var.tibco.home}" id="tibcoLibraries">
+            <file name="${lib.jar.Framework}"/>
+            <file name="${lib.jar.Jms}"/>
+            <file name="${lib.jar.TibcoHawk.agent}"/>
+            <file name="${lib.jar.TibcoHawk.ami}"/>
+            <file name="${lib.jar.TibcoHawk.console}"/>
+            <file name="${lib.jar.TibcoHawk.talon}"/>
+            <file name="${lib.jar.TibcoHawk.util}"/>
+            <file name="${lib.jar.TibcoRv}"/>
+            <file name="${lib.jar.TibcoJms.tibjms}"/>
+        </filelist>
+    </path>
+
+
+    <!--======================================================================================
+    Junit java code operations
+    ========================================================================================-->
+    <!-- Target: prepare. -->
+    <target name="prepareCode">
+        <echo>${out} ${src}</echo>
+        <delete dir="${out}"/>
+        <mkdir dir="${out}"/>
+    </target>
+
+    <!-- Target: compile. Compile framework. -->
+    <target name="compileTests" depends="prepareCode">
+        <javac destdir="${out}">
+            <src path="${src}"/>
+            <classpath path="${toString:project.classpath}"/>
+        </javac>
+    </target>
+
+    <!-- Target: buildTestJar -->
+    <target name="buildTests" depends="compileTests">
+        <jar jarfile="${basedir}/${var.junit-jar}" basedir="${out}">
+            <fileset dir="${src}">
+                <include name="**/*.xml" />
+            </fileset>
+        </jar>
+    </target>
+
+    <!-- Target: clean -->
+    <target name="clean" depends="buildTests">
+        <delete dir="${out}"/>
+    </target>
+
+    <!-- Target: copyLibs -->
+    <target name="copyLibs" depends="clean">
+        <delete dir="${basedir}/lib"/>
+        <mkdir dir="${basedir}/lib"/>
+        <copy todir="${basedir}/lib">
+            <path refid="project.classpath"/>
+        </copy>
+    </target>
+
+    <macrodef name="run_junit">
+        <attribute name="TestName"/>
+        <attribute name="ResultName"/>
+        <sequential>
+            <junit printsummary="yes" haltonfailure="yes">
+                <classpath path="project.classpath"/>
+                <classpath>
+                    <pathelement location="${var.tpcl.libExt}"/>
+                    <pathelement location="${junit-dir}\${var.junit-jar}"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+                <test name="@{TestName}" haltonfailure="yes" todir="${jenkins_location}\${app-name}\build\" outfile="@{ResultName}">
+                    <formatter type="xml"/>
+                </test>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <target name="start-daemon">
+        <parallel>
+            <daemons>
+                <daemonRun/>
+            </daemons>
+        </parallel>
+    </target>
+
+    <macrodef name="daemonRun">
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.JunitDaemon" fork="true">
+                <classpath>
+                    <pathelement location="${var.tpcl.libExt}"/>
+                    <pathelement location="${var.tpcl.libExt}\${var.junit-framework}"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="daemon-invoker">
+        <attribute name="cmd" default="NOT SET" />
+        <attribute name="jtest" default="NOT SET" />
+        <attribute name="timeout" default="300" />
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.invoke.JUnitDaemonInvoker" fork="true" failonerror="false" resultproperty="junit.invoker.result">
+                <classpath>
+                    <pathelement location="${var.tpcl.libExt}"/>
+                    <pathelement location="${var.tpcl.libExt}\${var.junit-framework}"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+                <arg line="-command @{cmd} -jtest @{jtest} -timeout @{timeout}"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+      macrodef: app-delete
+      Deletes specified application from Tibco administrator
+     = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-delete">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred-path" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deleting application @{appname}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${var.tra.bin}">
+                <arg value="-delete"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="@{domain}"/>
+                <arg value="-cred"/>
+                <arg value="@{cred-path}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+         macrodef: app-export-admin
+         Exports applicaiton configuration from Tibco Administrator.
+        = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-export">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred-path" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Exporting application @{appname}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${var.tra.bin}">
+                <arg value="-export"/>
+                <arg value="-out"/>
+                <arg value="@{config}"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="@{domain}"/>
+                <arg value="-cred"/>
+                <arg value="@{cred-path}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+        macrodef: build-ear
+        Macro which builds specified ear according to variables. This is intended to be
+        used from hudson environment.
+        -ear  path to file .archive
+        -o    destination path for new .ear
+        -p    project folder
+    = = = = = = = = = = = = = = = = = -->
+    <macrodef name="build-ear">
+        <attribute name="archive"/>
+        <attribute name="target"/>
+        <attribute name="location"/>
+        <sequential>
+            <exec executable="${buildear.cmd}" dir="${var.tra.bin}">
+                <arg value="-s"/>
+                <arg value="-x"/>
+                <arg value="-ear"/>
+                <arg value="@{archive}"/>
+                <arg value="-o"/>
+                <arg value="@{target}"/>
+                <arg value="-p"/>
+                <arg value="@{location}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+      macrodef: app-deploy
+      Deploys specified ear in Tibco administrator.
+     = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-deploy">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="ear" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred-path" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deploying application: @{appname}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${var.tra.bin}">
+                <arg value="-deploy"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-ear"/>
+                <arg value="@{ear}"/>
+                <arg value="-deployconfig"/>
+                <arg value="@{config}"/>
+                <arg value="-domain"/>
+                <arg value="${var.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+                <arg value="-nostart"/>
+
+            </exec>
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <target name="default">
+        <description>default dummy</description>
+    </target>
+</project>

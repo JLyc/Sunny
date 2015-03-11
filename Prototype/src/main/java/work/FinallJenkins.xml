@@ -1,0 +1,360 @@
+<project name="Jenkins_automated_ant" default="default">
+    <!-- = = = = = = = = = = = = = = = = =
+    properties
+    = = = = = = = = = = = = = = = = = -->
+    <property environment="env"/>
+    <property file="something.properties" prefix="tmprop"/>
+
+    <property name="buildear.cmd" value="${tmprop.tra.bin}/buildear"/>
+    <property name="buildlibrary.cmd" value="${tmprop.designer.bin}/buildlibrary"/>
+    <property name="appmanage.cmd" value="${tmprop.tra.bin}/AppManage"/>
+    <property name="credential.file" value="${tmprop.env.WORKSPACE}/${tmprop.bw.cred.file}"/>
+
+
+    <property name="app-name" value="SalesManagement"/>
+    <property name="ear-path" value="D:\IntegrationSourceCodes\SalesManagement\Build\SalesManagement.ear"/>
+    <property name="config-path" value="D:\IntegrationSourceCodes\SalesManagement\Build\AppConfig.xml"/>
+    <property name="project-path" value="D:\IntegrationSourceCodes\SalesManagement\BWProjects\SalesManagement"/>
+    <property name="archive-location" value="/SalesManagement.archive"/>
+    <property name="domain" value="OSK_DEV"/>
+    <property name="cred-path" value="d:/tibco/tra/domain/OSK_DEV/OSK_DEV.cred"/>
+
+    <property environment="env"/>
+    <!-- Properties: common. -->
+    <property file="${basedir}/lib.properties" prefix="lib"/>
+    <property name="Tibco_Home" location="${env.TIBCO_HOME}"/>
+    <property name="out" value="${basedir}/build"/>
+    <property name="src" value="D:\IntegrationSourceCodes\JUnit\OSKJUnitTests/src"/>
+    <!--Pridat oznacenie bude sa menit -->
+    <property name="lib" value="D:/IntegrationSourceCodes/JUnit/BWCGIFramework/lib"/>
+
+    <!-- Classpath. -->
+    <path id="project.classpath">
+        <filelist dir="${lib}">
+            <file name="${lib.jar.ApacheCommonsLog}"/>
+            <file name="${lib.jar.ApacheCommonsPool}"/>
+            <file name="${lib.jar.ApacheCommonsDBCP}"/>
+            <file name="${lib.jar.Junit4}"/>
+            <file name="${lib.jar.XmlUnit}"/>
+            <file name="${lib.jar.Hamcrest}"/>
+            <file name="${lib.jar.Dom4j}"/>
+            <file name="${lib.jar.Jetty}"/>
+        </filelist>
+        <filelist dir="${Tibco_Home}" id="tibcoLibraries">
+            <file name="${lib.jar.Framework}"/>
+            <file name="${lib.jar.Jms}"/>
+            <file name="${lib.jar.TibcoHawk.agent}"/>
+            <file name="${lib.jar.TibcoHawk.ami}"/>
+            <file name="${lib.jar.TibcoHawk.console}"/>
+            <file name="${lib.jar.TibcoHawk.talon}"/>
+            <file name="${lib.jar.TibcoHawk.util}"/>
+            <file name="${lib.jar.TibcoRv}"/>
+            <file name="${lib.jar.TibcoJms.tibjms}"/>
+        </filelist>
+    </path>
+
+    <target name="testsuit">
+
+    </target>
+
+    <target name="Deploy_Sales_Management">
+        <Deploy-New-App app-name="${app-name}" ear-path="${ear-path}" config-path="${config-path}" project-path="${project-path}" archive-location="${archive-location}" domain="${domain}" cred-path="${cred-path}"/>
+    </target>
+
+    <target name="ReDeploy_Sales_Management">
+        <Re-Deploy-App  app-name="${app-name}" ear-path="${ear-path}" config-path="${config-path}" project-path="${project-path}" archive-location="${archive-location}" domain="${domain}" cred-path="${cred-path}"/>
+    </target>
+
+    <target name="UnDeploy_Sales_Management">
+        <UnDeploy-App  app-name="${app-name}" ear-path="${ear-path}" config-path="${config-path}" project-path="${project-path}" archive-location="${archive-location}" domain="${domain}" cred-path="${cred-path}"/>
+    </target>
+
+    <target name="Get_App_Config_Sales_Management">
+        <Get-Config-For-App  app-name="${app-name}" ear-path="${ear-path}" config-path="${config-path}" project-path="${project-path}" archive-location="${archive-location}" domain="${domain}" cred-path="${cred-path}"/>
+    </target>
+
+    <macrodef name="UnDeploy-App">
+        <attribute name="app-name"/>
+        <attribute name="ear-path"/>
+        <attribute name="config-path"/>
+        <attribute name="project-path"/>
+        <attribute name="archive-location"/>
+        <attribute name="domain"/>
+        <attribute name="cred-path"/>
+        <sequential>
+            <echo>@{cred-path}</echo>
+            <app-delete appname="@{app-name}" domain="@{domain}" cred="@{cred-path}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="Deploy-New-App">
+        <!--should be properiest file :(-->
+        <attribute name="app-name"/>
+        <attribute name="ear-path"/>
+        <attribute name="config-path"/>
+        <attribute name="project-path"/>
+        <attribute name="archive-location"/>
+        <attribute name="domain"/>
+        <attribute name="cred-path"/>
+        <sequential>
+            <echo>app-name="${app-name}" ear-path="${ear-path}" config-path="${config-path}" project-path="${project-path}" archive-location="${archive-location}" domain="${domain}" cred-path="${credential.file}"</echo>
+            <build-ear archive="@{archive-location}" target="@{ear-path}" location="@{project-path}"/>
+            <app-deploy appname="@{app-name}" ear="@{ear-path}" config="@{config-path}" domain="@{domain}" cred-path="@{cred-path}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="Re-Deploy-App">
+        <attribute name="app-name"/>
+        <attribute name="ear-path"/>
+        <attribute name="config-path"/>
+        <attribute name="project-path"/>
+        <attribute name="archive-location"/>
+        <attribute name="domain"/>
+        <attribute name="cred-path"/>
+        <sequential>
+            <app-export-admin appname="@{app-name}" config="@{config-path}" domain="@{domain}" cred="@{cred-path}"/>
+            <app-delete appname="@{app-name}" domain="@{domain}" cred="@{cred-path"/>
+            <app-deploy appname="@{app-name}" ear="@{ear-path}" config="@{config-path}" domain="@{domain}" cred-path="@{cred-path}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="Get-Config-For-App">
+        <attribute name="app-name"/>
+        <attribute name="ear-path"/>
+        <attribute name="config-path"/>
+        <attribute name="project-path"/>
+        <attribute name="archive-location"/>
+        <attribute name="domain"/>
+        <attribute name="cred-path"/>
+        <sequential>
+            <app-export-admin appname="@{app-name}" config="@{config-path}" domain="@{domain}" cred="@{cred-path}"/>
+        </sequential>
+    </macrodef>
+
+    <!-- Target: prepare. -->
+    <target name="prepareCode">
+        <delete dir="${out}"/>
+        <mkdir dir="${out}"/>
+        <delete dir="${basedir}\lib"/>
+    </target>
+
+    <!-- Target: compile. Compile framework. -->
+    <target name="compileTests" depends="prepareCode">
+        <javac destdir="${out}">
+            <src path="${src}"/>
+            <classpath path="${toString:project.classpath}"/>
+        </javac>
+    </target>
+
+    <!-- Target: buildTestJar -->
+    <target name="buildTests" depends="compileTests">
+        <jar jarfile="D:/UnitTests.jar" basedir="${out}">
+            <fileset dir="${src}">
+                <include name="**/*.xml" />
+            </fileset>
+        </jar>
+    </target>
+    <!-- Target: clean -->
+    <target name="clean" depends="buildTests">
+        <delete dir="${out}"/>
+    </target>
+
+    <!-- Target: copyLibs -->
+    <target name="copyLibs" depends="clean">
+        <mkdir dir="${basedir}/lib"/>
+        <copy todir="${basedir}/lib">
+            <path refid="project.classpath">
+            </path>
+        </copy>
+    </target>
+
+    <target name="start SalesManagement">
+        <parallel>
+            <daemons>
+                <antcall target="daemonRun"/>
+            </daemons>
+        </parallel>
+        <daemon-invoker cmd="starttest" jtest="SalesManagement"/>
+        <run_junit TestName="com.logica.eai.test.bw.osk.managecustomercontract.manageframeworkagreement.searchframeworkagreements.Search" ResultName="iWantResult"/>
+    </target>
+
+    <target name="stop SalesManagement">
+        <parallel>
+            <daemons>
+                <antcall target="daemonRun"/>
+            </daemons>
+        </parallel>
+        <daemon-invoker cmd="stoptest" jtest="SalesManagement"/>
+    </target>
+
+    <macrodef name="run_junit">
+        <attribute name="TestName"/>
+        <attribute name="ResultName"/>
+        <sequential>
+            <junit printsummary="yes" haltonfailure="yes">
+                <classpath path="project.classpath"/>
+                <classpath>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                    <pathelement location="D:\UnitTests.jar"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+                <test name="@{TestName}"
+                      haltonfailure="no" outfile="@{ResultName}">
+                    <formatter type="plain"/>
+                    <formatter type="xml"/>
+                </test>
+            </junit>
+        </sequential>
+    </macrodef>
+
+    <target name="daemonRun" description="run Daemon">
+        <java classname="com.logica.eai.test.daemon.JunitDaemon" fork="true">
+            <classpath>
+                <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                <pathelement location="${Tibco_Home}\tpcl\5.8\lib\lcmgTestFw.jar"/>
+                <path refid="project.classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <macrodef name="daemon-invoker">
+        <attribute name="cmd" default="NOT SET" />
+        <attribute name="jtest" default="NOT SET" />
+        <attribute name="timeout" default="300" />
+        <sequential>
+            <java classname="com.logica.eai.test.daemon.invoke.JUnitDaemonInvoker" fork="true" failonerror="false" resultproperty="junit.invoker.result">
+                <classpath>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib"/>
+                    <pathelement location="${Tibco_Home}\tpcl\5.8\lib\lcmgTestFw.jar"/>
+                    <path refid="project.classpath"/>
+                </classpath>
+                <arg line="-command @{cmd} -jtest @{jtest} -timeout @{timeout}"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+      macrodef: app-delete
+      Deletes specified application from Tibco administrator
+     = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-delete">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deleting application @{appname} @{cred}</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-delete"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="SalesManagement"/>
+                <arg value="-domain"/>
+                <arg value="OSK_DEV"/>
+                <arg value="-cred"/>
+                <arg value="@{cred}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+         macrodef: app-export-admin
+         Exports applicaiton configuration from Tibco Administrator.
+        = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-export-admin">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Exporting application @{appname}/</echo>
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-export"/>
+                <arg value="-out"/>
+                <arg value="@{config}"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-domain"/>
+                <arg value="@{domain}"/>
+                <arg value="-cred"/>
+                <arg value="@{cred}"/>
+            </exec>
+
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+        macrodef: build-ear
+        Macro which builds specified ear according to variables. This is intended to be
+        used from hudson environment.
+        -ear  path to file .archive
+        -o    destination path for new .ear
+        -p    project folder
+    = = = = = = = = = = = = = = = = = -->
+    <macrodef name="build-ear">
+        <attribute name="archive"/>
+        <attribute name="target"/>
+        <attribute name="location"/>
+        <sequential>
+            <exec executable="${buildear.cmd}" dir="${tmprop.tra.bin}">
+                <arg value="-s"/>
+                <arg value="-x"/>
+                <arg value="-ear"/>
+                <arg value="@{archive}"/>
+                <arg value="-o"/>
+                <arg value="@{target}"/>
+                <arg value="-p"/>
+                <arg value="@{location}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <!-- = = = = = = = = = = = = = = = = =
+      macrodef: app-deploy
+      Deploys specified ear in Tibco administrator.
+     = = = = = = = = = = = = = = = = = -->
+    <macrodef name="app-deploy">
+        <attribute name="appname" default="NOT SET"/>
+        <attribute name="ear" default="NOT SET"/>
+        <attribute name="config" default="NOT SET"/>
+        <attribute name="domain" default="NOT SET"/>
+        <attribute name="cred-path" default="NOT SET"/>
+        <sequential>
+            <echo>[AppManage] Deploying application: @{ear}</echo>
+
+            <exec executable="${appmanage.cmd}" resultproperty="appmanage.out" dir="${tmprop.tra.bin}">
+                <arg value="-deploy"/>
+                <arg value="-force"/>
+                <arg value="-app"/>
+                <arg value="@{appname}"/>
+                <arg value="-ear"/>
+                <arg value="@{ear}"/>
+                <arg value="-deployconfig"/>
+                <arg value="@{config}"/>
+                <arg value="-domain"/>
+                <arg value="${tmprop.bw.domain}"/>
+                <arg value="-cred"/>
+                <arg value="${credential.file}"/>
+            </exec>
+            <condition property="appmanage.err">
+                <not>
+                    <equals arg1="${appmanage.out}" arg2="0"/>
+                </not>
+            </condition>
+        </sequential>
+    </macrodef>
+
+    <target name="default">
+        <description>empty end</description>
+    </target>
+</project>
