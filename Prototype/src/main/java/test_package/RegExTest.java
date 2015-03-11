@@ -5,18 +5,21 @@ public class RegExTest
 {
     private static String[][] word = {
             {"sunny run fire fox"},
-            {"nieco.txt"}
+            {"nieco.txt"},
+            {"D:\\integrated\\sourcde\\mfg.ear"}
     };
 
     private static String[][] regex = {
             {""},
             {".*\\.txt"},
-            {".*\\..{3}"}
+            {".*\\..{3}"},
+            {"\\b?\\.ear"}
     };
 
 	public static void main(String arg[])
 	{
-        System.out.println(word[1][0].matches(regex[2][0]));
+        System.out.println(word[2][0].matches(regex[3][0]));
+        System.out.println(word[2][0].replaceAll(regex[3][0],"blabla"));
         //		String slovo = "sunny run fire fox";
 		//		String test = "unhappy";
 		//		slovo = test.substring(2);

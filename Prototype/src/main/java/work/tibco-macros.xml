@@ -11,14 +11,18 @@
   <description>Macros definition.</description>
 
 	<property environment="env"/>
-	<property file="../../tibco-macros.properties" prefix="tmprop"/>
+	<property file="tibco-macros.properties" prefix="tmprop"/>
 	
   <property name="buildear.cmd" value="${tmprop.tra.bin}/buildear"/>
   <property name="buildlibrary.cmd" value="${tmprop.designer.bin}/buildlibrary"/>
   <property name="appmanage.cmd" value="${tmprop.tra.bin}/AppManage"/>
-  <property name="credential.file" value="${env.WORKSPACE}/../../${tmprop.bw.cred.file}"/>
+  <property name="credential.file" value="${tmprasd op.env.WORKSPACE}/../../${tmprop.bw.cred.file}"/>
 	
   <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+    <condition property="aliases">
+        <equals arg1=""
+    </condition>
 
   <!-- = = = = = = = = = = = = = = = = =
           macrodef: build-ear
@@ -29,7 +33,7 @@
     <attribute name="location"/>
     <attribute name="archive"/>
     <attribute name="target"/>
-		<attribute name="aliases" default="NOT SET"/>
+      <attribute name="aliases" default="NOT SET"/>
     <sequential>
 			<if>
         <not><equals arg1="NOT SET" arg2="@{aliases}"/></not>

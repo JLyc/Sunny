@@ -90,7 +90,6 @@ public class AudioCapture02 extends JFrame{
         captureBtn.setEnabled(true);
         stopBtn.setEnabled(false);
         playBtn.setEnabled(false);
-
         //Register anonymous listeners
         captureBtn.addActionListener(
                 new ActionListener(){

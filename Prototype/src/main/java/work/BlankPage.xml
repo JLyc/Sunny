@@ -1,0 +1,42 @@
+<project name="templateProject" default="callJenkinsAnt">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="D:\tibco\tpcl\5.8\libExt\ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+
+    <propertyregex property="jenkins_location"
+                   input="${basedir}"
+                   regexp="(.*IntegrationSourceCodes).*"
+                   select="\1"
+                   casesensitive="false" />
+
+    <property name="path" value="${jenkins_location}\JUnit-Jenkins\OSKJUnitTests\JenkinsBuild.xml"/>
+
+    <property name="junit.junit-dir" value="JUnit-Jenkins/OSKJUnitTests"/>
+    <property name="result-dir" value="JUnit_test_result"/>
+    <property name="app-name" value="SalesManagement"/>
+    <property name="ear-path" value="SalesManagement/Build/SalesManagement.ear"/>
+    <property name="config-path" value="SalesManagement/Build/AppConfig.xml"/>
+    <property name="project-path" value="SalesManagement/BWProjects/SalesManagement"/>
+    <property name="archive-location" value="/SalesManagement.archive"/>
+
+    <property name="main-clazz" value="com.logica.eai.test.bw.osk.managecustomercontract.manageframeworkagreement.searchframeworkagreements.Search"/>
+
+    <target name="callJenkinsAnt">
+        <ant antfile="${path}" target="composite" useNativeBasedir="true">
+            <target name="buildTests"/>
+            <target name="App_Config"/>
+            <target name="UnDeploy"/>
+            <target name="Build-WithSpecial"/>
+            <target name="Deploy"/>
+
+            <target name="start-daemon"/>
+            <target name="startapp"/>
+
+            <target name="stopapp"/>
+            <property name="path" value="${basedir}"/>
+        </ant>
+    </target>
+</project>

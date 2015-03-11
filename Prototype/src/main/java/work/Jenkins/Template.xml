@@ -1,0 +1,71 @@
+<project name="templateProject">
+
+    <!--Determine location-->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="D:\tibco\tpcl\5.8\libExt\ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+    <propertyregex property="jenkins_location"
+                   input="${basedir}"
+                   regexp="(.*IntegrationSourceCodes).*"
+                   select="\1"
+                   casesensitive="false" />
+
+    <property name="JenkinsBuildBasePath" value="${jenkins_location}\JUnit-Jenkins\OSKJUnitTests\"/>
+
+    <property name="result-dir" value="JUnit_test_result"/>
+    <property name="app-name" value="SalesManagement"/>
+    <property name="ear-path" value="${JenkinsBuildBasePath}/${app-name}/Build/${app-name}test.ear"/>
+    <property name="config-path" value="${JenkinsBuildBasePath}/${app-name}/Build/AppConfig.xml"/>
+    <property name="project-path" value="${JenkinsBuildBasePath}/${app-name}/BWProjects/${app-name}"/>
+    <property name="archive-location" value="/${app-name}.archive"/>
+
+    <property name="runSuit" value="com.logica.eai.test.bw.osk.managecustomercontract.manageframeworkagreement."/>
+    <property name="runTest" value="searchframeworkagreements"/>
+    <property name="runClazz0" value="${runSuit}.${runTest}.Search"/>
+    <property name="runClazz1" value="${runSuit}.${runTest}.GetAgent"/>
+    <property name="runClazz2" value="${runSuit}.${runTest}.GetAgentSoapCallInCore"/>
+
+    <macrodef name="prepearTest">
+        <sequential>
+            <echo>${JenkinsBasePath}</echo>
+            <antcall target="start-daemon"/>
+            <antcall target="buildTests"/>
+            <build-ear archive="${archive-location}" target="${ear-path}" location="${project-path}"/>
+            <app-export appname="${app-name}" config="${config-path}" domain="${var.bw.domain}" cred-path="${credential.file}"/>
+            <app-delete appname="${app-name}" domain="${var.bw.domain}" cred-path="${credential.file}"/>
+            <app-deploy appname="${app-name}" ear="${ear-path}" config="${config-path}" domain="${var.bw.domain}" cred-path="${credential.file}"/>
+            <daemon-invoker cmd="starttest" jtest="${app-name}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="cleaning">
+        <sequential>
+            <daemon-invoker cmd="stoptest" jtest="${app-name}"/>
+        </sequential>
+    </macrodef>
+
+    <target name="runSuit">
+        <prepearTest/>
+        <junit_test TestName="${runClazz0}" ResultName="${result-dir}"/>
+        <junit_test TestName="${runClazz1}" ResultName="${result-dir}"/>
+        <junit_test TestName="${runClazz2}" ResultName="${result-dir}"/>
+        <cleaning/>
+    </target>
+
+    <target name="runTest">
+        <prepearTest/>
+        <junit_test TestName="${runClazz0}" ResultName="${result-dir}"/>
+        <junit_test TestName="${runClazz1}" ResultName="${result-dir}"/>
+        <junit_test TestName="${runClazz2}" ResultName="${result-dir}"/>
+        <cleaning/>
+    </target>
+
+    <target name="runClazz">
+        <prepearTest/>
+        <junit_test TestName="${runSuit}.${runTest}.${specific-clazz}" ResultName="${result-dir}"/>
+        <cleaning/>
+    </target>
+
+</project>

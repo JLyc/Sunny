@@ -101,7 +101,7 @@ public class SerialTest implements SerialPortEventListener
 	 */
 	@Override
 	public synchronized void serialEvent(SerialPortEvent oEvent)
-	{
+    {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE)
 		{
 			try
@@ -120,6 +120,7 @@ public class SerialTest implements SerialPortEventListener
 	
 	public static void main(String[] args) throws Exception
 	{
+
 		SerialTest main = new SerialTest();
 		main.initialize();
 		Thread t = new Thread()

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<ns0:AtomicOffer xmlns:ns0="www.tibco.com/be/ontology/Concepts/AtomicOffer">
+<catalogueItem>
+<atomicOfferSpecification>
+    <oid>
+        <system>MPC_custom</system>
+        <pid>7815217</pid>
+    </oid>
+    <oid>
+        <system>MPC</system>
+        <pid>7815217</pid>
+    </oid>
+    <oid>
+        <system>SOS</system>
+        <pid>10995</pid>
+    </oid>
+    <cariesTarrif>
+        <tid>
+            <system>MPC</system>
+            <pid>10061676</pid>
+        </tid>
+        <recurrenceType>PURCHASE</recurrenceType>
+        <priceAmount>360.0</priceAmount>
+        <priceCurrency>?</priceCurrency>
+        <vatRate>20</vatRate>
+    </cariesTarrif>
+    <functionSpecification>
+        <name>Type</name>
+        <type>String</type>
+        <staticValue>Subject.Product.Hardware.Modem.Modem 2010</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionHash</name>
+        <type>String</type>
+        <staticValue>AHdAMQCZh2w</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionMD5</name>
+        <type>String</type>
+        <staticValue>1aa7831e56d0fc7e123f50fc61ba64bf</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionStartDateFrom</name>
+        <type>Date</type>
+        <staticValue>2013-04-22</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Applied Claim</name>
+        <type>Integer</type>
+        <staticValue>10437346</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Product Role</name>
+        <type>Integer</type>
+        <staticValue>10466911</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Brand</name>
+        <type>String</type>
+        <staticValue>2N</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Model</name>
+        <type>String</type>
+        <staticValue>SmartGate</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Stock Code</name>
+        <type>String</type>
+        <staticValue>S-A2NSMARTGSNFAXQ</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Virtual Stock Code</name>
+        <type>String</type>
+        <staticValue>V-DUMMYZARIADENIE</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Brand</name>
+        <type>String</type>
+        <staticValue>2N</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Model</name>
+        <type>String</type>
+        <staticValue>SmartGate</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.EDGE</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.GPRS</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.Prenos dát</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.Wi-Fi</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Prevedenie.Displej</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Prevedenie.Rozmery (mm)</name>
+        <type>String</type>
+        <staticValue>170 x 130 x 45</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 1</name>
+        <type>String</type>
+        <staticValue>analógová GSM brána</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 2</name>
+        <type>String</type>
+        <staticValue>odosielanie a prijímanie FAXov</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 3</name>
+        <type>String</type>
+        <staticValue>CallBack, DialThru, CLIP FSK</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Parametre.Pamä?ová karta</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Batéria</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.CD-ROM</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Nabíja?ka</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Náhlavná súprava</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Používate?ská príru?ka</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>StartDate</name>
+        <type>Date</type>
+        <staticValue>2010-09-17</staticValue>
+        <group>LifeCycle</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>UserSelectable</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>OrderCapture</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Applied Claim</name>
+        <type>Integer</type>
+        <staticValue>10437346</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Value</name>
+        <type>Double</type>
+        <staticValue>360.0</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Unit</name>
+        <type>String</type>
+        <staticValue>?</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>PriceCategory</name>
+        <type>String</type>
+        <staticValue>PF</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VAT</name>
+        <type>Integer</type>
+        <staticValue>20</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Documentation</name>
+        <type>String</type>
+        <staticValue>Cena produktu bey podmienok = zákazník nakupuje produkt bez podmiekok. Napríklad notebooky pre Non-OSK Customer</staticValue>
+        <group>Description</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>StartDate</name>
+        <type>Date</type>
+        <staticValue>2013-04-22</staticValue>
+        <group>LifeCycle</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>UserSelectable</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>OrderCapture</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>E-shop:master_large</name>
+        <type>String</type>
+        <staticValue>2n-smartgate.gif</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>E-shop:Master image</name>
+        <type>String</type>
+        <staticValue>2n-smartgate.jpg</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>salespad:ZAR1-spredu-maly</name>
+        <type>String</type>
+        <staticValue>7815217_10995_ZAR2-spredu-maly.png</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>salespad:ZAR2-spredu-velky</name>
+        <type>String</type>
+        <staticValue>7815217_10995_ZAR2-spredu-velky.png</staticValue>
+    </functionSpecification>
+</atomicOfferSpecification>
+</catalogueItem>
+<catalogueItem>
+<atomicOfferSpecification>
+    <oid>
+        <system>MPC</system>
+        <pid>7815217</pid>
+    </oid>
+    <oid>
+        <system>MPC</system>
+        <pid>7815217</pid>
+    </oid>
+    <oid>
+        <system>SOS</system>
+        <pid>10995</pid>
+    </oid>
+    <cariesTarrif>
+        <tid>
+            <system>MPC</system>
+            <pid>10061676</pid>
+        </tid>
+        <recurrenceType>PURCHASE</recurrenceType>
+        <priceAmount>360.0</priceAmount>
+        <priceCurrency>?</priceCurrency>
+        <vatRate>20</vatRate>
+    </cariesTarrif>
+    <functionSpecification>
+        <name>Type</name>
+        <type>String</type>
+        <staticValue>Subject.Product.Hardware.Modem.Modem 2015</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionHash</name>
+        <type>String</type>
+        <staticValue>AHdAMQCZh2w</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionMD5</name>
+        <type>String</type>
+        <staticValue>1aa7831e56d0fc7e123f50fc61ba64bf</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VersionStartDateFrom</name>
+        <type>Date</type>
+        <staticValue>2013-04-22</staticValue>
+        <group>VersionInfo</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Applied Claim</name>
+        <type>Integer</type>
+        <staticValue>10437346</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Product Role</name>
+        <type>Integer</type>
+        <staticValue>10466911</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Brand</name>
+        <type>String</type>
+        <staticValue>2N</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Model</name>
+        <type>String</type>
+        <staticValue>SmartGate</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Stock Code</name>
+        <type>String</type>
+        <staticValue>S-A2NSMARTGSNFAXQ</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Virtual Stock Code</name>
+        <type>String</type>
+        <staticValue>V-DUMMYZARIADENIE</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Brand</name>
+        <type>String</type>
+        <staticValue>2N</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Model</name>
+        <type>String</type>
+        <staticValue>SmartGate</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.EDGE</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.GPRS</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.Prenos dát</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Dátové aplikácie.Wi-Fi</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Prevedenie.Displej</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Prevedenie.Rozmery (mm)</name>
+        <type>String</type>
+        <staticValue>170 x 130 x 45</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 1</name>
+        <type>String</type>
+        <staticValue>analógová GSM brána</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 2</name>
+        <type>String</type>
+        <staticValue>odosielanie a prijímanie FAXov</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Promo atribúty.Promo atribút 3</name>
+        <type>String</type>
+        <staticValue>CallBack, DialThru, CLIP FSK</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Parametre.Pamä?ová karta</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Batéria</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.CD-ROM</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Nabíja?ka</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Náhlavná súprava</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Obsah balenia.Používate?ská príru?ka</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>HardwareAttr</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>StartDate</name>
+        <type>Date</type>
+        <staticValue>2010-09-17</staticValue>
+        <group>LifeCycle</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>UserSelectable</name>
+        <type>Boolean</type>
+        <staticValue>true</staticValue>
+        <group>OrderCapture</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>LabelGroup.Applied Claim</name>
+        <type>Integer</type>
+        <staticValue>10437346</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Value</name>
+        <type>Double</type>
+        <staticValue>360.0</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Unit</name>
+        <type>String</type>
+        <staticValue>?</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>PriceCategory</name>
+        <type>String</type>
+        <staticValue>PF</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>VAT</name>
+        <type>Integer</type>
+        <staticValue>20</staticValue>
+        <group>Attributes</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>Documentation</name>
+        <type>String</type>
+        <staticValue>Cena produktu bey podmienok = zákazník nakupuje produkt bez podmiekok. Napríklad notebooky pre Non-OSK Customer</staticValue>
+        <group>Description</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>StartDate</name>
+        <type>Date</type>
+        <staticValue>2013-04-22</staticValue>
+        <group>LifeCycle</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>UserSelectable</name>
+        <type>Boolean</type>
+        <staticValue>false</staticValue>
+        <group>OrderCapture</group>
+    </functionSpecification>
+    <functionSpecification>
+        <name>E-shop:master_large</name>
+        <type>String</type>
+        <staticValue>2n-smartgate.gif</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>E-shop:Master image</name>
+        <type>String</type>
+        <staticValue>2n-smartgate.jpg</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>salespad:ZAR1-spredu-maly</name>
+        <type>String</type>
+        <staticValue>7815217_10995_ZAR2-spredu-maly.png</staticValue>
+    </functionSpecification>
+    <functionSpecification>
+        <name>salespad:ZAR2-spredu-velky</name>
+        <type>String</type>
+        <staticValue>7815217_10995_ZAR2-spredu-velky.png</staticValue>
+    </functionSpecification>
+</atomicOfferSpecification>
+</catalogueItem>
+        </ns0:AtomicOffer>

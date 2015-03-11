@@ -1,0 +1,24 @@
+<project name="templateProject" default="callJenkinsAnt">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="D:\tibco\tpcl\5.8\libExt\ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+
+    <propertyregex property="jenkins_location"
+                   input="${basedir}"
+                   regexp="(.*IntegrationSourceCodes).*"
+                   select="\1"
+                   casesensitive="false" />
+
+    <property name="path" value="${jenkins_location}\JUnit-Jenkins\OSKJUnitTests\JenkinsBuild.xml"/>
+
+    <target name="callJenkinsAnt">
+        <ant antfile="${path}" target="composite" useNativeBasedir="true">
+            <target name=""/>
+
+            <property name="path" value="${basedir}"/>
+        </ant>
+    </target>
+</project>
