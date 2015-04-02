@@ -17,6 +17,5 @@
     <orderEntry type="library" scope="TEST" name="junit-4.7" level="project" />
     <orderEntry type="library" name="freetts-1.2.2" level="project" />
     <orderEntry type="library" name="sphinx4-1" level="project" />
-    <orderEntry type="module" module-name="SunnyGUI" />
   </component>
 </module>
