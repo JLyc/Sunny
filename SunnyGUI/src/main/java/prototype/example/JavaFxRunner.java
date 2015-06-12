@@ -12,7 +12,7 @@ package prototype.example;
 public class JavaFxRunner {
 
     public static void main(String[] args) {
-        
+        JavaFxFrameTemplate.startLaunch();
     }
 
 }
