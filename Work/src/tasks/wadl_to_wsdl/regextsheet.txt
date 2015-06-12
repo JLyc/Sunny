@@ -1,0 +1,15 @@
+                    <xsd:element type="xsd:string"  name="ids" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="entityIds" minOccurs="0"/>
+                    <xsd:element type="xsd:long"  name="delegationRequestId" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="delegatorUid" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="delegeeUid" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="delegableUserId" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="ownerUid" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="status" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="type" minOccurs="0"/>
+                    <xsd:element type="xsd:long"  name="templateId" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="createdBy" minOccurs="0"/>
+                    <xsd:element type="xsd:string"  name="sourceSystem" minOccurs="0"/>
+                    
+                    
+                    <xsd:element type="xsdd:long" name="id" minOccurs="0" minOccurs="0"/>

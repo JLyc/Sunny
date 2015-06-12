@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JLyc/JLyc.iml" filepath="$PROJECT_DIR$/JLyc/JLyc.iml" />
       <module fileurl="file://$PROJECT_DIR$/MiniApps/MiniApps.iml" filepath="$PROJECT_DIR$/MiniApps/MiniApps.iml" />
       <module fileurl="file://$PROJECT_DIR$/MiniGames/MiniGames.iml" filepath="$PROJECT_DIR$/MiniGames/MiniGames.iml" />
       <module fileurl="file://$PROJECT_DIR$/Prototype/Prototype.iml" filepath="$PROJECT_DIR$/Prototype/Prototype.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sunny.iml" filepath="$PROJECT_DIR$/Sunny.iml" />
       <module fileurl="file://$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" filepath="$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/SunnySences/SunnySences.iml" filepath="$PROJECT_DIR$/SunnySences/SunnySences.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work/Work.iml" filepath="$PROJECT_DIR$/Work/Work.iml" />
     </modules>
   </component>
 </project>

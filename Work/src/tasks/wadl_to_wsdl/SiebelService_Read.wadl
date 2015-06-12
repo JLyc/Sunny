@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://wadl.dev.java.net/2009/02" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:tns="http://www.t-mobile.sk/soa/AddressServices"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsd1="http://www.t-mobile.sk/soa/AddressServices/xsd"
+             xmlns:sc="http://eai.t-mobile.sk/ServiceCatalogue/" 
+             xmlns:cdm="http://www.logica.com/eurotel-crm">
+	<grammars>
+		<include href="CommonDataModel.xsd"/>
+		<include href="ServiceCatalogue.xsd"/>
+		<include href="SIEBELSERVICES.xsd"/>
+	</grammars>
+  	<resources base="https://tibtest.st.sk:8001/AddressService_Read">
+		<resource path="/getOrder">
+			<method id="getOrder" name="POST">
+				<request>
+					<representation element="xsd1:GetOrderMessageIn" mediaType="application/xml"/>
+				</request>
+				<response>
+					<representation element="xsd1:GetOrderMessageOut" mediaType="application/xml"/>
+				</response>
+				<response>
+					<representation element="xsd1:GetOrderMessageFault" mediaType="application/xml"/>
+				</response>
+			</method>
+		</resource>
+    <resource path="/getAssets">
+			<method id="getAssets" name="POST">
+				<request>
+					<representation element="xsd1:GetAssetMessageIn" mediaType="application/xml"/>
+				</request>
+				<response>
+					<representation element="xsd1:GetAssetMessageOut" mediaType="application/xml"/>
+				</response>
+				<response>
+					<representation element="xsd1:GetAssetFaultMessage" mediaType="application/xml"/>
+				</response>
+			</method>
+		</resource>
+	</resources>
+</application>

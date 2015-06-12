@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Web Service Description Language Generator - @changes by Logica -->
+<!-- Web Service: SiebelService_Read -->
+<!-- Author: benyom -->
+<!-- Modified: 10. mája 2015 14:39:25 -->
+
+<definitions name="SiebelService_Read" 
+ targetNamespace="http://www.t-mobile.sk/soa/SiebelServices"
+ xmlns="http://schemas.xmlsoap.org/wsdl/"
+ xmlns:tns="http://www.t-mobile.sk/soa/SiebelServices"
+ xmlns:xsd1="http://www.t-mobile.sk/soa/SiebelServices/xsd"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:jms="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS"
+ xmlns:jndi="http://www.tibco.com/namespaces/ws/2004/soap/apis/jndi"
+ xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+ xmlns:sc="http://eai.t-mobile.sk/ServiceCatalogue/"
+ xmlns:cdm="http://www.logica.com/eurotel-crm"
+ xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+ xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+ >
+      
+
+   <sc:package>T-MOBILE SK EAI SOLUTION/SERVICE CATALOGUE/SOA SERVICES/SIEBEL</sc:package>
+   <!-- Schema -->
+   <types>
+      <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.logica.com/eurotel-crm">
+        <xsd:include schemaLocation="CommonDataModel.xsd"/>
+      </xsd:schema>
+   
+   	<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://eai.t-mobile.sk/ServiceCatalogue">
+   		<xsd:include schemaLocation="ServiceCatalogue.xsd"/>
+   	</xsd:schema>
+      <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.t-mobile.sk/soa/SiebelServices/xsd">
+   		<xsd:include schemaLocation="SIEBELSERVICES.xsd" />
+   	</xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.xmlsoap.org/ws/2003/03/addressing">
+   	   <xsd:include schemaLocation="ws-addressing.xsd"/>
+   	</xsd:schema>
+   </types>
+
+
+   <!-- Messages -->
+   <message name="getOrderSoapIn">
+      <part name="inputPart" element="xsd1:GetOrderMessageIn" />
+   </message>
+   <message name="getOrderSoapOut">
+      <part name="outputPart" element="xsd1:GetOrderMessageOut" />
+   </message>
+   <message name="getOrderSoapFault">
+      <part name="FaultPart" element="xsd1:GetOrderMessageFault" />
+   </message>
+   <message name="getAssetsSoapIn">
+      <part name="inputPar" element="xsd1:GetAssetMessageIn" />
+   </message>
+   <message name="getAssetsSoapOut">
+      <part name="outputPar" element="xsd1:GetAssetMessageOut" />
+   </message>
+   <message name="getAssetsSoapFault">
+      <part name="FaultPart" element="xsd1:GetAssetFaultMessage" />
+   </message>
+
+   <!-- Port Types -->
+   <portType name="SiebelService_ReadSoapPortType">
+      <operation name="getOrder">
+            <input message="tns:getOrderSoapIn" />
+         <output message="tns:getOrderSoapOut" />
+         <fault message="tns:getOrderSoapFault" name="getOrderSoapFault" />
+      </operation>
+      <operation name="getAssets">
+         <documentation>
+         Service will retrieve Asset structures from Siebel CRM Stage DB.
+         Service will be implemented as synchronous SOAP over HTTP service, exposed through Service Grid as Rest service. Policy Director will maintain authorization for the service.
+         
+         Meta-attribute	Description
+         Operation	getAssets
+         Service name	SiebelAssetService_Read
+         Purpose/Description	Retrieves asset objects from SIEBEL Stage DB based on provided filters / identificators
+         System	Siebel CRM
+         Conditions/QoS	Not specified
+         Stereotype	Request-Response
+         Communication Style	Synchronous
+         Availability	Limited to Siebel Stage DB availability
+         Peak transaction number	Not specified
+         Error Codes	GETASSETS_001 – Technical error.
+         GETASSETS_002 – No data found.
+         Transport	SOAP over HTTP
+         
+         
+                              <sc:inputMessage>GetAssetMessageIn</sc:inputMessage>
+            <sc:outputMessage>xsd:string</sc:outputMessage>
+                              </documentation>
+            <input message="tns:getAssetsSoapIn" />
+         <output message="tns:getAssetsSoapOut" />
+         <fault message="tns:getAssetsSoapFault" name="getAssetsSoapFault" />
+      </operation>
+   </portType>
+   
+   <!-- Partner links -->
+   <plnk:partnerLinkType name="SiebelService_ReadSoapPartnerLink">
+      <plnk:role name="SiebelService_ReadSoapProviderRole">
+   		<plnk:portType name="tns:SiebelService_ReadSoapPortType"/>
+   	</plnk:role>
+   </plnk:partnerLinkType>
+
+   <!-- Bindings -->
+   <binding name="SiebelService_ReadSoapPortTypeHTTPBinding" type="tns:SiebelService_ReadSoapPortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+      <operation name="getOrder">
+         <soap:operation soapAction="SiebelService_Read.serviceagent/SiebelService_ReadSoapPortTypeHTTP/getOrder" style="document" />
+      <input>
+         <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+         <soap:body parts="outputPart" use="literal"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+      <fault name="getOrderSoapFault">
+         <soap:fault name="getOrderSoapFault" use="literal"/>
+      </fault>
+      
+      </operation>
+      <operation name="getAssets">
+         <soap:operation soapAction="SiebelService_Read.serviceagent/SiebelService_ReadSoapPortTypeHTTP/getAssets" style="document" />
+      <input>
+         <soap:body parts="inputPar" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+         <soap:body parts="outputPar" use="literal"
+          encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+      <fault name="getAssetsSoapFault">
+         <soap:fault name="getAssetsSoapFault" use="literal"/>
+      </fault>
+      
+      </operation>
+   </binding>
+
+   <!-- Bindings -->
+   <service name="SiebelService_Read">
+      <port name="SiebelService_ReadSoapPortHTTP" binding="tns:SiebelService_ReadSoapPortTypeHTTPBinding">
+         <soap:address location="http://crmdev1.eurotel.sk:6000/SiebelService_Read.serviceagent/SiebelService_ReadSoapPortTypeHTTP" />
+      </port>
+   </service>
+
+</definitions>

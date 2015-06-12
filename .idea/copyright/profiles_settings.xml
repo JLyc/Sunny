@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="" />
+  <settings default="JLyc">
+    <module2copyright>
+      <element module="All" copyright="JLyc" />
+    </module2copyright>
+  </settings>
 </component>
