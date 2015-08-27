@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?> <!--
+  ~ Copyright (c) 2015. All rights reserved for autor and owner of email domain JLyc.Development@gmial.com.
+  -->
+<blos_test>
+
+    <PFRandAPPreq>
+        <!--Request-->
+        <xmlAPIstart Type="PFRandAPPreq" Username="bbsa" Password="B1%6Zhl098p">
+            <PFRandAPPreq>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <customer_id>7776361</customer_id>
+                <HistoryDays>3</HistoryDays>
+            </PFRandAPPreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <LSI_HISTORY>
+            <DeviceData>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+            </DeviceData>
+            <LSI_DATA>
+                <lsi_data>
+                    <operator_id>ST</operator_id>
+                    <date>2015-06-21</date>
+                    <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                    <t_inits_no>1</t_inits_no>
+                    <no_15min_counters>77</no_15min_counters>
+                    <lsi>4</lsi>
+                    <lol_no>0</lol_no>
+                    <t_es_cv_no>0</t_es_cv_no>
+                    <i_cv>0</i_cv>
+                    <internet>1</internet>
+                    <dslam_type>ISAM 7302 FD</dslam_type>
+                    <i_inits>5</i_inits>
+                    <dsl_type>ADSL</dsl_type>
+                    <no_1hour_counters>24</no_1hour_counters>
+                    <t_cv_no>0</t_cv_no>
+                    <i_lol>0</i_lol>
+                    <t_snr_us_no>0</t_snr_us_no>
+                    <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                    <dslam_name>100226636</dslam_name>
+                    <i_ses>4</i_ses>
+                    <i_es_cv>5</i_es_cv>
+                    <customer_id>0007776361</customer_id>
+                    <t_es_no>0</t_es_no>
+                    <i_snr_us>5</i_snr_us>
+                    <platform>ALCATEL ISAM</platform>
+                    <i_es>0</i_es>
+                    <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                    <services>INT5</services>
+                    <iptv>0</iptv>
+                    <voip>0</voip>
+                    <vlans>3980</vlans>
+                    <dslam_ip_slot_port>10.188.48.23/6/39</dslam_ip_slot_port>
+                    <t_snr_ds_no>0</t_snr_ds_no>
+                    <i_snr_ds>5</i_snr_ds>
+                    <t_ses_no>4</t_ses_no>
+                    <vendor>ALCATEL</vendor>
+                </lsi_data>
+                <lsi_data>
+                    <operator_id>ST</operator_id>
+                    <date>2015-06-22</date>
+                    <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                    <t_inits_no>0</t_inits_no>
+                    <no_15min_counters>77</no_15min_counters>
+                    <lsi>5</lsi>
+                    <lol_no>0</lol_no>
+                    <t_es_cv_no>0</t_es_cv_no>
+                    <i_cv>0</i_cv>
+                    <internet>1</internet>
+                    <dslam_type>ISAM 7302 FD</dslam_type>
+                    <i_inits>5</i_inits>
+                    <dsl_type>ADSL</dsl_type>
+                    <no_1hour_counters>24</no_1hour_counters>
+                    <t_cv_no>0</t_cv_no>
+                    <i_lol>0</i_lol>
+                    <t_snr_us_no>0</t_snr_us_no>
+                    <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                    <dslam_name>100226636</dslam_name>
+                    <i_ses>5</i_ses>
+                    <i_es_cv>5</i_es_cv>
+                    <customer_id>0007776361</customer_id>
+                    <t_es_no>0</t_es_no>
+                    <i_snr_us>5</i_snr_us>
+                    <platform>ALCATEL ISAM</platform>
+                    <i_es>0</i_es>
+                    <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                    <services>INT5</services>
+                    <iptv>0</iptv>
+                    <voip>0</voip>
+                    <vlans>3980</vlans>
+                    <dslam_ip_slot_port>10.188.48.23/6/39</dslam_ip_slot_port>
+                    <t_snr_ds_no>0</t_snr_ds_no>
+                    <i_snr_ds>5</i_snr_ds>
+                    <t_ses_no>0</t_ses_no>
+                    <vendor>ALCATEL</vendor>
+                </lsi_data>
+                <lsi_data>
+                    <operator_id>ST</operator_id>
+                    <date>2015-06-23</date>
+                    <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                    <t_inits_no>0</t_inits_no>
+                    <no_15min_counters>77</no_15min_counters>
+                    <lsi>5</lsi>
+                    <lol_no>0</lol_no>
+                    <t_es_cv_no>0</t_es_cv_no>
+                    <i_cv>0</i_cv>
+                    <internet>1</internet>
+                    <dslam_type>ISAM 7302 FD</dslam_type>
+                    <i_inits>5</i_inits>
+                    <dsl_type>ADSL</dsl_type>
+                    <no_1hour_counters>24</no_1hour_counters>
+                    <t_cv_no>0</t_cv_no>
+                    <i_lol>0</i_lol>
+                    <t_snr_us_no>0</t_snr_us_no>
+                    <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                    <dslam_name>100226636</dslam_name>
+                    <i_ses>5</i_ses>
+                    <i_es_cv>5</i_es_cv>
+                    <customer_id>0007776361</customer_id>
+                    <t_es_no>0</t_es_no>
+                    <i_snr_us>5</i_snr_us>
+                    <platform>ALCATEL ISAM</platform>
+                    <i_es>0</i_es>
+                    <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                    <services>INT5</services>
+                    <iptv>0</iptv>
+                    <voip>0</voip>
+                    <vlans>3980</vlans>
+                    <dslam_ip_slot_port>10.188.48.23/6/39</dslam_ip_slot_port>
+                    <t_snr_ds_no>0</t_snr_ds_no>
+                    <i_snr_ds>5</i_snr_ds>
+                    <t_ses_no>0</t_ses_no>
+                    <vendor>ALCATEL</vendor>
+                </lsi_data>
+            </LSI_DATA>
+        </LSI_HISTORY>
+    </PFRandAPPreq>
+
+    <POLapiAGGreq>
+        <!--Request-->
+        <xmlAPIstart Type="POLapiAGGreq" Username="bbsa" Password="B1%6Zhl098p">
+            <PFRandAPPreq>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <customer_id>7776361</customer_id>
+                <HistoryDays>3</HistoryDays>
+            </PFRandAPPreq>
+            <POLapiAGGreq>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <customer_id>7776361</customer_id>
+                <HistoryDays>3</HistoryDays>
+            </POLapiAGGreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <POL_AGG_HISTORY>
+            <POL_AGG_DATA>
+                <max_att_bitrate_ds>21552.00</max_att_bitrate_ds>
+                <no_15min_counters>77</no_15min_counters>
+                <es_ds_stdev>119.53</es_ds_stdev>
+                <es_us_stdev>0</es_us_stdev>
+                <ses_ds_stdev>119.53</ses_ds_stdev>
+                <max_snr_ds>24.30</max_snr_ds>
+                <fec_us_stdev>0</fec_us_stdev>
+                <dslam_ip>10.188.48.23</dslam_ip>
+                <min_att_bitrate_ds>20560.00</min_att_bitrate_ds>
+                <avg_att_bitrate_us>1170.00</avg_att_bitrate_us>
+                <no_1hour_counters>24</no_1hour_counters>
+                <cv_ds_n>0</cv_ds_n>
+                <min_pwr_ds>4.30</min_pwr_ds>
+                <min_snr_ds>14.80</min_snr_ds>
+                <ses_us_sum>0</ses_us_sum>
+                <avg_attenuation_ds>15.90</avg_attenuation_ds>
+                <max_attenuation_us>10.20</max_attenuation_us>
+                <ses_us_n>0</ses_us_n>
+                <es_ds_n>77</es_ds_n>
+                <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                <min_pwr_us>-2.20</min_pwr_us>
+                <min_bitrate_us>574.00</min_bitrate_us>
+                <fec_us_n>0</fec_us_n>
+                <min_attenuation_ds>15.80</min_attenuation_ds>
+                <min_snr_us>16.00</min_snr_us>
+                <max_snr_us>17.30</max_snr_us>
+                <ses_ds_rec>4</ses_ds_rec>
+                <cv_us_stdev>0</cv_us_stdev>
+                <services>INT5</services>
+                <code_of_dominant_modulation>3</code_of_dominant_modulation>
+                <avg_attenuation_us>10.20</avg_attenuation_us>
+                <iptv>0</iptv>
+                <ses_ds_n>77</ses_ds_n>
+                <voip>0</voip>
+                <max_att_bitrate_us>1173.00</max_att_bitrate_us>
+                <fec_us_sum>0</fec_us_sum>
+                <max_pwr_ds>6.00</max_pwr_ds>
+                <fec_ds_stdev>12976.60</fec_ds_stdev>
+                <cv_us_n>0</cv_us_n>
+                <cv_us_rec>0</cv_us_rec>
+                <cv_ds_stdev>0</cv_ds_stdev>
+                <ses_us_24h>0</ses_us_24h>
+                <es_us_n>0</es_us_n>
+                <cv_ds_rec>0</cv_ds_rec>
+                <platforma>ALCATEL ISAM</platforma>
+                <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                <pol_dslam_slot_port>100226636/6/39</pol_dslam_slot_port>
+                <fec_us_rec>0</fec_us_rec>
+                <max_bitrate_ds>5212.00</max_bitrate_ds>
+                <es_ds_rec>4</es_ds_rec>
+                <fec_ds_rec>5</fec_ds_rec>
+                <avg_att_bitrate_ds>21510.70</avg_att_bitrate_ds>
+                <internet>1</internet>
+                <dslam_type>ISAM 7302 FD</dslam_type>
+                <avg_snr_ds>23.75</avg_snr_ds>
+                <ses_us_rec>0</ses_us_rec>
+                <dsl_type>ADSL</dsl_type>
+                <distinct_modulation>1</distinct_modulation>
+                <cv_us_sum>0</cv_us_sum>
+                <no_of_dominant_modulation>24</no_of_dominant_modulation>
+                <datum>2015-06-21</datum>
+                <avg_snr_us>16.18</avg_snr_us>
+                <es_us_sum>0</es_us_sum>
+                <ses_ds_sum>2201</ses_ds_sum>
+                <avg_pwr_ds>5.86</avg_pwr_ds>
+                <ses_us_stdev>0</ses_us_stdev>
+                <min_bitrate_ds>5212.00</min_bitrate_ds>
+                <dslam_name>100226636</dslam_name>
+                <cv_ds_sum>0</cv_ds_sum>
+                <min_att_bitrate_us>1163.00</min_att_bitrate_us>
+                <customer_id>0007776361</customer_id>
+                <fec_ds_sum>227143</fec_ds_sum>
+                <min_attenuation_us>10.10</min_attenuation_us>
+                <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                <fec_ds_n>77</fec_ds_n>
+                <ses_ds_24h>2</ses_ds_24h>
+                <es_ds_sum>2201</es_ds_sum>
+                <es_us_rec>0</es_us_rec>
+                <sum_inits>1</sum_inits>
+                <avg_bitrate_us>574.00</avg_bitrate_us>
+                <max_pwr_us>-1.50</max_pwr_us>
+                <avg_bitrate_ds>5212.00</avg_bitrate_ds>
+                <max_attenuation_ds>15.90</max_attenuation_ds>
+                <max_bitrate_us>574.00</max_bitrate_us>
+                <vendor>ALCATEL</vendor>
+                <avg_pwr_us>-1.53</avg_pwr_us>
+            </POL_AGG_DATA>
+            <POL_AGG_DATA>
+                <max_att_bitrate_ds>21552.00</max_att_bitrate_ds>
+                <no_15min_counters>77</no_15min_counters>
+                <es_ds_stdev>0</es_ds_stdev>
+                <es_us_stdev>0</es_us_stdev>
+                <ses_ds_stdev>0</ses_ds_stdev>
+                <max_snr_ds>24.30</max_snr_ds>
+                <fec_us_stdev>0</fec_us_stdev>
+                <dslam_ip>10.188.48.23</dslam_ip>
+                <min_att_bitrate_ds>21552.00</min_att_bitrate_ds>
+                <avg_att_bitrate_us>1169.79</avg_att_bitrate_us>
+                <no_1hour_counters>24</no_1hour_counters>
+                <cv_ds_n>0</cv_ds_n>
+                <min_pwr_ds>5.70</min_pwr_ds>
+                <min_snr_ds>22.70</min_snr_ds>
+                <ses_us_sum>0</ses_us_sum>
+                <avg_attenuation_ds>15.90</avg_attenuation_ds>
+                <max_attenuation_us>10.20</max_attenuation_us>
+                <ses_us_n>0</ses_us_n>
+                <es_ds_n>0</es_ds_n>
+                <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                <min_pwr_us>-1.50</min_pwr_us>
+                <min_bitrate_us>574.00</min_bitrate_us>
+                <fec_us_n>0</fec_us_n>
+                <min_attenuation_ds>15.90</min_attenuation_ds>
+                <min_snr_us>16.00</min_snr_us>
+                <max_snr_us>16.30</max_snr_us>
+                <ses_ds_rec>0</ses_ds_rec>
+                <cv_us_stdev>0</cv_us_stdev>
+                <services>INT5</services>
+                <code_of_dominant_modulation>3</code_of_dominant_modulation>
+                <avg_attenuation_us>10.20</avg_attenuation_us>
+                <iptv>0</iptv>
+                <ses_ds_n>0</ses_ds_n>
+                <voip>0</voip>
+                <max_att_bitrate_us>1173.00</max_att_bitrate_us>
+                <fec_us_sum>0</fec_us_sum>
+                <max_pwr_ds>5.90</max_pwr_ds>
+                <fec_ds_stdev>0.22</fec_ds_stdev>
+                <cv_us_n>0</cv_us_n>
+                <cv_us_rec>0</cv_us_rec>
+                <cv_ds_stdev>0</cv_ds_stdev>
+                <ses_us_24h>0</ses_us_24h>
+                <es_us_n>0</es_us_n>
+                <cv_ds_rec>0</cv_ds_rec>
+                <platforma>ALCATEL ISAM</platforma>
+                <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                <pol_dslam_slot_port>100226636/6/39</pol_dslam_slot_port>
+                <fec_us_rec>0</fec_us_rec>
+                <max_bitrate_ds>5212.00</max_bitrate_ds>
+                <es_ds_rec>0</es_ds_rec>
+                <fec_ds_rec>1</fec_ds_rec>
+                <avg_att_bitrate_ds>21552.00</avg_att_bitrate_ds>
+                <internet>1</internet>
+                <dslam_type>ISAM 7302 FD</dslam_type>
+                <avg_snr_ds>23.92</avg_snr_ds>
+                <ses_us_rec>0</ses_us_rec>
+                <dsl_type>ADSL</dsl_type>
+                <distinct_modulation>1</distinct_modulation>
+                <cv_us_sum>0</cv_us_sum>
+                <no_of_dominant_modulation>24</no_of_dominant_modulation>
+                <datum>2015-06-22</datum>
+                <avg_snr_us>16.14</avg_snr_us>
+                <es_us_sum>0</es_us_sum>
+                <ses_ds_sum>0</ses_ds_sum>
+                <avg_pwr_ds>5.79</avg_pwr_ds>
+                <ses_us_stdev>0</ses_us_stdev>
+                <min_bitrate_ds>5212.00</min_bitrate_ds>
+                <dslam_name>100226636</dslam_name>
+                <cv_ds_sum>0</cv_ds_sum>
+                <min_att_bitrate_us>1163.00</min_att_bitrate_us>
+                <customer_id>0007776361</customer_id>
+                <fec_ds_sum>2</fec_ds_sum>
+                <min_attenuation_us>10.20</min_attenuation_us>
+                <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                <fec_ds_n>77</fec_ds_n>
+                <ses_ds_24h>0</ses_ds_24h>
+                <es_ds_sum>0</es_ds_sum>
+                <es_us_rec>0</es_us_rec>
+                <sum_inits>0</sum_inits>
+                <avg_bitrate_us>574.00</avg_bitrate_us>
+                <max_pwr_us>-1.50</max_pwr_us>
+                <avg_bitrate_ds>5212.00</avg_bitrate_ds>
+                <max_attenuation_ds>15.90</max_attenuation_ds>
+                <max_bitrate_us>574.00</max_bitrate_us>
+                <vendor>ALCATEL</vendor>
+                <avg_pwr_us>-1.50</avg_pwr_us>
+            </POL_AGG_DATA>
+            <POL_AGG_DATA>
+                <max_att_bitrate_ds>21552.00</max_att_bitrate_ds>
+                <no_15min_counters>77</no_15min_counters>
+                <es_ds_stdev>0</es_ds_stdev>
+                <es_us_stdev>0</es_us_stdev>
+                <ses_ds_stdev>0</ses_ds_stdev>
+                <max_snr_ds>24.10</max_snr_ds>
+                <fec_us_stdev>0</fec_us_stdev>
+                <dslam_ip>10.188.48.23</dslam_ip>
+                <min_att_bitrate_ds>21552.00</min_att_bitrate_ds>
+                <avg_att_bitrate_us>1170.00</avg_att_bitrate_us>
+                <no_1hour_counters>24</no_1hour_counters>
+                <cv_ds_n>0</cv_ds_n>
+                <min_pwr_ds>5.60</min_pwr_ds>
+                <min_snr_ds>22.30</min_snr_ds>
+                <ses_us_sum>0</ses_us_sum>
+                <avg_attenuation_ds>15.90</avg_attenuation_ds>
+                <max_attenuation_us>10.20</max_attenuation_us>
+                <ses_us_n>0</ses_us_n>
+                <es_ds_n>0</es_ds_n>
+                <spectrum_profile>spectrumT6AutoLPL1</spectrum_profile>
+                <min_pwr_us>-1.50</min_pwr_us>
+                <min_bitrate_us>574.00</min_bitrate_us>
+                <fec_us_n>0</fec_us_n>
+                <min_attenuation_ds>15.90</min_attenuation_ds>
+                <min_snr_us>16.00</min_snr_us>
+                <max_snr_us>16.30</max_snr_us>
+                <ses_ds_rec>0</ses_ds_rec>
+                <cv_us_stdev>0</cv_us_stdev>
+                <services>INT5</services>
+                <code_of_dominant_modulation>3</code_of_dominant_modulation>
+                <avg_attenuation_us>10.20</avg_attenuation_us>
+                <iptv>0</iptv>
+                <ses_ds_n>0</ses_ds_n>
+                <voip>0</voip>
+                <max_att_bitrate_us>1173.00</max_att_bitrate_us>
+                <fec_us_sum>0</fec_us_sum>
+                <max_pwr_ds>5.70</max_pwr_ds>
+                <fec_ds_stdev>0.45</fec_ds_stdev>
+                <cv_us_n>0</cv_us_n>
+                <cv_us_rec>0</cv_us_rec>
+                <cv_ds_stdev>0</cv_ds_stdev>
+                <ses_us_24h>0</ses_us_24h>
+                <es_us_n>0</es_us_n>
+                <cv_ds_rec>0</cv_ds_rec>
+                <platforma>ALCATEL ISAM</platforma>
+                <dslam_slot_port>100226636/6/39</dslam_slot_port>
+                <pol_dslam_slot_port>100226636/6/39</pol_dslam_slot_port>
+                <fec_us_rec>0</fec_us_rec>
+                <max_bitrate_ds>5212.00</max_bitrate_ds>
+                <es_ds_rec>0</es_ds_rec>
+                <fec_ds_rec>1</fec_ds_rec>
+                <avg_att_bitrate_ds>21552.00</avg_att_bitrate_ds>
+                <internet>1</internet>
+                <dslam_type>ISAM 7302 FD</dslam_type>
+                <avg_snr_ds>23.80</avg_snr_ds>
+                <ses_us_rec>0</ses_us_rec>
+                <dsl_type>ADSL</dsl_type>
+                <distinct_modulation>1</distinct_modulation>
+                <cv_us_sum>0</cv_us_sum>
+                <no_of_dominant_modulation>24</no_of_dominant_modulation>
+                <datum>2015-06-23</datum>
+                <avg_snr_us>16.16</avg_snr_us>
+                <es_us_sum>0</es_us_sum>
+                <ses_ds_sum>0</ses_ds_sum>
+                <avg_pwr_ds>5.68</avg_pwr_ds>
+                <ses_us_stdev>0</ses_us_stdev>
+                <min_bitrate_ds>5212.00</min_bitrate_ds>
+                <dslam_name>100226636</dslam_name>
+                <cv_ds_sum>0</cv_ds_sum>
+                <min_att_bitrate_us>1166.00</min_att_bitrate_us>
+                <customer_id>0007776361</customer_id>
+                <fec_ds_sum>4</fec_ds_sum>
+                <min_attenuation_us>10.20</min_attenuation_us>
+                <service_profile>hsi5m-5216k576k-d8d2-i1i05</service_profile>
+                <fec_ds_n>77</fec_ds_n>
+                <ses_ds_24h>0</ses_ds_24h>
+                <es_ds_sum>0</es_ds_sum>
+                <es_us_rec>0</es_us_rec>
+                <sum_inits>0</sum_inits>
+                <avg_bitrate_us>574.00</avg_bitrate_us>
+                <max_pwr_us>-1.50</max_pwr_us>
+                <avg_bitrate_ds>5212.00</avg_bitrate_ds>
+                <max_attenuation_ds>15.90</max_attenuation_ds>
+                <max_bitrate_us>574.00</max_bitrate_us>
+                <vendor>ALCATEL</vendor>
+                <avg_pwr_us>-1.50</avg_pwr_us>
+            </POL_AGG_DATA>
+        </POL_AGG_HISTORY>
+    </POLapiAGGreq>
+
+    <POLapiPhyreq>
+        <!--Request-->
+        <xmlAPIstart Type="POLapiPhyreq" Username="bbsa" Password="B1%6Zhl098p">
+            <POLapiPhyreq>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <customer_id>7776361</customer_id>
+                <StatsType>1</StatsType>
+                <History>3</History>
+            </POLapiPhyreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <POLapiPhyResponse>
+            <DeviceData>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <SlotPort>6/39</SlotPort>
+            </DeviceData>
+            <POL>
+                <name>bitrateUS</name>
+                <StatsDescr>bitrate_US</StatsDescr>
+                <MeasurementUnit>bps</MeasurementUnit>
+            </POL>
+        </POLapiPhyResponse>
+    </POLapiPhyreq>
+
+    <POLapiPMreq>
+        <!--Request-->
+        <xmlAPIstart Type="POLapiPMreq" Username="bbsa" Password="B1%6Zhl098p">
+            <POLapiPMreq>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+                <customer_id>7776361</customer_id>
+                <StatsType>1</StatsType>
+                <History>3</History>
+            </POLapiPMreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <POLapiPMResponse>
+            <DeviceData>
+                <DeviceName>100226636</DeviceName>
+                <Slot>6</Slot>
+                <Port>39</Port>
+            </DeviceData>
+            <POL>
+                <name>bitrateUS</name>
+                <StatsDescr>bitrate_US</StatsDescr>
+                <MeasurementUnit>bps</MeasurementUnit>
+            </POL>
+        </POLapiPMResponse>
+    </POLapiPMreq>
+
+    <TRAPreq>
+        <!--Request-->
+        <xmlAPIstart Type="TRAPreq" Username="bbsa" Password="B1%6Zhl098p">
+            <TRAPreq>
+                <customer_id>7776361</customer_id>
+                <HistoryDays>3</HistoryDays>
+            </TRAPreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <TRAPres>
+            <err>NE IP not found.</err>
+        </TRAPres>
+
+
+        <!--Request-->
+        <xmlAPIstart Type="TRAPreq" Username="bbsa" Password="B1%6Zhl098p">
+            <TRAPreq>
+                <DeviceName>89665871</DeviceName>
+                <Slot>303</Slot>
+                <Port>56</Port>
+                <HistoryDays>3</HistoryDays>
+            </TRAPreq>
+        </xmlAPIstart>
+
+        <!--Response-->
+        <TRAPD_HISTORY>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>1</problem>
+                <vrijeme>2015-06-21T07:53:37</vrijeme>
+                <datum>2015-06-21</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>0</problem>
+                <vrijeme>2015-06-21T07:54:13</vrijeme>
+                <datum>2015-06-21</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>1</problem>
+                <vrijeme>2015-06-22T14:04:01</vrijeme>
+                <datum>2015-06-22</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>0</problem>
+                <vrijeme>2015-06-22T14:04:40</vrijeme>
+                <datum>2015-06-22</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>1</problem>
+                <vrijeme>2015-06-23T10:49:24</vrijeme>
+                <datum>2015-06-23</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>0</problem>
+                <vrijeme>2015-06-23T10:49:57</vrijeme>
+                <datum>2015-06-23</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>1</problem>
+                <vrijeme>2015-06-23T16:23:56</vrijeme>
+                <datum>2015-06-23</datum>
+            </TRAPD_EVENT>
+            <TRAPD_EVENT>
+                <dslam_ip>10.188.6.3</dslam_ip>
+                <dslam_name>BA_JARB-02</dslam_name>
+                <dslam_slot_port>BA_JARB-02/303/56</dslam_slot_port>
+                <platforma>NOKIA SIEMENS HIX 5300</platforma>
+                <orig_specific_problem>LOL</orig_specific_problem>
+                <problem>0</problem>
+                <vrijeme>2015-06-23T16:24:31</vrijeme>
+                <datum>2015-06-23</datum>
+            </TRAPD_EVENT>
+        </TRAPD_HISTORY>
+    </TRAPreq>
+
+</blos_test>
+
+<POLapiPMResponse>
+<DeviceData>
+    <DeviceName>100226636</DeviceName>
+    <Slot>6</Slot>
+    <Port>39</Port>
+</DeviceData>
+<POL>
+    <name>USESs</name>
+    <StatsDescr>US_ESs</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSFEC</name>
+    <StatsDescr>DS_FEC</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USLoss</name>
+    <StatsDescr>US_Loss</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSUasL</name>
+    <StatsDescr>DS_UasL</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSLprs</name>
+    <StatsDescr>DS_Lprs</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USFEC</name>
+    <StatsDescr>US_FEC</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USSesL</name>
+    <StatsDescr>US_SesL</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSCRC</name>
+    <StatsDescr>DS_CRC</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSSesL</name>
+    <StatsDescr>DS_SesL</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USUasL</name>
+    <StatsDescr>US_UasL</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSLofs</name>
+    <StatsDescr>DS_Lofs</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSESs</name>
+    <StatsDescr>DS_ESs</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>DSLoss</name>
+    <StatsDescr>DS_Loss</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USLofs</name>
+    <StatsDescr>US_Lofs</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USCRC</name>
+    <StatsDescr>US_CRC</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USLols</name>
+    <StatsDescr>US_Lols</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>USInits</name>
+    <StatsDescr>US_Inits</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+</POLapiPMResponse>
+
+<POLapiPhyResponse>
+<DeviceData>
+    <DeviceName>100226636</DeviceName>
+    <Slot>6</Slot>
+    <Port>39</Port>
+    <SlotPort>6/39</SlotPort>
+</DeviceData>
+<POL>
+    <name>Attenuation_US</name>
+    <StatsDescr>Attenuation_US</StatsDescr>
+    <MeasurementUnit>dB</MeasurementUnit>
+</POL>
+<POL>
+    <name>PwrOut_DS</name>
+    <StatsDescr>PwrOut_DS</StatsDescr>
+    <MeasurementUnit>dBm</MeasurementUnit>
+</POL>
+<POL>
+    <name>Attenuation_DS</name>
+    <StatsDescr>Attenuation_DS</StatsDescr>
+    <MeasurementUnit>dB</MeasurementUnit>
+</POL>
+<POL>
+    <name>PwrOut_US</name>
+    <StatsDescr>PwrOut_US</StatsDescr>
+    <MeasurementUnit>dBm</MeasurementUnit>
+</POL>
+<POL>
+    <name>bitrateUS</name>
+    <StatsDescr>bitrate_US</StatsDescr>
+    <MeasurementUnit>bps</MeasurementUnit>
+</POL>
+<POL>
+    <name>bitrateDS</name>
+    <StatsDescr>bitrate_DS</StatsDescr>
+    <MeasurementUnit>bps</MeasurementUnit>
+</POL>
+<POL>
+    <name>PortType</name>
+    <StatsDescr>dslam_port_type</StatsDescr>
+    <MeasurementUnit></MeasurementUnit>
+</POL>
+<POL>
+    <name>snrDS</name>
+    <StatsDescr>SNR_DS</StatsDescr>
+    <MeasurementUnit>dB</MeasurementUnit>
+</POL>
+<POL>
+    <name>snrUS</name>
+    <StatsDescr>SNR_US</StatsDescr>
+    <MeasurementUnit>dB</MeasurementUnit>
+</POL>
+<POL>
+    <name>MAXattUS</name>
+    <StatsDescr>max_attainable_US</StatsDescr>
+    <MeasurementUnit>bps</MeasurementUnit>
+</POL>
+<POL>
+    <name>MAXattDS</name>
+    <StatsDescr>max_attainable_DS</StatsDescr>
+    <MeasurementUnit>bps</MeasurementUnit>
+</POL>
+</POLapiPhyResponse>

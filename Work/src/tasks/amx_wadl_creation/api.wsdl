@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2015. All rights reserved for autor and owner of email domain JLyc.Development@gmail.com.
+  -->
+
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tibex="http://www.tibco.com/bs3.2/extensions" xmlns:tns="http://www.t-mobile.sk/delegation-api" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://www.telekom.sk/delegations/api" xmlns:xsd2="http://www.t-mobile.sk/delegation-api/input/xsd" name="Delegations_API" targetNamespace="http://www.t-mobile.sk/delegation-api" tibex:src="file:/D:/SVN/TIBCO/Releases/Testing/branches/WaterBear_Drop5/Delegacie/custom_v003_withNS/api.wsdl">
+
+	<!-- Schema -->
+	<types>
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telekom.sk/delegations/api">
+			<xsd:include schemaLocation="apiModel.xsd"/>
+		</xsd:schema>
+		
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.t-mobile.sk/delegation-api/input/xsd">
+			<xsd:include schemaLocation="apiExtModel.xsd"/>
+		</xsd:schema>
+	</types>
+
+	<!-- Messages -->
+	<!-- remodelate input -->
+	<message name="searchForTemplatesInSG">
+		<part element="xsd2:templates" name="__body"/>
+	</message>
+	<message name="searchForTemplatesIn">
+		<part name="id" type="xsd:string"/>
+		<part name="type" type="xsd:string"/>
+		<part name="status" type="xsd:string"/>
+		<part name="ownerUid" type="xsd:string"/>
+		<part name="validFrom" type="xsd:string"/>
+		<part name="withGrantsConfiguration" type="xsd:boolean"/>
+	</message>
+	<message name="searchForTemplatesOut">
+		<part element="xsd1:templatesResponse" name="__body"/>
+	</message>
+	
+	<message name="createTemplateIn">
+		<part element="xsd1:createTemplate" name="__body"/>
+	</message>
+	<message name="createTemplateOut">
+		<part element="xsd1:createTemplateResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="changeTemplateStatusInSG">
+		<part element="xsd2:changeTemplateExt" name="__body"/>
+	</message>
+	<message name="changeTemplateStatusIn">
+		<part name="id" type="xsd:long"/>
+		<part element="xsd1:changeTemplate" name="__body"/>
+	</message>
+	<message name="changeTemplateStatusOut">
+		<part element="xsd1:changeTemplateResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="searchForDelegableUsersInSG">
+		<part element="xsd2:delegationUser" name="__body"/>
+	</message>
+	<message name="searchForDelegableUsersIn">
+		<part name="id" type="xsd:string"/>
+		<part name="status" type="xsd:string"/>
+		<part name="emailRequested" type="xsd:string"/>
+		<part name="label" type="xsd:string"/>
+		<part name="delegatorUid" type="xsd:string"/>
+		<part name="delegeeUid" type="xsd:string"/>
+	</message>
+	<message name="searchForDelegableUsersOut">
+		<part element="xsd1:delegableUsersResponse" name="__body"/>
+	</message>
+	
+	<message name="addDelegableUserToDelegatorIn">
+		<part element="xsd1:addDelegableUserToDelegator" name="__body"/>
+	</message>
+	<message name="addDelegableUserToDelegatorOut">
+		<part element="xsd1:addDelegaleUserToDelegatorResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="changeDelegableUserStatusInSG">
+		<part element="xsd2:changeDelegableUserExt" name="__body"/>
+	</message>
+	<message name="changeDelegableUserStatusIn">
+		<part name="id" type="xsd:long"/>
+		<part element="xsd1:changeDelegableUser" name="__body"/>
+	</message>
+	<message name="changeDelegableUserStatusOut">
+		<part element="xsd1:changeDelegableUserResponse" name="__body"/>
+	</message>
+
+	<!-- remodelate input -->
+	<message name="pairInSG">
+		<part element="xsd2:delegationUserPair" name="__body"/>
+	</message>
+	<message name="pairIn">
+		<part name="pairingId" type="xsd:string"/>
+		<part name="pairedId" type="xsd:string"/>
+		<part name="status" type="xsd:string"/>
+	</message>
+	<message name="pairOut">
+		<part element="xsd1:pairResponse" name="__body"/>
+	</message>
+	
+	<message name="createDelegationsIn">
+		<part element="xsd1:createDelegations" name="__body"/>
+	</message>
+	<message name="createDelegationsOut">
+		<part element="xsd1:createDelegationsResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="searchDelegationsInSG">
+		<part element="xsd2:delegations" name="__body"/>
+    </message>
+	<message name="searchDelegationsIn">
+		<part name="ids" type="xsd:string"/>
+		<part name="entityIds" type="xsd:string"/>
+		<part name="delegationRequestId" type="xsd:string"/>
+		<part name="delegatorUid" type="xsd:string"/>
+		<part name="delegeeUid" type="xsd:string"/>
+		<part name="delegableUserId" type="xsd:string"/>
+		<part name="ownerUid" type="xsd:string"/>
+		<part name="status" type="xsd:string"/>
+		<part name="type" type="xsd:string"/>
+		<part name="templateId" type="xsd:string"/>
+		<part name="createdBy" type="xsd:string"/>
+		<part name="sourceSystem" type="xsd:string"/>
+    </message>
+	<message name="searchDelegationsOut">
+		<part element="xsd1:delegationsResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="updateDelegationsInSG">
+		<part element="xsd2:updateDelegationExt" name="__body"/>
+	</message>
+	<message name="updateDelegationsIn">
+		<part name="id" type="xsd:long"/>
+		<part element="xsd1:updateDelegation" name="__body"/>
+	</message>
+	<message name="updateDelegationsOut">
+		<part element="xsd1:updateDelegationResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="searchDelegationRequestsInSG">
+		<part element="xsd2:delegationRequests" name="__body"/>
+	</message>
+	<message name="searchDelegationRequestsIn">
+		<part name="id" type="xsd:string"/>
+		<part name="status" type="xsd:string"/>
+		<part name="type" type="xsd:string"/>
+		<part name="approverUid" type="xsd:string"/>
+	</message>
+	<message name="searchDelegationRequestsOut">
+		<part element="xsd1:delegationRequestsResponse" name="__body"/>
+	</message>
+	
+	<message name="createDelegationRequestIn">
+		<part element="xsd1:createDelegationRequest" name="__body"/>
+	</message>
+	<message name="createDelegationRequestOut">
+		<part element="xsd1:createDelegationRequestResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="changeDelegationRequestInSG">
+		<part element="xsd2:changeDelegationRequestExt" name="__body"/>
+	</message>
+	<message name="changeDelegationRequestIn">
+		<part name="id" type="xsd:long"/>
+		<part element="xsd1:changeDelegationRequest" name="__body"/>
+	</message>
+	<message name="changeDelegationRequestOut">
+		<part element="xsd1:changeDelegationRequestResponse" name="__body"/>
+	</message>
+	
+	<!-- remodelate input -->
+	<message name="searchForGrantsInSG">
+		<part element="xsd2:grants" name="__body"/>
+	</message>
+	<message name="searchForGrantsIn">
+		<part name="templateId" type="xsd:string"/>
+		<part name="entityTypes" type="xsd:string"/>
+		<part name="grantName" type="xsd:string"/>
+	</message>
+	<message name="searchForGrantsOut">
+		<part element="xsd1:grantsResponse" name="__body"/>
+	</message>
+	
+	<message name="getUserSettingsInSG">
+		<part element="xsd2:user" name="__body"/>
+	</message>
+	<message name="getUserSettingsIn">
+		<part name="uid" type="xsd:string"/>
+	</message>
+	<message name="getUserSettingsOut">
+		<part element="xsd1:userConfigurationResponse" name="__body"/>
+	</message>
+	
+	
+	
+	<!-- Port Types -->
+	<portType name="Delegations_API_input">
+		
+		<operation name="getTemplate">
+			<input message="tns:searchForTemplatesInSG"/>
+			<output message="tns:searchForTemplatesOut"/>
+		</operation>
+		
+		<operation name="createTemplate">
+			<input message="tns:createTemplateIn"/>
+			<output message="tns:createTemplateOut"/>
+		</operation>
+		
+		<operation name="updateTemplate">
+			<input message="tns:changeTemplateStatusInSG"/>
+			<output message="tns:changeTemplateStatusOut"/>
+		</operation>
+		
+		<operation name="getDelegableUsers">
+			<input message="tns:searchForDelegableUsersInSG"/>
+			<output message="tns:searchForDelegableUsersOut"/>
+		</operation>
+		
+		<operation name="createDelegableUser">
+			<input message="tns:addDelegableUserToDelegatorIn"/>
+			<output message="tns:addDelegableUserToDelegatorOut"/>
+		</operation>
+		
+		<operation name="updateDelegableUser">
+			<input message="tns:changeDelegableUserStatusInSG"/>
+			<output message="tns:changeDelegableUserStatusOut"/>
+		</operation>
+		
+		<operation name="getDelegableUserPair">
+			<input message="tns:pairInSG"/>
+			<output message="tns:pairOut"/>
+		</operation>
+		
+		<operation name="createDelegations">
+			<input message="tns:createDelegationsIn"/>
+			<output message="tns:createDelegationsOut"/>
+		</operation>
+		
+		<operation name="getDelegations">
+			<input message="tns:searchDelegationsInSG"/>
+			<output message="tns:searchDelegationsOut"/>
+		</operation>
+		
+		<operation name="updateDelegation">
+			<input message="tns:updateDelegationsInSG"/>
+			<output message="tns:updateDelegationsOut"/>
+		</operation>
+		
+		<operation name="getDelegationRequests">
+			<input message="tns:searchDelegationRequestsInSG"/>
+			<output message="tns:searchDelegationRequestsOut"/>
+		</operation>
+		
+		<operation name="createDelegationRequest">
+			<input message="tns:createDelegationRequestIn"/>
+			<output message="tns:createDelegationRequestOut"/>
+		</operation>
+		
+		<operation name="updateDelegationRequest">
+			<input message="tns:changeDelegationRequestInSG"/>
+			<output message="tns:changeDelegationRequestOut"/>
+		</operation>
+		
+		<operation name="getGrants">
+			<input message="tns:searchForGrantsInSG"/>
+			<output message="tns:searchForGrantsOut"/>
+		</operation>
+		
+		<operation name="getUserSettings">
+			<input message="tns:getUserSettingsInSG"/>
+			<output message="tns:getUserSettingsOut"/>
+		</operation>
+		
+	</portType>
+	
+	<portType name="Delegations_API_output">
+		
+		<operation name="searchForTemplates">
+			<input message="tns:searchForTemplatesIn"/>
+			<output message="tns:searchForTemplatesOut"/>
+		</operation>
+		
+		<operation name="createTemplate">
+			<input message="tns:createTemplateIn"/>
+			<output message="tns:createTemplateOut"/>
+		</operation>
+		
+		<operation name="changeTemplateStatus">
+			<input message="tns:changeTemplateStatusIn"/>
+			<output message="tns:changeTemplateStatusOut"/>
+		</operation>
+		
+		<operation name="searchForDelegableUsers">
+			<input message="tns:searchForDelegableUsersIn"/>
+			<output message="tns:searchForDelegableUsersOut"/>
+		</operation>
+		
+		<operation name="addDelegableUserToDelegator">
+			<input message="tns:addDelegableUserToDelegatorIn"/>
+			<output message="tns:addDelegableUserToDelegatorOut"/>
+		</operation>
+		
+		<operation name="changeDelegableUserStatus">
+			<input message="tns:changeDelegableUserStatusIn"/>
+			<output message="tns:changeDelegableUserStatusOut"/>
+		</operation>
+		
+		<operation name="pair">
+			<input message="tns:pairIn"/>
+			<output message="tns:pairOut"/>
+		</operation>
+		
+		<operation name="createDelegations">
+			<input message="tns:createDelegationsIn"/>
+			<output message="tns:createDelegationsOut"/>
+		</operation>
+		
+		<operation name="searchDelegations">
+			<input message="tns:searchDelegationsIn"/>
+			<output message="tns:searchDelegationsOut"/>
+		</operation>
+		
+		<operation name="updateDelegations">
+			<input message="tns:updateDelegationsIn"/>
+			<output message="tns:updateDelegationsOut"/>
+		</operation>
+		
+		<operation name="searchDelegationRequests">
+			<input message="tns:searchDelegationRequestsIn"/>
+			<output message="tns:searchDelegationRequestsOut"/>
+		</operation>
+		
+		<operation name="createDelegationRequest">
+			<input message="tns:createDelegationRequestIn"/>
+			<output message="tns:createDelegationRequestOut"/>
+		</operation>
+		
+		<operation name="changeDelegationRequest">
+			<input message="tns:changeDelegationRequestIn"/>
+			<output message="tns:changeDelegationRequestOut"/>
+		</operation>
+		
+		<operation name="searchForGrants">
+			<input message="tns:searchForGrantsIn"/>
+			<output message="tns:searchForGrantsOut"/>
+		</operation>
+		
+		<operation name="getUserSettings">
+			<input message="tns:getUserSettingsIn"/>
+			<output message="tns:getUserSettingsOut"/>
+		</operation>
+		
+	</portType>
+
+</definitions>

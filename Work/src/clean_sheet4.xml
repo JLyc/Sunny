@@ -1,0 +1,262 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.t-mobile.sk/oss/Measurement/xsd" xmlns:cdm="http://www.logica.com/eurotel-crm"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.t-mobile.sk/oss/Measurement/xsd"
+            xmlns:ana="http://www.t-mobile.sk/oss/Measurement/xsd">
+
+    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
+
+    <xsd:complexType name="Evaluation" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Particular evaluation of the measurement.
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="evaluation" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Particular evaluation based on the measurement. It can represents som hints or actions for the consumer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MeasurementResults" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Represent measurement results (e.g. returned by ANA via call back operation)
+
+                    Usage:
+                    This is the TIBCO object (not ANA) send to JMS for further consumers. Ana object is mapped into this.
+
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="taskId" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Id of the measurement (used for pairing this reponse to original request)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="type" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Name of measurement
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="target" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Physical address of measured ONT/Port e.g:
+                        /MSAN Surpass hiX5600 {G1100:B:E|hiX5635 NOS she_r3.8m_cxu-b_sip_o.280}#10.188.60.31/IU_ADSL72#11/xDSL#62
+
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceId" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Service Id (e.g. 0007012177)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="status" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        status of measurement
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="result" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        result of measurement
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="created" type="xsd:dateTime" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Start Time and Date of measurement
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="finished" type="xsd:dateTime" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        End Time and Date of measurement
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="category" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        usuall values: PROVISIONING or MAINTENANCE
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="profile" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Name of service profile (e.g. hsi5m)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="paramValues" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        list of parameters
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="measuredValue" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        value measured (cumulative). It is not known if used.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="simpleMeasurement" type="ana:SimpleMeasurement" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="evaluations" type="ana:Evaluation" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="InitiateMeasurementRequest" >
+        <xsd:sequence>
+            <xsd:element name="taskTypeName" type="xsd:string" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Name of the measurement. Should not be used (to invoke default emasurement)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="paramValues" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        parameters delimited by # (if requried by measurement) (not used by Motive)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceId" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Service Id (e.g. 0007012177) Input parameter for Cramer procedure
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="category" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        values: PROVISIONING or MAINTENANCE. Motive will use just &quot;MAINTENANCE&quot;
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="profileName" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Name of the profile assigned to the port determinig services:
+                        hag_4096/512
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="InitiateMeasurementFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="InitiateMeasurementMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ana:InitiateMeasurementRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="InitiateMeasurementMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ana:InitiateMeasurementResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="InitiateMeasurementResponse" >
+        <xsd:sequence>
+            <xsd:element name="taskId" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Identifier of the measurement task
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SimpleMeasurement" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Simple measurement task
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="taskId" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Identifier of the measurement subtask
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="type" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        measured attribute (what was measured)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="paramValues" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        list of parameters
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="measuredValue" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        what value of the type was measured
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="result" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Result of the simple task
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

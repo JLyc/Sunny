@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+
+<xsd:schema xmlns="http://www.st.sk/oss/ossfindservicenoderesponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.st.sk/oss/ossfindservicenoderequest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sch2="http://www.st.sk/oss/ossfindservicenoderesponse" xmlns:sch1="http://www.st.sk/oss/osscommon" xmlns:cmn="http://www.st.sk/oss/osscommon" xmlns:sch0="http://www.st.sk/oss/ossfindservicenoderequest" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.st.sk/oss/ossfindservicenoderesponse" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.st.sk/oss/osscommon"/>
+    <xsd:import namespace="http://www.st.sk/oss/ossfindservicenoderequest"/>
+    <xsd:import namespace="http://www.st.sk/oss/osscommon"/>
+    <xsd:element name="ossEndPointResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cmn:ossEndPointHeader">
+                    <xsd:sequence>
+                        <xsd:element name="servicePointId" type="xsd:string"/>
+                        <xsd:element name="customer" type="xsd:string"/>
+                        <xsd:element name="operationStatus" type="cmn:operationStatus"/>
+                        <xsd:element name="nodeItem" type="cmn:nodeItem"/>
+                        <xsd:element name="portItem" type="cmn:portItem"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

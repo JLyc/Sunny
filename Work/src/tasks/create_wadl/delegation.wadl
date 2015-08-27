@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://wadl.dev.java.net/2009/02"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:dlg="http://www.t-mobile.sk/delegation/xsd">
+    <grammars>
+        <include href="delegation.wadl/xsd0.xsd">
+            <doc xml:lang="en" title="Generated"/>
+        </include>
+        <include href="delegation.xsd"/>
+    </grammars>
+    <resources base="http://url.sk">
+        <resource path="/template">
+            <method name="POST" id="getTemplate">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="dlg:templates"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="templatesResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="createTemplate">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createTemplate"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createTemplateResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateTemplate">
+                <request>
+                    <param type="xsd:long" style="query" name="id" required="true"/>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="changeTemplateStatus"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="changeTemplateStatusResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/delegableUser">
+            <method name="POST" id="createDelegableUser">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="addDelegableUserToDelegator"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="addDelegaleUserToDelegatorResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegableUsers">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="dlg:delegationUser"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="delegableUsersResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegableUser">
+                <request>
+                    <param type="xsd:long" style="query" name="id" required="true"/>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml"
+                                        element="changeDelegableUserStatus"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml"
+                                        element="changeDelegableUserStatusResponse"/>
+                </response>
+            </method>
+            <resource path="/pair">
+                <method name="POST" id="getDelegableUserPair">
+                    <request>
+                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                            mediaType="application/xml" element="dlg:delegationUserPair"/>
+                    </request>
+                    <response>
+                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                            mediaType="application/xml" element="pairResponse"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/delegation">
+            <method name="POST" id="createDelegations">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createDelegations"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createDelegationsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegations">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="dlg:delegations"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="delegationsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegation">
+                <request>
+                    <param type="xsd:long" style="query" name="id" required="true"/>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="updateDelegation"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="updateDelegationResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/delegationRequest">
+            <method name="POST" id="createDelegationRequest">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createDelegationRequest"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="createDelegationRequestResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegationRequest">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="dlg:delegationRequests"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="delegationRequestsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegationRequest">
+                <request>
+                    <param type="xsd:long" style="query" name="id" required="true"/>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="changeDelegationRequestStatus"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml" element="changeDelegationRequestStateResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/grant">
+            <method name="POST" id="getGrants">
+                <request>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml"
+                                        element="dlg:grants"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml"
+                                        element="grantsResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/user/settings">
+            <method name="POST" id="getUserSettings">
+                <response>
+                    <param type="xsd:long" style="query" name="id" required="true"/>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns=""
+                                        mediaType="application/xml"
+                                        element="userConfigurationResponse"/>
+                </response>
+            </method>
+        </resource>
+    </resources>
+</application>
+

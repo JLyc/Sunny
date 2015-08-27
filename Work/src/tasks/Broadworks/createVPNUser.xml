@@ -1,0 +1,89 @@
+<!--
+  ~ Copyright (c) 2015. All rights reserved for autor and owner of email domain JLyc.Development@gmail.com.
+  -->
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.t-mobile.sk/soa/broadworksServices/xsd" xmlns:eur="http://www.logica.com/eurotel-crm">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <xsd:CreateVPNUserMessageIn>
+            <eur:Header>
+                <eur:version>1.0</eur:version>
+                <eur:originator>TIBCO</eur:originator>
+                <eur:operation>create</eur:operation>
+            </eur:Header>
+            <!--Optional:-->
+            <xsd:Body>
+                <xsd:enterpriseId>MOBIL_VPN</xsd:enterpriseId>
+                <xsd:groupId>MOBIL_VPN_1</xsd:groupId>
+                <xsd:userId>421905123001@as</xsd:userId>
+                <!--Optional:-->
+                <xsd:customer xsi:type="eur:Person">
+                    <eur:id>BSCS-PRD-CUSTOMER-1</eur:id>
+                    <eur:name>name</eur:name>
+                    <eur:password>000000</eur:password>
+                    <eur:address>
+                        <eur:streetName>cela addresa</eur:streetName>
+                    </eur:address>
+                    <eur:contact>
+                        <eur:title>Mrs</eur:title>
+                        <eur:mobilePhone>421905123001</eur:mobilePhone>
+                    </eur:contact>
+                    <eur:firstname>firstname</eur:firstname>
+                </xsd:customer>
+                <!--1 or more repetitions:-->
+                <xsd:directoryNumber>
+                    <eur:type>VOICE</eur:type>
+                    <eur:msisdn>0905123001</eur:msisdn>
+                </xsd:directoryNumber>
+                <xsd:directoryNumber>
+                    <eur:type>SHORTCODE</eur:type>
+                    <eur:msisdn>0905123001</eur:msisdn>
+                </xsd:directoryNumber>
+                <!--Optional:-->
+                <xsd:userDevice>
+                    <xsd:name>421905123001_dev</xsd:name>
+                    <xsd:type>Generic SIP Phone</xsd:type>
+                    <xsd:protocol>SIP 2.0</xsd:protocol>
+                    <xsd:transportProtocol>Unspecified</xsd:transportProtocol>
+                    <xsd:linePort>421905123001@as</xsd:linePort>
+                </xsd:userDevice>
+                <!--Zero or more repetitions:-->
+                <xsd:userServicePackage>
+                    <xsd:name>Mobil_Service_Pack</xsd:name>
+                </xsd:userServicePackage>
+                <!--Zero or more repetitions:-->
+                <xsd:mobileIdentity>
+                    <!--Optional:-->
+                    <xsd:description>description</xsd:description>
+                    <xsd:isPrimary>true</xsd:isPrimary>
+                    <xsd:enableAlerting>true</xsd:enableAlerting>
+                    <xsd:alertAgentCalls>true</xsd:alertAgentCalls>
+                    <xsd:alertClickToDialCalls>true</xsd:alertClickToDialCalls>
+                    <xsd:alertGroupPagingCalls>true</xsd:alertGroupPagingCalls>
+                    <xsd:useMobilityCallingLineID>true</xsd:useMobilityCallingLineID>
+                    <xsd:enableDiversionInhibitor>false</xsd:enableDiversionInhibitor>
+                    <xsd:requireAnswerConfirmation>false</xsd:requireAnswerConfirmation>
+                    <xsd:broadworksCallControl>true</xsd:broadworksCallControl>
+                    <xsd:useSettingLevel>Group</xsd:useSettingLevel>
+                    <xsd:denyCallOriginations>false</xsd:denyCallOriginations>
+                    <xsd:denyCallTerminations>false</xsd:denyCallTerminations>
+                    <xsd:deviceToRing>Mobile</xsd:deviceToRing>
+                    <xsd:includeSharedCallAppearance>true</xsd:includeSharedCallAppearance>
+                    <xsd:includeBroadworksAnywhere>true</xsd:includeBroadworksAnywhere>
+                    <xsd:includeExecutiveAssistant>true</xsd:includeExecutiveAssistant>
+                    <xsd:enableCallAnchoring>true</xsd:enableCallAnchoring>
+                    <xsd:directoryNumber>
+                        <eur:type>VOICE</eur:type>
+                        <eur:msisdn>0905123001</eur:msisdn>
+                    </xsd:directoryNumber>
+                    <xsd:mobileNumberAlerted>
+                        <eur:msisdn>0905123001</eur:msisdn>
+                    </xsd:mobileNumberAlerted>
+                </xsd:mobileIdentity>
+                <xsd:serviceSettings>
+                    <eur:name>Mobil_Basic</eur:name>
+                </xsd:serviceSettings>
+            </xsd:Body>
+        </xsd:CreateVPNUserMessageIn>
+    </soapenv:Body>
+</soapenv:Envelope>

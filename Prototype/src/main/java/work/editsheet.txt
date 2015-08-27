@@ -1,0 +1,35 @@
+Welcome JUnit writer show me if you are worthy of my knowleadge!
+Show me your JUnit framework! Ok you have it it doesent matter if it's java project or jar file.
+But you will need more then this framework, come back when you get your procces you want test.
+I see you got your procces, but if you want train before you make yours, here take my old one.
+ITEM OBTAINED "WaterBear_4/Processes/Request Reply/Siebel/SiebelAddressService_Read".
+Now you need use your TIBCO designer to open it.
+Aaah you got it i see you have potential. Check if your porjlib is valid and extract (save) WSDL from SiebelAddressService_Read.
+Your steady hands amuse me, go on and open WSDL at SoapUI to get request request message.
+Here comes test you have to pass in order to continue learning. Ready u are young padawan ?
+Run SiebelAddressService_Read and Set Mock Driver precess.
+Impossible you make it.
+Now take this as reward. You earn it.
+ITEM OBTAINED "GetAddress.java"
+Now try it run to see result of you work. Green means you posses great wisdom and knowleadge, Red on other hand means you are not worthy and you
+tried cheat me!
+
+
+
+
+
+validation error: unexpected content "Envelope"; expected "GetAddressMessageIn"   (COMPLEX_E_UNEXPECTED_CONTENT) at /getAddressesSoapIn[1]/inputPar[1]/SOAP-ENV:Envelope[1]
+unexpected content "Envelope"; expected "GetAddressMessageIn"
+
+
+
+
+
+
+
+
+
+
+
+
+

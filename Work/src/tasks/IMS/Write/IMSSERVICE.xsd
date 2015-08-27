@@ -1,0 +1,107 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.t-mobile.sk/soa/IMSService/xsd"
+            xmlns:cdm="http://www.logica.com/eurotel-crm"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.t-mobile.sk/soa/IMSService/xsd"
+            xmlns:ims="http://www.t-mobile.sk/soa/IMSService/xsd"
+            xmlns:ss="http://uri.etsi.org/ngn/params/xml/simservs/xcap">
+
+    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
+    <xsd:import namespace="http://uri.etsi.org/ngn/params/xml/simservs/xcap" schemaLocation="simservs.xsd"/>
+
+    <xsd:element name="GetIMSServicesMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ims:GetIMSServicesRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetIMSServicesMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ims:GetIMSServicesResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetIMSServicesFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetIMSServicesRequest" >
+        <xsd:sequence>
+            <xsd:element name="MSISDN" type="xsd:string" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetIMSServicesResponse" >
+        <xsd:sequence>
+            <xsd:element ref="ss:simservs" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SetIMSServicesResponse" >
+        <xsd:sequence>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="SetIMSServicesFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SetIMSServicesMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ims:SetIMSServicesRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SetIMSServicesMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="ims:SetIMSServicesResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="SetIMSServicesRequest" >
+        <xsd:sequence>
+            <xsd:element name="MSISDN" type="xsd:string" nillable="false"/>
+            <xsd:element ref="ss:simservs" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

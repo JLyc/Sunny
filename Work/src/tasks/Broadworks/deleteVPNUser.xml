@@ -1,0 +1,29 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.t-mobile.sk/soa/broadworksServices/xsd" xmlns:eur="http://www.logica.com/eurotel-crm">
+<soapenv:Header/>
+<soapenv:Body>
+    <xsd:DeleteVPNUserMessageIn>
+        <eur:Header>
+            <eur:version>1.0</eur:version>
+            <eur:originator>TIBCO</eur:originator>
+            <eur:operation>create</eur:operation>
+        </eur:Header>
+        <!--Optional:-->
+        <xsd:Body>
+            <xsd:enterpriseId>MOBIL_VPN</xsd:enterpriseId>
+            <xsd:groupId>MOBIL_VPN_1</xsd:groupId>
+            <xsd:userId>421905123001@as</xsd:userId>
+            <xsd:directoryNumber>
+                <eur:type>VOICE</eur:type>
+                <eur:msisdn>0905123001</eur:msisdn>
+            </xsd:directoryNumber>
+            <xsd:directoryNumber>
+                <eur:type>SHORTCODE</eur:type>
+                <eur:msisdn>0905123001</eur:msisdn>
+            </xsd:directoryNumber>
+            <xsd:userDevice>
+                <xsd:name>421905123001_dev</xsd:name>
+            </xsd:userDevice>
+        </xsd:Body>
+    </xsd:DeleteVPNUserMessageIn>
+</soapenv:Body>
+</soapenv:Envelope>

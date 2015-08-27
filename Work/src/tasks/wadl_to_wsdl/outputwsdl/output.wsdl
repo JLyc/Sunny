@@ -18,7 +18,7 @@
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
-             >
+        >
 
     <!-- Schema -->
     <types>
@@ -45,18 +45,18 @@
             <xsd:element name="delegation">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element type="xsd:string"  name="ids" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="entityIds" minOccurs="0"/>
-                        <xsd:element type="xsd:long"  name="delegationRequestId" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="delegatorUid" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="delegeeUid" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="delegableUserId" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="ownerUid" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="status" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="type" minOccurs="0"/>
-                        <xsd:element type="xsd:long"  name="templateId" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="createdBy" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="sourceSystem" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="ids" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="entityIds" minOccurs="0"/>
+                        <xsd:element type="xsd:long" name="delegationRequestId" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="delegatorUid" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="delegeeUid" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="delegableUserId" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="ownerUid" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="status" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="type" minOccurs="0"/>
+                        <xsd:element type="xsd:long" name="templateId" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="createdBy" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="sourceSystem" minOccurs="0"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -81,7 +81,7 @@
                         <xsd:element type="xsd:long" name="id" minOccurs="0"/>
                         <xsd:element type="xsd:string" name="status" minOccurs="0"/>
                         <xsd:element type="xsd:string" name="type" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="approverUid" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="approverUid" minOccurs="0"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -107,7 +107,7 @@
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element type="xsd:long" name="pairingId" minOccurs="0"/>
-                        <xsd:element type="xsd:string"  name="pairedId" minOccurs="0"/>
+                        <xsd:element type="xsd:string" name="pairedId" minOccurs="0"/>
                         <xsd:element type="xsd:string" name="status" minOccurs="0"/>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -221,390 +221,385 @@
     </message>
 
 
-
     <!-- Port Types -->
     <portType name="Delegations_APIPortType">
 
         <operation name="searchForTemplates">
-            <input message="tns:searchForTemplatesIn" />
-            <output message="tns:searchForTemplatesOut" />
+            <input message="tns:searchForTemplatesIn"/>
+            <output message="tns:searchForTemplatesOut"/>
         </operation>
 
         <operation name="createTemplate">
-            <input message="tns:createTemplateIn" />
-            <output message="tns:createTemplateOut" />
+            <input message="tns:createTemplateIn"/>
+            <output message="tns:createTemplateOut"/>
         </operation>
 
         <operation name="changeTemplateStatus">
-            <input message="tns:changeTemplateStatusIn" />
-            <output message="tns:changeTemplateStatusOut" />
+            <input message="tns:changeTemplateStatusIn"/>
+            <output message="tns:changeTemplateStatusOut"/>
         </operation>
 
         <operation name="searchDelegations">
-            <input message="tns:searchDelegationsIn" />
-            <output message="tns:searchDelegationsOut" />
+            <input message="tns:searchDelegationsIn"/>
+            <output message="tns:searchDelegationsOut"/>
         </operation>
 
         <operation name="createDelegations">
-            <input message="tns:createDelegationsIn" />
-            <output message="tns:createDelegationsOut" />
+            <input message="tns:createDelegationsIn"/>
+            <output message="tns:createDelegationsOut"/>
         </operation>
 
         <operation name="updateDelegations">
-            <input message="tns:updateDelegationsIn" />
-            <output message="tns:updateDelegationsOut" />
+            <input message="tns:updateDelegationsIn"/>
+            <output message="tns:updateDelegationsOut"/>
         </operation>
 
         <operation name="searchForGrants">
-            <input message="tns:searchForGrantsIn" />
-            <output message="tns:searchForGrantsOut" />
+            <input message="tns:searchForGrantsIn"/>
+            <output message="tns:searchForGrantsOut"/>
         </operation>
 
         <operation name="getUserSettings">
-            <output message="tns:getUserSettingsOut" />
+            <output message="tns:getUserSettingsOut"/>
         </operation>
 
         <operation name="createDelegationRequest">
-            <input message="tns:createDelegationRequestIn" />
-            <output message="tns:createDelegationRequestOut" />
+            <input message="tns:createDelegationRequestIn"/>
+            <output message="tns:createDelegationRequestOut"/>
         </operation>
 
         <operation name="searchDelegationRequests">
-            <input message="tns:searchDelegationRequestsIn" />
-            <output message="tns:searchDelegationRequestsOut" />
+            <input message="tns:searchDelegationRequestsIn"/>
+            <output message="tns:searchDelegationRequestsOut"/>
         </operation>
 
         <operation name="changeDelegationRequestState">
-            <input message="tns:changeDelegationRequestStateIn" />
-            <output message="tns:changeDelegationRequestStateOut" />
+            <input message="tns:changeDelegationRequestStateIn"/>
+            <output message="tns:changeDelegationRequestStateOut"/>
         </operation>
 
         <operation name="addDelegableUserToDelegator">
-            <input message="tns:addDelegableUserToDelegatorIn" />
-            <output message="tns:addDelegableUserToDelegatoreOut" />
+            <input message="tns:addDelegableUserToDelegatorIn"/>
+            <output message="tns:addDelegableUserToDelegatoreOut"/>
         </operation>
 
         <operation name="searchForDelegableUsers">
-            <input message="tns:searchForDelegableUsersIn" />
-            <output message="tns:searchForDelegableUsersOut" />
+            <input message="tns:searchForDelegableUsersIn"/>
+            <output message="tns:searchForDelegableUsersOut"/>
         </operation>
 
         <operation name="pair">
-            <input message="tns:pairIn" />
-            <output message="tns:pairOut" />
+            <input message="tns:pairIn"/>
+            <output message="tns:pairOut"/>
         </operation>
 
         <operation name="changeDelegableUserStatus">
-            <input message="tns:changeDelegableUserStatusIn" />
-            <output message="tns:changeDelegableUserStatusOut" />
+            <input message="tns:changeDelegableUserStatusIn"/>
+            <output message="tns:changeDelegableUserStatusOut"/>
         </operation>
 
     </portType>
 
 
-<!--    &lt;!&ndash; Bindings &ndash;&gt;
-    <binding name="Delegations_APIPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <!--    &lt;!&ndash; Bindings &ndash;&gt;
+        <binding name="Delegations_APIPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
+            <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 
-        <operation name="searchForTemplates">
-            <soap:operation soapAction="searchForTemplates" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="createTemplate">
-            <soap:operation soapAction="createTemplate" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="changeTemplateStatus">
-            <soap:operation soapAction="changeTemplateStatus" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="searchDelegations">
-            <soap:operation soapAction="searchDelegations" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="createDelegations">
-            <soap:operation soapAction="createDelegations" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="updateDelegations">
-            <soap:operation soapAction="updateDelegations" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="searchForGrants">
-            <soap:operation soapAction="searchForGrants" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="getUserSettings">
-            <soap:operation soapAction="getUserSettings" style="document" />
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="createDelegationRequest">
-            <soap:operation soapAction="createDelegationRequest" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="searchDelegationRequests">
-            <soap:operation soapAction="searchDelegationRequests" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="changeDelegationRequestState">
-            <soap:operation soapAction="changeDelegationRequestState" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="addDelegableUserToDelegator">
-            <soap:operation soapAction="addDelegableUserToDelegator" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="searchForDelegableUsers">
-            <soap:operation soapAction="searchForDelegableUsers" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-    </binding>-->
+            <operation name="searchForTemplates">
+                <soap:operation soapAction="searchForTemplates" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="createTemplate">
+                <soap:operation soapAction="createTemplate" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="changeTemplateStatus">
+                <soap:operation soapAction="changeTemplateStatus" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="searchDelegations">
+                <soap:operation soapAction="searchDelegations" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="createDelegations">
+                <soap:operation soapAction="createDelegations" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="updateDelegations">
+                <soap:operation soapAction="updateDelegations" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="searchForGrants">
+                <soap:operation soapAction="searchForGrants" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="getUserSettings">
+                <soap:operation soapAction="getUserSettings" style="document" />
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="createDelegationRequest">
+                <soap:operation soapAction="createDelegationRequest" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="searchDelegationRequests">
+                <soap:operation soapAction="searchDelegationRequests" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="changeDelegationRequestState">
+                <soap:operation soapAction="changeDelegationRequestState" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="addDelegableUserToDelegator">
+                <soap:operation soapAction="addDelegableUserToDelegator" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+            <operation name="searchForDelegableUsers">
+                <soap:operation soapAction="searchForDelegableUsers" style="document" />
+                <input>
+                    <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                </input>
+                <output>
+                    <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                </output>
+            </operation>
+        </binding>-->
     <!-- Bindings -->
     <binding name="TemplatePortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="searchForTemplates">
-            <soap:operation soapAction="searchForTemplates" style="document" />
-            <input>
-                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </input>
-            <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-            </output>
-        </operation>
-        <operation name="createTemplate">
-            <soap:operation soapAction="createTemplate" style="document" />
+            <soap:operation soapAction="searchForTemplates" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="createTemplate">
+            <soap:operation soapAction="createTemplate" style="document"/>
+            <input>
+                <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="TemplateIDPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="changeTemplateStatus">
-            <soap:operation soapAction="changeTemplateStatus" style="document" />
+            <soap:operation soapAction="changeTemplateStatus" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegationsPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
         <operation name="searchDelegations">
-            <soap:operation soapAction="searchDelegations" style="document" />
+            <soap:operation soapAction="searchDelegations" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
         <operation name="createDelegations">
-            <soap:operation soapAction="createDelegations" style="document" />
+            <soap:operation soapAction="createDelegations" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegationsIDPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="updateDelegations">
-            <soap:operation soapAction="updateDelegations" style="document" />
+            <soap:operation soapAction="updateDelegations" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="GrantsPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="searchForGrants">
-            <soap:operation soapAction="searchForGrants" style="document" />
+            <soap:operation soapAction="searchForGrants" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegableUserPairPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="pair">
-            <soap:operation soapAction="pair" style="document" />
+            <soap:operation soapAction="pair" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="UserSettingsPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="changeDelegableUserStatus">
-            <soap:operation soapAction="changeDelegableUserStatus" style="document" />
+            <soap:operation soapAction="changeDelegableUserStatus" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegationRequestPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="createDelegationRequest">
-            <soap:operation soapAction="createDelegationRequest" style="document" />
+            <soap:operation soapAction="createDelegationRequest" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
         <operation name="searchDelegationRequests">
-            <soap:operation soapAction="searchDelegationRequests" style="document" />
+            <soap:operation soapAction="searchDelegationRequests" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegationRequestIDPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="changeDelegationRequestState">
-            <soap:operation soapAction="changeDelegationRequestState" style="document" />
+            <soap:operation soapAction="changeDelegationRequestState" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegableUserPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="addDelegableUserToDelegator">
-            <soap:operation soapAction="addDelegableUserToDelegator" style="document" />
+            <soap:operation soapAction="addDelegableUserToDelegator" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
         <operation name="searchForDelegableUsers">
-            <soap:operation soapAction="searchForDelegableUsers" style="document" />
+            <soap:operation soapAction="searchForDelegableUsers" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
     <!-- Bindings -->
     <binding name="DelegableUserIDPortTypeHTTPBinding" type="tns:Delegations_APIPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="searchForDelegableUsers">
-            <soap:operation soapAction="searchForDelegableUsers" style="document" />
+            <soap:operation soapAction="searchForDelegableUsers" style="document"/>
             <input>
                 <soap:body parts="inputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </input>
             <output>
-                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+                <soap:body parts="outputPart" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
             </output>
         </operation>
     </binding>
-
-
-
-
 
 
     <!-- Partner links -->
@@ -621,47 +616,47 @@
         </port>
 -->
         <port name="TemplatePortHTTP" binding="tns:TemplatePortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/template" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/template"/>
         </port>
 
         <port name="TemplateIDPortHTTP" binding="tns:TemplateIDPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/template/{id}" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/template/{id}"/>
         </port>
 
         <port name="DelegationPortHTTP" binding="tns:DelegationsPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegation" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegation"/>
         </port>
 
         <port name="DelegationIDPortHTTP" binding="tns:DelegationsIDPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegation/{id}" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegation/{id}"/>
         </port>
 
         <port name="GrantsPortHTTP" binding="tns:GrantsPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/grant" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/grant"/>
         </port>
 
         <port name="DelegableUserPairPortHTTP" binding="tns:DelegableUserPairPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser/pair" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser/pair"/>
         </port>
 
         <port name="UserSettingsPortHTTP" binding="tns:UserSettingsPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/{uid}/settings" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/{uid}/settings"/>
         </port>
 
         <port name="DelegationRequestPortHTTP" binding="tns:DelegationRequestPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegationRequest" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegationRequest"/>
         </port>
 
         <port name="DelegationRequestIDPortHTTP" binding="tns:DelegationRequestIDPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegationRequest/{id}" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegationRequest/{id}"/>
         </port>
 
         <port name="DelegableUserPortHTTP" binding="tns:DelegableUserPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser"/>
         </port>
 
         <port name="DelegableIDUserPortHTTP" binding="tns:DelegableUserIDPortTypeHTTPBinding">
-            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser/{id}" />
+            <soap:address location="http://idmtsta1.st.sk/delegations-api/delegableUser/{id}"/>
         </port>
 
 

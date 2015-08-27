@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <application xmlns="http://wadl.dev.java.net/2009/02">
     <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 2.5.1 2014-01-02 13:43:00"/>
-    <doc xmlns:jersey="http://jersey.java.net/" jersey:hint="This is simplified WADL with user and core resources only. To get full WADL with extended resources use the query parameter detail. Link: http://idmtsta1.st.sk/delegations-api/application.wadl?detail=true"/>
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:hint="This is simplified WADL with user and core resources only. To get full WADL with extended resources use the query parameter detail. Link: http://localhost:8889/delegations-api/application.wadl?detail=true"/>
     <grammars>
         <include href="application.wadl/xsd0.xsd">
             <doc xml:lang="en" title="Generated"/>
         </include>
     </grammars>
-    <resources base="http://idmtsta1.st.sk/delegations-api/">
+    <resources base="http://localhost:8889/delegations-api/">
         <resource path="template">
+            <method name="POST" id="createTemplate">
+                <request>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createTemplate"/>
+                </request>
+                <response>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createTemplateResponse"/>
+                </response>
+            </method>
             <method name="GET" id="searchForTemplates">
                 <request>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="id"/>
@@ -19,25 +27,17 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" default="false" type="xs:boolean" style="query" name="withGrantsConfiguration"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="templatesResponse"/>
-                </response>
-            </method>
-            <method name="POST" id="createTemplate">
-                <request>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createTemplate"/>
-                </request>
-                <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createTemplateResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:templatesResponse"/>
                 </response>
             </method>
             <resource path="/{id}">
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="template" name="id"/>
                 <method name="PUT" id="changeTemplateStatus">
                     <request>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeTemplateStatus"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeTemplate"/>
                     </request>
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeTemplateStatusResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeTemplateResponse"/>
                     </response>
                 </method>
             </resource>
@@ -50,7 +50,7 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="delegationRequestId"/>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="delegatorUid"/>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="delegeeUid"/>
-                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="delegableUserId"/>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="delegableUserId"/>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="ownerUid"/>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="status"/>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="type"/>
@@ -59,25 +59,37 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="sourceSystem"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="delegationsResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:delegationsResponse"/>
                 </response>
             </method>
             <method name="POST" id="createDelegations">
                 <request>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createDelegations"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createDelegations"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createDelegationsResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createDelegationsResponse"/>
                 </response>
             </method>
             <resource path="/{id}">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="template" name="id"/>
+                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="template" name="id"/>
                 <method name="PUT" id="updateDelegation">
                     <request>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="updateDelegation"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:updateDelegation"/>
                     </request>
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="updateDelegationResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:updateDelegationResponse"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="UCDService_Read">
+            <resource path="/getEntities">
+                <method name="POST" id="getEntities">
+                    <request>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:request"/>
+                    </request>
+                    <response>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:entityResponse"/>
                     </response>
                 </method>
             </resource>
@@ -90,24 +102,11 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="grantName"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="grantsResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:grantsResponse"/>
                 </response>
-            </method>
-        </resource>
-        <resource path="test">
-            <method name="GET" id="test">
-                <response/>
             </method>
         </resource>
         <resource path="delegableUser">
-            <method name="POST" id="addDelegableUserToDelegator">
-                <request>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="addDelegableUserToDelegator"/>
-                </request>
-                <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="addDelegaleUserToDelegatorResponse"/>
-                </response>
-            </method>
             <method name="GET" id="searchForDelegableUsers">
                 <request>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="id"/>
@@ -118,42 +117,42 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="delegeeUid"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="delegableUsersResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:delegableUsersResponse"/>
                 </response>
             </method>
-            <resource path="/pair">
-                <method name="GET" id="pair">
+            <method name="POST" id="addDelegableUserToDelegator">
+                <request>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:addDelegableUserToDelegator"/>
+                </request>
+                <response>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:addDelegaleUserToDelegatorResponse"/>
+                </response>
+            </method>
+            <resource path="/{id}">
+                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="template" name="id"/>
+                <method name="PUT" id="changeDelegableUserStatus">
                     <request>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="pairingId"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="pairedId"/>
-                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="status"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeDelegableUser"/>
                     </request>
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="pairResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeDelegableUserResponse"/>
                     </response>
                 </method>
             </resource>
-            <resource path="/{id}">
-                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="template" name="id"/>
-                <method name="PUT" id="changeDelegableUserStatus">
+            <resource path="/pair">
+                <method name="GET" id="pair">
                     <request>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeDelegableUserStatus"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="pairing-id"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="paired-id"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="status"/>
                     </request>
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeDelegableUserStatusResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:pairResponse"/>
                     </response>
                 </method>
             </resource>
         </resource>
         <resource path="delegationRequest">
-            <method name="POST" id="createDelegationRequest">
-                <request>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createDelegationRequest"/>
-                </request>
-                <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="createDelegationRequestResponse"/>
-                </response>
-            </method>
             <method name="GET" id="searchDelegationRequests">
                 <request>
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="query" name="id"/>
@@ -162,16 +161,25 @@
                     <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="query" name="approverUid"/>
                 </request>
                 <response>
-                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="delegationRequestsResponse"/>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:delegationRequestsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="createDelegationRequest">
+                <request>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createDelegationRequest"/>
+                </request>
+                <response>
+                    <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:createDelegationRequestResponse"/>
                 </response>
             </method>
             <resource path="/{id}">
-                <method name="PUT" id="changeDelegationRequestState">
+                <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:long" style="template" name="id"/>
+                <method name="PUT" id="changeDelegationRequest">
                     <request>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeDelegationRequestStatus"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeDelegationRequest"/>
                     </request>
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="changeDelegationRequestStateResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:changeDelegationRequestResponse"/>
                     </response>
                 </method>
             </resource>
@@ -181,7 +189,7 @@
                 <param xmlns:xs="http://www.w3.org/2001/XMLSchema" type="xs:string" style="template" name="uid"/>
                 <method name="GET" id="getUserSettings">
                     <response>
-                        <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" mediaType="application/xml" element="userConfigurationResponse"/>
+                        <representation xmlns:ns2="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="ns2:userConfigurationResponse"/>
                     </response>
                 </method>
             </resource>

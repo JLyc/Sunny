@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.t-mobile.sk/delegation-api/input/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://www.telekom.sk/delegations/api" elementFormDefault="qualified" targetNamespace="http://www.t-mobile.sk/delegation-api/input/xsd" version="1.0">
+	
+	<xsd:import namespace="http://www.telekom.sk/delegations/api" schemaLocation="apiModel.xsd"/>
+	
+	<xsd:element name="templates">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="id" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="type" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="status" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="ownerUid" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="validFrom" type="xsd:string"/>
+				<xsd:element default="false" name="withGrantsConfiguration" type="xsd:boolean"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changeTemplateExt">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:long"/>
+				<xsd:element ref="xsd1:changeTemplate"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="delegationUser">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="id" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="status" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="emailRequested" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="label" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="delegatorUid" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="delegeeUid" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changeDelegableUserExt">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:long"/>
+				<xsd:element ref="xsd1:changeDelegableUser"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="delegationUserPair">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="pairing-id" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="paired-id" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="status" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="delegations">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="ids" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="entityIds" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="delegationRequestId" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="delegatorUid" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="delegeeUid" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="delegableUserId" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="ownerUid" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="status" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="type" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="templateId" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="createdBy" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="sourceSystem" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="updateDelegationExt">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:long"/>
+				<xsd:element ref="xsd1:updateDelegation"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="delegationRequests">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="id" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="status" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="type" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="approverUid" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="changeDelegationRequestExt">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:long"/>
+				<xsd:element ref="xsd1:changeDelegationRequest"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="grants">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" name="templateId" type="xsd:long"/>
+				<xsd:element minOccurs="0" name="entityTypes" type="xsd:string"/>
+				<xsd:element minOccurs="0" name="grantName" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="user">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="uid" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

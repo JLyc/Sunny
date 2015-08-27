@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:tns="http://www.telekom.sk/delegations/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.telekom.sk/delegations/api" version="1.0">
+
+  <xs:element name="addDelegableUserToDelegator" type="tns:addDelegableUserToDelegatorDTO"/>
+
+  <xs:element name="addDelegaleUserToDelegatorResponse" type="tns:addDelegableUserToDelegatorResponseDTO"/>
+
+  <xs:element name="changeDelegableUser" type="tns:changeDelegableUserDTO"/>
+
+  <xs:element name="changeDelegableUserResponse" type="tns:changeDelegableUserResponseDTO"/>
+
+  <xs:element name="changeDelegationRequest" type="tns:changeDelegationRequestDTO"/>
+
+  <xs:element name="changeDelegationRequestResponse" type="tns:changeDelegationRequestResponseDTO"/>
+
+  <xs:element name="changeTemplate" type="tns:changeTemplateDTO"/>
+
+  <xs:element name="changeTemplateResponse" type="tns:changeTemplateResponseDTO"/>
+
+  <xs:element name="configuration" type="tns:userConfigurationDTO"/>
+
+  <xs:element name="createDelegationRequest" type="tns:createDelegationRequestDTO"/>
+
+  <xs:element name="createDelegationRequestResponse" type="tns:createDelegationRequestResponseDTO"/>
+
+  <xs:element name="createDelegations" type="tns:createDelegationsDTO"/>
+
+  <xs:element name="createDelegationsResponse" type="tns:createDelegationsResponseDTO"/>
+
+  <xs:element name="createTemplate" type="tns:createTemplateDTO"/>
+
+  <xs:element name="createTemplateResponse" type="tns:createTemplateResponseDTO"/>
+
+  <xs:element name="delegableUser" type="tns:delegableUserDTO"/>
+
+  <xs:element name="delegableUsersResponse" type="tns:delegableUsersResponseDTO"/>
+
+  <xs:element name="delegation" type="tns:delegationDTO"/>
+
+  <xs:element name="delegationRequest" type="tns:delegationRequestDTO"/>
+
+  <xs:element name="delegationRequestsResponse" type="tns:delegationRequestsResponseDTO"/>
+
+  <xs:element name="delegationsResponse" type="tns:delegationsResponseDTO"/>
+
+  <xs:element name="entity" type="tns:entity"/>
+
+  <xs:element name="entityResponse" type="tns:entityResponse"/>
+
+  <xs:element name="grantConfiguration" type="tns:grantConfigurationDTO"/>
+
+  <xs:element name="grantConfigurationRestriction" type="tns:grantConfigurationRestrictionDTO"/>
+
+  <xs:element name="grantEntity" type="tns:grantDTO"/>
+
+  <xs:element name="grantsResponse" type="tns:grantsResponseDTO"/>
+
+  <xs:element name="pairResponse" type="tns:pairResponseDTO"/>
+
+  <xs:element name="reference" type="tns:reference"/>
+
+  <xs:element name="request" type="tns:entityRequest"/>
+
+  <xs:element name="response" type="tns:responseBase"/>
+
+  <xs:element name="result" type="tns:resultDTO"/>
+
+  <xs:element name="template" type="tns:templateDTO"/>
+
+  <xs:element name="templatesResponse" type="tns:templatesResponseDTO"/>
+
+  <xs:element name="updateDelegation" type="tns:updateDelegationDTO"/>
+
+  <xs:element name="updateDelegationResponse" type="tns:updateDelegationResponseDTO"/>
+
+  <xs:element name="userConfigurationResponse" type="tns:userConfigurationResponseDTO"/>
+
+  <xs:complexType name="delegationsResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="delegations">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegation"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="responseBaseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="tns:result"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="delegationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="ownerUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="delegableUserId" type="xs:long"/>
+      <xs:element minOccurs="0" ref="tns:delegableUser"/>
+      <xs:element minOccurs="0" name="templateId" type="xs:long"/>
+      <xs:element minOccurs="0" ref="tns:template"/>
+      <xs:element minOccurs="0" name="requests">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegationRequest"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="parentDelegationId" type="xs:long"/>
+      <xs:element minOccurs="0" name="parentDelegation" type="tns:delegationDTO"/>
+      <xs:element minOccurs="0" name="entityId" type="xs:string"/>
+      <xs:element minOccurs="0" name="entityType" type="tns:entityType"/>
+      <xs:element minOccurs="0" name="status" type="tns:delegationStatus"/>
+      <xs:element minOccurs="0" name="type" type="tns:delegationType"/>
+      <xs:element minOccurs="0" name="canBeDelegated" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="delegatorUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="delegeeUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="createdBy" type="tns:createdBy"/>
+      <xs:element minOccurs="0" name="sourceSystem" type="tns:sourceSystem"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="delegableUserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="delegeeUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="delegatorUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="emailRequested" type="xs:string"/>
+      <xs:element minOccurs="0" name="label" type="xs:string"/>
+      <xs:element minOccurs="0" name="invitationId" type="xs:long"/>
+      <xs:element minOccurs="0" name="invitationStatus" type="tns:invitationStatus"/>
+      <xs:element minOccurs="0" name="status" type="tns:delegableUserStatus"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="delegations" nillable="true" type="tns:delegationDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="templateDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="tns:templateType"/>
+      <xs:element minOccurs="0" name="status" type="tns:templateStatus"/>
+      <xs:element minOccurs="0" name="ownerUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="grants">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="grant" type="tns:grantDTO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grantDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="grantConfigurations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:grantConfiguration"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grantConfigurationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="entityType" type="tns:entityType"/>
+      <xs:element minOccurs="0" name="grantConfigurationRestrictions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:grantConfigurationRestriction"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grantConfigurationRestrictionDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="name" type="tns:grantConfigurationRestrictionItem"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="delegationRequestDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="status" type="tns:delegationRequestStatus"/>
+      <xs:element minOccurs="0" name="type" type="tns:delegationRequestType"/>
+      <xs:element minOccurs="0" name="approverUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="delegations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegation"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="resultDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="resultMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeTemplateDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="templateStatus" type="tns:templateStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeDelegationRequestDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="status" type="tns:delegationRequestStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addDelegableUserToDelegatorDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="delegatorUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="emailRequested" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pairResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="userConfigurationResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="tns:configuration"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="userConfigurationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="uid" type="xs:string"/>
+      <xs:element name="delegeeEmail" type="xs:boolean"/>
+      <xs:element name="delegeeSms" type="xs:boolean"/>
+      <xs:element name="ownerEmail" type="xs:boolean"/>
+      <xs:element name="ownerSms" type="xs:boolean"/>
+      <xs:element name="createdEmail" type="xs:boolean"/>
+      <xs:element name="createdSms" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="modified" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeDelegationRequestResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="createDelegationsResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="delegationIds">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="delegationId" type="xs:long"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="resultsIds">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="resultId" type="xs:long"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="createDelegationRequestResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="changeDelegableUserResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="delegableUsersResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="delegableUsers">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegableUser"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="entityResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entities">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:entity"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="entitiesCount" type="xs:int"/>
+          <xs:element minOccurs="0" name="entitiesFileId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="responseBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="resultCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="resultMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="entity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="tns:entityType"/>
+      <xs:element minOccurs="0" name="parentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="ucdId" type="xs:string"/>
+      <xs:element minOccurs="0" name="entities">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:entity"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="references">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:reference"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="reference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grantsResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="grants">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="grant" type="tns:grantDTO"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="delegationRequestsResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="delegationRequests">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegationRequest"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="createDelegationsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="delegations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:delegation"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="generateRequest" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeTemplateResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="createTemplateResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="updateDelegationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="templateId" type="xs:long"/>
+      <xs:element minOccurs="0" name="delegableUserId" type="xs:long"/>
+      <xs:element minOccurs="0" name="canBeDelegated" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="delegationStatus" type="tns:delegationStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createDelegationRequestDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="delegationIds">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="delegationId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="approver" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="tns:delegationRequestType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createTemplateDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="tns:templateType"/>
+      <xs:element minOccurs="0" name="status" type="tns:templateStatus"/>
+      <xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ownerUid" type="xs:string"/>
+      <xs:element minOccurs="0" name="grants">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="grant" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="entityRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="parentId" type="xs:string"/>
+      <xs:element minOccurs="0" name="ids">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="id" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="type" type="tns:entityType"/>
+      <xs:element minOccurs="0" name="depthLevel" type="xs:int"/>
+      <xs:element minOccurs="0" name="references">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:reference"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="outputFormat" type="tns:outputFormat"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addDelegableUserToDelegatorResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="changeDelegableUserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="delegableUserStatus" type="tns:delegableUserStatus"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateDelegationResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="templatesResponseDTO">
+    <xs:complexContent>
+      <xs:extension base="tns:responseBaseDTO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="templates">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:template"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="invitationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEW"/>
+      <xs:enumeration value="ACCEPTED"/>
+      <xs:enumeration value="INVALIDATED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="delegableUserStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WAITING"/>
+      <xs:enumeration value="ACTIVE"/>
+      <xs:enumeration value="INACTIVE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="templateType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DEFAULT"/>
+      <xs:enumeration value="PRIVATE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="templateStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACTIVE"/>
+      <xs:enumeration value="INACTIVE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="entityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CUSTOMER"/>
+      <xs:enumeration value="BILLING_PROFILE"/>
+      <xs:enumeration value="PRODUCT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="grantConfigurationRestrictionItem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SOURCE_SYSTEM"/>
+      <xs:enumeration value="SEGMENT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="delegationRequestStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEW"/>
+      <xs:enumeration value="ACCEPTED"/>
+      <xs:enumeration value="REJECTED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="delegationRequestType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OWNER_APPROVED"/>
+      <xs:enumeration value="DELEGEE_APPROVED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="delegationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WAITING"/>
+      <xs:enumeration value="ACTIVE"/>
+      <xs:enumeration value="INACTIVE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="delegationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BOTTOM_TOP"/>
+      <xs:enumeration value="TOP_BOTTOM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="createdBy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="USER"/>
+      <xs:enumeration value="SYSTEM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sourceSystem">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELEGATIONS"/>
+      <xs:enumeration value="WATERBEAR"/>
+      <xs:enumeration value="VOX"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="outputFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="XML"/>
+      <xs:enumeration value="CSV"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

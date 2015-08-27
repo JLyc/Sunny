@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:apm="http://www.telekom.sk/delegations/api" xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd">
+    <grammars>
+        <include href="apiModel.xsd"/>
+        <include href="apiExtModel.xsd"/>
+    </grammars>
+    <resources base="https://tibtest.st.sk:8001/Delegations_API">
+        <resource path="/template">
+            <method name="POST" id="getTemplate">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:templates"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:templatesResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="createTemplate">
+                <request>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createTemplate"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createTemplateResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateTemplate">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:changeTemplateExt"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:changeTemplateResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/delegableUser">
+            <method name="POST" id="createDelegableUser">
+                <request>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:addDelegableUserToDelegator"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:addDelegaleUserToDelegatorResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegableUsers">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:delegationUser"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:delegableUsersResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegableUser">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:changeDelegableUserExt"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:changeDelegableUserResponse"/>
+                </response>
+            </method>
+            <resource path="/pair">
+                <method name="POST" id="getDelegableUserPair">
+                    <request>
+                        <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:delegationUserPair"/>
+                    </request>
+                    <response>
+                        <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:pairResponse"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/delegation">
+            <method name="POST" id="createDelegations">
+                <request>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createDelegations"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createDelegationsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegations">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:delegations"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:delegationsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegation">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:updateDelegationExt"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:updateDelegationResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/delegationRequest">
+            <method name="POST" id="createDelegationRequest">
+                <request>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createDelegationRequest"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:createDelegationRequestResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="getDelegationRequests">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:delegationRequests"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:delegationRequestsResponse"/>
+                </response>
+            </method>
+            <method name="POST" id="updateDelegationRequest">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:changeDelegationRequestExt"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:changeDelegationRequestResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/grant">
+            <method name="POST" id="getGrants">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:grants"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:grantsResponse"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="/user/settings">
+            <method name="POST" id="getUserSettings">
+                <request>
+                    <representation xmlns:apem="http://www.t-mobile.sk/delegation-api/input/xsd" mediaType="application/xml" element="apem:user"/>
+                </request>
+                <response>
+                    <representation xmlns:apm="http://www.telekom.sk/delegations/api" mediaType="application/xml" element="apm:userConfigurationResponse"/>
+                </response>
+            </method>
+        </resource>
+    </resources>
+</application>
+

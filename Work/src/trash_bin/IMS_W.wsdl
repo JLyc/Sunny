@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015. All rights reserved for autor and owner of email domain JLyc.Development@gmial.com.
+  -->
+
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:ns2="http://uri.etsi.org/ngn/params/xml/simservs/xcap"
+                  xmlns:ns1="urn:oma:xml:xdm:common-policy"
+                  xmlns:ns4="http://schemas.ericsson.com/mmtel/services"
+                  xmlns:ns3="http://schemas.ericsson.com/mmtel/common-types"
+                  xmlns:tns="http://www.t-mobile.sk/soa/IMSService/xsd"
+                  xmlns:nns="http://www.t-mobile.sk/soa/IMSService/cmd"
+                  xmlns:nns1="http://www.t-mobile.sk/soa/IMSService/xml"
+                  xmlns:nns2="http://www.t-mobile.sk/soa/IMSService/wsa"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns0="urn:ietf:params:xml:ns:common-policy"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns5="http://www.logica.com/eurotel-crm"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  name="Untitled" targetNamespace="http://www.t-mobile.sk/soa/IMSService/xsd">
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:ietf:params:xml:ns:common-policy"
+                   elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xsd:include schemaLocation="common-policy.xsd"/>
+       </xsd:schema>
+        <xsd:schema xmlns="http://www.t-mobile.sk/soa/IMSService/xsd" targetNamespace="http://www.t-mobile.sk/soa/IMSService/xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+                <xsd:include schemaLocation="IMSSERVICE.xsd"/>
+        </xsd:schema>
+        <xsd:schema targetNamespace="http://www.t-mobile.sk/soa/IMSService/cmd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xsd:include schemaLocation="CommonDataModel.xsd"/>
+        </xsd:schema>
+        <xsd:schema targetNamespace="http://www.t-mobile.sk/soa/IMSService/xml" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xsd:include schemaLocation="xml.xsd"/>
+        </xsd:schema>
+        <xsd:schema targetNamespace="http://www.t-mobile.sk/soa/IMSService/wsa" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xsd:include schemaLocation="ws-addressing.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:service name="IMSService_Write">
+        <wsdl:port name="IMSService_WriteSoapPortTypeHTTP" binding="tns:IMSService_WriteSoapPortTypeHTTPBinding">
+            <soap:address location="http://localhost:8888/IMSService_Write.serviceagent/IMSService_WriteSoapPortTypeHTTP"/>
+        </wsdl:port>
+    </wsdl:service>
+
+    <wsdl:portType name="IMSService_WriteSoapPortType">
+        <wsdl:operation name="setIMSServices">
+            <wsdl:documentation>
+                Wrapper arround IMS simserv service.
+                Wraps simserv operations:
+                - AbbreviatedDialing
+                - OriginatingIdentityPresentationRestriction
+                - IncomingCommunicationBarring
+                - OutgoingCommunicationBarring
+                - CommunicationDiversion
+
+
+                SETIMSSERVICES_001 - Technical error.
+                SETIMSSERVICES_002 – Error in IMS
+
+
+                Designed
+                SetIMSServicesMessageIn
+                SetIMSServicesMessageOut
+            </wsdl:documentation>
+            <wsdl:input message="tns:setIMSServicesSoapIn"/>
+            <wsdl:output message="tns:setIMSServicesSoapOut"/>
+            <wsdl:fault name="setIMSServicesSoapFault" message="tns:setIMSServicesSoapFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="IMSService_WriteSoapPortTypeHTTPBinding" type="tns:IMSService_WriteSoapPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="setIMSServices">
+            <soap:operation style="document" soapAction="IMSService_Write.serviceagent/IMSService_WriteSoapPortTypeHTTP/setIMSServices"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="inputPar"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="outputPar"/>
+            </wsdl:output>
+            <wsdl:fault name="setIMSServicesSoapFault">
+                <soap:fault use="literal" name="setIMSServicesSoapFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:message name="setIMSServicesSoapIn">
+        <wsdl:part name="inputPar" element="tns:SetIMSServicesMessageIn"/>
+    </wsdl:message>
+    <wsdl:message name="setIMSServicesSoapOut">
+        <wsdl:part name="outputPar" element="tns:SetIMSServicesMessageOut"/>
+    </wsdl:message>
+    <wsdl:message name="setIMSServicesSoapFault">
+        <wsdl:part name="FaultPart" element="tns:SetIMSServicesFaultMessage"/>
+    </wsdl:message>
+
+</wsdl:definitions>

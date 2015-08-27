@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:ModifyPortMessageIn xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns2="http://www.t-mobile.sk/oss/OsspeServices/xsd">
+    <ns1:Header>
+        <ns1:version>1.0</ns1:version>
+        <ns1:id>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::30_1440161656306</ns1:id>
+        <ns1:originator>MOTIVE</ns1:originator>
+        <ns1:timeStamp>1440161656306</ns1:timeStamp>
+        <ns1:operation>query</ns1:operation>
+        <ns1:requestID>142444444444444444444444446565444444443411</ns1:requestID>
+    </ns1:Header>
+    <ns2:Body>
+        <ns2:serviceAction>None</ns2:serviceAction>
+        <ns2:sessionId>1234567890</ns2:sessionId>
+        <ns2:customerCode>1</ns2:customerCode>
+        <ns2:servicePointId>2</ns2:servicePointId>
+        <ns2:port>
+            <ns1:number>1</ns1:number>
+            <ns1:nodeId>1</ns1:nodeId>
+        </ns2:port>
+    </ns2:Body>
+</ns2:ModifyPortMessageIn>
