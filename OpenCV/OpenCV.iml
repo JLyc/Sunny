@@ -4,10 +4,11 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="opencv-300" level="project" />
+    <orderEntry type="library" name="icu4j-localespi-55_1-20150610" level="project" />
     <orderEntry type="library" name="commons-lang3-3.4" level="project" />
   </component>
 </module>
