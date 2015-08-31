@@ -1,232 +1,1242 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by XMen (X-Corp) -->
+<?xml version = "1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.t-mobile.sk/soa/Measurement/xsd"
-            xmlns:cdm="http://www.logica.com/eurotel-crm"
-            xmlns:ana="http://www.t-mobile.sk/soa/Measurement/xsd"
-            targetNamespace="http://www.t-mobile.sk/soa/Measurement/xsd"
+            xmlns="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd" xmlns:cdm="http://www.logica.com/eurotel-crm"
             elementFormDefault="qualified"
-            attributeFormDefault="unqualified">
-    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="../../Shared Resources/CommonDataModel.xsd"/>
-    <xsd:element name="L1MeasurementMessageIn">
+            targetNamespace="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd"
+            xmlns:tns="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd">
+
+    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
+
+    <xsd:element name="HandleActionItemMessageIn">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="cdm:CommandMessageIn">
                     <xsd:sequence>
-                        <xsd:element name="Body" type="ana:MeasurementTaskRequest"/>
+                        <xsd:element name="Body" type="tns:ActionItemRequest"/>
                     </xsd:sequence>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="L1MeasurementMessageOut">
+
+    <xsd:complexType name="ActionItemRequest" >
+        <xsd:sequence>
+            <xsd:element name="ActionItem" type="cdm:ActionItem"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="FetchMarketMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchMarketMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:FetchMarketRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchMarketMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:FetchMarketResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="BillingCycle" >
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Billing cycle code
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dayFrom" type="xsd:dateTime" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The first day of the billiling period
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dayTo" type="xsd:dateTime" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The last day of the billing period
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FetchMarketRequest" >
+        <xsd:sequence>
+            <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="contractId" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="msisdn" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="personalNumber" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="companyRegNo" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="cacheAllowed" type="xsd:boolean" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        True/False operator specifying, whether service call is allowed to use cached result (when available). If not provided or set to TRUE, caching is allowed. If explicitly set to FALSE, result will always be retrieved from source, omitting caching process.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FetchMarketResponse" >
+        <xsd:sequence>
+            <xsd:element name="Customer" type="cdm:Customer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="HandleCaseAsynchCallbackIn">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="cdm:ResponseMessage">
                     <xsd:sequence>
-                        <xsd:element name="Body" type="ana:MeasurementTaskResponse"/>
+                        <xsd:element name="Body" type="tns:HandleCaseResponse"/>
                     </xsd:sequence>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="L1MeasurementFaultMessage">
+
+    <xsd:element name="HandleCaseMessageIn">
         <xsd:complexType>
             <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage"/>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:HandleCaseRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:complexType name="MeasurementTaskRequest">
+
+    <xsd:complexType name="DataLimitRequest" >
         <xsd:sequence>
-            <xsd:element name="taskTypeName" type="xsd:string" nillable="true">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Name of the measurement. Should not be used (to invoke default emasurement)
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="paramValues" type="xsd:string" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        parameters delimited by # (if requried by measurement) (not used by Motive)
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="serviceId" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Service Id (e.g. 0007012177) Input parameter for Cramer procedure
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="category" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        values: PROVISIONING or MAINTENANCE. Motive will use just "MAINTENANCE"
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="profileName" type="xsd:string" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Name of the profile assigned to the port determinig services:
-                        hag_4096/512
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
+            <xsd:element name="Contract" type="cdm:Contract" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="MeasurementTaskResponse">
+
+    <xsd:complexType name="HandleCaseRequest" >
         <xsd:sequence>
-            <xsd:element name="taskId" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Identifier of the measurement task
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
+            <xsd:element name="Case" type="cdm:Case"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="MeasurementResults">
+
+    <xsd:complexType name="DataLimitResponse" >
+        <xsd:sequence>
+            <xsd:element name="tmCode" type="xsd:string" nillable="false"/>
+            <xsd:element name="tmDescription" type="xsd:string" nillable="false"/>
+            <xsd:element name="spCode" type="xsd:string" nillable="false"/>
+            <xsd:element name="spDescription" type="xsd:string" nillable="false"/>
+            <xsd:element name="freeUnitsVolume" type="xsd:string" nillable="false"/>
+            <xsd:element name="speedCut" type="xsd:boolean" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="HandleCaseResponse" >
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage">
+                <xsd:sequence>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="CustomerExt" >
         <xsd:sequence>
             <xsd:annotation>
                 <xsd:documentation>
-                    Represent measurement results (e.g. returned by ANA via call back operation)
-
-                    Usage:
-                    This is the TIBCO object (not ANA) send to JMS for further consumers. Ana object is mapped into this.
-
+                    Siebel Customer extension
                 </xsd:documentation>
             </xsd:annotation>
-            <xsd:element name="taskId" type="xsd:string">
+            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Id of the measurement (used for pairing this reponse to original request)
+                        Customer rowId
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="type" type="xsd:string">
+            <xsd:element name="customer" type="cdm:Customer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DirectDebit" >
+        <xsd:sequence>
+            <xsd:element name="accountOwner" type="xsd:string" minOccurs="0" nillable="false"/>
+            <xsd:element name="umr" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Name of measurement
+                        Unique Mandate Reference
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="target" type="xsd:string" minOccurs="0">
+            <xsd:element name="limit" type="xsd:decimal" minOccurs="0" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="HandleCaseMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:HandleCaseResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="HandleCaseFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchCaseByAttrMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:FetchCaseByAttrRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchCaseByAttrMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:FetchCaseByAttrResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchCaseByAttrMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchSegmentMessageFault">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchSegmentMessageIn">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="FetchSegmentMessageOut">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="FetchCaseByAttrRequest" >
+        <xsd:sequence>
+            <xsd:element name="count" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Physical address of measured ONT/Port e.g:
-                        /MSAN Surpass hiX5600 {G1100:B:E|hiX5635 NOS she_r3.8m_cxu-b_sip_o.280}#10.188.60.31/IU_ADSL72#11/xDSL#62
+                        count of cases to be fetched
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Attribute" type="cdm:CaseAttribValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetCustomerDirectFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerDirectMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerDirectRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerDirectMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerDirectResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="FetchCaseByAttrResponse" >
+        <xsd:sequence>
+            <xsd:element name="Case" type="cdm:Case" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetContactStageFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetContactStageMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetContactStageRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetContactStageMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetContactStageResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetCustomerDirectResponse" >
+        <xsd:sequence>
+            <xsd:element name="FetchedCustomer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetContactStageResponse" >
+        <xsd:sequence>
+            <xsd:element name="customerExt" type="tns:CustomerExt" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="HandleActionItemAsynchCallbackIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:ActionItemResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetContactStageRequest" >
+        <xsd:sequence>
+            <xsd:element name="maxRecords" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Maximal records of Contacts in response
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Unique identifier of Customer over all systems.
+
+                            Customer Id (in CDM format, e.g. ‘SIEBEL-PRD-CUSTOMER-12345’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            rowid of Account entity in Siebel CRM
+
+                            Customer rowId (e.g. ‘1-8VKJ’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerCode" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Customer Code (e.g. ‘1723239400’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerSalesNumber" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            ICO - Company registration number (e.g. ‘35760273’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="contactRowId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Contact rowId (e.g. ‘1-9XLW’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="contactId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Contact Id (in CDM format, e.g. ‘SIEBEL-PRD-ADDRESS-12345’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="contactPersonalID" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Contact Person Identifier. (Rodne cislo) (e.g. ‘8212241234’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ActionItemResponse" >
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage">
+                <xsd:sequence>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="HandleActionItemFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetDataLimitFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetCustomerDirectRequest" >
+        <xsd:sequence>
+            <xsd:element name="msisdn" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        MSISDN in format ‘9XXXXXXXX’
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Customer Id in CDM format, e.g.:
+                        BSCS-PRD-CUSTOMER-30264
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cacheAllowed" type="xsd:boolean" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        True/False operator specifying, whether service call is allowed to use cached result (when available). If not provided or set to TRUE, caching is allowed. If explicitly set to FALSE, result will always be retrieved from source, omitting caching process.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetDataLimitIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:DataLimitRequest" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetDataLimitOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:DataLimitResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetPmtRespNumbersFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetPmtRespNumbersIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:PmtRespNumberRequest" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetPmtRespNumbersOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:PmtRespNumberResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerStageFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerStageMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerStageRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerStageMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerStageResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="HandleActionItemMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:ActionItemResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetCustomerStageResponse" >
+        <xsd:sequence>
+            <xsd:element name="customerExt" type="tns:CustomerExt" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetCustomerMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetCustomerResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:choice>
+        <xsd:element name="customerId">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Integration ID of the BSCS customer, i.e. &#39;BSCS-PRD-CUSTOMER-&#39; concatenated with the numerical value stored in sysadm.CUSTOMER_ALL.CUSTOMER_ID
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+
+                <xsd:restriction base="xsd:string">   <xsd:pattern value="((GSITY)|(IVR)|(GENESYS)|(XTC)|(DMS)|(MNP)|(SAM)|(SELFCARE)|(HPSD)|(FUNDIAL)|(BSCS)|(SICAP)|(INPPS)|(DOBS)|(CLARIFY)|(TOWER)|(LDAP)|(SIEBEL)|(ILINK)|(INFINYS)|(MAGIO)|(RMCA)|(NBE)|(NCC)|(IMD)|(OTA)|(TPM)|(NCBS)|(SAPFI)|(PORTAL)|(PURITY)|(DUMO)|(BPOINT)|(GISG)|(EC)|(MWF))-((DC)|(DEV2)|(DEV)|(TST)|(PRD))-((\p{Lu})+)-((\p{Nd}|\p{L}|\p{P}|\p{Sm})+)"/> </xsd:restriction>
+
+            </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="custCode" type="xsd:string" nillable="false">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Unique BSCS customer code, as stored in sysadm.CUSTOMER_ALL.CUSTCODE
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="msisdn" type="xsd:string" nillable="false">
+            <xsd:annotation>
+                <xsd:documentation>
+                    The main directory number of the customer&#39;s contracted postpaid product
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:element>
+    </xsd:choice>
+
+    <xsd:element name="GetMobilePostpaidCustomerMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetMobilePostpaidCustomerMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="body" type="tns:GetMobilePostpaidCustomerRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetMobilePostpaidCustomerMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="body" type="tns:GetMobilePostpaidCustomerResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetCustomerMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="GetMobilePostpaidCustomerResponse" >
+        <xsd:sequence>
+            <xsd:element name="mobilePostpaidCustomer" type="tns:MobilePostpaidCustomer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetCustomerRequest" >
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="msisdn" type="xsd:string" nillable="false"/>
+                <xsd:element name="customerId" type="xsd:string" nillable="false"/>
+                <xsd:element name="companyRegNo" type="xsd:string" nillable="false"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetCustomerStageRequest" >
+        <xsd:sequence>
+            <xsd:element name="extendMode" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        &quot;Possible values:
+                        BP_CN_ADDR = returns Customer including related BillingProfiles, Contacts and Addresses
+                        BP_ADDR = returns Customer including related BillingProfiles and Addresses
+                        BP_CN = returns Customer including related BillingProfiles and Contacts
+                        CN_ADDR = returns Customer including related Contacts and Addresses
+                        CN = returns Customer including related Contacts
+                        ADDR = returns Customer including related Addresses
+                        BP = returns Customer including related BillingProfiles
+                        If empty or missing - returns Customer only&quot;
 
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="serviceId" type="xsd:string">
+            <xsd:element name="maxRecords" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Service Id (e.g. 0007012177)
+                        Define limit of returned Customers
+
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="status" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        status of measurement
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="result" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        result of measurement
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="created" type="xsd:dateTime">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Start Time and Date of measurement
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="finished" type="xsd:dateTime" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        End Time and Date of measurement
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="category" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        usuall values: PROVISIONING or MAINTENANCE
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="profile" type="xsd:string" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Name of service profile (e.g. hsi5m)
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="simpleTasks" type="ana:SimpleTask" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="evaluations" type="ana:Evaluation" minOccurs="0"/>
+            <xsd:choice>
+                <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Unique identifier of Customer over all systems.
+
+                            Customer Id (in CDM format, e.g. ‘SIEBEL-PRD-CUSTOMER-12345’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            rowid of Account entity in Siebel CRM
+
+                            Customer rowId (e.g. ‘1-8VKJ’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerCode" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Customer Code (e.g. ‘1723239400’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerSalesNumber" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            ICO - Company registration number (e.g. ‘35760273’)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="customerPersonalID" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Account Person Identifier. (Rodne cislo)
+
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="billingProfileNum" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Billing Profile Number (e.g. ‘1234567890)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="assetSerialNum" type="xsd:string" minOccurs="0" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Asset Serial Number
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="Evaluation">
+
+    <xsd:complexType name="GetCustomerResponse" >
+        <xsd:sequence>
+            <xsd:element name="Customer" type="cdm:Customer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="UpdateDunningStepMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:UpdateDunningStepRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="UpdateDunningStepRequest" >
+        <xsd:sequence>
+            <xsd:element name="dunningStep" type="cdm:DunningStep"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PmtRespNumberResponse" >
+        <xsd:sequence>
+            <xsd:element name="Customer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PmtRespNumberRequest" >
+        <xsd:sequence>
+            <xsd:element name="custCode" type="xsd:string" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetMobilePostpaidCustomerRequest" >
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="customerId">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Integration ID of the BSCS customer, i.e. &#39;BSCS-PRD-CUSTOMER-&#39; concatenated with the numerical value stored in sysadm.CUSTOMER_ALL.CUSTOMER_ID
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+
+                        <xsd:restriction base="xsd:string">   <xsd:pattern value="((GSITY)|(IVR)|(GENESYS)|(XTC)|(DMS)|(MNP)|(SAM)|(SELFCARE)|(HPSD)|(FUNDIAL)|(BSCS)|(SICAP)|(INPPS)|(DOBS)|(CLARIFY)|(TOWER)|(LDAP)|(SIEBEL)|(ILINK)|(INFINYS)|(MAGIO)|(RMCA)|(NBE)|(NCC)|(IMD)|(OTA)|(TPM)|(NCBS)|(SAPFI)|(PORTAL)|(PURITY)|(DUMO)|(BPOINT)|(GISG)|(EC)|(MWF))-((DC)|(DEV2)|(DEV)|(TST)|(PRD))-((\p{Lu})+)-((\p{Nd}|\p{L}|\p{P}|\p{Sm})+)"/> </xsd:restriction>
+
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="custCode" type="xsd:string" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Unique BSCS customer code, as stored in sysadm.CUSTOMER_ALL.CUSTCODE
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="msisdn" type="xsd:string" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The main directory number of the customer&#39;s contracted postpaid product
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Rateplan" >
+        <xsd:sequence>
+            <xsd:element name="rateplanId" type="xsd:string" nillable="false"/>
+            <xsd:element name="rateplanDescription" type="xsd:string" nillable="false"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetRateplansResponse" >
+        <xsd:sequence>
+            <xsd:element name="rateplan" type="tns:Rateplan" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="GetRateplansRequest" >
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Search criteria for market.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:element name="personalNumber" type="xsd:string" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Personal number (RC) of contact person
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="companyRegNo" type="xsd:string" nillable="false">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Company Registration Number (ICO)
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetRateplansMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetRateplansResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GetRateplansFaultMessage">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SynchronizeContactFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SynchronizeContactMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:SynchronizeContactRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SynchronizeContactMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:SynchronizeContactResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="SynchronizeContactRequest" >
+        <xsd:sequence>
+            <xsd:element name="contactRequestList" type="tns:SynchronizeContactRequestList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="GetRateplansMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:GetRateplansRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="SynchronizeContactResponse" >
+        <xsd:sequence>
+            <xsd:element name="contactResponseList" type="tns:SynchronizeContactResponseList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="SynchronizeCustomerFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SynchronizeCustomerMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:SynchronizeCustomerRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SynchronizeCustomerMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:SynchronizeCustomerResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="SynchronizeCustomerRequest" >
+        <xsd:sequence>
+            <xsd:element name="customerRequestList" type="tns:SynchronizeCustomerRequestList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MobilePostpaidCustomer" >
         <xsd:sequence>
             <xsd:annotation>
                 <xsd:documentation>
-                    Particular evaluation of the measurement.
+                    Mobile postpaid specific attributes
                 </xsd:documentation>
             </xsd:annotation>
-            <xsd:element name="evaluation" type="xsd:string" maxOccurs="unbounded">
+            <xsd:element name="level" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Particular evaluation based on the measurement. It can represents som hints or actions for the consumer.
+                        Customer level, e.g. business partner, subscriber, dealer, etc.
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="priceGroupId" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Price group code
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="costCentreId" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Cost center code
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="paymentType" type="xsd:string" minOccurs="0" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Payment method of the subscriber
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
+            <xsd:element name="parent" type="cdm:Customer" minOccurs="0"/>
+            <xsd:element name="paymentResponsible" type="cdm:Customer" minOccurs="0"/>
+            <xsd:element name="billCycle" type="tns:BillingCycle" minOccurs="0"/>
+            <xsd:element name="directDebit" type="tns:DirectDebit" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:complexType name="SimpleTask">
+
+    <xsd:complexType name="SynchronizeContactRequestList" >
         <xsd:sequence>
             <xsd:annotation>
                 <xsd:documentation>
-                    Simple measurement task
+                    Auxiliary class
                 </xsd:documentation>
             </xsd:annotation>
-            <xsd:element name="taskId" type="xsd:string">
+            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Identifier of the measurement subtask
+                        Siebel row id of the customer account object
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="type" type="xsd:string">
+            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SynchronizeCustomerResponse" >
+        <xsd:sequence>
+            <xsd:element name="customerResponseList" type="tns:SynchronizeCustomerResponseList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SynchronizeContactResponseList" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Auxiliary class
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        measured attribute (what was measured)
+                        Siebel row id of the customer object
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="measuredValue" type="xsd:string">
+            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SynchronizeCustomerRequestList" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    auxiliary class for list
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        what value of the type was measured
+                        Siebel rowId of the customer to be synchronized
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="result" type="xsd:string">
+            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SynchronizeCustomerResponseList" >
+        <xsd:sequence>
+            <xsd:annotation>
+                <xsd:documentation>
+                    auxiliary class for list
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Result of the simple task
+                        Siebel customer row id.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="CheckPIDMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:CheckPIDRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="CheckPIDMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FetchMessageInOut">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="tns:CheckPIDResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="CheckPIDRequest" >
+        <xsd:sequence>
+            <xsd:element name="pinpid" type="xsd:string" nillable="false"/>
+            <xsd:choice>
+                <xsd:element name="ico" type="xsd:string" nillable="false"/>
+                <xsd:element name="customerCode" type="xsd:string" nillable="false"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CheckPIDResponse" >
+        <xsd:sequence>
+            <xsd:element name="resultCode" type="xsd:string" nillable="false">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Generated OTP
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
+
+    <xsd:element name="CheckPIDMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage">
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
 </xsd:schema>
