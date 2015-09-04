@@ -1,1242 +1,2460 @@
-<?xml version = "1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd" xmlns:cdm="http://www.logica.com/eurotel-crm"
-            elementFormDefault="qualified"
-            targetNamespace="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd"
-            xmlns:tns="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd">
-
-    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
-
-    <xsd:element name="HandleActionItemMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:ActionItemRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="ActionItemRequest" >
-        <xsd:sequence>
-            <xsd:element name="ActionItem" type="cdm:ActionItem"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="FetchMarketMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchMarketMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:FetchMarketRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchMarketMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:FetchMarketResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="BillingCycle" >
-        <xsd:sequence>
-            <xsd:element name="code" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Billing cycle code
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="dayFrom" type="xsd:dateTime" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        The first day of the billiling period
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="dayTo" type="xsd:dateTime" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        The last day of the billing period
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="FetchMarketRequest" >
-        <xsd:sequence>
-            <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="contractId" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="msisdn" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="personalNumber" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="companyRegNo" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="cacheAllowed" type="xsd:boolean" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        True/False operator specifying, whether service call is allowed to use cached result (when available). If not provided or set to TRUE, caching is allowed. If explicitly set to FALSE, result will always be retrieved from source, omitting caching process.
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="FetchMarketResponse" >
-        <xsd:sequence>
-            <xsd:element name="Customer" type="cdm:Customer"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="HandleCaseAsynchCallbackIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:HandleCaseResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="HandleCaseMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:HandleCaseRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="DataLimitRequest" >
-        <xsd:sequence>
-            <xsd:element name="Contract" type="cdm:Contract" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="HandleCaseRequest" >
-        <xsd:sequence>
-            <xsd:element name="Case" type="cdm:Case"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="DataLimitResponse" >
-        <xsd:sequence>
-            <xsd:element name="tmCode" type="xsd:string" nillable="false"/>
-            <xsd:element name="tmDescription" type="xsd:string" nillable="false"/>
-            <xsd:element name="spCode" type="xsd:string" nillable="false"/>
-            <xsd:element name="spDescription" type="xsd:string" nillable="false"/>
-            <xsd:element name="freeUnitsVolume" type="xsd:string" nillable="false"/>
-            <xsd:element name="speedCut" type="xsd:boolean" nillable="false"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="HandleCaseResponse" >
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage">
-                <xsd:sequence>
-                </xsd:sequence>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
-
-    <xsd:complexType name="CustomerExt" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    Siebel Customer extension
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Customer rowId
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="DirectDebit" >
-        <xsd:sequence>
-            <xsd:element name="accountOwner" type="xsd:string" minOccurs="0" nillable="false"/>
-            <xsd:element name="umr" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Unique Mandate Reference
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="limit" type="xsd:decimal" minOccurs="0" nillable="false"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="HandleCaseMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:HandleCaseResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="HandleCaseFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchCaseByAttrMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:FetchCaseByAttrRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchCaseByAttrMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:FetchCaseByAttrResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchCaseByAttrMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchSegmentMessageFault">
-        <xsd:complexType>
-            <xsd:sequence>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchSegmentMessageIn">
-        <xsd:complexType>
-            <xsd:sequence>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="FetchSegmentMessageOut">
-        <xsd:complexType>
-            <xsd:sequence>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="FetchCaseByAttrRequest" >
-        <xsd:sequence>
-            <xsd:element name="count" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        count of cases to be fetched
-                    </xsd:documentation>
-                </xsd:annotation>
-                <xsd:simpleType>
-                    <xsd:restriction base="xsd:string">
-                    </xsd:restriction>
-                </xsd:simpleType>
-            </xsd:element>
-            <xsd:element name="Attribute" type="cdm:CaseAttribValue"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetCustomerDirectFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerDirectMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerDirectRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerDirectMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerDirectResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="FetchCaseByAttrResponse" >
-        <xsd:sequence>
-            <xsd:element name="Case" type="cdm:Case" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetContactStageFaultMessage">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetContactStageMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetContactStageRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetContactStageMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetContactStageResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="GetCustomerDirectResponse" >
-        <xsd:sequence>
-            <xsd:element name="FetchedCustomer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetContactStageResponse" >
-        <xsd:sequence>
-            <xsd:element name="customerExt" type="tns:CustomerExt" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="HandleActionItemAsynchCallbackIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:ActionItemResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="GetContactStageRequest" >
-        <xsd:sequence>
-            <xsd:element name="maxRecords" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Maximal records of Contacts in response
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:choice>
-                <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Unique identifier of Customer over all systems.
-
-                            Customer Id (in CDM format, e.g. ‘SIEBEL-PRD-CUSTOMER-12345’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            rowid of Account entity in Siebel CRM
-
-                            Customer rowId (e.g. ‘1-8VKJ’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerCode" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Customer Code (e.g. ‘1723239400’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerSalesNumber" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            ICO - Company registration number (e.g. ‘35760273’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="contactRowId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Contact rowId (e.g. ‘1-9XLW’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="contactId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Contact Id (in CDM format, e.g. ‘SIEBEL-PRD-ADDRESS-12345’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="contactPersonalID" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Contact Person Identifier. (Rodne cislo) (e.g. ‘8212241234’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="ActionItemResponse" >
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage">
-                <xsd:sequence>
-                </xsd:sequence>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
-
-    <xsd:element name="HandleActionItemFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetDataLimitFaultMessage">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="GetCustomerDirectRequest" >
-        <xsd:sequence>
-            <xsd:element name="msisdn" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        MSISDN in format ‘9XXXXXXXX’
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Customer Id in CDM format, e.g.:
-                        BSCS-PRD-CUSTOMER-30264
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="cacheAllowed" type="xsd:boolean" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        True/False operator specifying, whether service call is allowed to use cached result (when available). If not provided or set to TRUE, caching is allowed. If explicitly set to FALSE, result will always be retrieved from source, omitting caching process.
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetDataLimitIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:DataLimitRequest" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetDataLimitOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:DataLimitResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetPmtRespNumbersFaultMessage">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetPmtRespNumbersIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:PmtRespNumberRequest" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetPmtRespNumbersOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:PmtRespNumberResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerStageFaultMessage">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerStageMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerStageRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerStageMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerStageResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="HandleActionItemMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:ActionItemResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="GetCustomerStageResponse" >
-        <xsd:sequence>
-            <xsd:element name="customerExt" type="tns:CustomerExt" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetCustomerMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetCustomerResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:choice>
-        <xsd:element name="customerId">
-            <xsd:annotation>
-                <xsd:documentation>
-                    Integration ID of the BSCS customer, i.e. &#39;BSCS-PRD-CUSTOMER-&#39; concatenated with the numerical value stored in sysadm.CUSTOMER_ALL.CUSTOMER_ID
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:simpleType>
-
-                <xsd:restriction base="xsd:string">   <xsd:pattern value="((GSITY)|(IVR)|(GENESYS)|(XTC)|(DMS)|(MNP)|(SAM)|(SELFCARE)|(HPSD)|(FUNDIAL)|(BSCS)|(SICAP)|(INPPS)|(DOBS)|(CLARIFY)|(TOWER)|(LDAP)|(SIEBEL)|(ILINK)|(INFINYS)|(MAGIO)|(RMCA)|(NBE)|(NCC)|(IMD)|(OTA)|(TPM)|(NCBS)|(SAPFI)|(PORTAL)|(PURITY)|(DUMO)|(BPOINT)|(GISG)|(EC)|(MWF))-((DC)|(DEV2)|(DEV)|(TST)|(PRD))-((\p{Lu})+)-((\p{Nd}|\p{L}|\p{P}|\p{Sm})+)"/> </xsd:restriction>
-
-            </xsd:simpleType>
-        </xsd:element>
-        <xsd:element name="custCode" type="xsd:string" nillable="false">
-            <xsd:annotation>
-                <xsd:documentation>
-                    Unique BSCS customer code, as stored in sysadm.CUSTOMER_ALL.CUSTCODE
-                </xsd:documentation>
-            </xsd:annotation>
-        </xsd:element>
-        <xsd:element name="msisdn" type="xsd:string" nillable="false">
-            <xsd:annotation>
-                <xsd:documentation>
-                    The main directory number of the customer&#39;s contracted postpaid product
-                </xsd:documentation>
-            </xsd:annotation>
-        </xsd:element>
-    </xsd:choice>
-
-    <xsd:element name="GetMobilePostpaidCustomerMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetMobilePostpaidCustomerMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="body" type="tns:GetMobilePostpaidCustomerRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetMobilePostpaidCustomerMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="body" type="tns:GetMobilePostpaidCustomerResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetCustomerMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="GetMobilePostpaidCustomerResponse" >
-        <xsd:sequence>
-            <xsd:element name="mobilePostpaidCustomer" type="tns:MobilePostpaidCustomer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetCustomerRequest" >
-        <xsd:sequence>
-            <xsd:choice>
-                <xsd:element name="msisdn" type="xsd:string" nillable="false"/>
-                <xsd:element name="customerId" type="xsd:string" nillable="false"/>
-                <xsd:element name="companyRegNo" type="xsd:string" nillable="false"/>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetCustomerStageRequest" >
-        <xsd:sequence>
-            <xsd:element name="extendMode" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        &quot;Possible values:
-                        BP_CN_ADDR = returns Customer including related BillingProfiles, Contacts and Addresses
-                        BP_ADDR = returns Customer including related BillingProfiles and Addresses
-                        BP_CN = returns Customer including related BillingProfiles and Contacts
-                        CN_ADDR = returns Customer including related Contacts and Addresses
-                        CN = returns Customer including related Contacts
-                        ADDR = returns Customer including related Addresses
-                        BP = returns Customer including related BillingProfiles
-                        If empty or missing - returns Customer only&quot;
-
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="maxRecords" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Define limit of returned Customers
-
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:choice>
-                <xsd:element name="customerId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Unique identifier of Customer over all systems.
-
-                            Customer Id (in CDM format, e.g. ‘SIEBEL-PRD-CUSTOMER-12345’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            rowid of Account entity in Siebel CRM
-
-                            Customer rowId (e.g. ‘1-8VKJ’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerCode" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Customer Code (e.g. ‘1723239400’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerSalesNumber" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            ICO - Company registration number (e.g. ‘35760273’)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="customerPersonalID" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Account Person Identifier. (Rodne cislo)
-
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="billingProfileNum" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Billing Profile Number (e.g. ‘1234567890)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="assetSerialNum" type="xsd:string" minOccurs="0" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Asset Serial Number
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetCustomerResponse" >
-        <xsd:sequence>
-            <xsd:element name="Customer" type="cdm:Customer"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="UpdateDunningStepMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:UpdateDunningStepRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="UpdateDunningStepRequest" >
-        <xsd:sequence>
-            <xsd:element name="dunningStep" type="cdm:DunningStep"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="PmtRespNumberResponse" >
-        <xsd:sequence>
-            <xsd:element name="Customer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="PmtRespNumberRequest" >
-        <xsd:sequence>
-            <xsd:element name="custCode" type="xsd:string" nillable="false"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetMobilePostpaidCustomerRequest" >
-        <xsd:sequence>
-            <xsd:choice>
-                <xsd:element name="customerId">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Integration ID of the BSCS customer, i.e. &#39;BSCS-PRD-CUSTOMER-&#39; concatenated with the numerical value stored in sysadm.CUSTOMER_ALL.CUSTOMER_ID
-                        </xsd:documentation>
-                    </xsd:annotation>
-                    <xsd:simpleType>
-
-                        <xsd:restriction base="xsd:string">   <xsd:pattern value="((GSITY)|(IVR)|(GENESYS)|(XTC)|(DMS)|(MNP)|(SAM)|(SELFCARE)|(HPSD)|(FUNDIAL)|(BSCS)|(SICAP)|(INPPS)|(DOBS)|(CLARIFY)|(TOWER)|(LDAP)|(SIEBEL)|(ILINK)|(INFINYS)|(MAGIO)|(RMCA)|(NBE)|(NCC)|(IMD)|(OTA)|(TPM)|(NCBS)|(SAPFI)|(PORTAL)|(PURITY)|(DUMO)|(BPOINT)|(GISG)|(EC)|(MWF))-((DC)|(DEV2)|(DEV)|(TST)|(PRD))-((\p{Lu})+)-((\p{Nd}|\p{L}|\p{P}|\p{Sm})+)"/> </xsd:restriction>
-
-                    </xsd:simpleType>
-                </xsd:element>
-                <xsd:element name="custCode" type="xsd:string" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Unique BSCS customer code, as stored in sysadm.CUSTOMER_ALL.CUSTCODE
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="msisdn" type="xsd:string" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            The main directory number of the customer&#39;s contracted postpaid product
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="Rateplan" >
-        <xsd:sequence>
-            <xsd:element name="rateplanId" type="xsd:string" nillable="false"/>
-            <xsd:element name="rateplanDescription" type="xsd:string" nillable="false"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetRateplansResponse" >
-        <xsd:sequence>
-            <xsd:element name="rateplan" type="tns:Rateplan" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="GetRateplansRequest" >
-        <xsd:sequence>
-            <xsd:choice>
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Search criteria for market.
-                    </xsd:documentation>
-                </xsd:annotation>
-                <xsd:element name="personalNumber" type="xsd:string" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Personal number (RC) of contact person
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-                <xsd:element name="companyRegNo" type="xsd:string" nillable="false">
-                    <xsd:annotation>
-                        <xsd:documentation>
-                            Company Registration Number (ICO)
-                        </xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetRateplansMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetRateplansResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="GetRateplansFaultMessage">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="SynchronizeContactFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="SynchronizeContactMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:SynchronizeContactRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="SynchronizeContactMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:SynchronizeContactResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="SynchronizeContactRequest" >
-        <xsd:sequence>
-            <xsd:element name="contactRequestList" type="tns:SynchronizeContactRequestList" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="GetRateplansMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:GetRateplansRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="SynchronizeContactResponse" >
-        <xsd:sequence>
-            <xsd:element name="contactResponseList" type="tns:SynchronizeContactResponseList" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="SynchronizeCustomerFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="SynchronizeCustomerMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:SynchronizeCustomerRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="SynchronizeCustomerMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:SynchronizeCustomerResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="SynchronizeCustomerRequest" >
-        <xsd:sequence>
-            <xsd:element name="customerRequestList" type="tns:SynchronizeCustomerRequestList" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="MobilePostpaidCustomer" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    Mobile postpaid specific attributes
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="level" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Customer level, e.g. business partner, subscriber, dealer, etc.
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="priceGroupId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Price group code
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="costCentreId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Cost center code
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="paymentType" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Payment method of the subscriber
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
-            <xsd:element name="parent" type="cdm:Customer" minOccurs="0"/>
-            <xsd:element name="paymentResponsible" type="cdm:Customer" minOccurs="0"/>
-            <xsd:element name="billCycle" type="tns:BillingCycle" minOccurs="0"/>
-            <xsd:element name="directDebit" type="tns:DirectDebit" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="SynchronizeContactRequestList" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    Auxiliary class
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Siebel row id of the customer account object
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="SynchronizeCustomerResponse" >
-        <xsd:sequence>
-            <xsd:element name="customerResponseList" type="tns:SynchronizeCustomerResponseList" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="SynchronizeContactResponseList" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    Auxiliary class
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Siebel row id of the customer object
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="SynchronizeCustomerRequestList" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    auxiliary class for list
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Siebel rowId of the customer to be synchronized
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="SynchronizeCustomerResponseList" >
-        <xsd:sequence>
-            <xsd:annotation>
-                <xsd:documentation>
-                    auxiliary class for list
-                </xsd:documentation>
-            </xsd:annotation>
-            <xsd:element name="customerRowId" type="xsd:string" minOccurs="0" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Siebel customer row id.
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customer" type="cdm:Customer" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="CheckPIDMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:CheckPIDRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="CheckPIDMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FetchMessageInOut">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="tns:CheckPIDResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="CheckPIDRequest" >
-        <xsd:sequence>
-            <xsd:element name="pinpid" type="xsd:string" nillable="false"/>
-            <xsd:choice>
-                <xsd:element name="ico" type="xsd:string" nillable="false"/>
-                <xsd:element name="customerCode" type="xsd:string" nillable="false"/>
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="CheckPIDResponse" >
-        <xsd:sequence>
-            <xsd:element name="resultCode" type="xsd:string" nillable="false">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Generated OTP
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:element name="CheckPIDMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage">
-                    <xsd:sequence>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-</xsd:schema>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application xmlns="http://www.tibco.com/xmlns/ApplicationManagement" name="VPN/ECF0984-PRD-006_BSCStoCDM">
+    <repoInstanceName>%%DOMAIN%%-ECF0984-PRD-006_BSCStoCDM-1</repoInstanceName>
+    <NVPairs name="Global Variables">
+        <NameValuePair>
+            <name>ADBScriptFileDir</name>
+            <value>d:\tibco\adapter\adadb\6.0\sql</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>Administration/RetryIGW_maxRows</name>
+            <value>100</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>Administration/RetryIGW_timeInterval</name>
+            <value>60000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/ErrorResend.ReprocessTimeout</name>
+            <value>120000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/ErrorResend.RetryTreshold</name>
+            <value>15</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/PendingServices.RetryTreshold</name>
+            <value>15</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/PendingServices.RetryWaitTime</name>
+            <value>20000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/RequestTimeout.default</name>
+            <value>10000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>CASAdapter/Wait.timeout</name>
+            <value>259200000</value>
+        </NameValuePairInteger>
+        <NameValuePairBoolean>
+            <name>Cache/cache_contract_on</name>
+            <value>true</value>
+        </NameValuePairBoolean>
+        <NameValuePairBoolean>
+            <name>Cache/cache_customer_on</name>
+            <value>true</value>
+        </NameValuePairBoolean>
+        <NameValuePairBoolean>
+            <name>Cache/cache_prepaidMainCmpgn_on</name>
+            <value>true</value>
+        </NameValuePairBoolean>
+        <NameValuePairInteger>
+            <name>Cache/cache_query_timeout</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairBoolean>
+            <name>Cache/cache_segment_on</name>
+            <value>true</value>
+        </NameValuePairBoolean>
+        <NameValuePairInteger>
+            <name>Cache/cache_validity_contract</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>Cache/cache_validity_customer</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>Cache/cache_validity_prepaidMainCmpgn</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>Cache/cache_validity_segment</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>Clarify/JDBCCallTimeoutGetRateplans</name>
+            <value>10</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Clarify/JDBCMaximumRowsGetRateplans</name>
+            <value>100</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/BSCS/CallProcedureTimeout</name>
+            <value>30</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/BSCS/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/BSCS/password</name>
+            <value>#!fBmI+502zFkAypn8upqORB2MzWrBDtzg0KTV+njXmS8=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/BSCS/url</name>
+            <value>tbscs.eurotel.sk:1521:dqebil6</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/BSCS/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/CCR/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/CCR/password</name>
+            <value>#!6iAeQhrh8zRsEd9xno3pS4X5gcdZu4+UNMEYzQW0EBU=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/CCR/url</name>
+            <value>tccr.eurotel.sk:1526:dccr</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/CCR/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/CLARIFY/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/CLARIFY/password</name>
+            <value>#!0SYXmmu+d9lKgc8krRVcvjZPjmeTGw1Qp/IdzLNI6LU=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/CLARIFY/url</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=cappy1rac.eurotel.sk)(PORT=1525))(ADDRESS=(PROTOCOL=TCP)(HOST=cappy2rac.eurotel.sk)(PORT=1525))(LOAD_BALANCE=ON)(FAILOVER=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=DQCRM_APP_DESKCL.tmobile.sk)(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=3)(DELAY=10))))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/CLARIFY/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/CheckPoint/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/CheckPoint/password</name>
+            <value>#!iaDT8/FKxfOgG4zHPPT/xDO/KI2Xn+eYSqUxGl0d2KXi6HNSzpFs+Q==</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/CheckPoint/url</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=cappy1rac.eurotel.sk)(PORT=1525))(ADDRESS=(PROTOCOL=TCP)(HOST=cappy2rac.eurotel.sk)(PORT=1525))(LOAD_BALANCE=ON)(FAILOVER=ON)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=TTIBCO7)(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=3)(DELAY=10))))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/CheckPoint/user</name>
+            <value>tibco_ft</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/EBIM/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/EBIM/password</name>
+            <value>#!m0msBf6QSyHncBfsNZeLUuACdd6ZKi/7</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/EBIM/url</name>
+            <value>ebim6.eurotel.sk:1526:EBIM6</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/EBIM/user</name>
+            <value>clarify</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/ERAT6/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/ERAT6/password</name>
+            <value>#!PaV9CRlcm98c3DpsVdGahqY+UIR7VplFSz6lJL9Qpbc=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/ERAT6/url</name>
+            <value>erat6.eurotel.sk:1524:ERAT6</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/ERAT6/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/EUTELA/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/EUTELA/password</name>
+            <value>#!KK//zKKKOIdr0eFx8pIBzw==</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/EUTELA/url</name>
+            <value>sowatest2.eurotel.sk:1523:teutela</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/EUTELA/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/FERO/CallProcedureTimeout</name>
+            <value>30</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/FERO/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/FERO/password</name>
+            <value>#!KQgB+J1lgAI7XrwQML5L6LEhunicIf/hGp/l56+hJqa5t526H07QAm8kPQQumLC5jA8dRwocF1w=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/FERO/url</name>
+            <value>10.170.136.178:1433;databaseName=datovesluzby</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/FERO/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/GISG/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/GISG/password</name>
+            <value>#!mmQk2Z04iWbiTUNEOAd7+blJKFd77SitSckGercZeak=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/GISG/url_tns</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=tibdb.eurotel.sk)(PORT=1523))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=tibgisg.tmobile.sk)))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/GISG/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/GSITY/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/GSITY/password</name>
+            <value>#!Qjvc9xFgkUN+/+FS5jBvCmQO1KcwizhP</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/GSITY/url</name>
+            <value>xgsity.t-mobile.sk:1527:xgsity</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/GSITY/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/IN.CUST/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/IN.CUST/password</name>
+            <value>#!2m4dVHCYZxrLIyDlj0VsX6ETAiHy67F4</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/IN.CUST/url</name>
+            <value>tmmdtest.eurotel.sk:1566:cust</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/IN.CUST/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/IN.CX6/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/IN.CX6/password</name>
+            <value>#!AO0n0m3i9TDQRqBhkM2nRagjvD3wEPAEDtyo9mGecNw=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/IN.CX6/url</name>
+            <value>tmcxtest.eurotel.sk:1590:cx</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/IN.CX6/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/IN.ISG/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/IN.ISG/password</name>
+            <value>#!MTUFaLzvCfKQbL8TYhqS+uRt6G8Xxyr4</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/IN.ISG/url</name>
+            <value>tibdb.eurotel.sk:1523:tibisg</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/IN.ISG/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/INFINYS/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/INFINYS/password</name>
+            <value>#!IFlB655kpvINM4Ufv+5f5h0UWV4CEEHr</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/INFINYS/url_tns</name>
+            <value>(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = ccbtstd5.st.sk)(PORT = 1521)))(CONNECT_DATA = (SERVICE_NAME = GNVCRM02)))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/INFINYS/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/MIRACLE/login_timeout</name>
+            <value>30</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/MIRACLE/password</name>
+            <value>#!CanP24GW4dMsqABiYqAphEq90PmWmIvvNQeN+tr8dq0=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/MIRACLE/url</name>
+            <value>miracle.eurotel.sk:1523:MIRACLE</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/MIRACLE/user</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/NCC/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/NCC/password</name>
+            <value>#!1632laHluT4UPUvErOky0FbNrt7Bruad</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/NCC/url</name>
+            <value>10.48.42.135:1521:SMF</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/NCC/user</name>
+            <value>logica</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/OffersDB/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/OffersDB/password</name>
+            <value>#!d2rsI/4JWQqvjjl8S54dnzE+MGiTqj5X</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/OffersDB/url</name>
+            <value>cmdtest.eurotel.sk:1529:tofr</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/OffersDB/user</name>
+            <value>cmd_tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/PSKSTG01/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/PSKSTG01/password</name>
+            <value>#!eflwEDWIvUES/OuyXbQp7v2i04BwyWOs</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/PSKSTG01/url</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crmprdd-cluster-scan.st.sk)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=PSKSTG01)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/PSKSTG01/user</name>
+            <value>TIBCO</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/RMCAViewStage/login_timeout</name>
+            <value>60</value>
+        </NameValuePair>
+        <NameValuePairPassword>
+            <name>DB/RMCAViewStage/password</name>
+            <value>#!aYQZAHG+W0GJuJlv6mSO4jfGEGrm2SM9hlPLol0ub/o=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/RMCAViewStage/url</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=ractstdbcl-scan.st.sk)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=RMCTSTS1)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/RMCAViewStage/user</name>
+            <value>TIBCO</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/SICAP/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>DB/SICAP/password</name>
+            <value>tsicap</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/SICAP/url_tns</name>
+            <value>(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(Host=sicap3)(Port=1531)))(CONNECT_DATA=(SERVICE_NAME=xppb))) </value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/SICAP/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/TIBCO/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/TIBCO/password</name>
+            <value>#!YABYmVx/spwY4NHYG+u3ZWuR2ZYt90MvBpPbxzo1PD4=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/TIBCO/url</name>
+            <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=cappy1rac.eurotel.sk)(PORT=1525))(ADDRESS=(PROTOCOL=TCP)(HOST=cappy2rac.eurotel.sk)(PORT=1525))(LOAD_BALANCE=ON)(FAILOVER=ON)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=TTIBCO7)(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=3)(DELAY=10))))</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/TIBCO/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/UDT/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/UDT/password</name>
+            <value>#!8xoQpwnI6lZDrM+BBena/MT6EKLj1VVcVqHg+4ELwuI=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/UDT/url_tns</name>
+            <value>ddatadb.eurotel.sk:1525:DGISG</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/UDT/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/VCA/login_timeout</name>
+            <value>0</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/VCA/password</name>
+            <value>#!2EnoelhG+eKIAAwAiFpfdSGXZmLG4HSILJID7yJAK40=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/VCA/url</name>
+            <value>topup3.eurotel.sk:1531:xvca</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/VCA/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>DB/iSiTy/login_timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairPassword>
+            <name>DB/iSiTy/password</name>
+            <value>#!MzFwaUpTNvPKg6Et7IIwisyGU8BB+zxHpaMdPYNgFXw=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>DB/iSiTy/url</name>
+            <value>localhost:1525:uisity</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DB/iSiTy/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/httpHost</name>
+            <value>preprod-ws.deezer.com</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/httpPort</name>
+            <value>80</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/httpTimeout</name>
+            <value>10000</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/local_service_host</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/local_service_port</name>
+            <value>4444</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/operator_id</name>
+            <value>37</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/secret_key</name>
+            <value>cb64801a4163b57ea45d9b77d9608195</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DEEZER/service_uri</name>
+            <value>/2.0/subscriber/</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DUMO/httpHost</name>
+            <value>fenix01.st.sk</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DUMO/httpPort</name>
+            <value>80</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DUMO/httpTimeout</name>
+            <value>60000</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DUMO/serviceURI</name>
+            <value>/api/api_pick_up_point_test_wb.php</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DeploymentRoot</name>
+            <value>ECF0984-PRD-006</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>DirTrace</name>
+            <value>/opt/tibco7/logs_DEV</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Domain/CRM</name>
+            <value>CRM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Domain/ERP</name>
+            <value>ERP</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/AllowedDoc.billCycle.end</name>
+            <value>2099-01-01</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EBill/AllowedDoc.billCycle.hist.months</name>
+            <value>18</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EBill/AllowedDoc.billCycle.start</name>
+            <value>2006-04-01</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EBill/BSCS.Service.ElUsageListings</name>
+            <value>262</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>EBill/BSCS.ServicePackage.ElUsageListings</name>
+            <value>5</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>EBill/Fee.EvCode.ElInvoiceCopy</name>
+            <value>288</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>EBill/Fee.EvCode.EllUsageListing</name>
+            <value>289</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EBill/SMS.confText</name>
+            <value>Vazeny zakaznik, potvrdte zasielanie el.faktury %c na email cez linku v maili zaslanom na Vasu adresu %e. T- Mobile</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/SMS.createText</name>
+            <value>Vygenerovane heslo: %s</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/SMS.resendText</name>
+            <value>Znovuodoslanie hesla: %s</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/SMS.sender</name>
+            <value>0903903903</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/caseConfRequest.lvl1</name>
+            <value>InternÃ© procesy</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/caseConfRequest.lvl2</name>
+            <value>InformÃ¡cia</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/caseConfRequest.lvl3</name>
+            <value>OdoslanÃ¡ E-bill linka</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EBill/createRuleForChangedElists</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EBill/email.confInitial.subject</name>
+            <value>Elektronicka faktura %s (overenie e-mailovej fakturacnej adresy)</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.confInitial.template</name>
+            <value>D:\tibco\bw\5.9\lib\ebillEmailInitialTemplate.txt</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.confUpdate.subject</name>
+            <value>Elektronicka faktura %s (overenie e-mailovej fakturacnej adresy)</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.confUpdate.template</name>
+            <value>D:\tibco\bw\5.9\lib\ebillEmailUpdateTemplate.txt</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.confirmation.from</name>
+            <value>faktury@t-mobile.sk</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.hashgen.e</name>
+            <value>ODDBv879u6aW+noMX3dgqnTAGq3jklNH7UJz4XTLVu4zQqjx5v+Vq5NC4j/2gkNsz5JjPjTbB2INzaIaMASXoQ==</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.hashgen.m</name>
+            <value>AK1US96PW3x5MyBHzNUsdq8R1vorBOUFEFJA1tB2JCUKYcek2ueE/at0HIoQjVIhAPDKucZr0i9wIeSbqvrEWyE=</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.smtp.host</name>
+            <value>localhost:2525</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.smtp.password</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/email.smtp.user</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/sms.NotSendFrom</name>
+            <value>22:00:00</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EBill/sms.NotSendTo</name>
+            <value>08:00:00</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ECS/ElderlyCareRateplans</name>
+            <value>( 'BSCS-PRD-TARIFFMODEL-680', 'BSCS-PRD-TARIFFMODEL-681' )</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>ECS/Soap.EndpointTimeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>ECS/Soap.EndpointURL</name>
+            <value>http://dctibco:6037/ElderlyCareService.serviceagent/ElderlyCareServiceSoapPortTypeHTTP</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>ECS/Soap.RetryCount</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EURE/ActivationModule/soapHost</name>
+            <value>http://10.97.104.162:8888/event/TechnicalServices/Roaming/DataRoaming</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EURE/ActivationModule/soapTimeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EURE/Domestic/email.From</name>
+            <value>eure@t-mobile.sk</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/Domestic/email.Subject</name>
+            <value>Eure subject</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/Domestic/notificationHost.HTTP</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EURE/Domestic/notificationPort.HTTP</name>
+            <value>6623</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EURE/Domestic/smtp.Login</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePairPassword>
+            <name>EURE/Domestic/smtp.Password</name>
+            <value></value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>EURE/Domestic/smtp.Server</name>
+            <value>exchange.eurotel.sk</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/VATmultiplication</name>
+            <value>1.19</value>
+        </NameValuePair>
+        <NameValuePairBoolean>
+            <name>EURE/emsResumeOnTimeout</name>
+            <value>false</value>
+        </NameValuePairBoolean>
+        <NameValuePairInteger>
+            <name>EURE/emsRethrowTimeout</name>
+            <value>5</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>EURE/emsRetryCount</name>
+            <value>5</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>EURE/emsTimeout</name>
+            <value>60000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EURE/infoCase.lvl1</name>
+            <value>Zmena profilu sluÅ¾ieb</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/infoCase.lvl2</name>
+            <value>Z_DÃ¡tovÃ© sluÅ¾by</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/infoCase.lvl3</name>
+            <value>Kontrola dÃ¡t</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/notificationHost.HTTP</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EURE/notificationPort.HTTP</name>
+            <value>6621</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>EURE/packageInfoCase.lvl1</name>
+            <value>Zmena profilu sluÅ¾ieb</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/packageInfoCase.lvl2</name>
+            <value>Z_DÃ¡tovÃ© sluÅ¾by</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/packageInfoCase.lvl3</name>
+            <value>Zmena parametra</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/smsSender.Sender</name>
+            <value>903903903</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/smsTexts/limitIndicator.LimitAmount</name>
+            <value>59,50</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/smsTexts/limitIndicator.Off</name>
+            <value>Deaktivovali ste si kontrolu cerpania dat nad limit &lt;LIMIT&gt;EUR v zone EU+.</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/smsTexts/limitIndicator.Period</name>
+            <value>Aktivovali ste si cerpanie dat nad limit &lt;LIMIT&gt;EUR v zone EU+ v tomto &lt;PERIOD&gt;. Pre vypnutie Kontroly dat v EU poslite SMS s textom VYP EU na 233.</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/smsTexts/limitIndicator.Permanent</name>
+            <value>Aktivovali ste si trvale cerpanie dat nad limit &lt;LIMIT&gt;EUR v zone EU+. Pre uplne vypnutie sluzby kontrola dat v EU poslite SMS s textom VYP EU na cislo 233.</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>EURE/soapHost</name>
+            <value> 	http://10.97.104.74:16080/provisioning/Provisioning</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>EURE/soapTimeout</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>Email/content-type</name>
+            <value>text/plain; charset=ISO-8859-2</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Email/defaultSender</name>
+            <value>defaultsender</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Email/host</name>
+            <value>localhost:2525</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Env</name>
+            <value>DEV</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>ErrorRetry_connectionToDB</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_connectionToHTTP</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_connectionToJMS</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_connectionToRV</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_connectionToRVCM</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_invokeRR</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>ErrorRetry_sendMail</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>ExternalListeners/BC/SLAResponses</name>
+            <value>ST_TST.BC-PRD-001.CDMTransport.SLAResponses.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/BSS/BusinessLogic</name>
+            <value>ST_DC.BSS.CDMTransport.BusinessLogic.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/EC/CDMtoEC</name>
+            <value>ST_TST.EC.CDMTransport.CDMtoEC.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/IL/CDMtoInstantlink</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/LBS/CDMtoLBS</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/MAGIO/CDMtoMagio</name>
+            <value>ST_TST.ECF0984-PRD-006.CDMTransport.ECF0984PRD006TST.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/NCC/CDM2NCC</name>
+            <value>ST_TST.NCC.CDMTransport.CDM2NCC.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SAM/CDMtoSAM</name>
+            <value>ST_TST.SAM-PRD-001.CDMTransport.CDMtoSAM.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SAP/CDMtoSAP</name>
+            <value>ST_TST.LIME-PRD-001.CDMTransport.CDMtoSAP.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SCSP3/CDMtoPortal</name>
+            <value>LOGICA-TMSK.TMSK-ServiceCatalogue.CDMTransport.CDMtoPortal.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SELFCARE/CDMtoSelfcare</name>
+            <value>ST_TST.SELFCARE-PRD-001.CDMTransport.CDMtoSelfcare.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SELFCARE/Responses</name>
+            <value>ST_TST.SELFCARE-PRD-001.CDMTransport.Responses.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SOA/Responses</name>
+            <value>ST_TST.SOA-PRD-001.CDMTransport.SOAPSERVICEPROXY.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/SPA/CDMtoSPA</name>
+            <value>ST_TST.SPA.CDMTransport.CDMtoSPA.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/TOWER/Responses</name>
+            <value>TMSK_TST.TOWER.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ExternalListeners/TOWER/Synchronisation</name>
+            <value>TMSK_TST.TOWER.CM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>FlexG3/http.host</name>
+            <value>flexg3.eurotel.sk</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>FlexG3/http.port</name>
+            <value>80</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>FlexG3/http.requestURI</name>
+            <value>/test/tsintfc.flex</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>FlexG3/httpTimeout</name>
+            <value>15000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>FlexG3/login</name>
+            <value>PORTAL</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>FlexG3/password</name>
+            <value>TSpas4intfc</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>FlexG3/userAgent</name>
+            <value>MSIE 5.5</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Generic/errCase.Default.Level1</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Generic/errCase.Default.Level2</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Generic/errCase.Default.Level3</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Generic/errCase.Default.Queue</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>HPSD/ConfigDir</name>
+            <value>/opt/tibco5/myConfig/HPSD</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>HPSD/ErrorNotesLog</name>
+            <value>ZÃ¡znam nie je prenesenÃ½ do HPSD. Potreba manuÃ¡lneho zadania do HPSD.</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>HPSD/ReconnectionSleep</name>
+            <value>60000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>HPSD/RetryConnection</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>HPSD/UpdateAttachCaseLog</name>
+            <value>Prebehla synchronizacia HPSD priloh na subcase-e #subcase#:  priloh pridanych #ADDED#, zmazanych #DELETED#, zmenenych #MODIFIED#.</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>HPSD/rcv.CloseSubcase.http.port</name>
+            <value>9010</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>HPSD/rcv.ReviseSubcase.http.port</name>
+            <value>9011</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>IGW/ErrorIGW.RetryTreshold</name>
+            <value>15</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>IGW/httpIGW.host</name>
+            <value>artemis2.eurotel.sk</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>IGW/httpIGW.port</name>
+            <value>8701</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>IGW/httpTimeout</name>
+            <value>15000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>IGW/userAgent</name>
+            <value>MSIE 5.5</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>IGW/webIGW.handlerLocation</name>
+            <value>/igw/IgwHttpHandler</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>ISDomain</name>
+            <value>CRM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>IWD/httpIWD.host</name>
+            <value>http://gengtl04:8080/datamart.test/services/webserviceCPLogica</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>IWD/httpIWD.restartSleepMilSec</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>IWD/httpIWD.timeout</name>
+            <value>60</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/fetchResponses.timeOut</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/resend.count</name>
+            <value>5</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/resend.timeout</name>
+            <value>2000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/tcp.timeout</name>
+            <value>20000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/tcp.waitResponses.timeout</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>InstantLink/tcpSAS.host</name>
+            <value>tbscs.eurotel.sk</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>InstantLink/tcpSAS.login</name>
+            <value>TIBCO</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>InstantLink/tcpSAS.market</name>
+            <value>TIB</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>InstantLink/tcpSAS.password</name>
+            <value>tibsas9000</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>InstantLink/tcpSAS.queue</name>
+            <value>TIB</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>InstantLink/tcpSAS.req.port</name>
+            <value>20000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>InstantLink/tcpSAS.resp.port</name>
+            <value>0</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>JMS/jndiContextFactory</name>
+            <value>com.tibco.tibjms.naming.TibjmsInitialContextFactory</value>
+        </NameValuePair>
+        <NameValuePairPassword>
+            <name>JMS/password</name>
+            <value>#!j8m0Wa8iT3j2wMDLtaJKmRKVc+93Zido</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>JMS/queueConnectionFactory</name>
+            <value>QueueConnectionFactory</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>JMS/topicConnectionFactory</name>
+            <value>TopicConnectionFactory</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>JMS/url</name>
+            <value>tcp://localhost:7222</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>JMS/user</name>
+            <value>tibco</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>LBS/endpointURL</name>
+            <value>https://lbs-app.st.sk:8080/provisioning</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>LBS/errorRetrySleep</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>Magio/MCore2_Message_url</name>
+            <value>http://10.159.62.107/WebServices/MessagingService.svc</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Magio/MCore2_url</name>
+            <value>http://10.159.62.107/WebServices/NotificationService.svc</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Magio/MagioServiceHost</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Magio/MagioServicePort</name>
+            <value>6061</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Magio/SOAP_timeout</name>
+            <value>60</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>NCC/OnErrorResendCount</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>NCC/endpointURL</name>
+            <value>http://10.48.42.10:8003</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NCC/password</name>
+            <value>prov</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NCC/soapTimeout</name>
+            <value>60</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NCC/username</name>
+            <value>prov</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>NFC/BSCS.Service.Data</name>
+            <value>166</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/BSCS.Service.mWallet</name>
+            <value>508</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/BSCS.Service.mWalletBarring</name>
+            <value>509</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>NFC/Sender/NBENotificationSIMChangeNotification</name>
+            <value>sndr:sk.telekom.architecture.BSCS:IL</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/Sender/SubscriptionAdministration</name>
+            <value>sndr:sk.telekom.architecture.BSCS:IL</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/Sender/SubscriptionManagement</name>
+            <value>sk.telekom.architecture.TibcoBW:NFCtoCDM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/Sender/TmoCapInterface</name>
+            <value>sndr:sk.telekom.architecture.Tower:Tower</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/Sender/TmoCapNotificationInterface</name>
+            <value>sk.telekom.architecture.TibcoBW:NFCtoCDM</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapin.fault</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapin.request</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapin.response</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapout.fault</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapout.request</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>NFC/StoreMessage/soapout.response</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>NFC/capSoapUrl</name>
+            <value>http://localhost:8088/mockTmoCapInterfaceBinding</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/serviceSynch.NBEErrorRetryCount</name>
+            <value>1</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/serviceSynch.NBEErrorRetryWaitTime</name>
+            <value>4000</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/serviceSynch.NBETimeout</name>
+            <value>10</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/simChngSimSoapUrl</name>
+            <value>http://localhost:8088/mockSimChangeNotification</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/soapTimeout</name>
+            <value>60</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>NFC/subAdmSoapUrl</name>
+            <value>http://localhost:8088/mockSubscriptionAdministration</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>OTA/otaSvcSoap.log_resp</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.password</name>
+            <value>SIM_PROVISIONING_SK</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.sender</name>
+            <value>sk.telekom.architecture.BSCS:IL</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.target</name>
+            <value>OTAService</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>OTA/otaSvcSoap.timeleft</name>
+            <value>60000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.timeout</name>
+            <value>70</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.url</name>
+            <value>http://soabptsta.st.sk:8080/net-tmobile-ota-services-OTAService.soap2jms/1.0</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>OTA/otaSvcSoap.user</name>
+            <value>SIM_PROVISIONING</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>OffersDB/RVTimeout</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>OneNDS/soapHost</name>
+            <value>http://artemis1:8867/ProvisioningGateway/services/SPMLSubscriber10Service</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>OneNDS/soapTimeout</name>
+            <value>20</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>Org</name>
+            <value>TMSK</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>PURITY/soapHost</name>
+            <value>http://10.97.103.87:8889/purity</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>PURITY/soapTimeout</name>
+            <value>60</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/BSCS/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/BSCS/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/BSCS/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/BSCS/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/BSCS/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/BSCS/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetMarket/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyGetMarket/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyGetMarket/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyGetMarket/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyGetMarket/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyGetMarket/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyGetRateplans/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyIGW/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyIGW/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyIGW/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyIGW/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyIGW/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyIGW/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/ClarifyPLSQL/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyPLSQL/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyPLSQL/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyPLSQL/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyPLSQL/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ClarifyPLSQL/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/DEEZER/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/DEEZER/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/DEEZER/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/DEEZER/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/DEEZER/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/DEEZER/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/EBILL/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/EBILL/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EBILL/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EBILL/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EBILL/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EBILL/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/ERAT6/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/ERAT6/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ERAT6/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ERAT6/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ERAT6/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/ERAT6/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/EURE/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/EURE/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EURE/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EURE/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EURE/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/EURE/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/FlexG3/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/FlexG3/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/FlexG3/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/FlexG3/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/FlexG3/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/FlexG3/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/INPPS/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/INPPS/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/INPPS/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/INPPS/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/INPPS/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/INPPS/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/InfinysGetConsumptionFix/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/InfinysGetConsumptionFix/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/InfinysGetConsumptionFix/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/InfinysGetConsumptionFix/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/InfinysGetConsumptionFix/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/InfinysGetConsumptionFix/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/OffersDB/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/OffersDB/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/OffersDB/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/OffersDB/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/OffersDB/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/OffersDB/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/RMCA/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/RMCA/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/RMCA/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/RMCA/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/RMCA/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/RMCA/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/TOWER/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/TOWER/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/TOWER/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/TOWER/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/TOWER/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/TOWER/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RemoteRvDaemon</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RetentionPeriod_pubMsg</name>
+            <value>20</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RvDaemon</name>
+            <value>tcp:7500</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>RvNetwork</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RvService</name>
+            <value>7500</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RvaHost</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RvaPort</name>
+            <value>0</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>SLA/sms.NotSendFrom</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>SLA/sms.NotSendTo</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>SLA/smtp.Login</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>SLA/smtp.Password</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>SLA/smtp.Server</name>
+            <value>no value</value>
+        </NameValuePair>
+        <NameValuePairPassword>
+            <name>SSL/credentialPassword</name>
+            <value>#!5D5CE5TQMWCidOXwMz/4/Vdue2rKkoW/KVswpxJjDtI=</value>
+        </NameValuePairPassword>
+        <NameValuePair>
+            <name>SSL/credentialUsername</name>
+            <value>admin</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Services/GetTariffModelList/selfcareChanells</name>
+            <value>SELFCARE|IVR</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>Siebel/IGWTimeout</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>Siebel/storeSynchMessage</name>
+            <value>1</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>StoreMessage</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>TIBHawkDaemon</name>
+            <value>tcp:7434</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>TIBHawkNetwork</name>
+            <value></value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>TIBHawkService</name>
+            <value>7434</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_add_code</name>
+            <value>SERV</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_add_ldes</name>
+            <value>ÄŒÃ­slo kontraktu: #CO_ID#   StarÃ¡ hodnota: #OLD_MSISDN#   NovÃ¡ hodnota: #NEW_MSISDN#</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_add_shdes</name>
+            <value>#action#/TY A JA ZLAVA</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_add_status</name>
+            <value>NOTE</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_main_code</name>
+            <value>SERV</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_main_ldes</name>
+            <value>#ORIGINATOR#/#INITIATOR#: ÄŒÃ­slo kontraktu: #CO_ID#   StarÃ¡ hodnota: #OLD_SCALE# %  NovÃ¡ hodnota: #NEW_SCALE# %</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_main_shdes</name>
+            <value>#action#/TY A JA ZLAVA</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeMicrocell/tickler_main_status</name>
+            <value>NOTE</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeRateplan/tickler_code</name>
+            <value>SYSTEM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeRateplan/tickler_ldes</name>
+            <value>#ORIGINATOR#/#INITIATOR#: Rateplan changed from #OLD_RPLN# to #NEW_RPLN#</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeRateplan/tickler_shdes</name>
+            <value>NEW TM</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>Tickler/ChangeRateplan/tickler_status</name>
+            <value>NOTE</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>UserClfBatchPassword</name>
+            <value>BATCH4CLF</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>VPNUser/Endpoint</name>
+            <value>http://localhost:17020/BroadworksService_Write.serviceagent/BroadworksService_WriteSoapPortTypeHTTP</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>VPNUser/userServicePackage</name>
+            <value>Mobil_Basic</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>Watchdog/period</name>
+            <value>3600000</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>XTC/XTC.errorRetryCount</name>
+            <value>3</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>XTC/XTC.password</name>
+            <value>tlbk0!p7</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>XTC/XTC.port</name>
+            <value>27114</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>XTC/XTC.server</name>
+            <value>http://xtctest</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>XTC/XTC.timeout</name>
+            <value>30</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>XTC/XTC.user</name>
+            <value>tibcoapi</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>currencySymbol</name>
+            <value>EUR</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>defaultInteractionAssociationType</name>
+            <value>PrvotnÃ¡</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>httpClarify.RR.fwToQueue.port</name>
+            <value>9002</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>httpClarify.RR.getRTData.port</name>
+            <value>9001</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>RVCMQ/SchedulerActivation</name>
+            <value>3.5</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>httpHost</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/WorkerCompleteTime</name>
+            <value>30000</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>InstanceID</name>
+            <value>instanceID_ChangeOnDeploy</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>HawkEnabled</name>
+            <value>true</value>
+        </NameValuePair>
+        <NameValuePair>
+            <name>SSL/httpsHost</name>
+            <value>localhost</value>
+        </NameValuePair>
+        <NameValuePairPassword>
+            <name>SSL/CertStorePass</name>
+            <value>#!MFHPsazplLD8T4xd1FjpMmMgYrKZWVXc</value>
+        </NameValuePairPassword>
+        <NameValuePairInteger>
+            <name>RVCMQ/SchedulerWeight</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>httpPort</name>
+            <value>8888</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>InstanceId</name>
+            <value>instanceId_changeOndeploy</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/SchedulerHeartbeat</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>SSL/CertStoreFile</name>
+            <value>file://d:/IntegrationSourceCodes/artemis1.pfx</value>
+        </NameValuePair>
+        <NameValuePairInteger>
+            <name>RVCMQ/WorkerWeight</name>
+            <value>1</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>RVCMQ/WorkerTasks</name>
+            <value>10</value>
+        </NameValuePairInteger>
+        <NameValuePairInteger>
+            <name>SSL/httpsPort</name>
+            <value>6032</value>
+        </NameValuePairInteger>
+        <NameValuePair>
+            <name>DirLedger</name>
+            <value>/opt/tibco7/ledger_DEV</value>
+        </NameValuePair>
+    </NVPairs>
+    <repoInstances selected="local">
+        <localRepoInstance>
+            <encoding>UTF-8</encoding>
+        </localRepoInstance>
+    </repoInstances>
+    <services>
+        <bw name="BSCS_to_CDM.par">
+            <enabled>true</enabled>
+            <bindings>
+                <binding name="BSCS_to_CDM">
+                    <machine>artemis1.eurotel.sk</machine>
+                    <product>
+                        <type>BW</type>
+                        <version>5.10</version>
+                        <location>/opt/tibco7/bw/5.10</location>
+                    </product>
+                    <setting>
+                        <startOnBoot>false</startOnBoot>
+                        <enableVerbose>false</enableVerbose>
+                        <maxLogFileSize>20000</maxLogFileSize>
+                        <maxLogFileCount>5</maxLogFileCount>
+                        <threadCount>8</threadCount>
+                        <java>
+                            <initHeapSize>32</initHeapSize>
+                            <maxHeapSize>256</maxHeapSize>
+                            <threadStackSize>256</threadStackSize>
+                        </java>
+                    </setting>
+                    <shutdown>
+                        <checkpoint>false</checkpoint>
+                        <timeout>0</timeout>
+                    </shutdown>
+                </binding>
+            </bindings>
+            <NVPairs name="Runtime Variables">
+                <NameValuePair>
+                    <name>RVCMQ/SchedulerActivation</name>
+                    <value>3.5</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>httpHost</name>
+                    <value>localhost</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerCompleteTime</name>
+                    <value>30000</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>InstanceID</name>
+                    <value>BSCStoCDM</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>HawkEnabled</name>
+                    <value>true</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>SSL/httpsHost</name>
+                    <value>localhost</value>
+                </NameValuePair>
+                <NameValuePairPassword>
+                    <name>SSL/CertStorePass</name>
+                    <value>#!0diky3Paf/DxFyAsPK1AOMNLO5JCbkhu</value>
+                </NameValuePairPassword>
+                <NameValuePairInteger>
+                    <name>RVCMQ/SchedulerWeight</name>
+                    <value>10</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>httpPort</name>
+                    <value>8888</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>InstanceId</name>
+                    <value>BSCStoCDM</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/SchedulerHeartbeat</name>
+                    <value>1</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>SSL/CertStoreFile</name>
+                    <value>file://d:/IntegrationSourceCodes/artemis1.pfx</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerWeight</name>
+                    <value>1</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerTasks</name>
+                    <value>10</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>SSL/httpsPort</name>
+                    <value>6032</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>DirLedger</name>
+                    <value>/opt/tibco7/ledger_DEV</value>
+                </NameValuePair>
+            </NVPairs>
+            <NVPairs name="Adapter SDK Properties">
+                <NameValuePair>
+                    <name>Trace.Task.*</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>EnableMemorySavingMode</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.engine.enableJobRecovery</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.engine.autoCheckpointRestart</name>
+                    <value>true</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.engine.jobstats.enable</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>log.file.encoding</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.engine.emaEnabled</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.container.service</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.container.service.rmi.port</name>
+                    <value>9995</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.Enabled</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.Hostname</name>
+                    <value>localhost</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.Httpport</name>
+                    <value>8010</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.defaultEncoding</name>
+                    <value>ISO8859_1</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.enableLookups</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.isSecure</name>
+                    <value>false</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.platform.services.retreiveresources.identity</name>
+                    <value>/Identity_HTTPConnection.id</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>bw.log4j.configuration</name>
+                    <value></value>
+                </NameValuePair>
+            </NVPairs>
+            <failureCount>0</failureCount>
+            <failureInterval>0</failureInterval>
+            <bwprocesses>
+                <bwprocess name="Processes/Production to CDM/BSCS/ContractBatch.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Promotion Package.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Service.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Tariff Model.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Tickler.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Billing.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Roaming Discount.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Fee.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Email.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/VPNUser/VPNUser.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Test Setup/Set Mock Driver.process">
+                    <starter>Rendezvous Subscriber</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Service Package.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Contract.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+                <bwprocess name="Processes/Production to CDM/BSCS/Customer.process">
+                    <starter>BSCS DB Adapter</starter>
+                    <enabled>true</enabled>
+                    <maxJob>0</maxJob>
+                    <activation>true</activation>
+                    <flowLimit>0</flowLimit>
+                </bwprocess>
+            </bwprocesses>
+            <checkpoints selected="Local File">
+                <checkpoint>Local File</checkpoint>
+                <checkpoint>/Shared Connections/BSCS</checkpoint>
+                <checkpoint>/Shared Connections/CCR</checkpoint>
+                <checkpoint>/Shared Connections/CheckPoint</checkpoint>
+                <checkpoint>/Shared Connections/Clarify</checkpoint>
+                <checkpoint>/Shared Connections/EBIM</checkpoint>
+                <checkpoint>/Shared Connections/ERAT6</checkpoint>
+                <checkpoint>/Shared Connections/Eutela</checkpoint>
+                <checkpoint>/Shared Connections/FERO</checkpoint>
+                <checkpoint>/Shared Connections/GISG</checkpoint>
+                <checkpoint>/Shared Connections/GSITY</checkpoint>
+                <checkpoint>/Shared Connections/IN.CUST</checkpoint>
+                <checkpoint>/Shared Connections/IN.CX6</checkpoint>
+                <checkpoint>/Shared Connections/IN.ISG</checkpoint>
+                <checkpoint>/Shared Connections/INFINYS</checkpoint>
+                <checkpoint>/Shared Connections/iSiTy</checkpoint>
+                <checkpoint>/Shared Connections/MIRACLE</checkpoint>
+                <checkpoint>/Shared Connections/MSG_DB</checkpoint>
+                <checkpoint>/Shared Connections/NCC</checkpoint>
+                <checkpoint>/Shared Connections/OFFERS_DB</checkpoint>
+                <checkpoint>/Shared Connections/PSKSTG01</checkpoint>
+                <checkpoint>/Shared Connections/RMCAViewStage</checkpoint>
+                <checkpoint>/Shared Connections/SICAP</checkpoint>
+                <checkpoint>/Shared Connections/Tibco</checkpoint>
+                <checkpoint>/Shared Connections/UDT</checkpoint>
+                <checkpoint>/Shared Connections/VCA</checkpoint>
+                <tablePrefix>BSCS_to_CD_19033004</tablePrefix>
+            </checkpoints>
+            <isFt>false</isFt>
+        </bw>
+        <adapter name="BSCS.aar">
+            <enabled>true</enabled>
+            <bindings>
+                <binding name="BSCS">
+                    <machine>artemis1.eurotel.sk</machine>
+                    <product>
+                        <type>adadb</type>
+                        <version>6.0</version>
+                        <location>/opt/tibco7/adapter/adadb/6.0</location>
+                    </product>
+                    <setting>
+                        <startOnBoot>false</startOnBoot>
+                        <enableVerbose>false</enableVerbose>
+                        <maxLogFileSize>20000</maxLogFileSize>
+                        <maxLogFileCount>5</maxLogFileCount>
+                    </setting>
+                </binding>
+            </bindings>
+            <NVPairs name="Runtime Variables">
+                <NameValuePair>
+                    <name>RVCMQ/SchedulerActivation</name>
+                    <value>3.5</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>httpHost</name>
+                    <value>localhost</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerCompleteTime</name>
+                    <value>30000</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>InstanceID</name>
+                    <value>BSCS</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>HawkEnabled</name>
+                    <value>true</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>SSL/httpsHost</name>
+                    <value>localhost</value>
+                </NameValuePair>
+                <NameValuePairPassword>
+                    <name>SSL/CertStorePass</name>
+                    <value>#!ewfFVsXRDyNGqyf2OweJ4qBgurW5KLJL</value>
+                </NameValuePairPassword>
+                <NameValuePairInteger>
+                    <name>RVCMQ/SchedulerWeight</name>
+                    <value>10</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>httpPort</name>
+                    <value>8888</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>InstanceId</name>
+                    <value>BSCS</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/SchedulerHeartbeat</name>
+                    <value>1</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>SSL/CertStoreFile</name>
+                    <value>file://d:/IntegrationSourceCodes/artemis1.pfx</value>
+                </NameValuePair>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerWeight</name>
+                    <value>1</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>RVCMQ/WorkerTasks</name>
+                    <value>10</value>
+                </NameValuePairInteger>
+                <NameValuePairInteger>
+                    <name>SSL/httpsPort</name>
+                    <value>6032</value>
+                </NameValuePairInteger>
+                <NameValuePair>
+                    <name>DirLedger</name>
+                    <value>/opt/tibco7/ledger_DEV</value>
+                </NameValuePair>
+            </NVPairs>
+            <NVPairs name="Adapter SDK Properties">
+                <NameValuePair>
+                    <name>adb.dsn</name>
+                    <value>BSCS_DQEBIL6</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.user</name>
+                    <value>tibco</value>
+                </NameValuePair>
+                <NameValuePairPassword>
+                    <name>adb.password</name>
+                    <value>#!HpNujXyP53wlQ6SqD1y7TvIO44fjzQSQp/GfxIqPPL4=</value>
+                </NameValuePairPassword>
+                <NameValuePair>
+                    <name>adb.debug</name>
+                    <value>2</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.verbose</name>
+                    <value>on</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.publishChildData</name>
+                    <value>on</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.batchPubStatusUpdates</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.pubBatchConfirmSize</name>
+                    <value>0</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.pubBatchConfirmTimeout</name>
+                    <value>10000</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.useExceptTable</name>
+                    <value>on</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.rvMaxQueueSize</name>
+                    <value>0</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.subBatchCommitSize</name>
+                    <value>0</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.subBatchCommitTimeout</name>
+                    <value>10000</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.subBulkInsertSize</name>
+                    <value>1</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.perfMon</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.traceOldMessages</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.PollingInterval</name>
+                    <value>5000</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.PollingBatchSize</name>
+                    <value>0</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.SleepBetweenRetries</name>
+                    <value>10000</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.RetryTotal</name>
+                    <value>3</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.wchar</name>
+                    <value>SQL_C_CHAR</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.addCustomHawkMethodsToClassMAgent</name>
+                    <value>on</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.groupSize</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.maxLongLen</name>
+                    <value>1048576</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.requestResponseThreads</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.terminateOnPubFail</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.rvAdvisoryNoLog</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.setClientInfo</name>
+                    <value>off</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.encoding</name>
+                    <value>IBM-912</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.unicode</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.mutex</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.tablespace</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.database</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.createMutexTable</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.heartbeat</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.primary.heartbeat</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.secondary.heartbeat</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.maxQuery</name>
+                    <value>3</value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.as400.defaultLibrary</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.as400.library</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.setEmptyStringNullForRvMsg</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.useSqlColumns</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.stmtCache</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.disableTerminationSubject</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.requestResponseMaxRows</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.noDupDetection</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.customScaleForNumberType</name>
+                    <value></value>
+                </NameValuePair>
+                <NameValuePair>
+                    <name>adb.useBetweenClause</name>
+                    <value>on</value>
+                </NameValuePair>
+            </NVPairs>
+            <failureCount>0</failureCount>
+            <failureInterval>0</failureInterval>
+        </adapter>
+    </services>
+</application>
