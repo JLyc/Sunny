@@ -1,56 +1,137 @@
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Body>
-        <ns0:GetCustomerStageMessageOut xmlns:ns0="http://www.t-mobile.sk/soa/CustomerServiceInterface/xsd">
+        <ns0:GetLastCorrectMeasureMessageOut xmlns:ns0="http://www.t-mobile.sk/oss/TtmServices/xsd">
             <ns1:Header xmlns:ns1="http://www.logica.com/eurotel-crm">
                 <ns1:version>1.0</ns1:version>
-                <ns1:id>PORTAL-DEV::CUSTOMER::SIEBEL-PRD-CUSTOMER-1::1002_1441207331586</ns1:id>
-                <ns1:originator>SIEBEL</ns1:originator>
+                <ns1:originator>TTM</ns1:originator>
             </ns1:Header>
             <ns0:Body>
-                <ns0:customerExt>
-                    <ns0:customerRowId>1-110IH9J</ns0:customerRowId>
-                    <ns0:customer ns2:type="ns1:Person" xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns2="http://www.w3.org/2001/XMLSchema-instance">
-                        <ns1:id>SIEBEL-PRD-CUSTOMER-1-110IH9J</ns1:id>
-                        <ns1:code>2315915800</ns1:code>
-                        <ns1:name>Labajová,AmbrozDubnička,Ivan</ns1:name>
-                        <ns1:status>Active</ns1:status>
-                        <ns1:email/>
-                        <ns1:idDocumentType>Identity Card</ns1:idDocumentType>
-                        <ns1:registrationDate>2013-12-01T00:00:00+01:00</ns1:registrationDate>
-                        <ns1:salesAgent>BOS</ns1:salesAgent>
-                        <ns1:segment>Silver</ns1:segment>
-                        <ns1:custTreatPkg>Premium Silver</ns1:custTreatPkg>
-                        <ns1:group/>
-                        <ns1:accountTypeCode>Customer</ns1:accountTypeCode>
-                        <ns1:location>1-110IH9J</ns1:location>
-                        <ns1:potentialSegment/>
-                        <ns1:vip>false</ns1:vip>
-                        <ns1:approvalOfMarktCommun>Yes</ns1:approvalOfMarktCommun>
-                        <ns1:accountCreated>2013-12-13T18:26:46+01:00</ns1:accountCreated>
-                        <ns1:accountUpdated>2014-03-18T00:49:35+01:00</ns1:accountUpdated>
-                        <ns1:approvalToProvideContactDT>Unspecified</ns1:approvalToProvideContactDT>
-                        <ns1:allowDigitalSignature>false</ns1:allowDigitalSignature>
-                        <ns1:reasonForTermination/>
-                        <ns1:notSegmented>false</ns1:notSegmented>
-                        <ns1:notSendOffersThirdParties>Yes</ns1:notSendOffersThirdParties>
-                        <ns1:notToDisplayStreetNum>false</ns1:notToDisplayStreetNum>
-                        <ns1:partnerFlag>false</ns1:partnerFlag>
-                        <ns1:pzzGv/>
-                        <ns1:masterAccountId>1-110IH9J</ns1:masterAccountId>
-                        <ns1:taxJurisdiction>SK</ns1:taxJurisdiction>
-                        <ns1:pinPid>8022</ns1:pinPid>
-                        <ns1:masterAccountIntegrationId>SIEBEL-PRD-CUSTOMER-1-110IH9J</ns1:masterAccountIntegrationId>
-                        <ns1:personalNumber>7607294464</ns1:personalNumber>
-                        <ns1:ztp/>
-                        <ns1:ownershipType/>
-                        <ns1:employeeSegment/>
-                        <ns1:registrationNumber/>
-                        <ns1:parent>
-                            <ns1:id>SIEBEL-PRD-CUSTOMER-1-110VRCV</ns1:id>
-                        </ns1:parent>
-                    </ns0:customer>
-                </ns0:customerExt>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A200</ns0:code>
+                    <ns0:slovakName>Cudzie AC napätie</ns0:slovakName>
+                    <ns0:name>foreign_ac_voltage</ns0:name>
+                    <ns0:measuredValueText>0,0 V</ns0:measuredValueText>
+                    <ns0:measuredValue>0,0</ns0:measuredValue>
+                    <ns0:orderBy>1</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A201</ns0:code>
+                    <ns0:slovakName>Cudzie DC napätie</ns0:slovakName>
+                    <ns0:name>foreign_dc_voltage</ns0:name>
+                    <ns0:measuredValueText>-0,2 V</ns0:measuredValueText>
+                    <ns0:measuredValue>-0,2</ns0:measuredValue>
+                    <ns0:orderBy>3</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A202</ns0:code>
+                    <ns0:slovakName>Napätie TU</ns0:slovakName>
+                    <ns0:name>feeding_dc_voltage</ns0:name>
+                    <ns0:measuredValueText>48,6 V</ns0:measuredValueText>
+                    <ns0:measuredValue>48,6</ns0:measuredValue>
+                    <ns0:orderBy>4</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A206</ns0:code>
+                    <ns0:slovakName>Dĺžka kábla</ns0:slovakName>
+                    <ns0:name>loop_length</ns0:name>
+                    <ns0:measuredValueText>2,1 km</ns0:measuredValueText>
+                    <ns0:measuredValue>2,1</ns0:measuredValue>
+                    <ns0:orderBy>5</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A207</ns0:code>
+                    <ns0:slovakName>Cudzí AC prúd</ns0:slovakName>
+                    <ns0:name>foreign_ac_current</ns0:name>
+                    <ns0:measuredValueText>A</ns0:measuredValueText>
+                    <ns0:orderBy>2</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A209</ns0:code>
+                    <ns0:slovakName>Odpor A/Z</ns0:slovakName>
+                    <ns0:name>resistance_a/g</ns0:name>
+                    <ns0:measuredValueText>9 982,7 kOhm</ns0:measuredValueText>
+                    <ns0:measuredValue>9 982,7</ns0:measuredValue>
+                    <ns0:orderBy>7</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A210</ns0:code>
+                    <ns0:slovakName>Odpor B/Z</ns0:slovakName>
+                    <ns0:name>resistance_b/g</ns0:name>
+                    <ns0:measuredValueText>10 000,0 kOhm</ns0:measuredValueText>
+                    <ns0:measuredValue>10 000,0</ns0:measuredValue>
+                    <ns0:orderBy>8</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A211</ns0:code>
+                    <ns0:slovakName>Odpor A/B</ns0:slovakName>
+                    <ns0:name>resistance_a/b</ns0:name>
+                    <ns0:measuredValueText>10 000,0 kOhm</ns0:measuredValueText>
+                    <ns0:measuredValue>10 000,0</ns0:measuredValue>
+                    <ns0:orderBy>6</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A212</ns0:code>
+                    <ns0:slovakName>Kapacita A/Z</ns0:slovakName>
+                    <ns0:name>capacitance_a/g</ns0:name>
+                    <ns0:measuredValueText>127,6 nF</ns0:measuredValueText>
+                    <ns0:measuredValue>127,6</ns0:measuredValue>
+                    <ns0:orderBy>10</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A213</ns0:code>
+                    <ns0:slovakName>Kapacita B/Z</ns0:slovakName>
+                    <ns0:name>capacitance_b/g</ns0:name>
+                    <ns0:measuredValueText>126,7 nF</ns0:measuredValueText>
+                    <ns0:measuredValue>126,7</ns0:measuredValue>
+                    <ns0:orderBy>11</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A214</ns0:code>
+                    <ns0:slovakName>Kapacita A/B</ns0:slovakName>
+                    <ns0:name>capacitance_a/b</ns0:name>
+                    <ns0:measuredValueText>30,8 nF</ns0:measuredValueText>
+                    <ns0:measuredValue>30,8</ns0:measuredValue>
+                    <ns0:orderBy>9</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A215</ns0:code>
+                    <ns0:slovakName>Kapacita B/A</ns0:slovakName>
+                    <ns0:name>capacitance_b/a</ns0:name>
+                    <ns0:measuredValueText>30,7 nF</ns0:measuredValueText>
+                    <ns0:measuredValue>30,7</ns0:measuredValue>
+                    <ns0:orderBy>13</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>A216</ns0:code>
+                    <ns0:slovakName>Odpor B/A</ns0:slovakName>
+                    <ns0:name>resistance_b/a</ns0:name>
+                    <ns0:measuredValueText>479,8 kOhm</ns0:measuredValueText>
+                    <ns0:measuredValue>479,8</ns0:measuredValue>
+                    <ns0:orderBy>8</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
+                <ns0:ttmMeasurement>
+                    <ns0:code>MSDT</ns0:code>
+                    <ns0:slovakName>Čas testu</ns0:slovakName>
+                    <ns0:name>MSDT</ns0:name>
+                    <ns0:measuredValueText>25.03.2015 04:40</ns0:measuredValueText>
+                    <ns0:measuredValue>2015/03/25 04/40/43</ns0:measuredValue>
+                    <ns0:orderBy>0</ns0:orderBy>
+                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
+                </ns0:ttmMeasurement>
             </ns0:Body>
-        </ns0:GetCustomerStageMessageOut>
+        </ns0:GetLastCorrectMeasureMessageOut>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

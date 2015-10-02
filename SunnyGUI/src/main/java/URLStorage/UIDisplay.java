@@ -52,11 +52,7 @@ public class UIDisplay extends Application{
 
         paneTabs.get("Settings").setClosable(false);
         paneTabs.get("Settings").setContent(box);
-//        paneTabs.get("Settings")
-//        paneTabs.get("Settings")
-//        paneTabs.get("Settings")
         paneTabs.put("BookMark",new Tab("BookMark"));
-//        paneTabs.get("Settings").
 
         for(Map.Entry tab: paneTabs.entrySet()){
             tabPane.getTabs().add((Tab) tab.getValue());
@@ -64,6 +60,11 @@ public class UIDisplay extends Application{
         return tabPane;
     }
 
+
+    public TabPane constructTabPane(){
+        ScrollPane scrollPane = new ScrollPane();
+
+    }
 
     public static void loadVisualUI(){
         UIDisplay.launch();

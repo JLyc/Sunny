@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/MiniApps/MiniApps.iml" filepath="$PROJECT_DIR$/MiniApps/MiniApps.iml" />
       <module fileurl="file://$PROJECT_DIR$/MiniGames/MiniGames.iml" filepath="$PROJECT_DIR$/MiniGames/MiniGames.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenCV/OpenCV.iml" filepath="$PROJECT_DIR$/OpenCV/OpenCV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Plugins/Plugins.iml" filepath="$PROJECT_DIR$/Plugins/Plugins.iml" />
       <module fileurl="file://$PROJECT_DIR$/Prototype/Prototype.iml" filepath="$PROJECT_DIR$/Prototype/Prototype.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sunny.iml" filepath="$PROJECT_DIR$/Sunny.iml" />
       <module fileurl="file://$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" filepath="$PROJECT_DIR$/SunnyGUI/SunnyGUI.iml" />

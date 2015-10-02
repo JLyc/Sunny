@@ -29,7 +29,13 @@
       <console name="BSCS" type="STANDARD" />
     </connection>
     <connection id="cca93791-7fc9-4ace-93d7-cf15eb83b676">
-      <console name="SIEBEL" type="STANDARD" />
+      <console name="SIEBEL" type="STANDARD"><![CDATA[SELECT * FROM DB_EXTRACTION.I_003_GetCustomerAssets WHERE CustomerCode  ='1059836800' AND Status ='Active' AND InstallDate >= TO_DATE ('1990-05-31' , 'YYYY-MM-DD' ) AND rownum<=10
+
+SELECT * FROM DB_EXTRACTION.I_002_GetCustomer WHERE CustomerCode  ='1189036300'
+
+SELECT * FROM DB_EXTRACTION.I_003_GetCustomerAssets WHERE ID = '1-14NC-555'
+
+SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE = 'Not Segmented' and rownum <= 100]]></console>
       <console name="SIEBEL 1" type="STANDARD"><![CDATA[SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST , DB_EXTRACTION.I_003_GetCustomerAssets ASSET WHERE ASSET.SerialNumber = '0527791686' AND  CUST.id = ASSET.AccountId]]></console>
     </connection>
   </component>
