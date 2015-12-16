@@ -1,115 +1,86 @@
-*** Backup ***
-        1.) Login to zeus1.eurotel.sk as tibuser7
-        2.) Create backup directory /home/tibuser7/ST_PRD/2015/10_20/00_backup
-        3.) Export production configuration using AppManage
-        ./AppManage -batchExport -domain ST_PRD -cred ~/Deployment/ST_PRD.credentials -dir /home/tibuser7/ST_PRD/2015/10_20/00_backup
-        *** Initial release ***
-        4.) Create configuration directory /home/tibuser7/ST_PRD/2015/10_20/01_release_1
-        5.) Copy all EARs from SVN http://wtrac.eurotel.sk/svn/ias/Releases/CutoverPkg/branches/R08_26/EAR to the 01_release_1 directory
-        6.) Copy AppManage.batch to 01_release_1 from 00_backup
-        7.) Copy all .xml configuration for all EARs in 01_release_1 from 00_backup
-        8.) Edit AppManage.batch. Leave only configuraion lines for EARs in 01_release_1
-        *** Disable TIVOLI ***
-        9.) Log Into TIBCO Administrator on http://zeus1:8040/
-        10.) Disable TIVOLI Monitoring
-        Monitoring Managment -> Hawk Console -> ST_PRD -> Microagents -> Tivoli -> stopPublisher -> Invoke
-        *** Uploading EARs for Compare ***
-        11.) BatchUpload EARs and configuration from 01_release_1
-        ./AppManage -batchConfig -domain ST_PRD -cred ~/Deployment/ST_PRD.credentials -dir /home/tibuser7/ST_PRD/2015/10_20/01_release_1
-        12.) Create directory /home/tibuser7/ST_PRD/2015/10_20/01_release_2
-        13.) Export uploaded configuration
-        ./AppManage -batchExport -domain ST_PRD -cred ~/Deployment/ST_PRD.credentials -dir /home/tibuser7/ST_PRD/2015/10_20/01_release_2
-        14.) Compare configuration for all uploaded EARs with 00_backup
-        *** Configure OSS ***
-        29.) Login as admin into TIBCO Administrator on http://zeus1:8040/
-        30.) In the left panel select OSS-> Configuration
-        31.) In the right panel in Configuration Builder select CDMtoECS.par
-        32.) Click Enable Service
-        33.) Click Add to Additional Machines
-        34.) Select helios1 and helios2 and click OK
-        35.) Set FT Weight for helios1 to „500 - Primary“, helios2 to "100 - Secondary"
-        36.) Set Activation Interval from 35000 to 40000
-        37.) Click Apply
-        38.) Select Monitoring tab
-        39.) In the Events part click Add
-        40.) Fill these values:
-        Event Type: Any Failure
-        Description: Notify any failure.
-        Generate Alert: Checked
-        Generate Alerts For: First Occurence
-        Level: High
-        Message: [ECF\CDMtoECS] ProcessEngine failed ...
-        41.) Select Advanced tab
-        42.) Set Runtime Variables:
-        InstanceID to "CDMtoECS"
-        httpPort to 6039
-        43.) Set Checkpoint Data Repository to /Shared Connections/CheckPoint
-        44.) Change Flow Limit for all processes to 5
-        45.) Click Apply
-        46.) In the left panel select OSS -> Configuration
-        47.) In the right panel select service instance CDMtoECS
-        48.) On General tab check if Service Instance Name is „CDMtoECS“
-        49.) On Advanced tab check if InstanceID is „CDMtoECS“
-        *** Configure ECF0984-PRD-006 ***
-        50.) Login as admin into TIBCO Administrator on http://zeus1:8040/
-        51.) In the left panel select ECF0984-PRD-006-> Configuration
-        52.) In the right panel in Configuration Builder select CDM_to_ECS.par
-        53.) Click Enable Service
-        54.) Click Add to Additional Machines
-        55.) Select helios1 and helios2 and click OK
-        56.) Set FT Weight for helios1 to „500 - Primary“, helios2 to "100 - Secondary"
-        57.) Set Activation Interval from 35000 to 40000
-        58.) Click Apply
-        59.) Select Monitoring tab
-        60.) In the Events part click Add
-        61.) Fill these values:
-        Event Type: Suspend Process
-        Description: Notify suspended processes.
-        Generate Alert: Checked
-        Generate Alerts For: First Occurence
-        Level: High
-        Message: [ECF\CDMtoECS] has suspended processes.
-        62.) Click OK
-        63.) In the Events part click Add
-        64.) Fill these values:
-        Event Type: Any Failure
-        Description: Notify any failure.
-        Generate Alert: Checked
-        Generate Alerts For: First Occurence
-        Level: High
-        Message: [ECF\CDMtoECS] ProcessEngine failed...
-        65.) Click OK
-        66.) In part Failure Count set these values:
-        Reset Failure Count: 4
-        Reset Faulure Interval (seconds): 300
-        67.) Click Apply
-        68.) Select Advanced tab
-        69.) Set Runtime Variables:
-        InstanceId to "CDMtoECS"
-        DirLedger to "/opt/tibco7/ledger"
-        InstanceID to "CDMtoECS"
-        70.) Set Checkpoint Data Repository to /Shared Connections/CheckPoint
-        71.) Disable Processes/Test Setup/Set Mock Driver.process
-        72.) Change Flow Limit for Processes/CDM to Application/ECS/Contract.process to 5
-        73.) Click Apply
-        74.) In the left panel select OSS -> Configuration
-        75.) In the right panel select service instance CDM_to_ECS
-        76.) On General tab check if Service Instance Name is „CDM_to_ECS“
-        77.) On Advanced tab check Runtime Variables:
-        InstanceId to "CDMtoECS"
-        DirLedger to "/opt/tibco7/ledger"
-        InstanceID to "CDMtoECS"
-        78.) Click Apply
-        *** Configure ECF0984-PRD-006_BSCStoCDM ***
-        79.) Login as admin into TIBCO Administrator on http://zeus1:8040/
-        80.) In the left panel select ECF0984-PRD-006_BSCStoCDM -> ServiceInstances
-        81.) Select Methods tab and search for reviewLedger, invoke
-        82.) Check if transport name is ST_PRD.ECF0984-PRD-006.CDMTransport.CDMtoECS.CM
-
-        *** Final Deployment ***
-        83.) Create new directory /home/tibuser7/ST_PRD/2015/08_26/01_release_3.
-        84.) Copy AppManage.batch, changed xml configutaion files and EARs from 01_release_2 into 01_release_3
-        85.) Deploy configuration from 01_release_3:
-        ./AppManage -*batchDeploy -domain ST_PRD -cred ~/Deployment/ST_PRD.credentials -dir /home/tibuser7/ST_PRD/2015/08_26/01_release_3 -serialize -nostart -nostop
-
-
+        
+       
+        
+        ONTPORTID : 1
+        ONTPORTTYPE : POTS
+        ONTPSTAT : --
+        ---------------------------------------------
+        ONTPORTID : 2
+        ONTPORTTYPE : POTS
+        ONTPSTAT : --
+        ---------------------------------------------
+        ONTPORTID : 1
+        ONTPORTTYPE : IPHOST
+        ONTPSTAT : --
+        ---------------------------------------------
+        ACTUALPT : GE
+        ADMINSTAT : Up
+        CODEMODE : --
+        COPYPRIORITYPOLICY : --
+        DUPLEX : AUTO
+        FLOWCTRL : CLOSE
+        LOOPBACK : NOLOOP
+        NEGOTIATE : OPEN
+        ONTPORTID : 1
+        ONTPORTTYPE : ETH
+        ONTPSTAT : Activating
+        PRIORITY : 0
+        QINQ : --
+        SPEED : AUTO
+        VLANDEFAULT : 2510
+        ---------------------------------------------
+        ACTUALPT : GE
+        ADMINSTAT : Up
+        CODEMODE : --
+        COPYPRIORITYPOLICY : --
+        DUPLEX : AUTO
+        FLOWCTRL : CLOSE
+        LOOPBACK : NOLOOP
+        NEGOTIATE : OPEN
+        ONTPORTID : 2
+        ONTPORTTYPE : ETH
+        ONTPSTAT : Activating
+        PRIORITY : 0
+        QINQ : --
+        SPEED : AUTO
+        VLANDEFAULT : 2510
+        ---------------------------------------------
+        ACTUALPT : GE
+        ADMINSTAT : Up
+        CODEMODE : --
+        COPYPRIORITYPOLICY : --
+        DUPLEX : AUTO
+        FLOWCTRL : CLOSE
+        LOOPBACK : NOLOOP
+        NEGOTIATE : OPEN
+        ONTPORTID : 3
+        ONTPORTTYPE : ETH
+        ONTPSTAT : Activating
+        PRIORITY : 0
+        QINQ : --
+        SPEED : AUTO
+        VLANDEFAULT : 2510
+        ---------------------------------------------
+        ACTUALPT : GE
+        ADMINSTAT : Up
+        CODEMODE : --
+        COPYPRIORITYPOLICY : --
+        DUPLEX : AUTO
+        FLOWCTRL : CLOSE
+        LOOPBACK : NOLOOP
+        NEGOTIATE : OPEN
+        ONTPORTID : 4
+        ONTPORTTYPE : ETH
+        ONTPSTAT : Activating
+        PRIORITY : 0
+        QINQ : --
+        SPEED : AUTO
+        VLANDEFAULT : 2510
+        ---------------------------------------------
+        ALLOCID : 2
+        DBAPROF : dba-profile_1
+        TCONTID : 0
+        ---------------------------------------------
+        ALLOCID : 1282
+        DBAPROF : HSI_4
+        TCONTID : 5

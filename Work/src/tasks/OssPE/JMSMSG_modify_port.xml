@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015. All rights reserved for author and owner of email domain JLyc.Development@gmail.com.
+  -->
+
 <ns2:ModifyPortMessageIn xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns2="http://www.t-mobile.sk/oss/OsspeServices/xsd">
 <ns1:Header>
     <ns1:version>1.0</ns1:version>
@@ -21,11 +25,3 @@
     </ns2:port>
 </ns2:Body>
 </ns2:ModifyPortMessageIn>
-
-<?xml version="1.0" encoding="UTF-8"?>
-<ossEndPointRequest xmlns="http://www.st.sk/oss/ossportrequest">
-<servicePointId>1</servicePointId>
-<customer>1</customer>
-<portid>1</portid>
-<setviceProfile>1</setviceProfile>
-</ossEndPointRequest>

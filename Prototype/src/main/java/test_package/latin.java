@@ -15,8 +15,8 @@ public class latin {
     public static void main(String[] args) {
 
         latin latin = new latin();
-        System.out.println(latin.deAccent("љљиљиљиљиѕќћићинннн"));
-        Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC")
+        System.out.println(latin.deAccent("пїЅпїЅпїЅпїЅпїЅиѕќпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
+//        Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
     }
 
     public String deAccent(String str) {

@@ -13,15 +13,16 @@ import java.util.concurrent.*;
  */
 public class FileLoader implements Callable<InputStream> {
 
+    private Path path;
 
     public FileLoader(String filePath) {
-        Path path = FileSystems.getDefault().getPath(filePath);
+        path = FileSystems.getDefault().getPath(filePath);
 
     }
 
     @Override
     public InputStream call() throws Exception {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(path.toString());
 
 
         return null;

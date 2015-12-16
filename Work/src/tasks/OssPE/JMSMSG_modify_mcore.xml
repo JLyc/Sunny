@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:ModifyMcoreAccountMessageIn xmlns:xsd="http://www.t-mobile.sk/oss/OsspeServices/xsd" xmlns:eur="http://www.logica.com/eurotel-crm">
+    <eur:Header>
+        <eur:version>1.0</eur:version>
+        <eur:id>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505</eur:id>
+        <eur:originator>MOTIVE</eur:originator>
+        <eur:timeStamp>1441615369505</eur:timeStamp>
+        <eur:operation>query</eur:operation>
+        <eur:requestID>14416546695056613378</eur:requestID>
+    </eur:Header>
+    <xsd:Body>
+        <xsd:ipTvId>123</xsd:ipTvId>
+        <xsd:serviceAction>None</xsd:serviceAction>
+        <xsd:sessionId>123123</xsd:sessionId>
+        <xsd:servicePointId>12313</xsd:servicePointId>
+        <xsd:customerCode>1231231</xsd:customerCode>
+    </xsd:Body>
+</xsd:ModifyMcoreAccountMessageIn>
+
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns13:ossEndPointResponse xmlns="http://www.st.sk/oss/osscommon" xmlns:ns2="http://st.sk/oss/test1request" xmlns:ns60="http://www.st.sk/oss/setfcdnumber" xmlns:ns4="http://st.sk/oss/test1response" xmlns:ns3="http://www.st.sk/oss/test2" xmlns:ns6="http://www.st.sk/oss/sethwreservationrequest" xmlns:ns53="http://www.st.sk/oss/tpmtvgo" xmlns:ns5="http://www.st.sk/oss/sethwreservationresponse" xmlns:ns52="http://www.st.sk/oss/tpmbras" xmlns:ns8="http://www.st.sk/oss/ossresetdevicepinrequest" xmlns:ns51="http://www.st.sk/oss/tpmvoice" xmlns:ns7="http://www.st.sk/oss/ossresetdevicepinresponse" xmlns:ns50="http://www.st.sk/oss/tpmgpon" xmlns:ns13="http://www.st.sk/oss/ossmcoreresponse" xmlns:ns57="http://www.st.sk/oss/getfcdstatusresponse" xmlns:ns9="http://www.st.sk/oss/ossportresponse" xmlns:ns12="http://www.st.sk/oss/ossmediaroomrequest" xmlns:ns56="http://www.st.sk/oss/parallelringing" xmlns:ns11="http://www.st.sk/oss/ossmediaroomresponse" xmlns:ns55="http://www.t-mobile.sk/soa/NetworkServiceInterface/xsd" xmlns:ns10="http://www.st.sk/oss/ossportrequest" xmlns:ns54="http://www.logica.com/eurotel-crm" xmlns:ns17="http://www.st.sk/oss/ossgettopologyresponse" xmlns:ns16="http://www.st.sk/oss/ossimsprofilemodificationrequest" xmlns:ns15="http://www.st.sk/oss/ossimsprofilemodificationresponse" xmlns:ns59="http://www.st.sk/oss/getfcdstatus" xmlns:ns14="http://www.st.sk/oss/ossmcorerequest" xmlns:ns58="http://www.st.sk/oss/setfcdnumberresponse" xmlns:ns19="http://www.st.sk/oss/ossgetsubscriberforportresponse" xmlns:ns18="http://www.st.sk/oss/ossgettopologyrequest" xmlns:ns42="http://www.st.sk/oss/ossgetaccessmatrixrequest" xmlns:ns41="http://www.st.sk/oss/ossgetaccessmatrixresponse" xmlns:ns40="http://www.st.sk/oss/ossgetcperequest" xmlns:ns46="http://www.st.sk/oss/ossdvbsrequest" xmlns:ns45="http://www.st.sk/oss/ossdvbsresponse" xmlns:ns44="http://www.st.sk/oss/ossfindservicenoderequest" xmlns:ns43="http://www.st.sk/oss/ossfindservicenoderesponse" xmlns:ns49="http://www.st.sk/oss/tpmaeth" xmlns:ns48="http://www.st.sk/oss/tpmxdsl" xmlns:ns47="http://www.st.sk/oss/tpmcpe" xmlns:ns31="http://www.st.sk/oss/gethwreservationresponse" xmlns:ns30="http://www.st.sk/oss/ossgetlastmilestatiscticrequest" xmlns:ns35="http://www.st.sk/oss/ossgethdmcpeservicesresponse" xmlns:ns34="http://www.st.sk/oss/ossgethdmservicepointidrequest" xmlns:ns33="http://www.st.sk/oss/ossgethdmservicepointidresponse" xmlns:ns32="http://www.st.sk/oss/gethwreservationrequest" xmlns:ns39="http://www.st.sk/oss/ossgetcperesponse" xmlns:ns38="http://www.st.sk/oss/ossgetdslneighborhoodsrequest" xmlns:ns37="http://www.st.sk/oss/ossgetdslneighborhoodsresponse" xmlns:ns36="http://www.st.sk/oss/ossgethdmcpeservicesrequest" xmlns:ns20="http://www.st.sk/oss/ossgetsubscriberforportrequest" xmlns:ns24="http://www.st.sk/oss/ossgetservicepointrequest" xmlns:ns23="http://www.st.sk/oss/ossgetservicepointresponse" xmlns:ns22="http://www.st.sk/oss/ossgetserviceprofilerequest" xmlns:ns21="http://www.st.sk/oss/ossgetserviceprofileresponse" xmlns:ns28="http://www.st.sk/oss/ossgetportinforequest" xmlns:ns27="http://www.st.sk/oss/ossgetportinforesponse" xmlns:ns26="http://www.st.sk/oss/ossgetproberequest" xmlns:ns25="http://www.st.sk/oss/ossgetproberesponse" xmlns:ns29="http://www.st.sk/oss/ossgetlastmilestatiscticresponse">
+<orderId>123123</orderId>
+<systems>
+    <messageId>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505</messageId>
+    <source>Oss</source>
+    <target>Tibco</target>
+    <timestamp>2015-12-02T17:09:43.944+01:00</timestamp>
+</systems>
+<serviceAction>None</serviceAction>
+<ns13:customer>1231231</ns13:customer>
+<ns13:operationStatus>
+    <statusCode>000</statusCode>
+    <statusDetail>operation_successful</statusDetail>
+    <errorCode>MCORE_000</errorCode>
+    <errorDescription></errorDescription>
+</ns13:operationStatus>
+<ns13:iptvid>123</ns13:iptvid>
+</ns13:ossEndPointResponse>

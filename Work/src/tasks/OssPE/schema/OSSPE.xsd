@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2015. All rights reserved for author and owner of email domain JLyc.Development@gmail.com.
+  -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.t-mobile.sk/oss/OsspeServices/xsd"
+            xmlns:cdm="http://www.logica.com/eurotel-crm"
+            xmlns:osspe="http://www.t-mobile.sk/oss/OsspeServices/xsd"
+            targetNamespace="http://www.t-mobile.sk/oss/OsspeServices/xsd"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
+    <xsd:complexType name="ModifyDvbsRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceAction" type="xsd:string"/>
+            <xsd:element name="sessionId" type="xsd:string"/>
+            <xsd:element name="inventoryItem" type="cdm:InventoryItem"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyImsServiceAttributeRequest">
+        <xsd:sequence>
+            <xsd:element name="pstnNumber" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="serviceAction" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        action to be performed during the operation
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sessionId" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Id of the order in Siebel
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="servicePointId" type="xsd:string"/>
+            <xsd:element name="customerCode" type="xsd:string"/>
+            <xsd:element name="serviceInstanceId" type="xsd:string"/>
+            <xsd:element name="vas" type="cdm:Service" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyMcoreAccountRequest">
+        <xsd:sequence>
+            <xsd:element name="ipTvId" type="xsd:string"/>
+            <xsd:element name="serviceAction" type="xsd:string"/>
+            <xsd:element name="sessionId" type="xsd:string"/>
+            <xsd:element name="servicePointId" type="xsd:string"/>
+            <xsd:element name="customerCode" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyPortMessageRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceAction" type="xsd:string"/>
+            <xsd:element name="sessionId" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Id of the Order in Siebel
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerCode" type="xsd:string"/>
+            <xsd:element name="servicePointId" type="xsd:string"/>
+            <xsd:element name="serviceProfile" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        servcie profile
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="port" type="cdm:NetworkPort"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="ModifyDvbsMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyDvbsRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ModifyDvbsMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyDvbsResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ReprovisionMstvAccountRequest">
+        <xsd:sequence>
+            <xsd:element name="ipTvId" type="xsd:string"/>
+            <xsd:element name="serviceAction" type="xsd:string"/>
+            <xsd:element name="sessionId" type="xsd:string"/>
+            <xsd:element name="servicePointId" type="xsd:string"/>
+            <xsd:element name="customerCode" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyDvbsResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ModifyImsServiceAttributeMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ModifyImsServiceAttributeMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyImsServiceAttributeRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ModifyImsServiceAttributeMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyImsServiceAttributeResponse"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ResetDevicePinRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceAction" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        IPTV ID
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sessionId" type="xsd:string"/>
+            <xsd:element name="cpeId" type="xsd:string"/>
+            <xsd:element name="pin" type="xsd:string"/>
+            <xsd:element name="servicePointId" type="xsd:string"/>
+            <xsd:element name="customerCode" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyImsServiceAttributeResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ModifyMcoreAccountMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyMcoreAccountRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ModifyMcoreAccountMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyMcoreAccountResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ResetMcoreAccountRequest">
+        <xsd:sequence>
+            <xsd:element name="ipTvId" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        IPTV ID
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ModifyMcoreAccountResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ModifyPortMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyPortMessageRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ModifyPortMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ModifyPortMessageResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ModifyPortMessageResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ReprovisionMstvAccountMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ReprovisionMstvAccountRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ReprovisionMstvAccountMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ReprovisionMstvAccountResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ReprovisionMstvAccountResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ResetDevicePinMessageFault">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:FaultMessage"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ResetDevicePinMessageIn">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:CommandMessageIn">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ResetDevicePinRequest"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ResetDevicePinMessageOut">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="cdm:ResponseMessage">
+                    <xsd:sequence>
+                        <xsd:element name="Body" type="osspe:ResetDevicePinResponse" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ResetDevicePinResponse">
+        <xsd:complexContent>
+            <xsd:extension base="cdm:ConfirmationMessage"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ResetMcoreAccountMessageFault">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="ResetMcoreAccountMessageIn">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="ResetMcoreAccountMessageOut">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:complexType name="ResetMcoreAccountResponse"/>
+</xsd:schema>

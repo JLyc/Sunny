@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!--
+          ~ Copyright (c) 2015. All rights reserved for author and owner of email domain JLyc.Development@gmail.com.
+          -->
+
+<ns2:BWKSProvisioningNotification xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns2="http://www.t-mobile.sk/soa/broadworksServices/xsd">
+<ns1:Header>
+    <ns1:version>1.0</ns1:version>
+    <ns1:originator>Tibco</ns1:originator>
+    <ns1:timeStamp>1441615369505</ns1:timeStamp>
+    <ns1:operation>query</ns1:operation>
+</ns1:Header>
+<ns2:Body>
+    <ns2:operation>suspend</ns2:operation>
+    <ns2:msisdn>905123001</ns2:msisdn>
+</ns2:Body>
+</ns2:BWKSProvisioningNotification>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns9:ossEndPointResponse xmlns="http://www.st.sk/oss/osscommon" xmlns:ns2="http://st.sk/oss/test1request" xmlns:ns4="http://st.sk/oss/test1response" xmlns:ns3="http://www.st.sk/oss/test2" xmlns:ns6="http://www.st.sk/oss/ossresetdevicepinrequest" xmlns:ns53="http://www.st.sk/oss/getfcdstatusresponse" xmlns:ns5="http://www.st.sk/oss/ossresetdevicepinresponse" xmlns:ns52="http://www.st.sk/oss/parallelringing" xmlns:ns8="http://www.st.sk/oss/ossportrequest" xmlns:ns51="http://www.t-mobile.sk/soa/NetworkServiceInterface/xsd" xmlns:ns7="http://www.st.sk/oss/ossportresponse" xmlns:ns50="http://www.logica.com/eurotel-crm" xmlns:ns13="http://www.st.sk/oss/ossimsprofilemodificationresponse" xmlns:ns9="http://www.st.sk/oss/ossmediaroomresponse" xmlns:ns12="http://www.st.sk/oss/ossmcorerequest" xmlns:ns56="http://www.st.sk/oss/setfcdnumber" xmlns:ns11="http://www.st.sk/oss/ossmcoreresponse" xmlns:ns55="http://www.st.sk/oss/getfcdstatus" xmlns:ns10="http://www.st.sk/oss/ossmediaroomrequest" xmlns:ns54="http://www.st.sk/oss/setfcdnumberresponse" xmlns:ns17="http://www.st.sk/oss/ossgetsubscriberforportresponse" xmlns:ns16="http://www.st.sk/oss/ossgettopologyrequest" xmlns:ns15="http://www.st.sk/oss/ossgettopologyresponse" xmlns:ns14="http://www.st.sk/oss/ossimsprofilemodificationrequest" xmlns:ns19="http://www.st.sk/oss/ossgetserviceprofileresponse" xmlns:ns18="http://www.st.sk/oss/ossgetsubscriberforportrequest" xmlns:ns42="http://www.st.sk/oss/ossdvbsrequest" xmlns:ns41="http://www.st.sk/oss/ossdvbsresponse" xmlns:ns40="http://www.st.sk/oss/ossfindservicenoderequest" xmlns:ns46="http://www.st.sk/oss/tpmgpon" xmlns:ns45="http://www.st.sk/oss/tpmaeth" xmlns:ns44="http://www.st.sk/oss/tpmxdsl" xmlns:ns43="http://www.st.sk/oss/tpmcpe" xmlns:ns49="http://www.st.sk/oss/tpmtvgo" xmlns:ns48="http://www.st.sk/oss/tpmbras" xmlns:ns47="http://www.st.sk/oss/tpmvoice" xmlns:ns31="http://www.st.sk/oss/ossgethdmcpeservicesresponse" xmlns:ns30="http://www.st.sk/oss/ossgethdmservicepointidrequest" xmlns:ns35="http://www.st.sk/oss/ossgetcperesponse" xmlns:ns34="http://www.st.sk/oss/ossgetdslneighborhoodsrequest" xmlns:ns33="http://www.st.sk/oss/ossgetdslneighborhoodsresponse" xmlns:ns32="http://www.st.sk/oss/ossgethdmcpeservicesrequest" xmlns:ns39="http://www.st.sk/oss/ossfindservicenoderesponse" xmlns:ns38="http://www.st.sk/oss/ossgetaccessmatrixrequest" xmlns:ns37="http://www.st.sk/oss/ossgetaccessmatrixresponse" xmlns:ns36="http://www.st.sk/oss/ossgetcperequest" xmlns:ns20="http://www.st.sk/oss/ossgetserviceprofilerequest" xmlns:ns24="http://www.st.sk/oss/ossgetproberequest" xmlns:ns23="http://www.st.sk/oss/ossgetproberesponse" xmlns:ns22="http://www.st.sk/oss/ossgetservicepointrequest" xmlns:ns21="http://www.st.sk/oss/ossgetservicepointresponse" xmlns:ns28="http://www.st.sk/oss/ossgetlastmilestatiscticrequest" xmlns:ns27="http://www.st.sk/oss/ossgetlastmilestatiscticresponse" xmlns:ns26="http://www.st.sk/oss/ossgetportinforequest" xmlns:ns25="http://www.st.sk/oss/ossgetportinforesponse" xmlns:ns29="http://www.st.sk/oss/ossgethdmservicepointidresponse">
+    <orderId>p1:orderId</orderId>
+    <systems>
+        <messageId>p1:messageId</messageId>
+        <source>Oss</source>
+        <target>Tibco</target>
+        <timestamp>2015-11-23T23:43:19.822+01:00</timestamp>
+    </systems>
+    <serviceType>MEDIAROOM</serviceType>
+    <serviceAction>Reprovisioning</serviceAction>
+    <ns9:customer>p:customer</ns9:customer>
+    <ns9:operationStatus>
+        <statusCode>000</statusCode>
+        <statusDetail>operation_successful</statusDetail>
+        <errorCode>MediaRoom_000</errorCode>
+        <errorDescription></errorDescription>
+    </ns9:operationStatus>
+    <ns9:iptvid>p:iptvid</ns9:iptvid>
+</ns9:ossEndPointResponse>

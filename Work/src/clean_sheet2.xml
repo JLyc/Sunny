@@ -1,137 +1,311 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-    <SOAP-ENV:Body>
-        <ns0:GetLastCorrectMeasureMessageOut xmlns:ns0="http://www.t-mobile.sk/oss/TtmServices/xsd">
-            <ns1:Header xmlns:ns1="http://www.logica.com/eurotel-crm">
-                <ns1:version>1.0</ns1:version>
-                <ns1:originator>TTM</ns1:originator>
-            </ns1:Header>
-            <ns0:Body>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A200</ns0:code>
-                    <ns0:slovakName>Cudzie AC napätie</ns0:slovakName>
-                    <ns0:name>foreign_ac_voltage</ns0:name>
-                    <ns0:measuredValueText>0,0 V</ns0:measuredValueText>
-                    <ns0:measuredValue>0,0</ns0:measuredValue>
-                    <ns0:orderBy>1</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A201</ns0:code>
-                    <ns0:slovakName>Cudzie DC napätie</ns0:slovakName>
-                    <ns0:name>foreign_dc_voltage</ns0:name>
-                    <ns0:measuredValueText>-0,2 V</ns0:measuredValueText>
-                    <ns0:measuredValue>-0,2</ns0:measuredValue>
-                    <ns0:orderBy>3</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A202</ns0:code>
-                    <ns0:slovakName>Napätie TU</ns0:slovakName>
-                    <ns0:name>feeding_dc_voltage</ns0:name>
-                    <ns0:measuredValueText>48,6 V</ns0:measuredValueText>
-                    <ns0:measuredValue>48,6</ns0:measuredValue>
-                    <ns0:orderBy>4</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A206</ns0:code>
-                    <ns0:slovakName>Dĺžka kábla</ns0:slovakName>
-                    <ns0:name>loop_length</ns0:name>
-                    <ns0:measuredValueText>2,1 km</ns0:measuredValueText>
-                    <ns0:measuredValue>2,1</ns0:measuredValue>
-                    <ns0:orderBy>5</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A207</ns0:code>
-                    <ns0:slovakName>Cudzí AC prúd</ns0:slovakName>
-                    <ns0:name>foreign_ac_current</ns0:name>
-                    <ns0:measuredValueText>A</ns0:measuredValueText>
-                    <ns0:orderBy>2</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A209</ns0:code>
-                    <ns0:slovakName>Odpor A/Z</ns0:slovakName>
-                    <ns0:name>resistance_a/g</ns0:name>
-                    <ns0:measuredValueText>9 982,7 kOhm</ns0:measuredValueText>
-                    <ns0:measuredValue>9 982,7</ns0:measuredValue>
-                    <ns0:orderBy>7</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A210</ns0:code>
-                    <ns0:slovakName>Odpor B/Z</ns0:slovakName>
-                    <ns0:name>resistance_b/g</ns0:name>
-                    <ns0:measuredValueText>10 000,0 kOhm</ns0:measuredValueText>
-                    <ns0:measuredValue>10 000,0</ns0:measuredValue>
-                    <ns0:orderBy>8</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A211</ns0:code>
-                    <ns0:slovakName>Odpor A/B</ns0:slovakName>
-                    <ns0:name>resistance_a/b</ns0:name>
-                    <ns0:measuredValueText>10 000,0 kOhm</ns0:measuredValueText>
-                    <ns0:measuredValue>10 000,0</ns0:measuredValue>
-                    <ns0:orderBy>6</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A212</ns0:code>
-                    <ns0:slovakName>Kapacita A/Z</ns0:slovakName>
-                    <ns0:name>capacitance_a/g</ns0:name>
-                    <ns0:measuredValueText>127,6 nF</ns0:measuredValueText>
-                    <ns0:measuredValue>127,6</ns0:measuredValue>
-                    <ns0:orderBy>10</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A213</ns0:code>
-                    <ns0:slovakName>Kapacita B/Z</ns0:slovakName>
-                    <ns0:name>capacitance_b/g</ns0:name>
-                    <ns0:measuredValueText>126,7 nF</ns0:measuredValueText>
-                    <ns0:measuredValue>126,7</ns0:measuredValue>
-                    <ns0:orderBy>11</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A214</ns0:code>
-                    <ns0:slovakName>Kapacita A/B</ns0:slovakName>
-                    <ns0:name>capacitance_a/b</ns0:name>
-                    <ns0:measuredValueText>30,8 nF</ns0:measuredValueText>
-                    <ns0:measuredValue>30,8</ns0:measuredValue>
-                    <ns0:orderBy>9</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A215</ns0:code>
-                    <ns0:slovakName>Kapacita B/A</ns0:slovakName>
-                    <ns0:name>capacitance_b/a</ns0:name>
-                    <ns0:measuredValueText>30,7 nF</ns0:measuredValueText>
-                    <ns0:measuredValue>30,7</ns0:measuredValue>
-                    <ns0:orderBy>13</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>A216</ns0:code>
-                    <ns0:slovakName>Odpor B/A</ns0:slovakName>
-                    <ns0:name>resistance_b/a</ns0:name>
-                    <ns0:measuredValueText>479,8 kOhm</ns0:measuredValueText>
-                    <ns0:measuredValue>479,8</ns0:measuredValue>
-                    <ns0:orderBy>8</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-                <ns0:ttmMeasurement>
-                    <ns0:code>MSDT</ns0:code>
-                    <ns0:slovakName>Čas testu</ns0:slovakName>
-                    <ns0:name>MSDT</ns0:name>
-                    <ns0:measuredValueText>25.03.2015 04:40</ns0:measuredValueText>
-                    <ns0:measuredValue>2015/03/25 04/40/43</ns0:measuredValue>
-                    <ns0:orderBy>0</ns0:orderBy>
-                    <ns0:measurementDate>2015-09-09T18:51:03+02:00</ns0:measurementDate>
-                </ns0:ttmMeasurement>
-            </ns0:Body>
-        </ns0:GetLastCorrectMeasureMessageOut>
-    </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns4="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:ns3="http://www.tibco.com/pe/EngineTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx3="http://www.st.sk/oss/ossportresponse" xmlns:pfx2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns5="http://www.st.sk/oss/osscommon" xmlns:pfx="http://www.t-mobile.sk/oss/OsspeServices/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.t-mobile.sk/oss/OsspeServices/xsd" schemaLocation="/Shared Resources/OSSPE.xsd"/>
+    <xsd:import namespace="http://www.st.sk/oss/ossportresponse" schemaLocation="/Resources/WSDL/OSSPortResponse.xsd"/>
+    <pd:name>Processes/ApplicationToCDM/OSSPE/Asynch/OSSService_Asynch/ReprovisionMstvAccountResponse/ReprovisionMstvAccountResponseCore.process</pd:name>
+    <pd:description>Core process for:
+        Response for port remote replacement, port re-provisioning and port restart, based on input operation in OSSPE (request from I_137 ModifyPort)</pd:description>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>26</pd:startX>
+    <pd:startY>135</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>847</pd:endX>
+    <pd:endY>138</pd:endY>
+    <pd:errorSchemas>
+        <ErorrSchema ref="pfx:ReprovisionMstvAccountResponseOut"/>
+    </pd:errorSchemas>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1448300333485</pd:targetNamespace>
+    <pd:activity name="Catch All">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>346</pd:x>
+        <pd:y>236</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="JDBC Call Procedure">
+        <pd:type>com.tibco.plugin.jdbc.JDBCCallActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCCallActivity</pd:resourceType>
+        <pd:x>143</pd:x>
+        <pd:y>145</pd:y>
+        <config>
+            <timeout>1</timeout>
+            <maxRows>0</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Resources/Connections/OSSPE.sharedjdbc</jdbcSharedConfig>
+            <schema>OSSADAPTER</schema>
+            <catalog>STPKGOSSADAPTER</catalog>
+            <ProcedureName>PDENQUEUE</ProcedureName>
+            <parameterTypes>
+                <parameter>
+                    <colName>ISERVICETYPE</colName>
+                    <colType>1</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>IACTION</colName>
+                    <colType>1</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+                <parameter>
+                    <colName>OMESSAGE</colName>
+                    <colType>4</colType>
+                    <dataType>2005</dataType>
+                    <typeName>CLOB</typeName>
+                </parameter>
+                <parameter>
+                    <colName>OERRORCODE</colName>
+                    <colType>4</colType>
+                    <dataType>2</dataType>
+                    <typeName>NUMBER</typeName>
+                </parameter>
+                <parameter>
+                    <colName>OERRORTEXT</colName>
+                    <colType>4</colType>
+                    <dataType>12</dataType>
+                    <typeName>VARCHAR2</typeName>
+                </parameter>
+            </parameterTypes>
+        </config>
+        <pd:inputBindings>
+            <inputs>
+                <inputSet>
+                    <ISERVICETYPE>
+                        <xsl:value-of select="&quot;PORT&quot;"/>
+                    </ISERVICETYPE>
+                    <IACTION>
+                        <xsl:value-of select="'RESTART'"/>
+                    </IACTION>
+                </inputSet>
+            </inputs>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="JMS Queue Sender">
+        <pd:type>com.tibco.plugin.jms.JMSQueueSendActivity</pd:type>
+        <pd:resourceType>ae.activities.JMSQueueSendActivity</pd:resourceType>
+        <pd:x>648</pd:x>
+        <pd:y>137</pd:y>
+        <config>
+            <PermittedMessageType>XML Text</PermittedMessageType>
+            <SessionAttributes>
+                <transacted>false</transacted>
+                <acknowledgeMode>1</acknowledgeMode>
+                <maxSessions>1</maxSessions>
+                <destination>motive.response.in</destination>
+            </SessionAttributes>
+            <ConfigurableHeaders>
+                <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                <JMSExpiration>0</JMSExpiration>
+                <JMSPriority>4</JMSPriority>
+            </ConfigurableHeaders>
+            <ConnectionReference>/Resources/Connections/JMS/JMS Connection.sharedjmscon</ConnectionReference>
+            <InDataxsdString ref="pfx:ReprovisionMstvAccountResponseOut"/>
+        </config>
+        <pd:inputBindings>
+            <ns:ActivityInput>
+                <JMSExpiration>
+                    <xsl:value-of select="$_globalVariables/ns2:GlobalVariables/JMS/JMSExpiration"/>
+                </JMSExpiration>
+                <JMSCorrelationID>
+                    <xsl:value-of select="$Parse-XML/pfx3:ossEndPointResponse/ns5:systems/ns5:messageId"/>
+                </JMSCorrelationID>
+                <JMSType>
+                    <xsl:value-of select="'ReprovisionMstvAccountResponse'"/>
+                </JMSType>
+                <Body>
+                    <xsl:copy-of select="$Map-Data/pfx:ReprovisionMstvAccountResponseOut"/>
+                </Body>
+            </ns:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Map Data">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>454</pd:x>
+        <pd:y>138</pd:y>
+        <config>
+            <element ref="pfx:ReprovisionMstvAccountResponseOut"/>
+        </config>
+        <pd:inputBindings>
+            <pfx:ModifyPortMessageOut>
+                <ns1:Header>
+                    <ns1:version>1.0</ns1:version>
+                    <ns1:id>
+                        <xsl:value-of select="concat(&quot;OSSPE-&quot;,$_globalVariables/ns2:GlobalVariables/Env,&quot;::MODIFYPORT::OSSPE-&quot;,$_globalVariables/ns2:GlobalVariables/Env ,&quot;-REPROVISIONING-1::&quot;,$_processContext/ns3:ProcessContext/ProcessId , tib:timestamp())"/>
+                    </ns1:id>
+                    <ns1:originator>OSSPE</ns1:originator>
+                    <ns1:requestID>
+                        <xsl:value-of select="$Parse-XML/pfx3:ossEndPointResponse/ns5:systems/ns5:messageId"/>
+                    </ns1:requestID>
+                </ns1:Header>
+                <pfx:Body>
+                    <xsl:choose>
+                        <xsl:when test="$Parse-XML/pfx3:ossEndPointResponse/pfx3:operationStatus/ns5:statusCode='000'">
+                            <ns1:status>
+                                <xsl:value-of select="'success'"/>
+                            </ns1:status>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <ns1:status>
+                                <xsl:value-of select="'failure'"/>
+                            </ns1:status>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <ns1:report>
+                        <ns1:code>
+                            <xsl:value-of select="$Parse-XML/pfx3:ossEndPointResponse/pfx3:operationStatus/ns5:errorCode"/>
+                        </ns1:code>
+                        <ns1:description>
+                            <xsl:value-of select="$Parse-XML/pfx3:ossEndPointResponse/pfx3:operationStatus/ns5:errorDescription"/>
+                        </ns1:description>
+                    </ns1:report>
+                </pfx:Body>
+            </pfx:ModifyPortMessageOut>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Parse XML">
+        <pd:type>com.tibco.plugin.xml.XMLParseActivity</pd:type>
+        <pd:resourceType>ae.activities.XMLParseActivity</pd:resourceType>
+        <pd:x>317</pd:x>
+        <pd:y>138</pd:y>
+        <config>
+            <inputStyle>text</inputStyle>
+            <xsdVersion>default</xsdVersion>
+            <validateOutput>true</validateOutput>
+            <term ref="pfx3:ossEndPointResponse"/>
+        </config>
+        <pd:inputBindings>
+            <xmlString>
+                <xsl:value-of select="$JDBC-Call-Procedure/resultSet/outputSet/OMESSAGE"/>
+            </xmlString>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Handle Error Message">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>528</pd:x>
+        <pd:y>243</pd:y>
+        <config>
+            <processName>/Processes/Generic/Handle Error Message.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <CustomString>Error when processing response from OSSPE.</CustomString>
+                <ErrorReport>
+                    <StackTrace>
+                        <xsl:value-of select="$_error/ns3:ErrorReport/StackTrace"/>
+                    </StackTrace>
+                    <Msg>
+                        <xsl:value-of select="$_error/ns3:ErrorReport/Msg"/>
+                    </Msg>
+                    <FullClass>
+                        <xsl:value-of select="$_error/ns3:ErrorReport/FullClass"/>
+                    </FullClass>
+                    <Class>
+                        <xsl:value-of select="$_error/ns3:ErrorReport/Class"/>
+                    </Class>
+                    <ProcessStack>
+                        <xsl:value-of select="$_error/ns3:ErrorReport/ProcessStack"/>
+                    </ProcessStack>
+                    <xsl:if test="$_error/ns3:ErrorReport/MsgCode">
+                        <MsgCode>
+                            <xsl:value-of select="$_error/ns3:ErrorReport/MsgCode"/>
+                        </MsgCode>
+                    </xsl:if>
+                </ErrorReport>
+                <objMessage>
+                    <xsl:value-of select="tib:string-to-base64($JDBC-Call-Procedure/resultSet/outputSet/OMESSAGE)"/>
+                </objMessage>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Log">
+        <pd:type>com.tibco.pe.core.WriteToLogActivity</pd:type>
+        <pd:resourceType>ae.activities.log</pd:resourceType>
+        <pd:x>313</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <role>RR</role>
+        </config>
+        <pd:inputBindings>
+            <ns4:ActivityInput>
+                <message>
+                    <xsl:value-of select="concat('OSSPE procedure PDENQUEUE returned error. ',$JDBC-Call-Procedure/resultSet/outputSet/OERRORTEXT)"/>
+                </message>
+                <msgCode>MODIFYPORTRESPONSE_002</msgCode>
+            </ns4:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>JDBC Call Procedure</pd:from>
+        <pd:to>Parse XML</pd:to>
+        <pd:xpathDescription>Success</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$JDBC-Call-Procedure/resultSet/outputSet/OERRORCODE = 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse XML</pd:from>
+        <pd:to>Map Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Call Procedure</pd:from>
+        <pd:to>Log</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-65536</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch All</pd:from>
+        <pd:to>Handle Error Message</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Call Procedure</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Handle Error Message</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>One Bend</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Log</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>One Bend</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>JMS Queue Sender</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JMS Queue Sender</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

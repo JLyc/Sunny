@@ -1,0 +1,46 @@
+<xsd:ModifyDvbsMessageIn xmlns:xsd="http://www.t-mobile.sk/oss/OsspeServices/xsd" xmlns:eur="http://www.logica.com/eurotel-crm">
+    <eur:Header>
+        <eur:version>1.0</eur:version>
+        <eur:id>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505</eur:id>
+        <eur:originator>MOTIVE</eur:originator>
+        <eur:timeStamp>1441615369505</eur:timeStamp>
+        <eur:operation>query</eur:operation>
+        <eur:requestID>14416546695056613378</eur:requestID>
+    </eur:Header>
+    <xsd:Body>
+        <xsd:serviceAction>string</xsd:serviceAction>
+        <xsd:sessionId>string</xsd:sessionId>
+        <xsd:inventoryItem>
+            <eur:id>OSSPE-DEV-MODIFYPORTSENDREQUEST-1</eur:id>
+            <!--Optional:-->
+            <eur:status>string</eur:status>
+            <!--Optional:-->
+            <eur:name>string</eur:name>
+            <!--Optional:-->
+            <eur:serviceInstanceId>string</eur:serviceInstanceId>
+            <!--Optional:-->
+            <eur:subtype>string</eur:subtype>
+            <!--Optional:-->
+            <eur:inventoryObjectType>string</eur:inventoryObjectType>
+            <!--Optional:-->
+            <eur:inventoryObjectId>100</eur:inventoryObjectId>
+            <!--Optional:-->
+            <eur:installationType>string</eur:installationType>
+            <!--Optional:-->
+            <eur:servicePointReference>string</eur:servicePointReference>
+        </xsd:inventoryItem>
+    </xsd:Body>
+</xsd:ModifyDvbsMessageIn>
+
+        <?xml version="1.0" encoding="UTF-8"?><ossEndPointRequest xmlns="http://www.st.sk/oss/ossdvbsrequest">
+<ns0:orderId xmlns:ns0="http://www.st.sk/oss/osscommon">string</ns0:orderId>
+<ns0:systems xmlns:ns0="http://www.st.sk/oss/osscommon">
+    <ns0:messageId>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505
+    </ns0:messageId>
+    <ns0:source>Tibco</ns0:source>
+    <ns0:target>Oss</ns0:target>
+    <ns0:timestamp>2015-09-07T10:42:49.505+02:00</ns0:timestamp>
+</ns0:systems>
+<ns0:serviceType xmlns:ns0="http://www.st.sk/oss/osscommon">OSSDVBS</ns0:serviceType>
+<ns0:serviceAction xmlns:ns0="http://www.st.sk/oss/osscommon">BaseProfile</ns0:serviceAction>
+</ossEndPointRequest>

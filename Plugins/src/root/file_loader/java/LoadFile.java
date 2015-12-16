@@ -36,7 +36,4 @@ public class LoadFile {
     public void setDefaultExecutor(ExecutorService defaultExecutor) {
         this.defaultExecutor = defaultExecutor;
     }
-
-
-
 }
