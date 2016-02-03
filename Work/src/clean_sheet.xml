@@ -1,86 +1,41 @@
-        
-       
-        
-        ONTPORTID : 1
-        ONTPORTTYPE : POTS
-        ONTPSTAT : --
-        ---------------------------------------------
-        ONTPORTID : 2
-        ONTPORTTYPE : POTS
-        ONTPSTAT : --
-        ---------------------------------------------
-        ONTPORTID : 1
-        ONTPORTTYPE : IPHOST
-        ONTPSTAT : --
-        ---------------------------------------------
-        ACTUALPT : GE
-        ADMINSTAT : Up
-        CODEMODE : --
-        COPYPRIORITYPOLICY : --
-        DUPLEX : AUTO
-        FLOWCTRL : CLOSE
-        LOOPBACK : NOLOOP
-        NEGOTIATE : OPEN
-        ONTPORTID : 1
-        ONTPORTTYPE : ETH
-        ONTPSTAT : Activating
-        PRIORITY : 0
-        QINQ : --
-        SPEED : AUTO
-        VLANDEFAULT : 2510
-        ---------------------------------------------
-        ACTUALPT : GE
-        ADMINSTAT : Up
-        CODEMODE : --
-        COPYPRIORITYPOLICY : --
-        DUPLEX : AUTO
-        FLOWCTRL : CLOSE
-        LOOPBACK : NOLOOP
-        NEGOTIATE : OPEN
-        ONTPORTID : 2
-        ONTPORTTYPE : ETH
-        ONTPSTAT : Activating
-        PRIORITY : 0
-        QINQ : --
-        SPEED : AUTO
-        VLANDEFAULT : 2510
-        ---------------------------------------------
-        ACTUALPT : GE
-        ADMINSTAT : Up
-        CODEMODE : --
-        COPYPRIORITYPOLICY : --
-        DUPLEX : AUTO
-        FLOWCTRL : CLOSE
-        LOOPBACK : NOLOOP
-        NEGOTIATE : OPEN
-        ONTPORTID : 3
-        ONTPORTTYPE : ETH
-        ONTPSTAT : Activating
-        PRIORITY : 0
-        QINQ : --
-        SPEED : AUTO
-        VLANDEFAULT : 2510
-        ---------------------------------------------
-        ACTUALPT : GE
-        ADMINSTAT : Up
-        CODEMODE : --
-        COPYPRIORITYPOLICY : --
-        DUPLEX : AUTO
-        FLOWCTRL : CLOSE
-        LOOPBACK : NOLOOP
-        NEGOTIATE : OPEN
-        ONTPORTID : 4
-        ONTPORTTYPE : ETH
-        ONTPSTAT : Activating
-        PRIORITY : 0
-        QINQ : --
-        SPEED : AUTO
-        VLANDEFAULT : 2510
-        ---------------------------------------------
-        ALLOCID : 2
-        DBAPROF : dba-profile_1
-        TCONTID : 0
-        ---------------------------------------------
-        ALLOCID : 1282
-        DBAPROF : HSI_4
-        TCONTID : 5
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:element name="snmp-response-message" type="snmp-response-messageType"/>
+    <xs:complexType name="snmp-response-messageType">
+        <xs:sequence>
+            <xs:element name="status" type="statusType"/>
+            <xs:element name="weatherProbe" type="weatherProbeType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="statusType">
+        <xs:sequence>
+            <xs:element name="result" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="weatherProbeType">
+        <xs:all>
+            <xs:element name="signalStandard" type="xs:string"/>
+            <xs:element name="signalFrameRate" type="xs:string"/>
+            <xs:element name="rfLevel" type="xs:string"/>
+            <xs:element name="inputIndex" type="xs:string"/>
+            <xs:element name="modulationErrorRatio" type="xs:string"/>
+            <xs:element name="ToneFlag22khz" type="xs:string"/>
+            <xs:element name="bitErrorRate" type="xs:string"/>
+            <xs:element name="signalModulationType" type="xs:string"/>
+            <xs:element name="inputSignalStatus" type="xs:string"/>
+            <xs:element name="streamBitrate" type="xs:string"/>
+            <xs:element name="supplyVoltage" type="xs:string"/>
+            <xs:element name="networkTransmitChannelIndex" type="xs:string"/>
+            <xs:element name="physicalPortNumber" type="xs:string"/>
+            <xs:element name="signalOfNoiseRatio" type="xs:string"/>
+            <xs:element name="signalPunctureRate" type="xs:string"/>
+            <xs:element name="streamSymbolRate" type="xs:string"/>
+            <xs:element name="carrierFrequency" type="xs:string"/>
+        </xs:all>
+        <xs:attribute name="ip" type="xs:string"/>
+    </xs:complexType>
+</xs:schema>

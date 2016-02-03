@@ -18,7 +18,7 @@ public class Test
 		
 		try
 		{
-			url = new URL("http://stackoverflow.com/");
+			url = new URL("http://google.com/");
 			is = url.openStream(); // throws an IOException
 			br = new BufferedReader(new InputStreamReader(is));
 			

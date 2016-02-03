@@ -35,3 +35,42 @@
 </ns13:operationStatus>
 <ns13:iptvid>123</ns13:iptvid>
 </ns13:ossEndPointResponse>
+
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns14:ossEndPointResponse xmlns="http://www.st.sk/oss/osscommon" xmlns:ns2="http://www.st.sk/oss/ossinternal" xmlns:ns60="http://www.st.sk/oss/parallelringing" xmlns:ns4="http://st.sk/oss/test1response" xmlns:ns3="http://www.st.sk/oss/test2" xmlns:ns6="http://www.st.sk/oss/sethwreservationresponse" xmlns:ns53="http://www.st.sk/oss/tpmaeth" xmlns:ns5="http://st.sk/oss/test1request" xmlns:ns52="http://www.st.sk/oss/tpmxdsl" xmlns:ns8="http://www.st.sk/oss/ossresetdevicepinresponse" xmlns:ns51="http://www.st.sk/oss/tpmcpe" xmlns:ns7="http://www.st.sk/oss/sethwreservationrequest" xmlns:ns50="http://www.st.sk/oss/ossdvbsrequest" xmlns:ns13="http://www.st.sk/oss/ossmediaroomrequest" xmlns:ns57="http://www.st.sk/oss/tpmtvgo" xmlns:ns9="http://www.st.sk/oss/ossresetdevicepinrequest" xmlns:ns12="http://www.st.sk/oss/ossmediaroomresponse" xmlns:ns56="http://www.st.sk/oss/tpmbras" xmlns:ns11="http://www.st.sk/oss/ossportrequest" xmlns:ns55="http://www.st.sk/oss/tpmvoice" xmlns:ns10="http://www.st.sk/oss/ossportresponse" xmlns:ns54="http://www.st.sk/oss/tpmgpon" xmlns:ns17="http://www.st.sk/oss/ossimsprofilemodificationrequest" xmlns:ns16="http://www.st.sk/oss/ossimsprofilemodificationresponse" xmlns:ns15="http://www.st.sk/oss/ossmcorerequest" xmlns:ns59="http://www.t-mobile.sk/soa/NetworkServiceInterface/xsd" xmlns:ns14="http://www.st.sk/oss/ossmcoreresponse" xmlns:ns58="http://www.logica.com/eurotel-crm" xmlns:ns19="http://www.st.sk/oss/ossgettopologyrequest" xmlns:ns18="http://www.st.sk/oss/ossgettopologyresponse" xmlns:ns42="http://www.st.sk/oss/ossgetdslneighborhoodsrequest" xmlns:ns41="http://www.st.sk/oss/ossgetdslneighborhoodsresponse" xmlns:ns40="http://www.st.sk/oss/ossgethdmcpeservicesrequest" xmlns:ns46="http://www.st.sk/oss/ossgetaccessmatrixrequest" xmlns:ns45="http://www.st.sk/oss/ossgetaccessmatrixresponse" xmlns:ns44="http://www.st.sk/oss/ossgetcperequest" xmlns:ns43="http://www.st.sk/oss/ossgetcperesponse" xmlns:ns49="http://www.st.sk/oss/ossdvbsresponse" xmlns:ns48="http://www.st.sk/oss/ossfindservicenoderequest" xmlns:ns47="http://www.st.sk/oss/ossfindservicenoderesponse" xmlns:ns31="http://www.st.sk/oss/ossgetlastmilestatiscticrequest" xmlns:ns30="http://www.st.sk/oss/ossgetlastmilestatiscticresponse" xmlns:ns35="http://www.st.sk/ngcrm/ngcommon" xmlns:ns34="http://www.st.sk/oss/gethwavailabilityresponse" xmlns:ns33="http://www.st.sk/oss/gethwreservationrequest" xmlns:ns32="http://www.st.sk/oss/gethwreservationresponse" xmlns:ns39="http://www.st.sk/oss/ossgethdmcpeservicesresponse" xmlns:ns38="http://www.st.sk/oss/ossgethdmservicepointidrequest" xmlns:ns37="http://www.st.sk/oss/ossgethdmservicepointidresponse" xmlns:ns36="http://www.st.sk/oss/gethwavailabilityrequest" xmlns:ns20="http://www.st.sk/oss/ossgetsubscriberforportresponse" xmlns:ns64="http://www.st.sk/oss/setfcdnumber" xmlns:ns63="http://www.st.sk/oss/getfcdstatus" xmlns:ns62="http://www.st.sk/oss/setfcdnumberresponse" xmlns:ns61="http://www.st.sk/oss/getfcdstatusresponse" xmlns:ns24="http://www.st.sk/oss/ossgetservicepointresponse" xmlns:ns23="http://www.st.sk/oss/ossgetserviceprofilerequest" xmlns:ns22="http://www.st.sk/oss/ossgetserviceprofileresponse" xmlns:ns21="http://www.st.sk/oss/ossgetsubscriberforportrequest" xmlns:ns28="http://www.st.sk/oss/ossgetportinforesponse" xmlns:ns27="http://www.st.sk/oss/ossgetproberequest" xmlns:ns26="http://www.st.sk/oss/ossgetproberesponse" xmlns:ns25="http://www.st.sk/oss/ossgetservicepointrequest" xmlns:ns29="http://www.st.sk/oss/ossgetportinforequest">
+<orderId>123123</orderId>
+<systems>
+    <messageId>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505</messageId>
+    <source>Oss</source>
+    <target>Tibco</target>
+    <timestamp>2015-12-17T10:27:35.386+01:00</timestamp>
+</systems>
+<serviceAction>None</serviceAction>
+<ns14:customer>1231231</ns14:customer>
+<ns14:operationStatus>
+    <statusCode>000</statusCode>
+    <statusDetail>operation_successful</statusDetail>
+    <errorCode>MCORE_000</errorCode>
+    <errorDescription></errorDescription>
+</ns14:operationStatus>
+<ns14:iptvid>123</ns14:iptvid>
+</ns14:ossEndPointResponse>
+
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns14:ossEndPointResponse>
+<orderId>123123</orderId>
+<systems>
+    <messageId>MOTIVE-DEV::MODIFYPORTSENDREQUEST::OSSPE-DEV-MODIFYPORTSENDREQUEST-1::66_1441615369505</messageId>
+    <source>Oss</source>
+    <target>Tibco</target>
+    <timestamp>2015-12-17T10:27:35.386+01:00</timestamp>
+</systems>
+<serviceAction>None</serviceAction>
+<ns14:customer>1231231</ns14:customer>
+<ns14:operationStatus>
+    <statusCode>000</statusCode>
+    <statusDetail>operation_successful</statusDetail>
+    <errorCode>MCORE_000</errorCode>
+    <errorDescription></errorDescription>
+</ns14:operationStatus>
+<ns14:iptvid>123</ns14:iptvid>
+</ns14:ossEndPointResponse>

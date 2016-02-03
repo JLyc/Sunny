@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-public class SerialTest implements SerialPortEventListener
+public class Kalkulacka implements SerialPortEventListener
 {
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
@@ -122,7 +122,7 @@ public class SerialTest implements SerialPortEventListener
 	public static void main(String[] args) throws Exception
 	{
 
-		SerialTest main = new SerialTest();
+		Kalkulacka main = new Kalkulacka();
 		main.initialize();
 		Thread t = new Thread()
 		{

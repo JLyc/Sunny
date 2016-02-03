@@ -1,55 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.logica.com/eurotel-crm" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:ns3="http://www.tibco.com/pe/EngineTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pfx="http://www.t-mobile.sk/oss/OsspeServices/xsd">
-    <xsd:import namespace="http://www.t-mobile.sk/oss/OsspeServices/xsd" schemaLocation="/Shared Resources/OSSPE.xsd"/>
-    <pd:name>Processes/ApplicationToCDM/OSSPE/Asynch/OSSService_Asynch/ReprovisionMstvAccountResponse/ReprovisionMstvAccountResponse.process</pd:name>
-    <pd:description>Response for port remote replacement, port re-provisioning and port restart, based on input operation in OSSPE (request from I_137 ModifyPort)</pd:description>
-    <pd:startName>Timer</pd:startName>
-    <pd:startX>0</pd:startX>
-    <pd:startY>0</pd:startY>
-    <pd:returnBindings/>
-    <pd:starter name="Timer">
-        <pd:type>com.tibco.plugin.timer.TimerEventSource</pd:type>
-        <pd:resourceType>ae.activities.timer</pd:resourceType>
-        <pd:x>100</pd:x>
-        <pd:y>34</pd:y>
-        <config>
-            <StartTime>1438079864000</StartTime>
-            <Frequency>false</Frequency>
-            <TimeInterval>%%DB/OSSPE/loopInterval%%</TimeInterval>
-            <FrequencyIndex>Millisecond</FrequencyIndex>
-        </config>
-        <pd:inputBindings/>
-    </pd:starter>
-    <pd:endName>End</pd:endName>
-    <pd:endX>392</pd:endX>
-    <pd:endY>38</pd:endY>
-    <pd:errorSchemas>
-        <ErorrSchema ref="pfx:ModifyPortMessageOut"/>
-    </pd:errorSchemas>
-    <pd:processVariables/>
-    <pd:targetNamespace>http://xmlns.example.com/1448300328754</pd:targetNamespace>
-    <pd:activity name="VoicePortModificationResponseCore">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>219</pd:x>
-        <pd:y>36</pd:y>
-        <config>
-            <processName>/Processes/ApplicationToCDM/OSSPE/Asynch/OSSService_Asynch/ModifyPortResponse/VoicePortModificationResponseCore.process</processName>
-        </config>
-        <pd:inputBindings/>
-    </pd:activity>
-    <pd:transition>
-        <pd:from>Timer</pd:from>
-        <pd:to>VoicePortModificationResponseCore</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>VoicePortModificationResponseCore</pd:from>
-        <pd:to>End</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-</pd:ProcessDefinition>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<snmp-response-message>
+    <status>
+        <result>0</result>
+        <description>success</description>
+    </status>
+    <weatherProbe ip="">
+        <unknown_element_uid19>0:00:00.00</unknown_element_uid19>
+        <unknown_element_uid2>1.3.6.1.4.1.27070.3.1</unknown_element_uid2>
+        <unknown_element_uid3>3:24:26.67</unknown_element_uid3>
+        <unknown_element_uid1>DTA-3137 Networked DVB-S2 Receiver</unknown_element_uid1>
+        <unknown_element_uid6>Van Riebeeckweg 43A;1212 EH Hilversum;The Netherlands</unknown_element_uid6>
+        <unknown_element_uid7>70</unknown_element_uid7>
+        <unknown_element_uid4>info@dektec.com</unknown_element_uid4>
+        <unknown_element_uid5>DTE-3137_0500c0</unknown_element_uid5>
+        <unknown_element_uid9>1.3.6.1.2.1.2</unknown_element_uid9>
+        <unknown_element_uid8>0:00:00.00</unknown_element_uid8>
+        <unknown_element_uid20>0:00:00.00</unknown_element_uid20>
+        <unknown_element_uid21>0:00:00.00</unknown_element_uid21>
+        <unknown_element_uid10>1.3.6.1.6.3.1</unknown_element_uid10>
+        <unknown_element_uid13>1.3.6.1.2.1.7</unknown_element_uid13>
+        <unknown_element_uid14>The MIB module to describe generic objects for network interface sub-layers.
+        </unknown_element_uid14>
+        <unknown_element_uid11>1.3.6.1.2.1.6</unknown_element_uid11>
+        <unknown_element_uid12>1.3.6.1.2.1.4</unknown_element_uid12>
+        <unknown_element_uid22>0:00:00.00</unknown_element_uid22>
+        <unknown_element_uid17>The MIB module for managing IP and ICMP implementations</unknown_element_uid17>
+        <unknown_element_uid23>0:00:00.00</unknown_element_uid23>
+        <unknown_element_uid18>The MIB module for managing UDP implementations</unknown_element_uid18>
+        <unknown_element_uid15>The MIB module for SNMPv2 entities.</unknown_element_uid15>
+        <unknown_element_uid16>The MIB module for managing TCP implementations.</unknown_element_uid16>
+    </weatherProbe>
+</snmp-response-message>

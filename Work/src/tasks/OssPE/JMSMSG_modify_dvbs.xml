@@ -8,26 +8,15 @@
         <eur:requestID>14416546695056613378</eur:requestID>
     </eur:Header>
     <xsd:Body>
-        <xsd:serviceAction>string</xsd:serviceAction>
-        <xsd:sessionId>string</xsd:sessionId>
+        <xsd:serviceAction>Reactivation</xsd:serviceAction>
+        <xsd:sessionId>123221412</xsd:sessionId>
         <xsd:inventoryItem>
             <eur:id>OSSPE-DEV-MODIFYPORTSENDREQUEST-1</eur:id>
-            <!--Optional:-->
-            <eur:status>string</eur:status>
-            <!--Optional:-->
-            <eur:name>string</eur:name>
-            <!--Optional:-->
-            <eur:serviceInstanceId>string</eur:serviceInstanceId>
-            <!--Optional:-->
-            <eur:subtype>string</eur:subtype>
-            <!--Optional:-->
-            <eur:inventoryObjectType>string</eur:inventoryObjectType>
-            <!--Optional:-->
-            <eur:inventoryObjectId>100</eur:inventoryObjectId>
-            <!--Optional:-->
-            <eur:installationType>string</eur:installationType>
-            <!--Optional:-->
-            <eur:servicePointReference>string</eur:servicePointReference>
+            <eur:servicePointReference>Reactivation</eur:servicePointReference>
+            <eur:customer>
+                <eur:id>OSSPE-DEV-MODIFYPORTSENDREQUEST-1</eur:id>
+                <eur:code>Customer_0002</eur:code>
+            </eur:customer>
         </xsd:inventoryItem>
     </xsd:Body>
 </xsd:ModifyDvbsMessageIn>

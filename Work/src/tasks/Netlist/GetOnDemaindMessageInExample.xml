@@ -1,0 +1,12 @@
+<xsd:GetOnDemandStbStatsMessageIn xmlns:xsd="http://www.t-mobile.sk/oss/NetlistServices/xsd" xmlns:eur="http://www.logica.com/eurotel-crm">
+<eur:Header>
+  <eur:version>1.0</eur:version>
+  <eur:originator>TIBCO</eur:originator>
+  <eur:operation>create</eur:operation>
+  <eur:requestID>123456789</eur:requestID>
+</eur:Header>
+<xsd:Body>
+  <xsd:stbId>18854</xsd:stbId>
+</xsd:Body>
+</xsd:GetOnDemandStbStatsMessageIn>
+

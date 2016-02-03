@@ -1,299 +1,854 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-  ~ Copyright (c) 2015. All rights reserved for author and owner of email domain JLyc.Development@gmail.com.
-  -->
-
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns="http://www.t-mobile.sk/oss/OsspeServices/xsd"
-            xmlns:cdm="http://www.logica.com/eurotel-crm"
-            xmlns:osspe="http://www.t-mobile.sk/oss/OsspeServices/xsd"
-            targetNamespace="http://www.t-mobile.sk/oss/OsspeServices/xsd"
-            elementFormDefault="qualified"
-            attributeFormDefault="unqualified">
-    <xsd:import namespace="http://www.logica.com/eurotel-crm" schemaLocation="CommonDataModel.xsd"/>
-    <xsd:complexType name="ModifyDvbsRequest">
-        <xsd:sequence>
-            <xsd:element name="serviceAction" type="xsd:string"/>
-            <xsd:element name="sessionId" type="xsd:string"/>
-            <xsd:element name="inventoryItem" type="cdm:InventoryItem"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyImsServiceAttributeRequest">
-        <xsd:sequence>
-            <xsd:element name="pstnNumber" type="xsd:string"/>
-            <xsd:element name="password" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="serviceAction" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        action to be performed during the operation
-                    </xsd:documentation>
-                </xsd:annotation>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch0="http://www.st.sk/oss/ossdvbsrequest" xmlns:sch1="http://www.st.sk/oss/osscommon" xmlns:sch2="http://www.st.sk/oss/ossdvbsresponse" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.st.sk/oss/ossdvbs" targetNamespace="http://www.st.sk/oss/ossdvbs">
+    <wsdl:types>
+        <xsd:schema xmlns="http://www.st.sk/oss/ossdvbsrequest" xmlns:cmn="http://www.st.sk/oss/osscommon" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.st.sk/oss/ossdvbsrequest">
+            <xsd:import namespace="http://www.st.sk/oss/osscommon"/>
+            <xsd:element name="ossEndPointRequest">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="cmn:ossEndPointHeader">
+                            <xsd:sequence>
+                                <xsd:element name="itemList">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="servicePointId" type="xsd:string"/>
+                                            <xsd:element name="customer" type="xsd:string"/>
+                                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="provisioningOrderItem" type="cmn:motiveCardPairing"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
             </xsd:element>
-            <xsd:element name="sessionId" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Id of the order in Siebel
-                    </xsd:documentation>
-                </xsd:annotation>
+        </xsd:schema>
+        <xsd:schema xmlns="http://www.st.sk/oss/osscommon" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.st.sk/oss/osscommon">
+            <xsd:simpleType name="elementAction">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="AddXXXX"/>
+                    <xsd:enumeration value="Modify"/>
+                    <xsd:enumeration value="Existing"/>
+                    <xsd:enumeration value="Delete"/>
+                    <xsd:enumeration value="SoftSuspend"/>
+                    <xsd:enumeration value="HardSuspend"/>
+                    <xsd:enumeration value="Resume"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:complexType name="virtualResource">
+                <xsd:sequence>
+                    <xsd:element name="action" type="elementAction"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="value" type="xsd:string"/>
+                    <xsd:element name="crmValue" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="resourceSelectionType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="UponRequest"/>
+                                <xsd:enumeration value="Gold"/>
+                                <xsd:enumeration value="Silver"/>
+                                <xsd:enumeration value="Pool"/>
+                                <xsd:enumeration value="Automatic"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="vrReservationId" type="xsd:string"/>
+                    <xsd:element name="resourceId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="expirationDate" nillable="true" type="xsd:dateTime"/>
+                    <xsd:element minOccurs="0" name="portStatus">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Locally"/>
+                                <xsd:enumeration value="Imported"/>
+                                <xsd:enumeration value="Exported"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="portRequestId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="portType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Complex"/>
+                                <xsd:enumeration value="Simple"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="portDate" nillable="true" type="xsd:date"/>
+                    <xsd:element minOccurs="0" name="numberDonor" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="numberRecipient" type="xsd:string"/>
+                    <xsd:element name="numberOwner" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="reservationStatus" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="ossServiceType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="TaskEngine"/>
+                    <xsd:enumeration value="WorkFlow"/>
+                    <xsd:enumeration value="Logistics"/>
+                    <xsd:enumeration value="ServiceDesign"/>
+                    <xsd:enumeration value="OSSPort"/>
+                    <xsd:enumeration value="Port"/>
+                    <xsd:enumeration value="GetOSSServiceProfil"/>
+                    <xsd:enumeration value="FindServiceNode"/>
+                    <xsd:enumeration value="GetDSLNeighborhoods"/>
+                    <xsd:enumeration value="GetServicePoint"/>
+                    <xsd:enumeration value="OSSGetHDMServicePointid"/>
+                    <xsd:enumeration value="OSSGetHDMCPEServices"/>
+                    <xsd:enumeration value="IMSmodificationProfile"/>
+                    <xsd:enumeration value="MCORE"/>
+                    <xsd:enumeration value="DVBS"/>
+                    <xsd:enumeration value="MEDIAROOM"/>
+                    <xsd:enumeration value="GetTopology"/>
+                    <xsd:enumeration value="ResetDevicePIN"/>
+                    <xsd:enumeration value="GetLastMileStatistic"/>
+                    <xsd:enumeration value="GetCPEofSubscriber"/>
+                    <xsd:enumeration value="GetAccessMatrix"/>
+                    <xsd:enumeration value="GetProbe"/>
+                    <xsd:enumeration value="GetSubscriberForPort"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ossServiceAction">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Start"/>
+                    <xsd:enumeration value="BaseProfile"/>
+                    <xsd:enumeration value="FullProfile"/>
+                    <xsd:enumeration value="HDMProfile"/>
+                    <xsd:enumeration value="Replacement"/>
+                    <xsd:enumeration value="Reset"/>
+                    <xsd:enumeration value="Restart"/>
+                    <xsd:enumeration value="Reprovisioning"/>
+                    <xsd:enumeration value="Pairing"/>
+                    <xsd:enumeration value="Reactivation"/>
+                    <xsd:enumeration value="ChangePassword"/>
+                    <xsd:enumeration value="Suspend"/>
+                    <xsd:enumeration value="Resume"/>
+                    <xsd:enumeration value="VasModification"/>
+                    <xsd:enumeration value="Assign"/>
+                    <xsd:enumeration value="BlockOrder"/>
+                    <xsd:enumeration value="Cancel"/>
+                    <xsd:enumeration value="Close"/>
+                    <xsd:enumeration value="Design"/>
+                    <xsd:enumeration value="ModifyDesign"/>
+                    <xsd:enumeration value="OnlineRedesign"/>
+                    <xsd:enumeration value="Refresh"/>
+                    <xsd:enumeration value="Rollback"/>
+                    <xsd:enumeration value="ServiceDesign"/>
+                    <xsd:enumeration value="UpdateDesign"/>
+                    <xsd:enumeration value="None"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:complexType name="nodeItem">
+                <xsd:sequence>
+                    <xsd:element name="nodeId" type="xsd:int"/>
+                    <xsd:element name="nodeTypeName" type="xsd:string"/>
+                    <xsd:element name="nodeDefName" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="fullname" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="relativename" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="alias1" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="alias2" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="osversion" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="subtype" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="notes" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="characteristicsList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="characteristics" type="nameValuePair"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="cardPairingData" type="motiveCardPairing"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="portItem">
+                <xsd:sequence>
+                    <xsd:element name="portId" type="xsd:int"/>
+                    <xsd:element name="nodeId" type="xsd:int"/>
+                    <xsd:element name="portTypeName" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="fullname" type="xsd:string"/>
+                    <xsd:element name="cardName" type="xsd:string"/>
+                    <xsd:element name="cardTypeName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="notes" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="service_profile" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="spectrum_profile" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="osversion" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="subtype" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="alarm_profile" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="VLAN_IPTV" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="VLAN_Internet" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="VLAN_Voice" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ossEndPointHeader">
+                <xsd:sequence>
+                    <xsd:element name="orderId" type="xsd:string"/>
+                    <xsd:element name="systems" type="messageEnvelope"/>
+                    <xsd:element name="serviceType" type="ossServiceType"/>
+                    <xsd:element name="serviceAction" type="ossServiceAction"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="messageEnvelope">
+                <xsd:sequence>
+                    <xsd:element name="messageId" type="xsd:string"/>
+                    <xsd:element name="source">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="SPASiebel"/>
+                                <xsd:enumeration value="Cramer"/>
+                                <xsd:enumeration value="SD"/>
+                                <xsd:enumeration value="TPM"/>
+                                <xsd:enumeration value="Vitria"/>
+                                <xsd:enumeration value="Oss"/>
+                                <xsd:enumeration value="Oss-WorkFlow"/>
+                                <xsd:enumeration value="Oss-Invetory"/>
+                                <xsd:enumeration value="Oss-Activation"/>
+                                <xsd:enumeration value="Oss-Logistics"/>
+                                <xsd:enumeration value="Oss-ServiceDesigner"/>
+                                <xsd:enumeration value="Tibco"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="target">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="SPASiebel"/>
+                                <xsd:enumeration value="Cramer"/>
+                                <xsd:enumeration value="SD"/>
+                                <xsd:enumeration value="TPM"/>
+                                <xsd:enumeration value="Vitria"/>
+                                <xsd:enumeration value="Oss"/>
+                                <xsd:enumeration value="Oss-WorkFlow"/>
+                                <xsd:enumeration value="Oss-Invetory"/>
+                                <xsd:enumeration value="Oss-Activation"/>
+                                <xsd:enumeration value="Oss-Logistics"/>
+                                <xsd:enumeration value="Oss-ServiceDesigner"/>
+                                <xsd:enumeration value="Tibco"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="timestamp" type="xsd:dateTime"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="customer">
+                <xsd:sequence>
+                    <xsd:element name="customerId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="firstName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="familyName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="name" type="xsd:string"/>
+                    <xsd:element name="accountType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Residential"/>
+                                <xsd:enumeration value="Business"/>
+                                <xsd:enumeration value="ST Organization"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="code" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="segment" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="microSegment" type="xsd:string"/>
+                    <xsd:element name="subscriberId" type="xsd:string"/>
+                    <xsd:element name="origin" type="entityOrigin"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="entityOrigin">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CRM"/>
+                    <xsd:enumeration value="Inventory"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:complexType name="nameValuePair">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="value" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oldValue" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="characteristic">
+                <xsd:complexContent>
+                    <xsd:extension base="nameValuePair">
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="virtualResourceInfo" type="virtualResource"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="attribute">
+                <xsd:complexContent>
+                    <xsd:extension base="nameValuePair">
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="displayName" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="mandatory" type="xsd:boolean"/>
+                        </xsd:sequence>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="VASItem">
+                <xsd:sequence>
+                    <xsd:element name="VASId" type="xsd:integer"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="action" type="elementAction"/>
+                    <xsd:element minOccurs="0" name="orderLineItemReference" type="xsd:string"/>
+                    <xsd:element name="referenceId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="characteristicsList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="characteristics" type="characteristic"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="referenceItem">
+                <xsd:sequence>
+                    <xsd:element name="itemId" type="xsd:integer"/>
+                    <xsd:element name="type">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Main Item"/>
+                                <xsd:enumeration value="Decomposition"/>
+                                <xsd:enumeration value="Reference"/>
+                                <xsd:enumeration value="Install Dependency"/>
+                                <xsd:enumeration value="WF Dependency"/>
+                                <xsd:enumeration value="CFS Reference"/>
+                                <xsd:enumeration value="TFC Dependency"/>
+                                <xsd:enumeration value="TE Design"/>
+                                <xsd:enumeration value="TE Assign"/>
+                                <xsd:enumeration value="TE Close"/>
+                                <xsd:enumeration value="TE Suspend"/>
+                                <xsd:enumeration value="Original Reference"/>
+                                <xsd:enumeration value="CPE2CFS"/>
+                                <xsd:enumeration value="CPE2CPE"/>
+                                <xsd:enumeration value="CPE Reference"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="status" type="xsd:string"/>
+                    <xsd:element name="action">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Assign"/>
+                                <xsd:enumeration value="Unassign"/>
+                                <xsd:enumeration value="Existing"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="address">
+                <xsd:sequence>
+                    <xsd:element name="addressId" type="xsd:string"/>
+                    <xsd:element name="city" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="cityArea" type="xsd:string"/>
+                    <xsd:element name="streetName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="streetNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="toStreetNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="building" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="floor" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="doorNumber" type="xsd:string"/>
+                    <xsd:element name="zipCode" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="country" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="region" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="subregion" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="description" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="MSI1Id" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="MSI2Id" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="servicePoint">
+                <xsd:sequence>
+                    <xsd:element name="servicePointId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="networkId" type="xsd:string"/>
+                    <xsd:element name="serviceType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Metallic"/>
+                                <xsd:enumeration value="Optical"/>
+                                <xsd:enumeration value="Ethernet"/>
+                                <xsd:enumeration value="SAT"/>
+                                <xsd:enumeration value="Virtual"/>
+                                <xsd:enumeration value="Data"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="accessNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="role" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="locationDescription" type="xsd:string"/>
+                    <xsd:element name="serviceAddressReference" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="operationStatus">
+                <xsd:sequence>
+                    <xsd:element name="statusCode" type="xsd:string"/>
+                    <xsd:element name="statusDetail" type="xsd:string"/>
+                    <xsd:element name="errorCode" type="xsd:string"/>
+                    <xsd:element name="errorDescription" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="processInfo">
+                <xsd:sequence>
+                    <xsd:element name="detailStatus" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="processedBy" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="comment" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="motiveItem">
+                <xsd:sequence>
+                    <xsd:element name="serviceInstanceId" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="inventoryObjectType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="CFS"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="servicePointReference" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="motiveCardPairing">
+                <xsd:sequence>
+                    <xsd:element name="serviceInstanceId" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="subtype" type="xsd:string"/>
+                    <xsd:element name="inventoryObjectType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="CPE"/>
+                                <xsd:enumeration value="CARD"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="serialNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="cpeReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="servicePointReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="characteristicsList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="characteristics" type="nameValuePair"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="motiveInstallationItem">
+                <xsd:sequence>
+                    <xsd:element name="itemId" type="xsd:integer"/>
+                    <xsd:element minOccurs="0" name="itemStatus" type="xsd:string"/>
+                    <xsd:element name="serviceInstanceId" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="subtype" type="xsd:string"/>
+                    <xsd:element name="inventoryObjectType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="CFS"/>
+                                <xsd:enumeration value="SERVICE"/>
+                                <xsd:enumeration value="PORT"/>
+                                <xsd:enumeration value="DIMNUMBER"/>
+                                <xsd:enumeration value="CIRCUIT"/>
+                                <xsd:enumeration value="ACCOUNT"/>
+                                <xsd:enumeration value="N/A"/>
+                                <xsd:enumeration value="ALIAS"/>
+                                <xsd:enumeration value="CARD"/>
+                                <xsd:enumeration value="DNSRECORD"/>
+                                <xsd:enumeration value="IPRANGE"/>
+                                <xsd:enumeration value="NODE"/>
+                                <xsd:enumeration value="LOCATION"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="inventoryObjectId" type="xsd:integer"/>
+                    <xsd:element name="action" type="elementAction"/>
+                    <xsd:element minOccurs="0" name="customerReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="parentVector">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="referenceItem" type="referenceItem"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="characteristicsList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="characteristics" type="characteristic"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="vasList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="vas" type="VASItem"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="servicePointReference" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="installationItem">
+                <xsd:sequence>
+                    <xsd:element name="itemId" type="xsd:integer"/>
+                    <xsd:element name="methodRoot" type="xsd:string"/>
+                    <xsd:element name="itemStatus" type="xsd:string"/>
+                    <xsd:element name="processingFlag" type="xsd:boolean"/>
+                    <xsd:element name="serviceInstanceId" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="subtype" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="productCode" type="xsd:string"/>
+                    <xsd:element name="serviceDescription" type="xsd:string"/>
+                    <xsd:element name="doNotPersist" type="xsd:boolean"/>
+                    <xsd:element name="inventoryObjectType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="CFS"/>
+                                <xsd:enumeration value="SERVICE"/>
+                                <xsd:enumeration value="PORT"/>
+                                <xsd:enumeration value="DIMNUMBER"/>
+                                <xsd:enumeration value="CIRCUIT"/>
+                                <xsd:enumeration value="ACCOUNT"/>
+                                <xsd:enumeration value="N/A"/>
+                                <xsd:enumeration value="ALIAS"/>
+                                <xsd:enumeration value="CARD"/>
+                                <xsd:enumeration value="DNSRECORD"/>
+                                <xsd:enumeration value="IPRANGE"/>
+                                <xsd:enumeration value="NODE"/>
+                                <xsd:enumeration value="LOCATION"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="inventoryObjectId" type="xsd:integer"/>
+                    <xsd:element name="installationObjectType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ACCESS"/>
+                                <xsd:enumeration value="PORT"/>
+                                <xsd:enumeration value="SERVICE"/>
+                                <xsd:enumeration value="NUMBER"/>
+                                <xsd:enumeration value="INVENTORY"/>
+                                <xsd:enumeration value="CPE"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="action" type="elementAction"/>
+                    <xsd:element name="isActive" type="xsd:boolean"/>
+                    <xsd:element name="dunningStatus">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Active"/>
+                                <xsd:enumeration value="SoftSuspended"/>
+                                <xsd:enumeration value="HardSuspended"/>
+                                <xsd:enumeration value="N/A"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="dunningReason">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Dunning- Soft Suspension"/>
+                                <xsd:enumeration value="Dunning- Hard Suspension"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="fraudReason">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Fraud"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="customerReason">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Customer Request"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="activityList">
+                        <xsd:complexType>
+                            <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                                <xsd:element name="activity" type="activity"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="groupId" type="xsd:integer"/>
+                    <xsd:element name="customerReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="previousCustomerReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="technicalContactReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="handoverContactReference" type="xsd:string"/>
+                    <xsd:element name="parentVector">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="referenceItem" type="referenceItem"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="characteristicsList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="characteristics" type="characteristic"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="vasList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="vas" type="VASItem"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="tfcReservation" type="tfcReservation"/>
+                    <xsd:element minOccurs="0" name="appointmentId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="servicePointReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oldServicePointReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="nodeAddressReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="accessMatrix">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="route" type="routeItem"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="accessMatrixComment" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="serviceComponentList" type="serviceComponentList"/>
+                    <xsd:element name="effectiveDate" nillable="true" type="xsd:dateTime"/>
+                    <xsd:element minOccurs="0" name="processInfo" type="processInfo"/>
+                    <xsd:element name="operationStatus" type="operationStatus"/>
+                    <xsd:element minOccurs="0" name="inventoryResponsibleTeam" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="designedBy" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="tfcReservation">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="tfcReservationId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="tfcInstallRequired" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="statusReason" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="expirationDate" nillable="true" type="xsd:dateTime"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="installationOrderHeader">
+                <xsd:sequence>
+                    <xsd:element name="messageEnvelope" type="messageEnvelope"/>
+                    <xsd:element name="provisioningOrderId" type="xsd:string"/>
+                    <xsd:element name="installationOrderId" type="xsd:string"/>
+                    <xsd:element name="installationActId" type="xsd:string"/>
+                    <xsd:element name="method">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ServiceDesign"/>
+                                <xsd:enumeration value="Design"/>
+                                <xsd:enumeration value="Assign"/>
+                                <xsd:enumeration value="Close"/>
+                                <xsd:enumeration value="Redesign"/>
+                                <xsd:enumeration value="Modify Design"/>
+                                <xsd:enumeration value="Update Design"/>
+                                <xsd:enumeration value="Online Redesign"/>
+                                <xsd:enumeration value="Rollback"/>
+                                <xsd:enumeration value="Cancel"/>
+                                <xsd:enumeration value="Refresh"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="orderType">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Provisioning"/>
+                                <xsd:enumeration value="Suspend"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="orderPhase">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ServiceDesign"/>
+                                <xsd:enumeration value="ServiceProvisioning"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="operationStatus" type="operationStatus"/>
+                    <xsd:element name="customerList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" name="customer" type="customer"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="addressList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="address" type="address"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="servicePointList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicePoint" type="servicePoint"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="linkItem">
+                <xsd:sequence>
+                    <xsd:element name="inventoryLinkId" type="xsd:integer"/>
+                    <xsd:element name="installationLinkId" type="xsd:string"/>
+                    <xsd:element name="linkName" type="xsd:string"/>
+                    <xsd:element name="linkType" type="xsd:string"/>
+                    <xsd:element name="linkNumber" type="xsd:integer"/>
+                    <xsd:element name="aNodeId" type="xsd:integer"/>
+                    <xsd:element name="aNodeName" type="xsd:string"/>
+                    <xsd:element name="aNodeType" type="xsd:string"/>
+                    <xsd:element name="aLocation" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="aShelf" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="aSlot" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="aCard" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="aPort" type="xsd:string"/>
+                    <xsd:element name="zNodeId" type="xsd:integer"/>
+                    <xsd:element name="zNodeName" type="xsd:string"/>
+                    <xsd:element name="zNodeType" type="xsd:string"/>
+                    <xsd:element name="zLocation" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="zShelf" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="zSlot" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="zCard" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="zPort" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="linkAction">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="NEW"/>
+                                <xsd:enumeration value="CHANGE"/>
+                                <xsd:enumeration value="EXISTS"/>
+                                <xsd:enumeration value="DELETE"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="linkActionPicklist">
+                        <xsd:complexType>
+                            <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                                <xsd:element name="linkActionOption">
+                                    <xsd:simpleType>
+                                        <xsd:restriction base="xsd:string">
+                                            <xsd:enumeration value="CHANGE"/>
+                                            <xsd:enumeration value="EXISTS"/>
+                                            <xsd:enumeration value="DELETE"/>
+                                        </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="linkActionResponse">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="CHANGE"/>
+                                <xsd:enumeration value="EXISTS"/>
+                                <xsd:enumeration value="DELETE"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="owner" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ownerContact" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attrib01" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="pairNumber" type="xsd:integer"/>
+                    <xsd:element minOccurs="0" name="circuitName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="circuitType" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="circuitBand" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="nextLinkId" type="xsd:integer"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="routeItem">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="link" type="linkItem"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="activity">
+                <xsd:sequence>
+                    <xsd:element name="activityName" type="xsd:string"/>
+                    <xsd:element name="parameterList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="parameter" type="characteristic"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="serviceComponentList">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="serviceComponent" type="serviceComponent"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="serviceComponent">
+                <xsd:sequence>
+                    <xsd:element name="serviceInstanceId" type="xsd:string"/>
+                    <xsd:element name="code" type="xsd:string"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="action" type="elementAction"/>
+                    <xsd:element name="orderLineItemReference" type="xsd:string"/>
+                    <xsd:element name="parentOrderLineItemReference" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="serviceId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="previousServiceId" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="attributeList">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" minOccurs="0" name="attributes" type="attribute"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema xmlns="http://www.st.sk/oss/ossdvbsresponse" xmlns:cmn="http://www.st.sk/oss/osscommon" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.st.sk/oss/ossdvbsresponse">
+            <xsd:import namespace="http://www.st.sk/oss/osscommon"/>
+            <xsd:element name="ossEndPointResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="cmn:ossEndPointHeader">
+                            <xsd:sequence>
+                                <xsd:element minOccurs="0" name="itemList">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="servicePointId" type="xsd:string"/>
+                                            <xsd:element name="customer" type="xsd:string"/>
+                                            <xsd:element name="operationStatus" type="cmn:operationStatus"/>
+                                            <xsd:element minOccurs="0" name="provisioningOrderItem" type="cmn:motiveCardPairing"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
             </xsd:element>
-            <xsd:element name="servicePointId" type="xsd:string"/>
-            <xsd:element name="customerCode" type="xsd:string"/>
-            <xsd:element name="serviceInstanceId" type="xsd:string"/>
-            <xsd:element name="vas" type="cdm:Service" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyMcoreAccountRequest">
-        <xsd:sequence>
-            <xsd:element name="ipTvId" type="xsd:string"/>
-            <xsd:element name="serviceAction" type="xsd:string"/>
-            <xsd:element name="sessionId" type="xsd:string"/>
-            <xsd:element name="servicePointId" type="xsd:string"/>
-            <xsd:element name="customerCode" type="xsd:string"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyPortMessageRequest">
-        <xsd:sequence>
-            <xsd:element name="serviceAction" type="xsd:string"/>
-            <xsd:element name="sessionId" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        Id of the Order in Siebel
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="customerCode" type="xsd:string"/>
-            <xsd:element name="servicePointId" type="xsd:string"/>
-            <xsd:element name="serviceProfile" type="xsd:string" minOccurs="0">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        servcie profile
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="port" type="cdm:NetworkPort"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:element name="ModifyDvbsMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyDvbsRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ModifyDvbsMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyDvbsResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ReprovisionMstvAccountRequest">
-        <xsd:sequence>
-            <xsd:element name="ipTvId" type="xsd:string"/>
-            <xsd:element name="serviceAction" type="xsd:string"/>
-            <xsd:element name="sessionId" type="xsd:string"/>
-            <xsd:element name="servicePointId" type="xsd:string"/>
-            <xsd:element name="customerCode" type="xsd:string"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyDvbsResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ModifyImsServiceAttributeMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage"/>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ModifyImsServiceAttributeMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyImsServiceAttributeRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ModifyImsServiceAttributeMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyImsServiceAttributeResponse"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ResetDevicePinRequest">
-        <xsd:sequence>
-            <xsd:element name="serviceAction" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        IPTV ID
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="sessionId" type="xsd:string"/>
-            <xsd:element name="cpeId" type="xsd:string"/>
-            <xsd:element name="pin" type="xsd:string"/>
-            <xsd:element name="servicePointId" type="xsd:string"/>
-            <xsd:element name="customerCode" type="xsd:string"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyImsServiceAttributeResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ModifyMcoreAccountMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyMcoreAccountRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ModifyMcoreAccountMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyMcoreAccountResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ResetMcoreAccountRequest">
-        <xsd:sequence>
-            <xsd:element name="ipTvId" type="xsd:string">
-                <xsd:annotation>
-                    <xsd:documentation>
-                        IPTV ID
-                    </xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:complexType name="ModifyMcoreAccountResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ModifyPortMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyPortMessageRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ModifyPortMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ModifyPortMessageResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ModifyPortMessageResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ReprovisionMstvAccountMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ReprovisionMstvAccountRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ReprovisionMstvAccountMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ReprovisionMstvAccountResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ReprovisionMstvAccountResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ResetDevicePinMessageFault">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:FaultMessage"/>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ResetDevicePinMessageIn">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:CommandMessageIn">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ResetDevicePinRequest"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ResetDevicePinMessageOut">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="cdm:ResponseMessage">
-                    <xsd:sequence>
-                        <xsd:element name="Body" type="osspe:ResetDevicePinResponse" minOccurs="0"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ResetDevicePinResponse">
-        <xsd:complexContent>
-            <xsd:extension base="cdm:ConfirmationMessage"/>
-        </xsd:complexContent>
-    </xsd:complexType>
-    <xsd:element name="ResetMcoreAccountMessageFault">
-        <xsd:complexType/>
-    </xsd:element>
-    <xsd:element name="ResetMcoreAccountMessageIn">
-        <xsd:complexType/>
-    </xsd:element>
-    <xsd:element name="ResetMcoreAccountMessageOut">
-        <xsd:complexType/>
-    </xsd:element>
-    <xsd:complexType name="ResetMcoreAccountResponse"/>
-</xsd:schema>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ossEndPointRequest">
+        <wsdl:part element="sch0:ossEndPointRequest" name="ossEndPointRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ossEndPointResponse">
+        <wsdl:part element="sch2:ossEndPointResponse" name="ossEndPointResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ossdvbs">
+        <wsdl:operation name="ossEndPoint">
+            <wsdl:input message="tns:ossEndPointRequest" name="ossEndPointRequest"></wsdl:input>
+            <wsdl:output message="tns:ossEndPointResponse" name="ossEndPointResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ossdvbsSoap11" type="tns:ossdvbs">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ossEndPoint">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="ossEndPointRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ossEndPointResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ossdvbs">
+        <wsdl:port binding="tns:ossdvbsSoap11" name="ossdvbsSoap11">
+            <soap:address location="http://localhost:9090/oss/ws/ossdvbs/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

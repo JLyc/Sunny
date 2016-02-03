@@ -16,6 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
+      <charset value="windows-1250" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -38,9 +39,15 @@ SELECT * FROM DB_EXTRACTION.I_003_GetCustomerAssets WHERE ID = '1-14NC-555'
 SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE = 'Not Segmented' and rownum <= 100]]></console>
       <console name="SIEBEL 1" type="STANDARD"><![CDATA[SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST , DB_EXTRACTION.I_003_GetCustomerAssets ASSET WHERE ASSET.SerialNumber = '0527791686' AND  CUST.id = ASSET.AccountId]]></console>
     </connection>
+    <connection id="9739ae25-f4a9-4899-8b01-9a09860750b8">
+      <console name="Connection" type="STANDARD" />
+    </connection>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-list connection-id="cca93791-7fc9-4ace-93d7-cf15eb83b676" dataset="SIEBEL.S_AGREE_ITEM_XA" active-filter-id="EMPTY_FILTER" />
+  </component>
+  <component name="DBNavigator.Project.EditorStateManager">
+    <last-used-providers />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
@@ -77,6 +84,7 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
           <database value="DQEBIL6" />
           <url-type value="SERVICE" />
           <os-authentication value="false" />
+          <empty-password value="false" />
           <user value="tibco" />
           <password value="RTYuNXRic2Nz" />
         </database>
@@ -150,8 +158,80 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
           <database value="BSKSTG01" />
           <url-type value="SERVICE" />
           <os-authentication value="false" />
+          <empty-password value="false" />
           <user value="DB_TPAZITNY" />
           <password value="aGVzbG9fMTEx" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <proxy-password value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <details>
+          <charset value="UTF-8" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <environment-type value="default" />
+          <idle-time-to-disconnect value="30" />
+          <password-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+          <connect-automatically value="true" />
+        </details>
+        <object-filters hide-empty-schemas="false">
+          <object-type-filter use-master-settings="true">
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED VIEW" enabled="true" />
+            <object-type name="NESTED TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="TRIGGER" enabled="true" />
+            <object-type name="TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+      <connection id="9739ae25-f4a9-4899-8b01-9a09860750b8" active="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="UNKNOWN" />
+          <config-type value="CUSTOM" />
+          <database-version value="9999.0" />
+          <driver-source value="EXTERNAL" />
+          <driver-library value="" />
+          <driver value="" />
+          <url value="" />
+          <os-authentication value="false" />
+          <empty-password value="false" />
+          <user value="" />
+          <password value="" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -250,6 +330,11 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
       </sorting>
+      <default-editors>
+        <object-type name="VIEW" editor-type="SELECTION" />
+        <object-type name="PACKAGE" editor-type="SELECTION" />
+        <object-type name="TYPE" editor-type="SELECTION" />
+      </default-editors>
     </browser-settings>
     <navigation-settings>
       <lookup-filters>
@@ -318,7 +403,6 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
         <convert-empty-strings-to-null value="true" />
         <select-content-on-cell-edit value="true" />
         <large-value-preview-active value="true" />
-        <load-view-data-active value="false" />
       </general>
       <filters>
         <prompt-filter-dialog value="true" />
@@ -336,8 +420,6 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
           <content-type name="Groovy" enabled="true" />
-          <content-type name="AIDL" enabled="true" />
-          <content-type name="Bash" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>
       </qualified-text-editor>
@@ -516,6 +598,7 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
         <fetch-block-size value="100" />
         <execution-timeout value="20" />
         <debug-execution-timeout value="600" />
+        <focus-result value="false" />
         <prompt-execution value="false" />
       </statement-execution>
       <script-execution>
@@ -585,10 +668,10 @@ SELECT CUST.* FROM DB_EXTRACTION.I_002_GetCustomer CUST where NG1KCUSTOMERTYPE =
       </regional-settings>
       <environment>
         <environment-types>
-          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" />
-          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" />
-          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" />
-          <environment-type id="other" name="Other" description="" color="-1576/-10724543" />
+          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" readonly-code="false" readonly-data="false" />
+          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" readonly-code="false" readonly-data="false" />
+          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" readonly-code="false" readonly-data="false" />
+          <environment-type id="other" name="Other" description="" color="-1576/-10724543" readonly-code="false" readonly-data="false" />
         </environment-types>
         <visibility-settings>
           <connection-tabs value="true" />
